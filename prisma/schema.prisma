@@ -1,0 +1,999 @@
+// =============================================================================
+// Synova Infotech - Prisma Schema
+// PostgreSQL | Public Schema | Snake Case Tables
+// =============================================================================
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// =============================================================================
+// ENUMS
+// =============================================================================
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+enum PageStatus {
+  DRAFT
+  PUBLISHED
+  SCHEDULED
+}
+
+enum LeadStage {
+  NEW
+  CONTACTED
+  QUALIFIED
+  PROPOSAL
+  WON
+  LOST
+}
+
+enum BlogPostStatus {
+  DRAFT
+  PUBLISHED
+  SCHEDULED
+}
+
+enum CareerType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  REMOTE
+}
+
+enum ApplicationStatus {
+  NEW
+  REVIEWED
+  SHORTLISTED
+  REJECTED
+  HIRED
+}
+
+enum MediaType {
+  IMAGE
+  SVG
+  VIDEO
+  PDF
+  DOCUMENT
+}
+
+enum FormFieldType {
+  TEXT
+  EMAIL
+  TEXTAREA
+  SELECT
+  CHECKBOX
+  RADIO
+  FILE
+  PHONE
+  DATE
+}
+
+enum RedirectType {
+  PERMANENT_301
+  TEMPORARY_302
+}
+
+enum BackupStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+// =============================================================================
+// MODELS
+// =============================================================================
+
+// --- 1. User ---
+model User {
+  id          String    @id @default(cuid())
+  name        String
+  email       String    @unique
+  password    String
+  image       String?
+  role        UserRole  @default(EDITOR)
+  isActive    Boolean   @default(true)
+  lastLoginAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  authoredPages      Page[]
+  pageVersions       PageVersion[]
+  uploadedMedia      Media[]
+  createdMediaFolders MediaFolder[]
+  assignedLeads      Lead[]       @relation("LeadAssignee")
+  assignedContacts   Contact[]    @relation("ContactAssignee")
+  leadActivities     LeadActivity[]
+  auditLogs          AuditLog[]
+  activities         Activity[]
+  blogPosts          BlogPost[]
+
+  @@index([email])
+  @@index([role])
+  @@index([isActive])
+  @@map("users")
+}
+
+// --- 2. Role ---
+model Role {
+  id          String       @id @default(cuid())
+  name        String       @unique
+  description String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  permissions Permission[]
+
+  @@map("roles")
+}
+
+// --- 3. Permission ---
+model Permission {
+  id        String   @id @default(cuid())
+  action    String
+  resource  String
+  roleId    String
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([roleId])
+  @@index([action, resource])
+  @@map("permissions")
+}
+
+// --- 4. Page ---
+model Page {
+  id            String       @id @default(cuid())
+  title         String
+  slug          String       @unique
+  content       Json?
+  excerpt       String?      @db.Text
+  status        PageStatus   @default(DRAFT)
+  featuredImage String?
+  template      String?
+  publishedAt   DateTime?
+  scheduledAt   DateTime?
+  authorId      String
+  author        User         @relation(fields: [authorId], references: [id])
+  parentId      String?
+  parent        Page?        @relation("PageHierarchy", fields: [parentId], references: [id])
+  children      Page[]       @relation("PageHierarchy")
+  customCss     String?      @db.Text
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  deletedAt     DateTime?
+
+  sections  PageSection[]
+  versions  PageVersion[]
+
+  @@index([slug])
+  @@index([status])
+  @@index([authorId])
+  @@index([parentId])
+  @@index([deletedAt])
+  @@map("pages")
+}
+
+// --- 5. PageSection ---
+model PageSection {
+  id          String   @id @default(cuid())
+  pageId      String
+  page        Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  sectionType String
+  title       String?
+  content     Json?
+  order       Int      @default(0)
+  isVisible   Boolean  @default(true)
+  settings    Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([pageId])
+  @@index([sectionType])
+  @@map("page_sections")
+}
+
+// --- 6. PageVersion ---
+model PageVersion {
+  id            String     @id @default(cuid())
+  pageId        String
+  page          Page       @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  versionNumber Int
+  content       Json?
+  title         String?
+  slug          String?
+  status        String?
+  publishedAt   DateTime?
+  createdById   String
+  createdBy     User       @relation(fields: [createdById], references: [id])
+  createdAt     DateTime   @default(now())
+
+  @@index([pageId])
+  @@index([createdById])
+  @@unique([pageId, versionNumber])
+  @@map("page_versions")
+}
+
+// --- 7. Service ---
+model Service {
+  id                String   @id @default(cuid())
+  title             String
+  slug              String   @unique
+  shortDescription  String?  @db.Text
+  fullDescription   String?  @db.Text
+  icon              String?
+  category          String?
+  benefits          Json?
+  businessOutcomes  Json?
+  status            Boolean  @default(true)
+  seoTitle          String?
+  seoDescription    String?
+  seoKeywords       String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  deletedAt         DateTime?
+
+  technologies ServiceTechnology[]
+  industries   ServiceIndustry[]
+
+  @@index([slug])
+  @@index([status])
+  @@index([category])
+  @@index([deletedAt])
+  @@map("services")
+}
+
+// --- 8. Industry ---
+model Industry {
+  id            String   @id @default(cuid())
+  name          String
+  slug          String   @unique
+  description   String?  @db.Text
+  icon          String?
+  capabilities  Json?
+  status        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  deletedAt     DateTime?
+
+  services ServiceIndustry[]
+
+  @@index([slug])
+  @@index([status])
+  @@map("industries")
+}
+
+// --- 9. Technology ---
+model Technology {
+  id               String   @id @default(cuid())
+  name             String
+  slug             String   @unique
+  category         String?
+  description      String?  @db.Text
+  icon             String?
+  websiteUrl       String?
+  proficiencyLevel Int      @default(0)
+  status           Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  services ServiceTechnology[]
+
+  @@index([slug])
+  @@index([category])
+  @@index([status])
+  @@map("technologies")
+}
+
+// --- 10. ServiceTechnology ---
+model ServiceTechnology {
+  id           String     @id @default(cuid())
+  serviceId    String
+  service      Service    @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  technologyId String
+  technology   Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+
+  @@unique([serviceId, technologyId])
+  @@index([serviceId])
+  @@index([technologyId])
+  @@map("service_technologies")
+}
+
+// --- 11. ServiceIndustry ---
+model ServiceIndustry {
+  id         String   @id @default(cuid())
+  serviceId  String
+  service    Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  industryId String
+  industry   Industry @relation(fields: [industryId], references: [id], onDelete: Cascade)
+
+  @@unique([serviceId, industryId])
+  @@index([serviceId])
+  @@index([industryId])
+  @@map("service_industries")
+}
+
+// --- 12. Statistic ---
+model Statistic {
+  id        String   @id @default(cuid())
+  label     String
+  value     String
+  prefix    String?
+  suffix    String?
+  order     Int      @default(0)
+  isVisible Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("statistics")
+}
+
+// --- 13. Testimonial ---
+model Testimonial {
+  id        String   @id @default(cuid())
+  quote     String   @db.Text
+  author    String
+  title     String?
+  company   String?
+  avatar    String?
+  rating    Int      @default(5)
+  status    Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@map("testimonials")
+}
+
+// --- 14. Client ---
+model Client {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?  @db.Text
+  logo        String?
+  websiteUrl  String?
+  industry    String?
+  order       Int      @default(0)
+  status      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+  @@index([status])
+  @@map("clients")
+}
+
+// --- 15. Career ---
+model Career {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  department  String?
+  location    String?
+  type        CareerType    @default(FULL_TIME)
+  description String?       @db.Text
+  requirements Json?
+  benefits    Json?
+  salaryMin   Int?
+  salaryMax   Int?
+  status      Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  deletedAt   DateTime?
+
+  applications CareerApplication[]
+
+  @@index([slug])
+  @@index([status])
+  @@index([department])
+  @@index([type])
+  @@index([deletedAt])
+  @@map("careers")
+}
+
+// --- 16. CareerApplication ---
+model CareerApplication {
+  id          String            @id @default(cuid())
+  careerId    String
+  career      Career            @relation(fields: [careerId], references: [id], onDelete: Cascade)
+  name        String
+  email       String
+  phone       String?
+  resumeUrl   String?
+  coverLetter String?           @db.Text
+  status      ApplicationStatus @default(NEW)
+  notes       String?           @db.Text
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([careerId])
+  @@index([status])
+  @@index([email])
+  @@map("career_applications")
+}
+
+// --- 17. BlogPost ---
+model BlogPost {
+  id            String         @id @default(cuid())
+  title         String
+  slug          String         @unique
+  content       String?        @db.Text
+  excerpt       String?        @db.Text
+  featuredImage String?
+  authorId      String
+  author        User           @relation(fields: [authorId], references: [id])
+  categoryId    String
+  category      BlogCategory   @relation(fields: [categoryId], references: [id])
+  status        BlogPostStatus @default(DRAFT)
+  publishedAt   DateTime?
+  scheduledAt   DateTime?
+  seoTitle      String?
+  seoDescription String?
+  seoKeywords   String?
+  canonicalUrl  String?
+  ogImage       String?
+  viewCount     Int            @default(0)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  deletedAt     DateTime?
+
+  tags TagOnPost[]
+
+  @@index([slug])
+  @@index([status])
+  @@index([authorId])
+  @@index([categoryId])
+  @@index([publishedAt])
+  @@index([deletedAt])
+  @@map("blog_posts")
+}
+
+// --- 18. BlogCategory ---
+model BlogCategory {
+  id          String     @id @default(cuid())
+  name        String
+  slug        String     @unique
+  description String?    @db.Text
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  posts BlogPost[]
+
+  @@index([slug])
+  @@map("blog_categories")
+}
+
+// --- 19. Tag ---
+model Tag {
+  id        String      @id @default(cuid())
+  name      String
+  slug      String      @unique
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  posts TagOnPost[]
+
+  @@index([slug])
+  @@map("tags")
+}
+
+// --- 20. TagOnPost ---
+model TagOnPost {
+  id     String   @id @default(cuid())
+  postId String
+  post   BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tagId  String
+  tag    Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, tagId])
+  @@index([postId])
+  @@index([tagId])
+  @@map("tags_on_posts")
+}
+
+// --- 21. FAQ ---
+model FAQ {
+  id          String       @id @default(cuid())
+  question    String
+  answer      String       @db.Text
+  categoryId  String
+  category    FAQCategory  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  order       Int          @default(0)
+  status      Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([categoryId])
+  @@index([status])
+  @@map("faqs")
+}
+
+// --- 22. FAQCategory ---
+model FAQCategory {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?  @db.Text
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  faqs FAQ[]
+
+  @@index([slug])
+  @@map("faq_categories")
+}
+
+// --- 23. Resource ---
+model Resource {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  description   String?  @db.Text
+  type          String?
+  fileUrl       String?
+  coverImage    String?
+  category      String?
+  tags          Json?
+  downloadCount Int      @default(0)
+  status        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([slug])
+  @@index([type])
+  @@index([category])
+  @@index([status])
+  @@map("resources")
+}
+
+// --- 24. Download ---
+model Download {
+  id            String   @id @default(cuid())
+  title         String
+  fileType      String?
+  fileSize      Int?
+  fileUrl       String?
+  description   String?  @db.Text
+  category      String?
+  icon          String?
+  isFeatured    Boolean  @default(false)
+  downloadCount Int      @default(0)
+  status        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([category])
+  @@index([status])
+  @@map("downloads")
+}
+
+// --- 25. Newsletter ---
+model Newsletter {
+  id              String   @id @default(cuid())
+  subject         String
+  body            String   @db.Text
+  sentAt          DateTime?
+  status          String   @default("draft")
+  recipientCount  Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  sends NewsletterSend[]
+
+  @@map("newsletters")
+}
+
+// --- 26. Subscriber ---
+model Subscriber {
+  id             String          @id @default(cuid())
+  email          String          @unique
+  name           String?
+  status         String          @default("active")
+  source         String?
+  subscribedAt   DateTime        @default(now())
+  unsubscribedAt DateTime?
+  createdAt      DateTime        @default(now())
+
+  newsletterSends NewsletterSend[]
+
+  @@index([email])
+  @@index([status])
+  @@map("subscribers")
+}
+
+// --- 27. NewsletterSend ---
+model NewsletterSend {
+  id            String     @id @default(cuid())
+  newsletterId  String
+  newsletter    Newsletter @relation(fields: [newsletterId], references: [id], onDelete: Cascade)
+  subscriberId  String
+  subscriber    Subscriber @relation(fields: [subscriberId], references: [id], onDelete: Cascade)
+  sentAt        DateTime?
+  openedAt      DateTime?
+  clickedAt     DateTime?
+
+  @@unique([newsletterId, subscriberId])
+  @@index([newsletterId])
+  @@index([subscriberId])
+  @@map("newsletter_sends")
+}
+
+// --- 28. Contact ---
+model Contact {
+  id           String    @id @default(cuid())
+  name         String
+  company      String?
+  email        String
+  phone        String?
+  service      String?
+  message      String?   @db.Text
+  source       String?
+  landingPage  String?
+  referrer     String?
+  browser      String?
+  device       String?
+  ipAddress    String?
+  status       LeadStage @default(NEW)
+  assignedToId String?
+  assignedTo   User?     @relation("ContactAssignee", fields: [assignedToId], references: [id])
+  notes        String?   @db.Text
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  activities LeadActivity[]
+
+  @@index([email])
+  @@index([status])
+  @@index([assignedToId])
+  @@index([createdAt])
+  @@map("contacts")
+}
+
+// --- 29. Lead ---
+model Lead {
+  id              String    @id @default(cuid())
+  companyName     String
+  contactName     String?
+  email           String?
+  phone           String?
+  serviceInterest String?
+  value           Int?
+  stage           LeadStage @default(NEW)
+  assignedToId    String?
+  assignedTo      User?     @relation("LeadAssignee", fields: [assignedToId], references: [id])
+  source          String?
+  notes           String?   @db.Text
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  activities LeadActivity[]
+
+  @@index([email])
+  @@index([stage])
+  @@index([assignedToId])
+  @@index([createdAt])
+  @@map("leads")
+}
+
+// --- 30. LeadActivity ---
+model LeadActivity {
+  id          String   @id @default(cuid())
+  leadId      String
+  lead        Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  contactId   String?
+  contact     Contact? @relation(fields: [contactId], references: [id], onDelete: SetNull)
+  type        String
+  description String?  @db.Text
+  createdById String
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+
+  @@index([leadId])
+  @@index([contactId])
+  @@index([createdById])
+  @@index([createdAt])
+  @@map("lead_activities")
+}
+
+// --- 31. Form ---
+model Form {
+  id                 String   @id @default(cuid())
+  name               String
+  slug               String   @unique
+  description        String?  @db.Text
+  submitButtonText   String   @default("Submit")
+  successMessage     String?  @db.Text
+  emailNotification  String?
+  status             Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  fields      FormField[]
+  submissions FormSubmission[]
+
+  @@index([slug])
+  @@map("forms")
+}
+
+// --- 32. FormField ---
+model FormField {
+  id              String        @id @default(cuid())
+  formId          String
+  form            Form          @relation(fields: [formId], references: [id], onDelete: Cascade)
+  type            FormFieldType
+  label           String
+  placeholder     String?
+  required        Boolean       @default(false)
+  validationRules Json?
+  options         Json?
+  order           Int           @default(0)
+  createdAt       DateTime      @default(now())
+
+  @@index([formId])
+  @@map("form_fields")
+}
+
+// --- 33. FormSubmission ---
+model FormSubmission {
+  id        String   @id @default(cuid())
+  formId    String
+  form      Form     @relation(fields: [formId], references: [id], onDelete: Cascade)
+  data      Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([formId])
+  @@index([createdAt])
+  @@map("form_submissions")
+}
+
+// --- 34. Media ---
+model Media {
+  id              String      @id @default(cuid())
+  filename        String
+  originalName    String
+  mimeType        String?
+  size            Int?
+  width           Int?
+  height          Int?
+  altText         String?
+  caption         String?     @db.Text
+  tags            Json?
+  folderId        String?
+  folder          MediaFolder? @relation(fields: [folderId], references: [id], onDelete: SetNull)
+  uploadedById    String
+  uploadedBy      User        @relation(fields: [uploadedById], references: [id])
+  url             String
+  thumbnailSm     String?
+  thumbnailMd     String?
+  thumbnailLg     String?
+  webpUrl         String?
+  originalSize    Int?
+  compressedSize  Int?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  deletedAt       DateTime?
+
+  @@index([folderId])
+  @@index([uploadedById])
+  @@index([mimeType])
+  @@index([deletedAt])
+  @@map("media")
+}
+
+// --- 35. MediaFolder ---
+model MediaFolder {
+  id          String        @id @default(cuid())
+  name        String
+  parentId    String?
+  parent      MediaFolder?  @relation("MediaFolderHierarchy", fields: [parentId], references: [id])
+  children    MediaFolder[] @relation("MediaFolderHierarchy")
+  createdById String
+  createdBy   User          @relation(fields: [createdById], references: [id])
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  media Media[]
+
+  @@index([parentId])
+  @@index([createdById])
+  @@map("media_folders")
+}
+
+// --- 36. Menu ---
+model Menu {
+  id        String     @id @default(cuid())
+  name      String
+  slug      String     @unique
+  location  String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  items MenuItem[]
+
+  @@index([slug])
+  @@map("menus")
+}
+
+// --- 37. MenuItem ---
+model MenuItem {
+  id              String    @id @default(cuid())
+  menuId          String
+  menu            Menu      @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  parentId        String?
+  parent          MenuItem? @relation("MenuItemHierarchy", fields: [parentId], references: [id])
+  children        MenuItem[] @relation("MenuItemHierarchy")
+  label           String
+  url             String?
+  target          String?   @default("_self")
+  icon            String?
+  cssClass        String?
+  isVisible       Boolean   @default(true)
+  isMegaMenu      Boolean   @default(false)
+  megaMenuColumns Json?
+  order           Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([menuId])
+  @@index([parentId])
+  @@map("menu_items")
+}
+
+// --- 38. Footer ---
+model Footer {
+  id        String         @id @default(cuid())
+  name      String
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  columns FooterColumn[]
+
+  @@map("footers")
+}
+
+// --- 39. FooterColumn ---
+model FooterColumn {
+  id        String       @id @default(cuid())
+  footerId  String
+  footer    Footer       @relation(fields: [footerId], references: [id], onDelete: Cascade)
+  title     String?
+  width     Int          @default(3)
+  order     Int          @default(0)
+  createdAt DateTime     @default(now())
+
+  links FooterLink[]
+
+  @@index([footerId])
+  @@map("footer_columns")
+}
+
+// --- 40. FooterLink ---
+model FooterLink {
+  id             String       @id @default(cuid())
+  footerColumnId String
+  footerColumn   FooterColumn @relation(fields: [footerColumnId], references: [id], onDelete: Cascade)
+  label          String
+  url            String?
+  target         String?      @default("_self")
+  order          Int          @default(0)
+  createdAt      DateTime     @default(now())
+
+  @@index([footerColumnId])
+  @@map("footer_links")
+}
+
+// --- 41. Redirect ---
+model Redirect {
+  id         String       @id @default(cuid())
+  source     String       @unique
+  target     String
+  type       RedirectType @default(PERMANENT_301)
+  isWildcard Boolean      @default(false)
+  status     Boolean      @default(true)
+  hitCount   Int          @default(0)
+  lastHitAt  DateTime?
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  @@index([source])
+  @@index([status])
+  @@map("redirects")
+}
+
+// --- 42. AuditLog ---
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  action     String
+  resource   String
+  resourceId String?
+  details    Json?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([resource])
+  @@index([createdAt])
+  @@index([action, resource])
+  @@map("audit_logs")
+}
+
+// --- 43. Activity ---
+model Activity {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  type        String
+  description String?  @db.Text
+  metadata    Json?
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([type])
+  @@index([createdAt])
+  @@map("activities")
+}
+
+// --- 44. Backup ---
+model Backup {
+  id          String       @id @default(cuid())
+  filename    String
+  fileSize    Int?
+  type        String       @default("manual")
+  status      BackupStatus @default(PENDING)
+  fileUrl     String?
+  startedAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime     @default(now())
+
+  @@index([status])
+  @@index([type])
+  @@map("backups")
+}
+
+// --- 45. Setting ---
+model Setting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String   @db.Text
+  type        String   @default("string")
+  description String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([key])
+  @@map("settings")
+}
+
+// --- 46. HomepageSection ---
+model HomepageSection {
+  id          String   @id @default(cuid())
+  sectionType String
+  title       String?
+  content     Json?
+  order       Int      @default(0)
+  isVisible   Boolean  @default(true)
+  settings    Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sectionType])
+  @@map("homepage_sections")
+}

@@ -1,0 +1,169 @@
+@import "tailwindcss";
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  /* ===== Primary Colors ===== */
+  --color-primary: #0F1B2D;
+  --color-primary-light: #1A2940;
+  --color-primary-dark: #0A1220;
+
+  /* ===== Accent Colors ===== */
+  --color-accent-blue: #2563EB;
+  --color-accent-emerald: #10B981;
+  --color-accent-cyan: #06B6D4;
+  --color-accent-purple: #8B5CF6;
+
+  /* ===== Surface Colors ===== */
+  --color-surface: #FFFFFF;
+  --color-surface-secondary: #F8FAFC;
+  --color-surface-tertiary: #F1F5F9;
+
+  /* ===== Text Colors ===== */
+  --color-text: #0F1B2D;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #94A3B8;
+  --color-text-inverse: #FFFFFF;
+
+  /* ===== Border Colors ===== */
+  --color-border: #E2E8F0;
+  --color-border-light: #F1F5F9;
+
+  /* ===== Font Families ===== */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-manrope), ui-monospace, SFMono-Regular, monospace;
+
+  /* ===== Shadow Scale ===== */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* ===== Border Radius Scale ===== */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+  --radius-full: 9999px;
+}
+
+/* ===== Glassmorphism Tokens ===== */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --glass-blur: blur(20px);
+}
+
+/* ===== Dark Mode Overrides ===== */
+[data-theme="dark"] {
+  --color-surface: #0F1B2D;
+  --color-surface-secondary: #1A2940;
+  --color-surface-tertiary: #2D3748;
+
+  --color-text: #FFFFFF;
+  --color-text-secondary: #CBD5E1;
+  --color-text-tertiary: #64748B;
+  --color-text-inverse: #0F1B2D;
+
+  --color-border: #2D3748;
+  --color-border-light: #1A2940;
+
+  --glass-bg: rgba(15, 27, 45, 0.7);
+  --glass-border: rgba(45, 55, 72, 0.3);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Base Styles ===== */
+body {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Hero Animation Keyframes ===== */
+
+/* Slow float for geometric shapes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(-18px) rotate(1deg);
+  }
+}
+
+.floating-shape {
+  animation: float 8s ease-in-out infinite;
+}
+
+/* Gentle bob for technology badges */
+@keyframes badge-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Pulse animation for technology grid */
+@keyframes gridPulse {
+  0%, 100% {
+    opacity: 0.03;
+  }
+  50% {
+    opacity: 0.07;
+  }
+}
+
+.tech-grid-pulse {
+  animation: gridPulse 4s ease-in-out infinite;
+}
+
+/* ===== Smooth Theme Transitions ===== */
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== Selection ===== */
+::selection {
+  background-color: var(--color-accent-blue);
+  color: var(--color-text-inverse);
+}
+
+/* ===== Focus Styles ===== */
+:focus-visible {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
