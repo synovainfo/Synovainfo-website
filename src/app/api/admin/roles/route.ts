@@ -6,7 +6,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { withPermission } from "@/lib/authorization";
-import { Permissions, getPermissions, type Role } from "@/lib/permissions";
+import { Permissions, getPermissions } from "@/lib/permissions";
+
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+interface RoleDescriptor {
+  id: string;
+  name: string;
+  description: string;
+  userCount: number;
+  permissions: string[];
+  groupedPermissions: Record<string, string[]>;
+  isSystem: boolean;
+}
 
 // ---------------------------------------------------------------------------
 // Role descriptor — maps to the enum values in the User model
@@ -56,7 +70,7 @@ export const GET = withPermission(async () => {
     }
 
     // Build roles from the permission matrix
-    const roles = (["SUPER_ADMIN", "ADMIN", "EDITOR", "VIEWER"] as Role[]).map((role) => {
+    const roles: RoleDescriptor[] = (["SUPER_ADMIN", "ADMIN", "EDITOR", "VIEWER"]).map((role) => {
       const permissions = getPermissions(role);
 
       // Group permissions by resource

@@ -1,4 +1,3 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -7,17 +6,10 @@ import {
   ThemeScript,
 } from "@/components/providers/theme-provider";
 import { AuthProvider } from "@/components/auth/auth-provider";
+import { PageTransition } from "@/components/animations/page-transition";
 import JsonLd from "./json-ld";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { inter, plusJakartaSans, manrope } from "@/styles/fonts";
+import { CookieConsent } from "@/components/ui/cookie-consent";
 
 export { metadata } from "./seo";
 
@@ -30,11 +22,16 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
+      className={`${inter.variable} ${plusJakartaSans.variable} ${manrope.variable} h-full scroll-smooth antialiased`}
     >
       <head>
         <ThemeScript />
         <JsonLd />
+        <link rel="alternate" hrefLang="en-IN" href="https://synovainfotech.com/" />
+        <link rel="alternate" hrefLang="en-US" href="https://synovainfotech.com/" />
+        <link rel="alternate" hrefLang="en-GB" href="https://synovainfotech.com/" />
+        <link rel="alternate" hrefLang="en-SG" href="https://synovainfotech.com/" />
+        <link rel="alternate" hrefLang="x-default" href="https://synovainfotech.com/" />
       </head>
       <body className="min-h-full flex flex-col">
         {/* Skip-to-content link for keyboard users */}
@@ -52,6 +49,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
+            <CookieConsent />
           </ThemeProvider>
         </AuthProvider>
       </body>

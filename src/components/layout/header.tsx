@@ -8,6 +8,7 @@ import { NavLinks } from "./nav-links";
 import { MegaMenu } from "./mega-menu";
 import { MobileNav } from "./mobile-nav";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import Link from "next/link";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -91,10 +92,10 @@ export function Header() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between gap-4 md:h-20">
             {/* Logo */}
-            <Logo variant={isScrolled ? "dark" : "dark"} />
+            <Logo variant={"dark"} />
 
             {/* Desktop navigation - center */}
-            <div className="hidden md:flex md:items-center md:gap-1">
+            <nav className="hidden md:flex md:items-center md:gap-1" aria-label="Main navigation">
               {/* Services with mega menu */}
               <div
                 className="relative"
@@ -107,8 +108,8 @@ export function Header() {
                   className={cn(
                     "inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200",
                     megaOpen
-                      ? "text-zinc-900 dark:text-white"
-                      : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white",
+                      ? "text-corporate-navy bg-corporate-gold/10"
+                      : "text-[var(--color-text-secondary)] hover:text-corporate-navy",
                   )}
                   aria-expanded={megaOpen}
                   aria-haspopup="true"
@@ -150,7 +151,7 @@ export function Header() {
               </div>
 
               <NavLinks variant="desktop" />
-            </div>
+            </nav>
 
             {/* Right section */}
             <div className="flex items-center gap-2">
@@ -158,12 +159,13 @@ export function Header() {
               <ThemeToggle />
 
               {/* Desktop CTA */}
-              <a
-                href="#contact"
-                className="hidden md:inline-flex items-center justify-center rounded-xl bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+              <Link
+                href="/contact"
+                className="hidden md:inline-flex items-center justify-center rounded-xl bg-[var(--color-corporate-navy)] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[var(--color-corporate-gold)] hover:text-[var(--color-corporate-navy)] dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+                aria-label="Contact us to discuss enterprise technology solutions"
               >
-                Let&apos;s Talk
-              </a>
+                Contact Us
+              </Link>
 
               {/* Mobile nav toggle */}
               <MobileNav isOpen={mobileOpen} onToggle={handleMobileToggle} />

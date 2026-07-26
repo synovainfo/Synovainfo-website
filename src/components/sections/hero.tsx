@@ -2,9 +2,21 @@
 
 import { useState, useEffect, Component, type ReactNode } from 'react'
 import dynamic from 'next/dynamic'
-import { motion } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
-import { CtaButton } from '@/components/ui/cta-button'
+import { motion, AnimatePresence } from 'framer-motion'
+import {
+  ArrowRight,
+  ShieldCheck,
+  Zap,
+  Globe2,
+  Cpu,
+  Layers,
+  Sparkles,
+  X,
+  CheckCircle2,
+  Lock,
+  Cloud,
+} from 'lucide-react'
+import Link from 'next/link'
 
 // ── Error boundary for Three.js Canvas ──────────────────────────
 
@@ -35,7 +47,7 @@ class ThreeErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryStat
   }
 }
 
-// ── Dynamic Three.js scene (code-split) ─────────────────────────
+// ── Dynamic Three.js scene ──────────────────────────────────────
 
 const HeroParticles = dynamic(
   () => import('@/components/three/hero-particles'),
@@ -45,217 +57,321 @@ const HeroParticles = dynamic(
   },
 )
 
-// ── Background layers ───────────────────────────────────────────
+// ── Background Layers ────────────────────────────────────────────
 
-/** Soft gradient orbs — always visible, acts as Three.js fallback */
-function GradientOrbs() {
+function AuroraGradients() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      {/* Top-left blue orb */}
-      <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[var(--color-accent-blue)]/10 to-transparent blur-3xl" />
-      {/* Bottom-right cyan orb */}
-      <div className="absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[var(--color-accent-cyan)]/8 to-transparent blur-3xl" />
-      {/* Center subtle glow */}
-      <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[var(--color-accent-blue)]/5 via-transparent to-transparent blur-3xl" />
+      <div className="aurora-orb aurora-orb-1 opacity-60" />
+      <div className="aurora-orb aurora-orb-2 opacity-50" />
+      <div className="aurora-orb aurora-orb-3 opacity-40" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--color-primary)]/80 to-[var(--color-primary)]" />
     </div>
   )
 }
 
-/** Animated technology grid background */
-function TechGrid() {
+function TechGridMesh() {
   return (
-    <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-      {/* Static grid lines */}
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
       <div
-        className="absolute inset-0 opacity-[0.04]"
+        className="absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage: [
             'linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px)',
             'linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)',
           ].join(', '),
-          backgroundSize: '60px 60px',
+          backgroundSize: '64px 64px',
         }}
       />
-      {/* Pulsing grid overlay */}
       <div
-        className="tech-grid-pulse absolute inset-0 opacity-[0.03]"
+        className="tech-grid-pulse absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage: [
             'linear-gradient(rgba(37, 99, 235, 0.6) 1px, transparent 1px)',
             'linear-gradient(90deg, rgba(37, 99, 235, 0.6) 1px, transparent 1px)',
           ].join(', '),
-          backgroundSize: '60px 60px',
+          backgroundSize: '64px 64px',
         }}
       />
     </div>
   )
 }
 
-/** Floating geometric shapes with slow CSS animation */
-function FloatingShapes() {
+function FloatingTechElements() {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      {/* Rotated square (diamond) — top-left */}
-      <div
-        className="floating-shape absolute left-[12%] top-[22%] h-16 w-16 rotate-45 border border-[var(--color-accent-blue)]/30 opacity-30 md:h-20 md:w-20"
-        style={{ animationDelay: '0s' }}
-      />
+    <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block" aria-hidden="true">
+      {/* Node 1 */}
+      <motion.div
+        animate={{ y: [-10, 10, -10], rotate: [0, 5, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[22%] left-[8%] flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 backdrop-blur-xl shadow-2xl"
+      >
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/20 text-blue-400">
+          <Cloud className="h-5 w-5" />
+        </div>
+        <div>
+          <div className="text-xs font-semibold text-white">Multi-Cloud Fabric</div>
+          <div className="text-[10px] text-zinc-400">99.999% SLA Uptime</div>
+        </div>
+      </motion.div>
 
-      {/* Circle — top-right */}
-      <div
-        className="floating-shape absolute right-[18%] top-[30%] h-12 w-12 rounded-full border-2 border-[var(--color-accent-cyan)]/20 opacity-25 md:h-16 md:w-16"
-        style={{ animationDelay: '-2s' }}
-      />
+      {/* Node 2 */}
+      <motion.div
+        animate={{ y: [10, -10, 10], rotate: [0, -5, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[28%] right-[8%] flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 backdrop-blur-xl shadow-2xl"
+      >
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-400">
+          <Cpu className="h-5 w-5" />
+        </div>
+        <div>
+          <div className="text-xs font-semibold text-white">Agentic AI Engines</div>
+          <div className="text-[10px] text-zinc-400">Sub-10ms Inference</div>
+        </div>
+      </motion.div>
 
-      {/* Diamond — bottom-left */}
-      <div
-        className="floating-shape absolute bottom-[28%] left-[28%] h-10 w-10 rotate-45 border border-[var(--color-accent-purple)]/20 opacity-20 md:h-14 md:w-14"
-        style={{ animationDelay: '-4s' }}
-      />
-
-      {/* Small filled circle — bottom-right */}
-      <div
-        className="floating-shape absolute bottom-[35%] right-[12%] h-8 w-8 rounded-full bg-gradient-to-br from-[var(--color-accent-blue)]/20 to-transparent opacity-30 md:h-12 md:w-12"
-        style={{ animationDelay: '-1s' }}
-      />
-
-      {/* Large ring — far right-center */}
-      <div
-        className="floating-shape absolute left-[65%] top-[15%] h-24 w-24 rounded-full border border-[var(--color-accent-emerald)]/10 opacity-20 md:h-32 md:w-32"
-        style={{ animationDelay: '-3s' }}
-      />
-
-      {/* Tiny hexagon indicator — scattered */}
-      <div
-        className="floating-shape absolute left-[45%] top-[70%] h-6 w-6 rotate-12 border border-[var(--color-accent-blue)]/25 opacity-20"
-        style={{ animationDelay: '-5s' }}
-      />
+      {/* Node 3 */}
+      <motion.div
+        animate={{ y: [-8, 8, -8] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-[24%] left-[10%] flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 backdrop-blur-xl shadow-2xl"
+      >
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400">
+          <ShieldCheck className="h-5 w-5" />
+        </div>
+        <div>
+          <div className="text-xs font-semibold text-white">Zero Trust Security</div>
+          <div className="text-[10px] text-zinc-400">ISO 27001 & SOC 2 Type II</div>
+        </div>
+      </motion.div>
     </div>
   )
 }
 
-// ── Entrance animation variants ─────────────────────────────────
+// ── Interactive Architecture Preview Modal ───────────────────────
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
-  },
+function ArchitectureModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  if (!isOpen) return null
+
+  return (
+    <AnimatePresence>
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 20 }}
+          className="relative w-full max-w-4xl overflow-hidden rounded-3xl border border-white/15 bg-zinc-950 p-6 md:p-8 text-white shadow-2xl"
+        >
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute top-6 right-6 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-zinc-400 hover:bg-white/20 hover:text-white transition-colors"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-blue-400 mb-2">
+            <Layers className="h-4 w-4" /> Blueprint Reference Architecture
+          </div>
+          <h3 className="text-2xl font-bold md:text-3xl text-white">
+            Synova Global Enterprise Mesh Stack
+          </h3>
+          <p className="mt-2 text-sm text-zinc-400 max-w-2xl">
+            A resilient, zero-trust cloud architecture engineered for ultra-low latency, mission-critical compliance, and autonomous AI scale.
+          </p>
+
+          {/* Diagram Preview */}
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-white/10 pt-6">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+              <div className="flex items-center gap-2 font-semibold text-white mb-2">
+                <Globe2 className="h-5 w-5 text-blue-400" /> 1. Edge & Multi-Cloud
+              </div>
+              <ul className="text-xs text-zinc-400 space-y-2">
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Cloudflare Enterprise Edge WAN</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Multi-Region AWS & GCP Clusters</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Automated Anycast DDoS Mitigation</li>
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+              <div className="flex items-center gap-2 font-semibold text-white mb-2">
+                <Cpu className="h-5 w-5 text-cyan-400" /> 2. Core Microservices
+              </div>
+              <ul className="text-xs text-zinc-400 space-y-2">
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Event-Driven Kafka Streaming</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Sub-5ms Redis In-Memory Cache</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> GraphQL & gRPC API Gateway</li>
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+              <div className="flex items-center gap-2 font-semibold text-white mb-2">
+                <Lock className="h-5 w-5 text-purple-400" /> 3. Security & Compliance
+              </div>
+              <ul className="text-xs text-zinc-400 space-y-2">
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Hardware Security Module Key Vault</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Continuous Audit & RBAC Engine</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Real-time Automated SIEM Logging</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-4 text-xs text-zinc-400">
+            <span>ISO 27001 Certified • SOC 2 Type II Compliant</span>
+            <Link
+              href="/contact"
+              onClick={onClose}
+              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2 text-xs font-semibold text-white hover:bg-blue-500 transition-colors"
+            >
+              Consult an Architect <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </AnimatePresence>
+  )
 }
 
-const itemFadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const },
-  },
-}
+// ── Main Hero Component ──────────────────────────────────────────
 
-// ── Main hero export ────────────────────────────────────────────
-
-export default function Hero() {
+export function Hero() {
   const [mounted, setMounted] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
 
   useEffect(() => {
-    const id = setTimeout(() => setMounted(true), 0)
-    return () => clearTimeout(id)
+    const timer = setTimeout(() => setMounted(true), 0)
+    return () => clearTimeout(timer)
   }, [])
 
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[var(--color-primary)]"
+      className="relative flex min-h-[92vh] flex-col justify-center overflow-hidden bg-[#080E18] text-white pt-32 pb-24"
     >
-      {/* ── Background layers ── */}
-      <GradientOrbs />
-      <TechGrid />
-      <FloatingShapes />
+      {/* Dynamic Backgrounds */}
+      <AuroraGradients />
+      <TechGridMesh />
+      <FloatingTechElements />
 
-      {/* ── Three.js particle layer (client-only, error-bounded) ── */}
+      {/* Particle Canvas (Right 40%) */}
       {mounted && (
         <ThreeErrorBoundary fallback={null}>
-          <div className="absolute inset-0 z-[1]" aria-hidden="true">
+          <div className="absolute top-0 right-0 bottom-0 w-full lg:w-[45%] z-[1] opacity-70 lg:opacity-100 pointer-events-none" aria-hidden="true">
+            {/* Fade edge mask for smooth integration */}
+            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#080E18] to-transparent z-10 hidden lg:block" />
             <HeroParticles />
           </div>
         </ThreeErrorBoundary>
       )}
 
-      {/* ── Content layer ── */}
-      <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-        <motion.div
-          initial="hidden"
-          animate={mounted ? 'visible' : 'hidden'}
-          variants={containerVariants}
-        >
-          {/* Badge */}
-          <motion.div variants={itemFadeUp} className="mb-6">
-            <span className="inline-block rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-[var(--color-text-tertiary)]">
-              Pune-based IT Consultancy
-            </span>
-          </motion.div>
+      {/* Content Container - 60/40 Asymmetrical Layout */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-8">
+          
+          {/* Left Column (60%) */}
+          <div className="w-full lg:w-[55%] text-left">
+            {/* Corporate Status Pill */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-8 inline-flex items-center gap-3 rounded-full border border-corporate-gold/30 bg-corporate-navy/60 px-6 py-2.5 backdrop-blur-xl shadow-lg"
+            >
+              <span className="text-xs font-bold uppercase tracking-wider text-corporate-gold">
+                Enterprise Technology Solutions
+              </span>
+            </motion.div>
 
-          {/* Heading */}
-          <motion.h1
-            variants={itemFadeUp}
-            className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
-          >
-            Enterprise Technology.{' '}
-            <span className="text-[var(--color-accent-blue)]">Delivered.</span>
-          </motion.h1>
+            {/* Main Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl leading-[1.1] text-white"
+            >
+              Enterprise-Grade Technology Solutions
+              <br className="hidden md:block" />
+              <span className="bg-gradient-to-r from-corporate-gold via-blue-400 to-emerald-400 bg-clip-text text-transparent inline-block mt-4">
+                Engineered for Mission-Critical Scale
+              </span>
+            </motion.h1>
 
-          {/* Subheading */}
-          <motion.p
-            variants={itemFadeUp}
-            className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg"
-          >
-            Synova Infotech delivers enterprise-grade software solutions that
-            transform operations, accelerate growth, and build digital
-            transformation.
-          </motion.p>
+            {/* Executive Subheading */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-8 max-w-2xl text-lg leading-[1.75] text-zinc-400 font-normal"
+            >
+              Synova architects and deploys mission-critical cloud infrastructure, autonomous AI pipelines, and zero-trust security meshes for the world&apos;s most demanding enterprises. 99.999% SLA uptime. Sub-5ms inference. ISO 27001 & SOC 2 Type II certified.
+            </motion.p>
 
-          {/* CTAs */}
-          <motion.div
-            variants={itemFadeUp}
-            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
-          >
-            <CtaButton href="#contact" variant="primary">
-              Start Your Digital Transformation
-            </CtaButton>
-            <CtaButton href="#services" variant="secondary">
-              Explore Our Services
-            </CtaButton>
-          </motion.div>
+            {/* Action CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-10 flex flex-col sm:flex-row items-start gap-5"
+            >
+              <Link
+                href="/contact"
+                className="group relative inline-flex h-14 items-center justify-center gap-3 overflow-hidden rounded-full bg-corporate-gold px-8 py-4 text-sm font-bold text-corporate-navy transition-all duration-300 hover:bg-corporate-gold/90 hover:scale-[1.02] shadow-xl"
+              >
+                Request Enterprise Architecture Audit
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
 
-          {/* Trust indicators */}
-          <motion.p
-            variants={itemFadeUp}
-            className="mt-12 text-xs uppercase tracking-widest text-[var(--color-text-tertiary)]"
-          >
-            Trusted by enterprises across 6 industries
-          </motion.p>
-        </motion.div>
+              <button
+                onClick={() => setModalOpen(true)}
+                className="inline-flex h-14 items-center justify-center gap-3 rounded-full border border-corporate-gold/40 bg-corporate-navy/20 px-8 py-4 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:bg-corporate-navy/30 hover:border-corporate-gold/60"
+              >
+                <Sparkles className="h-4 w-4 text-corporate-gold" />
+                View Reference Blueprint
+              </button>
+            </motion.div>
+
+            {/* Live Counters */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="mt-16 flex flex-wrap gap-x-12 gap-y-8 border-t border-white/10 pt-8"
+            >
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-3xl font-bold text-white tracking-tight">99.999%</span>
+                  <ArrowRight className="h-4 w-4 text-emerald-400 -rotate-45" />
+                </div>
+                <div className="mt-1 text-xs uppercase tracking-widest text-zinc-500 font-semibold">SLA Guarantee</div>
+              </div>
+              
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-3xl font-bold text-white tracking-tight">250+</span>
+                  <Layers className="h-4 w-4 text-blue-400" />
+                </div>
+                <div className="mt-1 text-xs uppercase tracking-widest text-zinc-500 font-semibold">Global Deployments</div>
+              </div>
+              
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-3xl font-bold text-white tracking-tight">&lt;10ms</span>
+                  <Zap className="h-4 w-4 text-cyan-400" />
+                </div>
+                <div className="mt-1 text-xs uppercase tracking-widest text-zinc-500 font-semibold">Inference Latency</div>
+              </div>
+            </motion.div>
+          </div>
+          
+          {/* Right Column (40%) - Space for 3D model */}
+          <div className="w-full lg:w-[45%] h-[400px] lg:h-auto pointer-events-none" aria-hidden="true" />
+          
+        </div>
       </div>
 
-      {/* ── Scroll indicator ── */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={mounted ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
-      >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-xs font-medium uppercase tracking-widest text-[var(--color-text-tertiary)]">
-            Scroll
-          </span>
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-          >
-            <ChevronDown className="h-4 w-4 text-[var(--color-text-tertiary)]" />
-          </motion.div>
-        </div>
-      </motion.div>
+      {/* Architecture Modal */}
+      <ArchitectureModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   )
 }
+

@@ -28,6 +28,7 @@ export const Permissions = {
   PAGES_UPDATE: "pages:update",
   PAGES_DELETE: "pages:delete",
   PAGES_PUBLISH: "pages:publish",
+  PAGES_MANAGE: "pages:manage",
 
   // ── Services ──────────────────────────────────────────────────────────
   SERVICES_CREATE: "services:create",
@@ -35,6 +36,7 @@ export const Permissions = {
   SERVICES_UPDATE: "services:update",
   SERVICES_DELETE: "services:delete",
   SERVICES_PUBLISH: "services:publish",
+  SERVICES_MANAGE: "services:manage",
 
   // ── Industries ────────────────────────────────────────────────────────
   INDUSTRIES_CREATE: "industries:create",
@@ -42,6 +44,7 @@ export const Permissions = {
   INDUSTRIES_UPDATE: "industries:update",
   INDUSTRIES_DELETE: "industries:delete",
   INDUSTRIES_PUBLISH: "industries:publish",
+  INDUSTRIES_MANAGE: "industries:manage",
 
   // ── Blog ──────────────────────────────────────────────────────────────
   BLOG_CREATE: "blog:create",
@@ -49,12 +52,14 @@ export const Permissions = {
   BLOG_UPDATE: "blog:update",
   BLOG_DELETE: "blog:delete",
   BLOG_PUBLISH: "blog:publish",
+  BLOG_MANAGE: "blog:manage",
 
   // ── Media ─────────────────────────────────────────────────────────────
   MEDIA_CREATE: "media:create",
   MEDIA_READ: "media:read",
   MEDIA_UPDATE: "media:update",
   MEDIA_DELETE: "media:delete",
+  MEDIA_MANAGE: "media:manage",
 
   // ── Users ─────────────────────────────────────────────────────────────
   USERS_CREATE: "users:create",
@@ -91,12 +96,28 @@ export const Permissions = {
   NEWSLETTER_UPDATE: "newsletter:update",
   NEWSLETTER_DELETE: "newsletter:delete",
   NEWSLETTER_SEND: "newsletter:send",
+  NEWSLETTER_MANAGE: "newsletter:manage",
 
   // ── Forms ─────────────────────────────────────────────────────────────
   FORMS_CREATE: "forms:create",
   FORMS_READ: "forms:read",
   FORMS_UPDATE: "forms:update",
   FORMS_DELETE: "forms:delete",
+  FORMS_MANAGE: "forms:manage",
+
+  // ── Resources ─────────────────────────────────────────────────────────
+  RESOURCES_CREATE: "resources:create",
+  RESOURCES_READ: "resources:read",
+  RESOURCES_UPDATE: "resources:update",
+  RESOURCES_DELETE: "resources:delete",
+  RESOURCES_MANAGE: "resources:manage",
+
+  // ── Downloads ─────────────────────────────────────────────────────────
+  DOWNLOADS_CREATE: "downloads:create",
+  DOWNLOADS_READ: "downloads:read",
+  DOWNLOADS_UPDATE: "downloads:update",
+  DOWNLOADS_DELETE: "downloads:delete",
+  DOWNLOADS_MANAGE: "downloads:manage",
 
   // ── SEO ───────────────────────────────────────────────────────────────
   SEO_READ: "seo:read",
@@ -140,29 +161,34 @@ export const rolePermissions: Record<Role, Permission[]> = {
     Permissions.PAGES_UPDATE,
     Permissions.PAGES_DELETE,
     Permissions.PAGES_PUBLISH,
+    Permissions.PAGES_MANAGE,
     // Services
     Permissions.SERVICES_CREATE,
     Permissions.SERVICES_READ,
     Permissions.SERVICES_UPDATE,
     Permissions.SERVICES_DELETE,
     Permissions.SERVICES_PUBLISH,
+    Permissions.SERVICES_MANAGE,
     // Industries
     Permissions.INDUSTRIES_CREATE,
     Permissions.INDUSTRIES_READ,
     Permissions.INDUSTRIES_UPDATE,
     Permissions.INDUSTRIES_DELETE,
     Permissions.INDUSTRIES_PUBLISH,
+    Permissions.INDUSTRIES_MANAGE,
     // Blog
     Permissions.BLOG_CREATE,
     Permissions.BLOG_READ,
     Permissions.BLOG_UPDATE,
     Permissions.BLOG_DELETE,
     Permissions.BLOG_PUBLISH,
+    Permissions.BLOG_MANAGE,
     // Media
     Permissions.MEDIA_CREATE,
     Permissions.MEDIA_READ,
     Permissions.MEDIA_UPDATE,
     Permissions.MEDIA_DELETE,
+    Permissions.MEDIA_MANAGE,
     // Settings
     Permissions.SETTINGS_READ,
     Permissions.SETTINGS_UPDATE,
@@ -181,11 +207,25 @@ export const rolePermissions: Record<Role, Permission[]> = {
     Permissions.NEWSLETTER_UPDATE,
     Permissions.NEWSLETTER_DELETE,
     Permissions.NEWSLETTER_SEND,
+    Permissions.NEWSLETTER_MANAGE,
     // Forms
     Permissions.FORMS_CREATE,
     Permissions.FORMS_READ,
     Permissions.FORMS_UPDATE,
     Permissions.FORMS_DELETE,
+    Permissions.FORMS_MANAGE,
+    // Resources
+    Permissions.RESOURCES_CREATE,
+    Permissions.RESOURCES_READ,
+    Permissions.RESOURCES_UPDATE,
+    Permissions.RESOURCES_DELETE,
+    Permissions.RESOURCES_MANAGE,
+    // Downloads
+    Permissions.DOWNLOADS_CREATE,
+    Permissions.DOWNLOADS_READ,
+    Permissions.DOWNLOADS_UPDATE,
+    Permissions.DOWNLOADS_DELETE,
+    Permissions.DOWNLOADS_MANAGE,
     // SEO
     Permissions.SEO_READ,
     Permissions.SEO_UPDATE,

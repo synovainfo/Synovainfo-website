@@ -24,6 +24,8 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
+  BarChart3,
+  Database,
 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
@@ -80,6 +82,8 @@ const NAV_GROUPS: NavGroupConfig[] = [
     items: [
       { label: "Users", href: "/admin/users", icon: Shield },
       { label: "Audit Logs", href: "/admin/audit-logs", icon: ClipboardList },
+      { label: "Analytics", href: "/admin/analytics", icon: BarChart3 },
+      { label: "Backups", href: "/admin/backups", icon: Database },
     ],
   },
 ];
@@ -114,6 +118,7 @@ function NavItemRow({
           : "text-zinc-500 hover:bg-white/5 hover:text-zinc-300 dark:text-zinc-400 dark:hover:text-zinc-200",
         collapsed ? "justify-center border-l-0 px-2" : "px-3",
       )}
+      aria-label={collapsed ? item.label : undefined}
       title={collapsed ? item.label : undefined}
       aria-current={isActive ? "page" : undefined}
     >
@@ -273,15 +278,25 @@ export function Sidebar() {
 
               {/* Group items */}
               {(isCollapsed || expandedGroups[group.label]) && (
-                <div className={cn("mt-0.5", isCollapsed ? "space-y-1" : "space-y-0.5")}>
-                  {group.items.map((item) => (
-                    <NavItemRow
-                      key={item.href}
-                      item={item}
-                      collapsed={isCollapsed}
-                      onNavigate={closeMobile}
-                    />
-                  ))}
+                <div
+                  className={cn(
+                    "grid overflow-hidden transition-all duration-300 ease-in-out",
+                    isCollapsed || expandedGroups[group.label]
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0",
+                    isCollapsed ? "space-y-1" : "space-y-0.5",
+                  )}
+                >
+                  <div className="overflow-hidden">
+                    {group.items.map((item) => (
+                      <NavItemRow
+                        key={item.href}
+                        item={item}
+                        collapsed={isCollapsed}
+                        onNavigate={closeMobile}
+                      />
+                    ))}
+                  </div>
                 </div>
               )}
             </div>

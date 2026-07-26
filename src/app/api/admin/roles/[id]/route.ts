@@ -1,8 +1,8 @@
 // =============================================================================
 // GET   /api/admin/roles/[id] — get single role details
 // PUT   /api/admin/roles/[id] — update role permissions (for system roles,
-//                                we update the in-memory matrix; for custom
-//                                roles we update the DB)
+//                                we respond without DB changes; for custom
+//                                roles we update the Permission model)
 // Permission: SUPER_ADMIN (roles:manage)
 // =============================================================================
 
@@ -10,14 +10,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { withPermission } from "@/lib/authorization";
-
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
-
-interface RouteParams {
-  id: string;
-}
 
 // ---------------------------------------------------------------------------
 // Schema for updating permissions
@@ -30,15 +22,33 @@ const updatePermissionsSchema = z.object({
 const SYSTEM_ROLES = ["SUPER_ADMIN", "ADMIN", "EDITOR", "VIEWER"];
 
 // ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function getRoleId(context: {
+  params: Promise<Record<string, string | string[] | undefined>>;
+}): Promise<string | null> {
+  const params = await context.params;
+  const id = params.id;
+  return typeof id === "string" ? id : null;
+}
+
+// ---------------------------------------------------------------------------
 // GET — single role (with user list summary)
 // ---------------------------------------------------------------------------
 
 export const GET = withPermission(async (
   _request: NextRequest,
-  context: { params: Promise<RouteParams> },
+  context: { params: Promise<Record<string, string | string[] | undefined>> },
 ) => {
   try {
-    const { id } = await context.params;
+    const id = await getRoleId(context);
+    if (!id) {
+      return NextResponse.json(
+        { error: "Bad Request", message: "Role ID is required" },
+        { status: 400 },
+      );
+    }
 
     // Check if it's a system role
     if (SYSTEM_ROLES.includes(id)) {
@@ -90,19 +100,15 @@ export const GET = withPermission(async (
       );
     }
 
-    const permissions = role.permissions.map((p) => `${p.resource}:${p.action}`);
+    const permissions = role.permissions.map(
+      (p: { action: string; resource: string }) => `${p.resource}:${p.action}`,
+    );
     const grouped: Record<string, string[]> = {};
     for (const perm of permissions) {
       const [resource] = perm.split(":");
       if (!grouped[resource]) grouped[resource] = [];
       grouped[resource].push(perm);
     }
-
-    const users = await prisma.user.findMany({
-      where: { role: "EDITOR" }, // Custom roles not directly mappable
-      select: { id: true, name: true, email: true, isActive: true },
-      take: 0,
-    });
 
     return NextResponse.json({
       role: {
@@ -112,7 +118,7 @@ export const GET = withPermission(async (
         isSystem: false,
         permissions,
         groupedPermissions: grouped,
-        users,
+        users: [] as { id: string; name: string; email: string; isActive: boolean }[],
       },
     });
   } catch (error) {
@@ -130,10 +136,17 @@ export const GET = withPermission(async (
 
 export const PUT = withPermission(async (
   request: NextRequest,
-  context: { params: Promise<RouteParams> },
+  context: { params: Promise<Record<string, string | string[] | undefined>> },
 ) => {
   try {
-    const { id } = await context.params;
+    const id = await getRoleId(context);
+    if (!id) {
+      return NextResponse.json(
+        { error: "Bad Request", message: "Role ID is required" },
+        { status: 400 },
+      );
+    }
+
     const body = await request.json();
     const parsed = updatePermissionsSchema.safeParse(body);
 
@@ -171,7 +184,7 @@ export const PUT = withPermission(async (
 
       if (permissions.length > 0) {
         await tx.permission.createMany({
-          data: permissions.map((perm) => {
+          data: permissions.map((perm: string) => {
             const [resource, action] = perm.split(":");
             return {
               roleId: id,

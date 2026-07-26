@@ -43,7 +43,7 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
           'bg-gradient-to-br from-[var(--color-accent-blue)]/[0.03] to-[var(--color-accent-cyan)]/[0.03]',
           'group-hover:opacity-100',
         )}
-        aria-hidden
+        aria-hidden="true"
       />
 
       <div className="relative z-10">

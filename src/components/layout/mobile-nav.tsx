@@ -6,38 +6,39 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NavLinks } from "./nav-links";
 import { Logo } from "@/components/ui/logo";
+import Link from "next/link";
 
 const MOBILE_SERVICES = [
   {
     title: "Development",
     items: [
-      "Custom Software Dev",
-      "Web Development",
-      "Mobile Apps",
-      "Cloud Solutions",
-      "AI/ML",
-      "IoT",
-      "Blockchain",
+      { name: "Custom Software Dev", slug: "custom-software-development" },
+      { name: "Web Development", slug: "web-development" },
+      { name: "Mobile Apps", slug: "mobile-app-development" },
+      { name: "Cloud Solutions", slug: "cloud-infrastructure-solutions" },
+      { name: "AI/ML", slug: "ai-machine-learning" },
+      { name: "IoT", slug: "internet-of-things" },
+      { name: "Blockchain", slug: "blockchain-solutions" },
     ],
   },
   {
     title: "Management",
     items: [
-      "IT Consulting",
-      "Project Management",
-      "Infrastructure Mgmt",
-      "QA Testing",
-      "Support & Maintenance",
+      { name: "IT Consulting", slug: "it-consulting" },
+      { name: "Project Management", slug: "project-management" },
+      { name: "Infrastructure Mgmt", slug: "infrastructure-management" },
+      { name: "QA Testing", slug: "qa-testing" },
+      { name: "Support & Maintenance", slug: "support-maintenance" },
     ],
   },
   {
     title: "Solutions",
     items: [
-      "Digital Transformation",
-      "Enterprise Solutions",
-      "Data Analytics",
-      "Cybersecurity",
-      "UI/UX Design",
+      { name: "Digital Transformation", slug: "digital-transformation" },
+      { name: "Enterprise Solutions", slug: "enterprise-solutions" },
+      { name: "Data Analytics", slug: "data-analytics" },
+      { name: "Cybersecurity", slug: "cybersecurity" },
+      { name: "UI/UX Design", slug: "ui-ux-design" },
     ],
   },
 ];
@@ -51,6 +52,20 @@ export function MobileNav({ isOpen, onToggle }: MobileNavProps) {
   const [servicesExpanded, setServicesExpanded] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // Close on resize to desktop (fixing the scroll lock bug)
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        onToggle(); // automatically close if sized to desktop
+      }
+    };
+    
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isOpen, onToggle]);
 
   // Focus trap
   useEffect(() => {
@@ -254,14 +269,14 @@ export function MobileNav({ isOpen, onToggle }: MobileNavProps) {
                             </h4>
                             <ul className="space-y-1">
                               {cat.items.map((item) => (
-                                <li key={item}>
-                                  <a
-                                    href="#services"
+                                <li key={item.name}>
+                                  <Link
+                                    href={`/services/${item.slug}`}
                                     onClick={handleLinkClick}
                                     className="block rounded-lg px-3 py-2 text-sm text-zinc-500 transition-colors hover:bg-zinc-50 hover:text-zinc-800 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-zinc-200"
                                   >
-                                    {item}
-                                  </a>
+                                    {item.name}
+                                  </Link>
                                 </li>
                               ))}
                             </ul>
@@ -279,13 +294,13 @@ export function MobileNav({ isOpen, onToggle }: MobileNavProps) {
               variants={linkVariants}
               className="border-t border-zinc-100 px-5 py-5 dark:border-zinc-800"
             >
-              <a
-                href="#contact"
+              <Link
+                href="/contact"
                 onClick={handleLinkClick}
                 className="flex w-full items-center justify-center rounded-xl bg-zinc-900 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
               >
                 Let&apos;s Talk
-              </a>
+              </Link>
             </motion.div>
           </motion.div>
         )}

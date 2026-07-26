@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '@/components/providers/theme-provider'
 import { cn } from '@/lib/utils'
@@ -62,6 +63,12 @@ interface ThemeToggleProps {
 
 export function ThemeToggle({ className }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const isDark = theme === 'dark'
 
   return (
@@ -77,19 +84,21 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       )}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.span
-          key={isDark ? 'moon' : 'sun'}
-          initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
-          animate={{ rotate: 0, opacity: 1, scale: 1 }}
-          exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className="absolute inset-0 flex items-center justify-center"
-          aria-hidden="true"
-        >
-          {isDark ? <MoonIcon /> : <SunIcon />}
-        </motion.span>
-      </AnimatePresence>
+      {mounted && (
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={isDark ? 'moon' : 'sun'}
+            initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
+            animate={{ rotate: 0, opacity: 1, scale: 1 }}
+            exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="absolute inset-0 flex items-center justify-center"
+            aria-hidden="true"
+          >
+            {isDark ? <MoonIcon /> : <SunIcon />}
+          </motion.span>
+        </AnimatePresence>
+      )}
     </button>
   )
 }

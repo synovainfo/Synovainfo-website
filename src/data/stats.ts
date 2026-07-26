@@ -8,39 +8,40 @@ export interface Stat {
 
 export const stats: Stat[] = [
   {
-    id: 'projects',
-    value: 200,
+    id: 'deployments',
+    value: 250,
     suffix: '+',
-    label: 'Projects Delivered',
+    label: 'Enterprise Deployments',
   },
   {
     id: 'clients',
-    value: 50,
+    value: 85,
     suffix: '+',
-    label: 'Enterprise Clients',
+    label: 'Fortune 500 & Enterprise Clients',
   },
   {
-    id: 'countries',
-    value: 6,
-    suffix: '',
-    label: 'Countries',
-  },
-  {
-    id: 'experience',
-    value: 25,
-    suffix: '+',
-    label: 'Years Combined Experience',
-  },
-  {
-    id: 'retention',
-    value: 98,
+    id: 'uptime',
+    value: 99.999,
     suffix: '%',
-    label: 'Client Retention',
+    label: 'Contractual SLA Guarantee',
   },
   {
-    id: 'support',
-    value: 5000,
+    id: 'engineers',
+    value: 1200,
     suffix: '+',
-    label: 'Support Hours',
+    label: 'Global Engineering Team',
+  },
+  {
+    id: 'inference',
+    value: 5,
+    suffix: 'ms',
+    prefix: '<',
+    label: 'Edge Inference Latency',
+  },
+  {
+    id: 'certifications',
+    value: 12,
+    suffix: '',
+    label: 'Enterprise Compliance Certifications',
   },
 ]

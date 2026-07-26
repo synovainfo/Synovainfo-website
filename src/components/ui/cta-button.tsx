@@ -11,9 +11,9 @@ interface CtaButtonProps {
 }
 
 /**
- * Premium CTA button with two variants:
- * - primary: solid electric-blue background with hover glow
- * - secondary: transparent with white border + hover fill
+ * Premium CTA button with corporate variants:
+ * - primary: solid corporate navy with gold hover glow
+ * - secondary: transparent with gold border + hover fill
  *
  * Smooth-scrolls to the target section on click.
  */
@@ -40,17 +40,18 @@ export function CtaButton({
         'group relative inline-flex items-center justify-center overflow-hidden',
         'rounded-xl px-7 py-3.5 text-sm font-semibold',
         'transition-all duration-300 ease-out',
-        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent-blue)]',
+        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-corporate-gold)]',
 
         variant === 'primary' && [
-          'bg-[var(--color-accent-blue)] text-white',
-          'hover:shadow-[0_0_30px_-3px_var(--color-accent-blue)]',
+          'bg-[var(--color-corporate-navy)] text-white',
+          'hover:bg-[var(--color-corporate-gold)] hover:text-[var(--color-corporate-navy)]',
+          'hover:shadow-[0_0_30px_-3px_var(--color-corporate-gold)]',
           'active:scale-[0.97]',
         ],
 
         variant === 'secondary' && [
-          'border border-white/20 text-white',
-          'hover:border-white/40 hover:bg-white/[0.06]',
+          'border border-[var(--color-corporate-gold)]/40 text-[var(--color-corporate-gold)]',
+          'hover:bg-[var(--color-corporate-gold)] hover:text-[var(--color-corporate-navy)]',
           'active:scale-[0.97]',
         ],
 

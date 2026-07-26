@@ -10,15 +10,6 @@ import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { withPermission } from "@/lib/authorization";
-import { UserRole } from "@/generated/prisma/client";
-
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
-
-interface RouteParams {
-  id: string;
-}
 
 // ---------------------------------------------------------------------------
 // Update schema
@@ -33,7 +24,7 @@ const updateUserSchema = z.object({
     .max(128)
     .optional()
     .or(z.literal("")),
-  role: z.nativeEnum(UserRole, { errorMap: () => ({ message: "Invalid role" }) }).optional(),
+  role: z.enum(["SUPER_ADMIN", "ADMIN", "EDITOR", "VIEWER"]).optional(),
   isActive: z.boolean().optional(),
 });
 
@@ -41,10 +32,13 @@ const updateUserSchema = z.object({
 // Helpers
 // ---------------------------------------------------------------------------
 
-/** Extract the user id from params */
-async function getUserId(context: { params: Promise<RouteParams> }): Promise<string | null> {
-  const { id } = await context.params;
-  return id ?? null;
+/** Extract the user id from context params */
+async function getUserId(context: {
+  params: Promise<Record<string, string | string[] | undefined>>;
+}): Promise<string | null> {
+  const params = await context.params;
+  const id = params.id;
+  return typeof id === "string" ? id : null;
 }
 
 /** Fetch user or return error response */
@@ -67,7 +61,7 @@ async function findUserOrError(id: string) {
 
 export const GET = withPermission(async (
   _request: NextRequest,
-  context: { params: Promise<RouteParams> },
+  context: { params: Promise<Record<string, string | string[] | undefined>> },
 ) => {
   try {
     const id = await getUserId(context);
@@ -125,7 +119,7 @@ export const GET = withPermission(async (
 
 export const PUT = withPermission(async (
   request: NextRequest,
-  context: { params: Promise<RouteParams> },
+  context: { params: Promise<Record<string, string | string[] | undefined>> },
 ) => {
   try {
     const id = await getUserId(context);
@@ -206,7 +200,7 @@ export const PUT = withPermission(async (
 
 export const DELETE = withPermission(async (
   _request: NextRequest,
-  context: { params: Promise<RouteParams> },
+  context: { params: Promise<Record<string, string | string[] | undefined>> },
 ) => {
   try {
     const id = await getUserId(context);
@@ -237,18 +231,12 @@ export const DELETE = withPermission(async (
       }
     }
 
-    // Hard delete (user has relations with onDelete cascade for some models)
-    // Use a transaction to clean up relations
+    // Hard delete with transaction to clean up relations
     await prisma.$transaction([
-      // Delete audit logs for this user
       prisma.auditLog.deleteMany({ where: { userId: id } }),
-      // Delete activities
       prisma.activity.deleteMany({ where: { userId: id } }),
-      // Unassign leads
       prisma.lead.updateMany({ where: { assignedToId: id }, data: { assignedToId: null } }),
-      // Unassign contacts
       prisma.contact.updateMany({ where: { assignedToId: id }, data: { assignedToId: null } }),
-      // Delete the user
       prisma.user.delete({ where: { id } }),
     ]);
 

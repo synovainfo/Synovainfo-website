@@ -194,7 +194,7 @@ export function ContactForm({ className }: ContactFormProps) {
           {/* Custom chevron */}
           <div
             className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[var(--color-text-tertiary)]"
-            aria-hidden
+            aria-hidden="true"
           >
             <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
               <path
@@ -432,7 +432,7 @@ export function ContactForm({ className }: ContactFormProps) {
                 'transition-transform duration-700',
                 submitStatus !== 'submitting' && 'group-hover:translate-x-full',
               )}
-              aria-hidden
+              aria-hidden="true"
             />
 
             {submitStatus === 'submitting' ? (

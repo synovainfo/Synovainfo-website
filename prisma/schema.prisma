@@ -640,6 +640,8 @@ model Contact {
   email        String
   phone        String?
   service      String?
+  budget       String?
+  timeline     String?
   message      String?   @db.Text
   source       String?
   landingPage  String?

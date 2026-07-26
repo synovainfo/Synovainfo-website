@@ -9,8 +9,6 @@ import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { withPermission } from "@/lib/authorization";
-import { UserRole } from "@/generated/prisma/client";
-
 // ---------------------------------------------------------------------------
 // Query schema for GET
 // ---------------------------------------------------------------------------
@@ -19,7 +17,7 @@ const listQuerySchema = z.object({
   page: z.coerce.number().int().positive().optional().default(1),
   pageSize: z.coerce.number().int().positive().max(100).optional().default(20),
   search: z.string().optional().default(""),
-  role: z.nativeEnum(UserRole).optional(),
+  role: z.enum(["SUPER_ADMIN", "ADMIN", "EDITOR", "VIEWER"]).optional(),
   sort: z.enum(["name", "email", "role", "isActive", "createdAt"]).optional().default("createdAt"),
   order: z.enum(["asc", "desc"]).optional().default("desc"),
 });
@@ -35,7 +33,7 @@ const createUserSchema = z.object({
     .string()
     .min(8, "Password must be at least 8 characters")
     .max(128, "Password is too long"),
-  role: z.nativeEnum(UserRole, { errorMap: () => ({ message: "Invalid role" }) }),
+  role: z.enum(["SUPER_ADMIN", "ADMIN", "EDITOR", "VIEWER"]),
   isActive: z.boolean().optional().default(true),
 });
 

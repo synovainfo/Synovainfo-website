@@ -12,16 +12,22 @@ export async function middleware(request: NextRequest) {
   // -----------------------------------------------------------------------
   const { pathname } = request.nextUrl;
 
-  if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
+  if (pathname.startsWith("/admin")) {
     const token = await getToken({
       req: request,
       secret: process.env.AUTH_SECRET,
     });
 
-    if (!token) {
+    const isLoginPage = pathname === "/admin/login";
+
+    if (!token && !isLoginPage) {
       const loginUrl = new URL("/admin/login", request.url);
       loginUrl.searchParams.set("callbackUrl", pathname);
       return NextResponse.redirect(loginUrl);
+    }
+
+    if (token && isLoginPage) {
+      return NextResponse.redirect(new URL("/admin/dashboard", request.url));
     }
   }
 

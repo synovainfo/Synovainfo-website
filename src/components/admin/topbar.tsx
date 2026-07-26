@@ -34,17 +34,19 @@ export function Topbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(3); // Simulating unread notifications
 
   const searchRef = useRef<HTMLInputElement>(null);
-  const userMenuRef = useRef<HTMLDivElement>(null);
+  const userMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const userMenuDropdownRef = useRef<HTMLDivElement>(null);
   const notifRef = useRef<HTMLDivElement>(null);
 
   // Close dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
-        userMenuRef.current &&
-        !userMenuRef.current.contains(e.target as Node)
+        userMenuDropdownRef.current &&
+        !userMenuDropdownRef.current.contains(e.target as Node)
       ) {
         setShowUserMenu(false);
       }
@@ -57,20 +59,23 @@ export function Topbar() {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [userMenuDropdownRef, notifRef]);
 
   // Close on Escape
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setShowUserMenu(false);
+        if (showUserMenu) {
+          setShowUserMenu(false);
+          userMenuButtonRef.current?.focus();
+        }
         setShowNotifications(false);
         setSearchOpen(false);
       }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, []);
+  }, [showUserMenu, userMenuButtonRef]);
 
   // Focus search input when opened
   useEffect(() => {
@@ -107,6 +112,66 @@ export function Topbar() {
     };
   }, [searchOpen]);
 
+  // Keyboard navigation for user menu
+  useEffect(() => {
+    if (!showUserMenu || !userMenuDropdownRef.current) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const focusableElements = Array.from(
+        userMenuDropdownRef.current?.querySelectorAll(
+          'a[role="menuitem"], button[role="menuitem"]'
+        ) || []
+      ) as HTMLElement[];
+      const activeElement = document.activeElement as HTMLElement;
+      const activeIndex = focusableElements.indexOf(activeElement);
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const nextIndex = (activeIndex + 1) % focusableElements.length;
+        focusableElements[nextIndex].focus();
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const prevIndex =
+          (activeIndex - 1 + focusableElements.length) % focusableElements.length;
+        focusableElements[prevIndex].focus();
+      } else if (e.key === "Home") {
+        e.preventDefault();
+        focusableElements[0].focus();
+      } else if (e.key === "End") {
+        e.preventDefault();
+        focusableElements[focusableElements.length - 1].focus();
+      } else if (e.key === "Tab") {
+        e.preventDefault();
+        if (e.shiftKey) {
+          if (activeIndex === 0 || activeIndex === -1) {
+            userMenuButtonRef.current?.focus();
+            setShowUserMenu(false);
+          } else {
+            focusableElements[activeIndex - 1].focus();
+          }
+        } else {
+          if (activeIndex === focusableElements.length - 1) {
+            userMenuButtonRef.current?.focus();
+            setShowUserMenu(false);
+          } else {
+            focusableElements[activeIndex + 1].focus();
+          }
+        }
+      }
+    };
+
+    userMenuDropdownRef.current.addEventListener("keydown", handleKeyDown);
+    // Focus the first item when the menu opens
+    const firstItem = userMenuDropdownRef.current.querySelector(
+      'a[role="menuitem"], button[role="menuitem"]'
+    ) as HTMLElement;
+    firstItem?.focus();
+
+    return () => {
+      userMenuDropdownRef.current?.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showUserMenu]);
+
   const isDark = theme === "dark";
 
   return (
@@ -139,7 +204,7 @@ export function Topbar() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={() => setSearchOpen(true)}
-          onBlur={() => setTimeout(() => setSearchOpen(false), 200)}
+          onBlur={() => setSearchOpen(false)}
           className={cn(
             "h-9 w-full rounded-lg border bg-transparent pl-9 pr-3 text-sm outline-none transition-all duration-200",
             "border-[var(--color-border)] dark:border-white/10",
@@ -188,7 +253,7 @@ export function Topbar() {
             "text-zinc-500 hover:bg-white/10 hover:text-zinc-300 dark:text-zinc-400 dark:hover:text-zinc-200",
             "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500",
           )}
-          aria-label="Notifications"
+          aria-label={`Notifications${notificationCount > 0 ? ` (${notificationCount} unread)` : ""}`}
           aria-expanded={showNotifications}
         >
           <Bell className="h-4 w-4" aria-hidden="true" />
@@ -222,8 +287,9 @@ export function Topbar() {
       </div>
 
       {/* ── User menu ──────────────────────────────────────────── */}
-      <div ref={userMenuRef} className="relative">
+      <div className="relative">
         <button
+          ref={userMenuButtonRef}
           onClick={() => setShowUserMenu(!showUserMenu)}
           className={cn(
             "flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors",
@@ -232,6 +298,7 @@ export function Topbar() {
           )}
           aria-label="User menu"
           aria-expanded={showUserMenu}
+          aria-haspopup="menu"
         >
           {/* Avatar */}
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500/20 text-sm font-semibold text-blue-400">
@@ -255,6 +322,9 @@ export function Topbar() {
         {/* Dropdown */}
         {showUserMenu && (
           <div
+            ref={userMenuDropdownRef}
+            role="menu"
+            tabIndex={-1}
             className={cn(
               "absolute right-0 top-full mt-2 w-56 overflow-hidden rounded-xl border shadow-xl",
               "border-[var(--color-border)] dark:border-white/10",
@@ -276,6 +346,8 @@ export function Topbar() {
               <Link
                 href="/admin/profile"
                 onClick={() => setShowUserMenu(false)}
+                role="menuitem"
+                tabIndex={0}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
                   "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-white/5",
@@ -287,6 +359,8 @@ export function Topbar() {
               <Link
                 href="/admin/settings"
                 onClick={() => setShowUserMenu(false)}
+                role="menuitem"
+                tabIndex={0}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
                   "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-white/5",
@@ -298,6 +372,8 @@ export function Topbar() {
               <hr className="my-1 border-[var(--color-border-light)] dark:border-white/5" />
               <button
                 onClick={handleSignOut}
+                role="menuitem"
+                tabIndex={0}
                 className={cn(
                   "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
                   "text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10",

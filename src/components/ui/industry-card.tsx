@@ -31,7 +31,7 @@ export function IndustryCard({ industry, index = 0 }: IndustryCardProps) {
           'bg-gradient-to-br from-[var(--color-accent-blue)]/[0.03] to-[var(--color-accent-cyan)]/[0.03]',
           'group-hover:opacity-100',
         )}
-        aria-hidden
+        aria-hidden="true"
       />
 
       <div className="relative z-10 flex flex-col gap-4">

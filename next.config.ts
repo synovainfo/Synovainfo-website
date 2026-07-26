@@ -1,10 +1,9 @@
 import type { NextConfig } from "next";
+import { withSentryConfig } from "@sentry/nextjs";
 
 let nextConfig: NextConfig = {
+  outputFileTracingRoot: "C:\\Users\\Dinesh Nikam\\Desktop\\mirai\\synova",
   reactCompiler: true,
-  turbopack: {
-    root: "C:\\Users\\Dinesh Nikam\\Desktop\\mirai\\synova",
-  },
   images: {
     remotePatterns: [
       {
@@ -18,6 +17,40 @@ let nextConfig: NextConfig = {
     ],
   },
   serverExternalPackages: ["bcryptjs"],
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+          },
+          {
+            key: "Content-Security-Policy-Report-Only",
+            value:
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://vitals.vercel-insights.com https://*.sentry.io; frame-ancestors 'none';",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 // Bundle analyzer - only when ANALYZE=true
@@ -29,9 +62,6 @@ if (process.env.ANALYZE === "true") {
   nextConfig = withBundleAnalyzer(nextConfig);
 }
 
-// Sentry configuration
-const { withSentryConfig } = require("@sentry/nextjs");
-
 const sentryConfig = {
   org: process.env.SENTRY_ORG,
   project: process.env.SENTRY_PROJECT,
@@ -39,8 +69,6 @@ const sentryConfig = {
   widenClientFileUpload: true,
   tunnelRoute: "/monitoring",
   hideSourceMaps: true,
-  // disableLogger is deprecated - use webpack.treeshake.removeDebugLogging instead
-  // automaticVercelMonitors is deprecated - use webpack.automaticVercelMonitors instead
 };
 
-module.exports = withSentryConfig(nextConfig, sentryConfig);
+export default withSentryConfig(nextConfig, sentryConfig);

@@ -44,15 +44,18 @@ export function CoreValues() {
       />
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {values.map((value, index) => (
-          <ValueCard
-            key={value.title}
-            icon={value.icon}
-            title={value.title}
-            description={value.description}
-            index={index}
-          />
-        ))}
+        {values.map((value, index) => {
+          const Icon = value.icon
+          return (
+            <ValueCard
+              key={value.title}
+              icon={<Icon className="h-6 w-6" />}
+              title={value.title}
+              description={value.description}
+              index={index}
+            />
+          )
+        })}
       </div>
     </SectionWrapper>
   )

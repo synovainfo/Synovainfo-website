@@ -12,6 +12,19 @@
   --color-accent-emerald: #10B981;
   --color-accent-cyan: #06B6D4;
   --color-accent-purple: #8B5CF6;
+  --color-accent-red: #EF4444;
+
+  /* ===== Corporate Accent Colors ===== */
+  --color-corporate-gold: #D4AF37;
+  --color-corporate-silver: #C0C0C0;
+  --color-corporate-navy: #1E293B;
+  --color-corporate-gray: #64748B;
+  --color-corporate-slate: #94A3B8;
+
+  /* ===== Trust & Compliance Colors ===== */
+  --color-trust-green: #059669;
+  --color-trust-blue: #1D4ED8;
+  --color-compliance-red: #DC2626;
 
   /* ===== Surface Colors ===== */
   --color-surface: #FFFFFF;
@@ -21,7 +34,7 @@
   /* ===== Text Colors ===== */
   --color-text: #0F1B2D;
   --color-text-secondary: #475569;
-  --color-text-tertiary: #94A3B8;
+  --color-text-tertiary: #6B7280;
   --color-text-inverse: #FFFFFF;
 
   /* ===== Border Colors ===== */
@@ -31,7 +44,7 @@
   /* ===== Font Families ===== */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-manrope), ui-monospace, SFMono-Regular, monospace;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 
   /* ===== Shadow Scale ===== */
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -68,7 +81,7 @@
 
   --color-text: #FFFFFF;
   --color-text-secondary: #CBD5E1;
-  --color-text-tertiary: #64748B;
+  --color-text-tertiary: #94A3B8;
   --color-text-inverse: #0F1B2D;
 
   --color-border: #2D3748;
@@ -86,6 +99,7 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
 /* ===== Hero Animation Keyframes ===== */
@@ -135,13 +149,148 @@ body {
 }
 
 /* ===== Smooth Theme Transitions ===== */
-*,
-*::before,
-*::after {
+body,
+[data-theme] {
   transition: background-color 0.3s ease,
               color 0.3s ease,
               border-color 0.3s ease,
               box-shadow 0.3s ease;
+}
+
+/* ===== Aurora Background Keyframes ===== */
+
+@keyframes aurora-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+@keyframes aurora-2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50% { transform: translate(-40px, 30px) rotate(180deg) scale(1.1); }
+}
+
+@keyframes aurora-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  50% { transform: translate(20px, -20px) scale(1.2); opacity: 0.8; }
+}
+
+.aurora-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  will-change: transform, opacity;
+}
+
+.aurora-orb-1 {
+  top: -10rem;
+  right: -10rem;
+  height: 500px;
+  width: 500px;
+  background: linear-gradient(to right, var(--color-accent-blue), transparent);
+  animation: aurora-1 20s ease-in-out infinite;
+}
+
+.aurora-orb-2 {
+  bottom: -10rem;
+  left: -10rem;
+  height: 400px;
+  width: 400px;
+  background: linear-gradient(to right, var(--color-accent-cyan), transparent);
+  animation: aurora-2 25s ease-in-out infinite;
+}
+
+.aurora-orb-3 {
+  top: 33%;
+  left: 33%;
+  height: 300px;
+  width: 300px;
+  background: linear-gradient(to right, var(--color-accent-purple), transparent);
+  animation: aurora-3 18s ease-in-out infinite;
+}
+
+/* ===== Mesh Gradient Keyframes ===== */
+
+@keyframes mesh-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(5%, -8%) scale(1.05); }
+  66% { transform: translate(-5%, 5%) scale(0.95); }
+}
+
+@keyframes mesh-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-8%, 5%) scale(1.08); }
+}
+
+@keyframes mesh-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+  50% { transform: translate(6%, -6%) scale(1.03); opacity: 0.9; }
+}
+
+@keyframes mesh-drift-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  50% { transform: translate(-5%, -5%) scale(1.06); opacity: 0.8; }
+}
+
+.mesh-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  will-change: transform, opacity;
+}
+
+.mesh-blob-1 {
+  width: 60%;
+  height: 50%;
+  top: 10%;
+  left: 5%;
+  background: radial-gradient(ellipse, var(--mesh-color-1, var(--color-accent-blue)) 0%, transparent 70%);
+  animation: mesh-drift-1 calc(18s * var(--mesh-speed, 1)) ease-in-out infinite;
+}
+
+.mesh-blob-2 {
+  width: 50%;
+  height: 60%;
+  bottom: 5%;
+  right: 5%;
+  background: radial-gradient(ellipse, var(--mesh-color-2, var(--color-accent-cyan)) 0%, transparent 70%);
+  animation: mesh-drift-2 calc(22s * var(--mesh-speed, 1)) ease-in-out infinite;
+}
+
+.mesh-blob-3 {
+  width: 40%;
+  height: 40%;
+  top: 40%;
+  left: 40%;
+  background: radial-gradient(ellipse, var(--mesh-color-3, var(--color-accent-purple)) 0%, transparent 70%);
+  animation: mesh-drift-3 calc(20s * var(--mesh-speed, 1)) ease-in-out infinite;
+}
+
+.mesh-blob-4 {
+  width: 35%;
+  height: 45%;
+  top: 60%;
+  left: 5%;
+  background: radial-gradient(ellipse, var(--mesh-color-4, var(--color-accent-emerald)) 0%, transparent 70%);
+  animation: mesh-drift-4 calc(24s * var(--mesh-speed, 1)) ease-in-out infinite;
+}
+
+/* ===== Skeleton Shimmer ===== */
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-tertiary) 25%,
+    var(--color-border-light) 50%,
+    var(--color-surface-tertiary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
 }
 
 /* ===== Reduced Motion ===== */
@@ -164,6 +313,25 @@ body {
 
 /* ===== Focus Styles ===== */
 :focus-visible {
-  outline: 2px solid var(--color-accent-blue);
+  outline: 2px solid var(--color-corporate-gold);
   outline-offset: 2px;
+}
+
+/* ===== Corporate Button Styles ===== */
+.btn-corporate {
+  @apply inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-300;
+  @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-corporate-gold;
+}
+
+.btn-corporate-primary {
+  @apply bg-corporate-navy text-white hover:bg-corporate-gold hover:text-corporate-navy;
+  @apply shadow-lg hover:shadow-xl;
+}
+
+.btn-corporate-secondary {
+  @apply border border-corporate-gold/40 text-corporate-gold hover:bg-corporate-gold hover:text-corporate-navy;
+}
+
+.btn-corporate-outline {
+  @apply border border-corporate-navy/60 text-corporate-navy hover:bg-corporate-navy/10;
 }

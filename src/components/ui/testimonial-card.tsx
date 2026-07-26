@@ -69,12 +69,12 @@ export function TestimonialCard({ testimonial, index = 0 }: TestimonialCardProps
           'bg-gradient-to-br from-[var(--color-accent-blue)]/[0.03] to-[var(--color-accent-cyan)]/[0.03]',
           'group-hover:opacity-100',
         )}
-        aria-hidden
+        aria-hidden="true"
       />
 
       <div className="relative z-10 flex flex-1 flex-col">
         {/* Large quotation mark */}
-        <div className="mb-4 text-[var(--color-accent-blue)]/15" aria-hidden>
+        <div className="mb-4 text-[var(--color-accent-blue)]/15" aria-hidden="true">
           <svg
             width="48"
             height="40"
@@ -102,7 +102,7 @@ export function TestimonialCard({ testimonial, index = 0 }: TestimonialCardProps
               'bg-gradient-to-br from-[var(--color-accent-blue)] to-[var(--color-accent-cyan)]',
               'text-xs font-bold tracking-wide text-white',
             )}
-            aria-hidden
+            aria-hidden="true"
           >
             {testimonial.initials}
           </div>

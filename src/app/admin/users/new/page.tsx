@@ -27,7 +27,7 @@ const createUserSchema = z.object({
     .min(8, "Password must be at least 8 characters")
     .max(128, "Password is too long"),
   role: z.enum(["SUPER_ADMIN", "ADMIN", "EDITOR", "VIEWER"], {
-    errorMap: () => ({ message: "Please select a role" }),
+    error: "Please select a role",
   }),
   isActive: z.boolean(),
 });

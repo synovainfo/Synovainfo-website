@@ -2,30 +2,31 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: "Synova Infotech | Enterprise Software Development Company Pune",
+    default: "Synova Infotech | Enterprise Architecture & Digital Engineering",
     template: "%s | Synova Infotech",
   },
   description:
-    "Synova Infotech Private Limited — Pune-based enterprise software development company delivering custom software, cloud solutions, AI/ML, cybersecurity, and digital transformation services.",
+    "Synova Infotech architects mission-critical cloud platforms, autonomous AI systems, and zero-trust security meshes for Fortune 500 enterprises. 99.999% SLA uptime. ISO 27001 & SOC 2 Type II certified.",
   keywords: [
-    "enterprise software development",
-    "digital transformation",
-    "IT consultancy Pune",
-    "Synova Infotech",
-    "custom software solutions",
-    "cloud solutions",
-    "AI/ML services",
-    "cybersecurity services",
-    "software development company Pune",
+    "enterprise architecture",
+    "digital engineering",
+    "multi-cloud infrastructure",
+    "zero trust security",
+    "agentic AI",
+    "Fortune 500 technology partner",
+    "digital transformation consulting",
+    "enterprise microservices",
+    "Synova Infotech Pune",
+    "enterprise software architecture",
   ],
   authors: [{ name: "Synova Infotech Private Limited" }],
   creator: "Synova Infotech Private Limited",
   publisher: "Synova Infotech Private Limited",
   metadataBase: new URL("https://synovainfotech.com"),
   openGraph: {
-    title: "Synova Infotech | Enterprise Software Development Company",
+    title: "Synova Infotech | Enterprise Architecture & Digital Engineering",
     description:
-      "Enterprise-grade software solutions that transform operations, accelerate growth, and build digital transformation.",
+      "Mission-critical platforms engineered for Fortune 500 scale. Multi-cloud infrastructure, agentic AI pipelines, and zero-trust security architectures with 99.999% SLA guarantees.",
     url: "https://synovainfotech.com",
     siteName: "Synova Infotech",
     locale: "en_US",
@@ -33,9 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Synova Infotech | Enterprise Software Development",
+    title: "Synova Infotech | Enterprise Architecture & Digital Engineering",
     description:
-      "Enterprise-grade software solutions that transform operations, accelerate growth, and build digital transformation.",
+      "Mission-critical platforms engineered for Fortune 500 scale. Multi-cloud infrastructure, agentic AI, and zero-trust security with 99.999% SLA guarantees.",
   },
   robots: {
     index: true,

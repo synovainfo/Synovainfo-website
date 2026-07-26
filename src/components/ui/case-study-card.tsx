@@ -68,7 +68,7 @@ export function CaseStudyCard({ study, index = 0 }: CaseStudyCardProps) {
           'bg-gradient-to-br from-[var(--color-accent-blue)]/[0.03] to-[var(--color-accent-cyan)]/[0.03]',
           'group-hover:opacity-100',
         )}
-        aria-hidden
+        aria-hidden="true"
       />
 
       <div className="relative z-10 flex flex-col sm:flex-row">

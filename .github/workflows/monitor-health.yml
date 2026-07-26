@@ -1,0 +1,28 @@
+name: Synova Continuous QA & Health Monitor
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  monitor-health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Health & Security Header Audit
+        env:
+          SITE_URL: 'https://synovainfotech.com'
+        run: npx tsx scripts/monitor-health.ts

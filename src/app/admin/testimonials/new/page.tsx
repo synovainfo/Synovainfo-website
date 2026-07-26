@@ -1,0 +1,411 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { z } from "zod";
+import {
+  Loader2,
+  ChevronLeft,
+  AlertCircle,
+  CheckCircle2,
+  Star,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { PageHeader } from "@/components/admin/page-header";
+
+// ---------------------------------------------------------------------------
+// Schema
+// ---------------------------------------------------------------------------
+
+const createSchema = z.object({
+  quote: z.string().min(1, "Quote is required").max(2000, "Quote is too long"),
+  author: z
+    .string()
+    .min(1, "Author name is required")
+    .max(200, "Author name is too long"),
+  title: z.string().max(200).optional().nullable(),
+  company: z.string().max(200).optional().nullable(),
+  avatar: z.string().max(500).optional().nullable(),
+  rating: z.number().int().min(1).max(5),
+  status: z.boolean(),
+  order: z.number().int(),
+});
+
+type CreateForm = z.infer<typeof createSchema>;
+
+// ---------------------------------------------------------------------------
+// CreateTestimonialPage
+// ---------------------------------------------------------------------------
+
+export default function CreateTestimonialPage() {
+  const router = useRouter();
+
+  const [form, setForm] = useState<CreateForm>({
+    quote: "",
+    author: "",
+    title: "",
+    company: "",
+    avatar: "",
+    rating: 5,
+    status: true,
+    order: 0,
+  });
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof CreateForm, string>>
+  >({});
+  const [submitting, setSubmitting] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+
+  const handleChange = (
+    field: keyof CreateForm,
+    value: string | boolean | number | null,
+  ) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => {
+        const next = { ...prev };
+        delete next[field];
+        return next;
+      });
+    }
+    if (serverError) setServerError(null);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setServerError(null);
+    setSuccess(false);
+
+    const result = createSchema.safeParse(form);
+    if (!result.success) {
+      const fieldErrors: Partial<Record<keyof CreateForm, string>> = {};
+      for (const issue of result.error.issues) {
+        const field = issue.path[0] as keyof CreateForm;
+        if (!fieldErrors[field]) fieldErrors[field] = issue.message;
+      }
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setErrors({});
+    setSubmitting(true);
+
+    try {
+      const res = await fetch("/api/admin/testimonials", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(result.data),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message ?? data.error ?? "Failed to create testimonial");
+      }
+
+      setSuccess(true);
+      setTimeout(() => router.push("/admin/testimonials"), 1500);
+    } catch (err) {
+      setServerError(
+        err instanceof Error ? err.message : "An unexpected error occurred",
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div>
+      <Link
+        href="/admin/testimonials"
+        className={cn(
+          "mb-4 inline-flex items-center gap-1.5 text-sm font-medium",
+          "text-zinc-500 hover:text-zinc-700",
+          "dark:text-zinc-400 dark:hover:text-zinc-200",
+          "transition-colors",
+        )}
+      >
+        <ChevronLeft className="h-4 w-4" />
+        Back to Testimonials
+      </Link>
+
+      <PageHeader
+        title="New Testimonial"
+        description="Add a client testimonial or review"
+      />
+
+      {success && (
+        <div
+          className="mb-6 flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-900/50 dark:bg-green-950/30 dark:text-green-400"
+          role="alert"
+        >
+          <CheckCircle2 className="h-5 w-5 shrink-0" />
+          <span>Testimonial created successfully! Redirecting…</span>
+        </div>
+      )}
+
+      {serverError && (
+        <div
+          className="mb-6 flex items-center gap-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400"
+          role="alert"
+        >
+          <AlertCircle className="h-5 w-5 shrink-0" />
+          <span>{serverError}</span>
+          <button
+            onClick={() => setServerError(null)}
+            className="ml-auto font-medium hover:underline"
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
+
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        className="max-w-2xl rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-900"
+      >
+        <div className="space-y-6">
+          {/* Quote */}
+          <div>
+            <label
+              htmlFor="quote"
+              className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
+            >
+              Quote <span className="text-red-500">*</span>
+            </label>
+            <textarea
+              id="quote"
+              rows={4}
+              value={form.quote}
+              onChange={(e) => handleChange("quote", e.target.value)}
+              placeholder="Client testimonial quote..."
+              aria-invalid={!!errors.quote}
+              className={cn(
+                "w-full rounded-lg border px-3 py-2 text-sm",
+                "bg-white text-zinc-900 placeholder:text-zinc-400",
+                "focus:outline-none focus:ring-1",
+                "dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500",
+                errors.quote
+                  ? "border-red-400 focus:border-red-500 focus:ring-red-500"
+                  : "border-zinc-300 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600",
+              )}
+            />
+            {errors.quote && (
+              <p className="mt-1 text-xs text-red-500">{errors.quote}</p>
+            )}
+          </div>
+
+          {/* Author */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label
+                htmlFor="author"
+                className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
+              >
+                Author <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="author"
+                type="text"
+                value={form.author}
+                onChange={(e) => handleChange("author", e.target.value)}
+                placeholder="John Doe"
+                aria-invalid={!!errors.author}
+                className={cn(
+                  "w-full rounded-lg border px-3 py-2 text-sm",
+                  "bg-white text-zinc-900 placeholder:text-zinc-400",
+                  "focus:outline-none focus:ring-1",
+                  "dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500",
+                  errors.author
+                    ? "border-red-400 focus:border-red-500 focus:ring-red-500"
+                    : "border-zinc-300 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600",
+                )}
+              />
+              {errors.author && (
+                <p className="mt-1 text-xs text-red-500">{errors.author}</p>
+              )}
+            </div>
+
+            <div>
+              <label
+                htmlFor="title"
+                className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
+              >
+                Title
+              </label>
+              <input
+                id="title"
+                type="text"
+                value={form.title ?? ""}
+                onChange={(e) => handleChange("title", e.target.value || null)}
+                placeholder="CEO, Founder..."
+                className={cn(
+                  "w-full rounded-lg border px-3 py-2 text-sm",
+                  "bg-white text-zinc-900 placeholder:text-zinc-400",
+                  "focus:outline-none focus:ring-1",
+                  "border-zinc-300 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500",
+                )}
+              />
+            </div>
+          </div>
+
+          {/* Company */}
+          <div>
+            <label
+              htmlFor="company"
+              className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
+            >
+              Company
+            </label>
+            <input
+              id="company"
+              type="text"
+              value={form.company ?? ""}
+              onChange={(e) => handleChange("company", e.target.value || null)}
+              placeholder="Acme Inc."
+              className={cn(
+                "w-full rounded-lg border px-3 py-2 text-sm",
+                "bg-white text-zinc-900 placeholder:text-zinc-400",
+                "focus:outline-none focus:ring-1",
+                "border-zinc-300 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500",
+              )}
+            />
+          </div>
+
+          {/* Avatar URL */}
+          <div>
+            <label
+              htmlFor="avatar"
+              className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
+            >
+              Avatar URL
+            </label>
+            <input
+              id="avatar"
+              type="url"
+              value={form.avatar ?? ""}
+              onChange={(e) => handleChange("avatar", e.target.value || null)}
+              placeholder="https://example.com/avatar.jpg"
+              className={cn(
+                "w-full rounded-lg border px-3 py-2 text-sm",
+                "bg-white text-zinc-900 placeholder:text-zinc-400",
+                "focus:outline-none focus:ring-1",
+                "border-zinc-300 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500",
+              )}
+            />
+          </div>
+
+          {/* Rating */}
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+              Rating <span className="text-red-500">*</span>
+            </label>
+            <div className="flex items-center gap-2">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  type="button"
+                  onClick={() => handleChange("rating", star)}
+                  className="transition-transform hover:scale-110"
+                  aria-label={`Rate ${star} stars`}
+                >
+                  <Star
+                    className={cn(
+                      "h-6 w-6",
+                      star <= form.rating
+                        ? "fill-amber-400 text-amber-400"
+                        : "fill-none text-zinc-300 dark:text-zinc-600",
+                    )}
+                  />
+                </button>
+              ))}
+              <span className="ml-2 text-sm text-zinc-500 dark:text-zinc-400">
+                {form.rating} / 5
+              </span>
+            </div>
+            {errors.rating && (
+              <p className="mt-1 text-xs text-red-500">{errors.rating}</p>
+            )}
+          </div>
+
+          {/* Order */}
+          <div>
+            <label
+              htmlFor="order"
+              className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
+            >
+              Display Order
+            </label>
+            <input
+              id="order"
+              type="number"
+              value={form.order}
+              onChange={(e) =>
+                handleChange("order", parseInt(e.target.value) || 0)
+              }
+              className={cn(
+                "w-24 rounded-lg border px-3 py-2 text-sm",
+                "bg-white text-zinc-900",
+                "focus:outline-none focus:ring-1",
+                "border-zinc-300 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100",
+              )}
+            />
+          </div>
+
+          {/* Status */}
+          <div className="flex items-center gap-3">
+            <input
+              id="status"
+              type="checkbox"
+              checked={form.status}
+              onChange={(e) => handleChange("status", e.target.checked)}
+              className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500 dark:border-zinc-600"
+            />
+            <label
+              htmlFor="status"
+              className="text-sm font-medium text-zinc-700 dark:text-zinc-300"
+            >
+              Active
+            </label>
+          </div>
+        </div>
+
+        {/* Actions */}
+        <div className="mt-8 flex items-center justify-end gap-3 border-t border-zinc-200 pt-6 dark:border-zinc-700">
+          <Link
+            href="/admin/testimonials"
+            className={cn(
+              "rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium",
+              "text-zinc-700 hover:bg-zinc-50",
+              "dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800",
+              "transition-colors",
+            )}
+          >
+            Cancel
+          </Link>
+          <button
+            type="submit"
+            disabled={submitting || success}
+            className={cn(
+              "inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium",
+              "bg-blue-600 text-white hover:bg-blue-500",
+              "transition-colors",
+              (submitting || success) && "cursor-not-allowed opacity-70",
+            )}
+          >
+            {submitting ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Creating…
+              </>
+            ) : (
+              "Create Testimonial"
+            )}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}

@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1128" />
+      <stop offset="50%" stop-color="#001f54" />
+      <stop offset="100%" stop-color="#034078" />
+    </linearGradient>
+    <linearGradient id="accent-gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f7b801" />
+      <stop offset="100%" stop-color="#f18701" />
+    </linearGradient>
+    <linearGradient id="accent-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#4facfe" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Grid -->
+  <rect width="800" height="500" rx="16" fill="url(#bg-grad)" />
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <path d="M0 50 H800 M0 100 H800 M0 150 H800 M0 200 H800 M0 250 H800 M0 300 H800 M0 350 H800 M0 400 H800 M0 450 H800" />
+    <path d="M100 0 V500 M200 0 V500 M300 0 V500 M400 0 V500 M500 0 V500 M600 0 V500 M700 0 V500" />
+  </g>
+
+  <!-- Title & Blueprint Header -->
+  <text x="40" y="50" fill="#ffffff" font-family="Inter, sans-serif" font-size="16" font-weight="700" letter-spacing="1">SYNOVA ENTERPRISE ARCHITECTURE BLUEPRINT v4.0</text>
+  <text x="40" y="72" fill="#00f2fe" font-family="Inter, sans-serif" font-size="12" font-weight="500">EVENT-DRIVEN MULTI-REGION KUBERNETES &amp; SERVICE MESH</text>
+
+  <!-- Region 1 Box -->
+  <rect x="50" y="110" width="220" height="280" rx="12" fill="#001f54" fill-opacity="0.6" stroke="#00f2fe" stroke-width="1.5" stroke-dasharray="4 4" />
+  <text x="70" y="138" fill="#00f2fe" font-family="Inter, sans-serif" font-size="13" font-weight="600">REGION US-EAST (PRIMARY)</text>
+
+  <!-- Microservice Node 1 -->
+  <rect x="70" y="160" width="180" height="50" rx="8" fill="#034078" stroke="#4facfe" stroke-width="1" />
+  <circle cx="95" cy="185" r="10" fill="url(#accent-gold)" />
+  <text x="115" y="182" fill="#ffffff" font-family="Inter, sans-serif" font-size="12" font-weight="600">API Gateway</text>
+  <text x="115" y="196" fill="#8d99ae" font-family="Inter, sans-serif" font-size="10">Envoy / Envoy Proxy</text>
+
+  <!-- Microservice Node 2 -->
+  <rect x="70" y="230" width="180" height="50" rx="8" fill="#034078" stroke="#4facfe" stroke-width="1" />
+  <circle cx="95" cy="255" r="10" fill="url(#accent-cyan)" />
+  <text x="115" y="252" fill="#ffffff" font-family="Inter, sans-serif" font-size="12" font-weight="600">Auth Service</text>
+  <text x="115" y="266" fill="#8d99ae" font-family="Inter, sans-serif" font-size="10">OAuth2 / OIDC JWT</text>
+
+  <!-- Microservice Node 3 -->
+  <rect x="70" y="300" width="180" height="50" rx="8" fill="#034078" stroke="#4facfe" stroke-width="1" />
+  <circle cx="95" cy="325" r="10" fill="#f7b801" />
+  <text x="115" y="322" fill="#ffffff" font-family="Inter, sans-serif" font-size="12" font-weight="600">Core Engine</text>
+  <text x="115" y="336" fill="#8d99ae" font-family="Inter, sans-serif" font-size="10">Kafka Event Stream</text>
+
+  <!-- Central Bus / Kafka Backbone -->
+  <rect x="310" y="110" width="180" height="280" rx="12" fill="#0d1b2a" fill-opacity="0.9" stroke="url(#accent-gold)" stroke-width="2" filter="url(#glow)" />
+  <text x="330" y="140" fill="#f7b801" font-family="Inter, sans-serif" font-size="14" font-weight="700">EVENT MESH BUS</text>
+
+  <rect x="330" y="170" width="140" height="40" rx="6" fill="#1b263b" stroke="#f7b801" stroke-width="1" />
+  <text x="345" y="194" fill="#ffffff" font-family="Inter, sans-serif" font-size="11" font-weight="500">Apache Kafka Topic</text>
+
+  <rect x="330" y="230" width="140" height="40" rx="6" fill="#1b263b" stroke="#00f2fe" stroke-width="1" />
+  <text x="345" y="254" fill="#ffffff" font-family="Inter, sans-serif" font-size="11" font-weight="500">Vector Search DB</text>
+
+  <rect x="330" y="290" width="140" height="40" rx="6" fill="#1b263b" stroke="#4facfe" stroke-width="1" />
+  <text x="345" y="314" fill="#ffffff" font-family="Inter, sans-serif" font-size="11" font-weight="500">Redis Global Cache</text>
+
+  <!-- Region 2 Box -->
+  <rect x="530" y="110" width="220" height="280" rx="12" fill="#001f54" fill-opacity="0.6" stroke="#4facfe" stroke-width="1.5" stroke-dasharray="4 4" />
+  <text x="550" y="138" fill="#4facfe" font-family="Inter, sans-serif" font-size="13" font-weight="600">REGION EU-WEST (REPLICA)</text>
+
+  <!-- Microservice Node 4 -->
+  <rect x="550" y="160" width="180" height="50" rx="8" fill="#034078" stroke="#4facfe" stroke-width="1" />
+  <circle cx="575" cy="185" r="10" fill="url(#accent-cyan)" />
+  <text x="595" y="182" fill="#ffffff" font-family="Inter, sans-serif" font-size="12" font-weight="600">Edge Gateway</text>
+  <text x="595" y="196" fill="#8d99ae" font-family="Inter, sans-serif" font-size="10">Cloudflare Anycast</text>
+
+  <!-- Microservice Node 5 -->
+  <rect x="550" y="230" width="180" height="50" rx="8" fill="#034078" stroke="#4facfe" stroke-width="1" />
+  <circle cx="575" cy="255" r="10" fill="url(#accent-gold)" />
+  <text x="595" y="252" fill="#ffffff" font-family="Inter, sans-serif" font-size="12" font-weight="600">AI Worker Pods</text>
+  <text x="595" y="266" fill="#8d99ae" font-family="Inter, sans-serif" font-size="10">Ray / PyTorch GPU</text>
+
+  <!-- Microservice Node 6 -->
+  <rect x="550" y="300" width="180" height="50" rx="8" fill="#034078" stroke="#4facfe" stroke-width="1" />
+  <circle cx="575" cy="325" r="10" fill="#00f2fe" />
+  <text x="595" y="322" fill="#ffffff" font-family="Inter, sans-serif" font-size="12" font-weight="600">Telemetry Engine</text>
+  <text x="595" y="336" fill="#8d99ae" font-family="Inter, sans-serif" font-size="10">OpenTelemetry / Jaeger</text>
+
+  <!-- Connection Lines & Data Flow -->
+  <path d="M250 185 H310 M250 255 H310 M250 325 H310" stroke="#00f2fe" stroke-width="2" stroke-dasharray="6 4" />
+  <path d="M490 185 H550 M490 255 H550 M490 325 H550" stroke="#f7b801" stroke-width="2" stroke-dasharray="6 4" />
+
+  <!-- Bottom Telemetry Banner -->
+  <rect x="50" y="420" width="700" height="50" rx="8" fill="#001427" stroke="#ffffff" stroke-opacity="0.1" />
+  <text x="70" y="450" fill="#00f2fe" font-family="Inter, sans-serif" font-size="12" font-weight="600">Active SLA Status: 99.999%</text>
+  <text x="280" y="450" fill="#ffffff" font-family="Inter, sans-serif" font-size="12" font-weight="500">Latency: &lt; 12ms</text>
+  <text x="440" y="450" fill="#f7b801" font-family="Inter, sans-serif" font-size="12" font-weight="500">Global Regions: 14</text>
+  <text x="600" y="450" fill="#4facfe" font-family="Inter, sans-serif" font-size="12" font-weight="500">SOC2 Type II: ACTIVE</text>
+</svg>
