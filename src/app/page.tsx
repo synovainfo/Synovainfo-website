@@ -1,13 +1,7 @@
 import { prisma } from '@/lib/prisma'
-import { Hero } from '@/components/sections/hero'
 import { TrustBar } from '@/components/sections/trust-bar'
 import { TransformationShowcase } from '@/components/sections/transformation-showcase'
-import { Services } from '@/components/sections/services'
-import { Industries } from '@/components/sections/industries'
 import { WhySynova } from '@/components/sections/why-synova'
-import { Process } from '@/components/sections/process'
-import { Technologies } from '@/components/sections/technologies'
-import { CaseStudies } from '@/components/sections/case-studies'
 import { Testimonials } from '@/components/sections/testimonials'
 import { Stats } from '@/components/sections/stats'
 import { Insights } from '@/components/sections/insights'
@@ -16,6 +10,17 @@ import { Contact } from '@/components/sections/contact'
 import { Clients } from '@/components/sections/clients'
 import { About } from '@/components/sections/about'
 import { CoreValues } from '@/components/sections/core-values'
+
+import {
+  V2CaseStudyEditorial,
+  V2Hero,
+  V2IndustryAtlas,
+  V2ProcessRail,
+  V2ServicesShowcase,
+  V2TechnologyTopology,
+  V2Cta,
+} from '@/components/v2/enterprise-visuals'
+import { v2Pages } from '@/components/v2/experience-data'
 
 export const revalidate = 60
 
@@ -33,15 +38,15 @@ export default async function Home() {
   // If Prisma has custom section configurations, render them dynamically
   if (dbSections.length > 0) {
     const sectionComponents: Record<string, React.ComponentType> = {
-      hero: Hero,
+      hero: () => <V2Hero content={v2Pages.home} variant="home" />,
       'trust-bar': TrustBar,
       'transformation-showcase': TransformationShowcase,
-      services: Services,
-      industries: Industries,
+      services: V2ServicesShowcase,
+      industries: V2IndustryAtlas,
       'why-synova': WhySynova,
-      process: Process,
-      technologies: Technologies,
-      'case-studies': CaseStudies,
+      process: V2ProcessRail,
+      technologies: V2TechnologyTopology,
+      'case-studies': V2CaseStudyEditorial,
       testimonials: Testimonials,
       stats: Stats,
       insights: Insights,
@@ -50,6 +55,7 @@ export default async function Home() {
       clients: Clients,
       about: About,
       'core-values': CoreValues,
+      cta: V2Cta,
     }
 
     return (
@@ -63,18 +69,18 @@ export default async function Home() {
     )
   }
 
-  // Default Fortune 500 15-Section Enterprise Homepage Sequence
+  // Default Fortune 500 Enterprise Homepage Sequence (V2 + V1 Rich Content)
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
-      <Hero />
+      <V2Hero content={v2Pages.home} variant="home" />
       <TrustBar />
       <TransformationShowcase />
-      <Services />
-      <Industries />
+      <V2ServicesShowcase />
+      <V2IndustryAtlas />
       <WhySynova />
-      <Process />
-      <Technologies />
-      <CaseStudies />
+      <V2ProcessRail />
+      <V2TechnologyTopology />
+      <V2CaseStudyEditorial />
       <Testimonials />
       <Stats />
       <Insights />
@@ -83,6 +89,7 @@ export default async function Home() {
       <Careers />
       <Contact />
       <Clients />
+      <V2Cta />
     </div>
   )
 }

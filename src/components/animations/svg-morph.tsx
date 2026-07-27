@@ -29,7 +29,7 @@ export interface SvgMorphProps {
   /** Animation duration in seconds (default: 0.6) */
   duration?: number;
   /** Custom easing curve (default: [0.25, 0.1, 0.25, 1]) */
-  ease?: number[];
+  ease?: [number, number, number, number];
   /** Optional label for accessibility (default: 'Morphing shape') */
   ariaLabel?: string;
   /** Additional wrapper classes */
