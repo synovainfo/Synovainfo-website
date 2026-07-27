@@ -27,6 +27,11 @@ export default function RootLayout({
       <head>
         <ThemeScript />
         <JsonLd />
+        <link rel="alternate" hrefLang="en-IN" href="https://synovainfotech.com/" />
+        <link rel="alternate" hrefLang="en-US" href="https://synovainfotech.com/" />
+        <link rel="alternate" hrefLang="en-GB" href="https://synovainfotech.com/" />
+        <link rel="alternate" hrefLang="en-SG" href="https://synovainfotech.com/" />
+        <link rel="alternate" hrefLang="x-default" href="https://synovainfotech.com/" />
       </head>
       <body className="min-h-full flex flex-col">
         {/* Skip-to-content link for keyboard users */}
