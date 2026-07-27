@@ -7,7 +7,10 @@ import { ArrowRight, CheckCircle2, Cpu, ShieldCheck, Zap, Layers, Sparkles, Acti
 import Link from 'next/link'
 import { SectionWrapper } from '@/components/layout/section-wrapper'
 import { SectionHeader } from '@/components/ui/section-header'
-import { services as initialServices } from '@/data/services'
+import type { Service } from '@/data/services'
+interface ServicesClientProps {
+  initialServices: Service[]
+}
 
 const KEYNOTE_SERVICES = [
   {
@@ -84,7 +87,7 @@ const KEYNOTE_SERVICES = [
   },
 ]
 
-export function ServicesClient() {
+export function ServicesClient({ initialServices }: ServicesClientProps) {
   const [activeIdx, setActiveIdx] = useState(0)
   const currentService = KEYNOTE_SERVICES[activeIdx]
 

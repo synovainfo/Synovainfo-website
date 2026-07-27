@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion, type Easing } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { type ReactNode, useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -29,7 +29,7 @@ export interface SvgMorphProps {
   /** Animation duration in seconds (default: 0.6) */
   duration?: number;
   /** Custom easing curve (default: [0.25, 0.1, 0.25, 1]) */
-  ease?: Easing;
+  ease?: number[];
   /** Optional label for accessibility (default: 'Morphing shape') */
   ariaLabel?: string;
   /** Additional wrapper classes */

@@ -23,7 +23,7 @@ const DEFAULT_CONTENT: AboutContent = {
   vision:
     'To be the most trusted technology partner for enterprises seeking digital transformation — delivering solutions that create measurable business impact.',
   mission:
-    'Empower organizations with enterprise-grade software solutions that combine scalable technology with robust architecture, enabling them to achieve measurable operational excellence and sustainable growth.',
+    'Empower organizations with enterprise-grade software solutions that combine cutting-edge technology with robust architecture, enabling them to achieve operational excellence and sustainable growth.',
   incorporated: '30 June 2026',
   headquarters: 'Pune, India',
   directors: 'Amir Khaja Baig · Tazeen Shahnawaz Shaikh',
