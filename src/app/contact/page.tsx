@@ -1,53 +1,25 @@
-import Link from 'next/link'
-import { prisma } from '@/lib/prisma'
 import type { Metadata } from 'next'
-import { ChevronRight } from 'lucide-react'
+import { prisma } from '@/lib/prisma'
 import { ContactForm } from './contact-form'
+import { V2Hero } from '@/components/v2/enterprise-visuals'
+import { v2Pages } from '@/components/v2/experience-data'
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Synova Infotech',
-  description:
-    'Get in touch with Synova Infotech. Reach out for digital transformation, AI solutions, web development, and enterprise technology services.',
-  openGraph: {
-    title: 'Contact Us | Synova Infotech',
-    description:
-      'Get in touch with Synova Infotech for digital transformation, AI solutions, and enterprise technology services.',
-    url: '/contact',
-  },
+  title: 'Contact Synova Infotech',
+  description: 'Contact Synova Infotech to discuss enterprise software, cloud, AI, data, cybersecurity, and digital transformation initiatives.',
 }
 
 export default async function ContactPage() {
   const [services, contactSetting] = await Promise.all([
-    prisma.service.findMany({
-      where: { status: true },
-      select: { id: true, title: true },
-      orderBy: { createdAt: 'asc' },
-    }),
+    prisma.service.findMany({ where: { status: true }, select: { id: true, title: true }, orderBy: { createdAt: 'asc' } }),
     prisma.setting.findUnique({ where: { key: 'contact' } }),
   ])
 
-  const contactInfo = contactSetting?.value
-    ? (JSON.parse(contactSetting.value) as Record<string, string>)
-    : null
+  const contactInfo = contactSetting?.value ? (JSON.parse(contactSetting.value) as Record<string, string>) : null
 
   return (
     <>
-      {/* ── Breadcrumb ── */}
-      <nav aria-label="Breadcrumb" className="border-b border-[var(--color-border)] bg-[var(--color-surface-secondary)]">
-        <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3 text-sm sm:px-6 lg:px-8">
-          <Link
-            href="/"
-            className="text-[var(--color-text-tertiary)] transition-colors hover:text-[var(--color-accent-blue)]"
-          >
-            Home
-          </Link>
-          <ChevronRight className="h-3.5 w-3.5 text-[var(--color-text-tertiary)]" aria-hidden="true" />
-          <span className="font-medium text-[var(--color-text)]" aria-current="page">
-            Contact
-          </span>
-        </div>
-      </nav>
-
+      <V2Hero content={v2Pages.contact} />
       <ContactForm services={services} contactInfo={contactInfo} />
     </>
   )

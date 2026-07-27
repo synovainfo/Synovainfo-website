@@ -52,3 +52,5 @@ next-env.d.ts
 .codegraph/
 .omo/
 AGENTS.md 
+.kilo/
+docs/

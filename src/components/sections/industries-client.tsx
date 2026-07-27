@@ -7,11 +7,7 @@ import Link from 'next/link'
 import { SectionWrapper } from '@/components/layout/section-wrapper'
 import { SectionHeader } from '@/components/ui/section-header'
 
-import type { Industry } from '@/data/industries'
-
-interface IndustriesClientProps {
-  initialIndustries: Industry[]
-}
+import { industries as initialIndustries } from '@/data/industries'
 
 const REGIONAL_HUBS = [
   {
@@ -48,7 +44,7 @@ const REGIONAL_HUBS = [
   },
 ]
 
-export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
+export function IndustriesClient() {
   const [activeHubId, setActiveHubId] = useState(REGIONAL_HUBS[0]?.id || '')
   const currentHub = REGIONAL_HUBS.find((h) => h.id === activeHubId) || REGIONAL_HUBS[0]
 

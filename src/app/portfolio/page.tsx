@@ -3,13 +3,13 @@ import { V2CaseStudyEditorial, V2PageFrame, V2TechnologyTopology } from '@/compo
 import { v2Pages } from '@/components/v2/experience-data'
 
 export const metadata: Metadata = {
-  title: 'Resources | Synova Infotech',
-  description: 'Enterprise resources, whitepapers, guides, and decision frameworks for technology leaders.',
+  title: 'Portfolio | Synova Infotech',
+  description: 'Selected enterprise product systems, architecture patterns, and digital operations work from Synova Infotech.',
 }
 
-export default function ResourcesPage() {
+export default function PortfolioPage() {
   return (
-    <V2PageFrame content={v2Pages.insights}>
+    <V2PageFrame content={v2Pages.portfolio}>
       <V2CaseStudyEditorial />
       <V2TechnologyTopology />
     </V2PageFrame>

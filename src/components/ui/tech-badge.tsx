@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { resolveIcon } from '@/lib/resolve-icon'
 import type { Technology } from '@/data/technologies'
 
 interface TechBadgeProps {
@@ -11,7 +12,7 @@ interface TechBadgeProps {
 
 export function TechBadge({ tech, index }: TechBadgeProps) {
   const prefersReducedMotion = useReducedMotion()
-  const Icon = tech.icon
+  const Icon = resolveIcon(tech.icon)
 
   return (
     <motion.div

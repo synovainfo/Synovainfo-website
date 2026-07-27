@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Cpu, Server, Cloud, Database, Lock, Layers, Sparkles } from 'lucide-react'
 import { SectionWrapper } from '@/components/layout/section-wrapper'
 import { SectionHeader } from '@/components/ui/section-header'
+import { resolveIcon } from '@/lib/resolve-icon'
 
 import type { Technology } from '@/data/technologies'
 
@@ -147,7 +148,7 @@ export function TechnologiesClient({ initialTechnologies }: TechnologiesClientPr
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {initialTechnologies.map((tech, idx) => {
-            const Icon = tech.icon
+            const Icon = resolveIcon(tech.icon)
             return (
               <motion.div
                 key={tech.id}

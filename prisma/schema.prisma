@@ -236,6 +236,12 @@ model Service {
   category          String?
   benefits          Json?
   businessOutcomes  Json?
+  businessProblems  Json?
+  solutionArchitecture String? @db.Text
+  keyFeatures       Json?
+  securityCompliance Json?
+  faqs              Json?
+  relatedCaseStudies Json?
   status            Boolean  @default(true)
   seoTitle          String?
   seoDescription    String?

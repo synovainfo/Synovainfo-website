@@ -23,6 +23,16 @@ export const metadata: Metadata = {
   creator: "Synova Infotech Private Limited",
   publisher: "Synova Infotech Private Limited",
   metadataBase: new URL("https://synovainfotech.com"),
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-IN": "/",
+      "en-US": "/",
+      "en-GB": "/",
+      "en-SG": "/",
+      "x-default": "/",
+    },
+  },
   openGraph: {
     title: "Synova Infotech | Enterprise Architecture & Digital Engineering",
     description:
@@ -31,12 +41,21 @@ export const metadata: Metadata = {
     siteName: "Synova Infotech",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Synova Infotech Enterprise Solutions",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Synova Infotech | Enterprise Architecture & Digital Engineering",
     description:
       "Mission-critical platforms engineered for Fortune 500 scale. Multi-cloud infrastructure, agentic AI, and zero-trust security with 99.999% SLA guarantees.",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
