@@ -18,12 +18,6 @@ interface ServicePageData {
   category: string | null
   benefits: unknown
   businessOutcomes: unknown
-  businessProblems: unknown
-  solutionArchitecture: string | null
-  keyFeatures: unknown
-  securityCompliance: unknown
-  faqs: unknown
-  relatedCaseStudies: unknown
   seoTitle: string | null
   seoDescription: string | null
   seoKeywords: string | null
@@ -105,12 +99,12 @@ export default async function ServiceDetailPage({
   const relatedTechnologies = service.technologies.map((st) => st.technology)
   const relatedIndustries = service.industries.map((si) => si.industry)
 
-  const businessProblems = (service.businessProblems as string[]) ?? []
-  const solutionArchitecture = service.solutionArchitecture ?? ''
-  const keyFeatures = (service.keyFeatures as Array<{ title: string; description: string }>) ?? []
-  const securityCompliance = (service.securityCompliance as string[]) ?? []
-  const faqs = (service.faqs as Array<{ question: string; answer: string }>) ?? []
-  const relatedCaseStudies = (service.relatedCaseStudies as any[]) ?? []
+  const businessProblems: string[] = []
+  const solutionArchitecture = ''
+  const keyFeatures: Array<{ title: string; description: string }> = []
+  const securityCompliance: string[] = []
+  const faqs: Array<{ question: string; answer: string }> = []
+  const relatedCaseStudies: any[] = []
 
   return (
     <>

@@ -112,7 +112,7 @@ const WHY_JOIN = [
     icon: Lightbulb,
     title: 'Innovation First',
     description:
-      'Access to enterprise-grade tools, scalable technologies, and the autonomy to drive measurable technical impact.',
+      'Access to cutting-edge tools, technologies, and the freedom to experiment and innovate.',
   },
   {
     icon: Sparkles,
