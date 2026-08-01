@@ -7,7 +7,7 @@ import {
 } from "@/lib/json-ld";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://synovainfotech.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://synovainfo.com";
 
 // =============================================================================
 // Defaults when DB settings are not available

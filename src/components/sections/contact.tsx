@@ -2,22 +2,29 @@ import { prisma } from '@/lib/prisma'
 import { ContactClient } from './contact-client'
 
 export async function Contact() {
-  const [settings, section] = await Promise.all([
-    prisma.setting.findMany({
-      where: {
-        key: {
-          in: ['contact_email', 'contact_phone', 'site_name', 'site_description'],
+  let settings: Awaited<ReturnType<typeof prisma.setting.findMany>> = []
+  let section: Awaited<ReturnType<typeof prisma.homepageSection.findFirst>> = null
+
+  try {
+    ;[settings, section] = await Promise.all([
+      prisma.setting.findMany({
+        where: {
+          key: {
+            in: ['contact_email', 'contact_phone', 'site_name', 'site_description'],
+          },
         },
-      },
-    }),
-    prisma.homepageSection.findFirst({
-      where: { sectionType: 'contact', isVisible: true },
-    }),
-  ])
+      }),
+      prisma.homepageSection.findFirst({
+        where: { sectionType: 'contact', isVisible: true },
+      }),
+    ])
+  } catch (error) {
+    console.error('Contact: database fallback engaged:', error)
+  }
 
   const settingsMap = new Map(settings.map((s) => [s.key, s.value]))
 
-  const email = settingsMap.get('contact_email') ?? 'info@synovainfotech.com'
+  const email = settingsMap.get('contact_email') ?? 'info@synovainfo.com'
   const phone = settingsMap.get('contact_phone') ?? '+91 98765 43210'
   const siteName = settingsMap.get('site_name') ?? 'Synova Infotech'
 

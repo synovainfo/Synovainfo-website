@@ -169,7 +169,7 @@ export default async function BlogPostDetailPage({ params }: Props) {
             },
             mainEntityOfPage: {
               '@type': 'WebPage',
-              '@id': `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://synovainfotech.com'}/blog/${post.slug}`,
+              '@id': `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://synovainfo.com'}/blog/${post.slug}`,
             },
           }),
         }}

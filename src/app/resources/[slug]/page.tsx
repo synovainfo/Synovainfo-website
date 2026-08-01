@@ -190,7 +190,7 @@ export default async function ResourceDetailPage({
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://synovainfotech.com'}/resources/${resource.slug}`,
+      '@id': `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://synovainfo.com'}/resources/${resource.slug}`,
     },
   }
 

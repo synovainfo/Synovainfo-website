@@ -14,7 +14,7 @@ const envSchema = z.object({
 
   // Resend
   RESEND_API_KEY: z.string().optional(),
-  RESEND_FROM_EMAIL: z.string().email().default("noreply@synovainfotech.com"),
+  RESEND_FROM_EMAIL: z.string().email().default("noreply@synovainfo.com"),
 
   // Sentry
   SENTRY_DSN: z.string().url().optional(),
@@ -23,7 +23,7 @@ const envSchema = z.object({
   REDIS_URL: z.string().default("redis://localhost:6379"),
 
   // Site
-  NEXT_PUBLIC_SITE_URL: z.string().url().default("https://synovainfotech.com"),
+  NEXT_PUBLIC_SITE_URL: z.string().url().default("https://synovainfo.com"),
   NEXT_PUBLIC_SITE_NAME: z.string().default("Synova Infotech"),
 
   // Form

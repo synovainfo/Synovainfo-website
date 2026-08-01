@@ -108,16 +108,33 @@ model User {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
-  authoredPages      Page[]
-  pageVersions       PageVersion[]
-  uploadedMedia      Media[]
+  authoredPages       Page[]
+  pageVersions        PageVersion[]
+  uploadedMedia       Media[]
   createdMediaFolders MediaFolder[]
-  assignedLeads      Lead[]       @relation("LeadAssignee")
-  assignedContacts   Contact[]    @relation("ContactAssignee")
-  leadActivities     LeadActivity[]
-  auditLogs          AuditLog[]
-  activities         Activity[]
-  blogPosts          BlogPost[]
+  assignedLeads       Lead[]         @relation("LeadAssignee")
+  assignedContacts    Contact[]      @relation("ContactAssignee")
+  leadActivities      LeadActivity[]
+  auditLogs           AuditLog[]
+  activities          Activity[]
+  blogPosts           BlogPost[]
+
+  createdServices     Service[]     @relation("ServiceCreatedBy")
+  updatedServices     Service[]     @relation("ServiceUpdatedBy")
+  createdIndustrys    Industry[]    @relation("IndustryCreatedBy")
+  updatedIndustrys    Industry[]    @relation("IndustryUpdatedBy")
+  createdTechnologys  Technology[]  @relation("TechnologyCreatedBy")
+  updatedTechnologys  Technology[]  @relation("TechnologyUpdatedBy")
+  createdClients      Client[]      @relation("ClientCreatedBy")
+  updatedClients      Client[]      @relation("ClientUpdatedBy")
+  createdCareers      Career[]      @relation("CareerCreatedBy")
+  updatedCareers      Career[]      @relation("CareerUpdatedBy")
+  createdResources    Resource[]    @relation("ResourceCreatedBy")
+  updatedResources    Resource[]    @relation("ResourceUpdatedBy")
+  createdTestimonials Testimonial[] @relation("TestimonialCreatedBy")
+  updatedTestimonials Testimonial[] @relation("TestimonialUpdatedBy")
+  createdFAQs         FAQ[]         @relation("FAQCreatedBy")
+  updatedFAQs         FAQ[]         @relation("FAQUpdatedBy")
 
   @@index([email])
   @@index([role])
@@ -127,11 +144,11 @@ model User {
 
 // --- 2. Role ---
 model Role {
-  id          String       @id @default(cuid())
-  name        String       @unique
+  id          String   @id @default(cuid())
+  name        String   @unique
   description String?
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   permissions Permission[]
 
@@ -154,28 +171,28 @@ model Permission {
 
 // --- 4. Page ---
 model Page {
-  id            String       @id @default(cuid())
+  id            String     @id @default(cuid())
   title         String
-  slug          String       @unique
+  slug          String     @unique
   content       Json?
-  excerpt       String?      @db.Text
-  status        PageStatus   @default(DRAFT)
+  excerpt       String?    @db.Text
+  status        PageStatus @default(DRAFT)
   featuredImage String?
   template      String?
   publishedAt   DateTime?
   scheduledAt   DateTime?
   authorId      String
-  author        User         @relation(fields: [authorId], references: [id])
+  author        User       @relation(fields: [authorId], references: [id])
   parentId      String?
-  parent        Page?        @relation("PageHierarchy", fields: [parentId], references: [id])
-  children      Page[]       @relation("PageHierarchy")
-  customCss     String?      @db.Text
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  parent        Page?      @relation("PageHierarchy", fields: [parentId], references: [id])
+  children      Page[]     @relation("PageHierarchy")
+  customCss     String?    @db.Text
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
   deletedAt     DateTime?
 
-  sections  PageSection[]
-  versions  PageVersion[]
+  sections PageSection[]
+  versions PageVersion[]
 
   @@index([slug])
   @@index([status])
@@ -206,9 +223,9 @@ model PageSection {
 
 // --- 6. PageVersion ---
 model PageVersion {
-  id            String     @id @default(cuid())
+  id            String    @id @default(cuid())
   pageId        String
-  page          Page       @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  page          Page      @relation(fields: [pageId], references: [id], onDelete: Cascade)
   versionNumber Int
   content       Json?
   title         String?
@@ -216,33 +233,37 @@ model PageVersion {
   status        String?
   publishedAt   DateTime?
   createdById   String
-  createdBy     User       @relation(fields: [createdById], references: [id])
-  createdAt     DateTime   @default(now())
+  createdBy     User      @relation(fields: [createdById], references: [id])
+  createdAt     DateTime  @default(now())
 
+  @@unique([pageId, versionNumber])
   @@index([pageId])
   @@index([createdById])
-  @@unique([pageId, versionNumber])
   @@map("page_versions")
 }
 
 // --- 7. Service ---
 model Service {
-  id                String   @id @default(cuid())
-  title             String
-  slug              String   @unique
-  shortDescription  String?  @db.Text
-  fullDescription   String?  @db.Text
-  icon              String?
-  category          String?
-  benefits          Json?
-  businessOutcomes  Json?
-  status            Boolean  @default(true)
-  seoTitle          String?
-  seoDescription    String?
-  seoKeywords       String?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-  deletedAt         DateTime?
+  id               String    @id @default(cuid())
+  title            String
+  slug             String    @unique
+  shortDescription String?   @db.Text
+  fullDescription  String?   @db.Text
+  icon             String?
+  category         String?
+  benefits         Json?
+  businessOutcomes Json?
+  status           Boolean   @default(true)
+  seoTitle         String?
+  seoDescription   String?
+  seoKeywords      String?
+  createdById      String?
+  createdBy        User?     @relation("ServiceCreatedBy", fields: [createdById], references: [id])
+  updatedById      String?
+  updatedBy        User?     @relation("ServiceUpdatedBy", fields: [updatedById], references: [id])
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  deletedAt        DateTime?
 
   technologies ServiceTechnology[]
   industries   ServiceIndustry[]
@@ -256,16 +277,20 @@ model Service {
 
 // --- 8. Industry ---
 model Industry {
-  id            String   @id @default(cuid())
-  name          String
-  slug          String   @unique
-  description   String?  @db.Text
-  icon          String?
-  capabilities  Json?
-  status        Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  deletedAt     DateTime?
+  id           String    @id @default(cuid())
+  name         String
+  slug         String    @unique
+  description  String?   @db.Text
+  icon         String?
+  capabilities Json?
+  status       Boolean   @default(true)
+  createdById  String?
+  createdBy    User?     @relation("IndustryCreatedBy", fields: [createdById], references: [id])
+  updatedById  String?
+  updatedBy    User?     @relation("IndustryUpdatedBy", fields: [updatedById], references: [id])
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
 
   services ServiceIndustry[]
 
@@ -285,6 +310,10 @@ model Technology {
   websiteUrl       String?
   proficiencyLevel Int      @default(0)
   status           Boolean  @default(true)
+  createdById      String?
+  createdBy        User?    @relation("TechnologyCreatedBy", fields: [createdById], references: [id])
+  updatedById      String?
+  updatedBy        User?    @relation("TechnologyUpdatedBy", fields: [updatedById], references: [id])
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
@@ -326,38 +355,105 @@ model ServiceIndustry {
 
 // --- 12. Statistic ---
 model Statistic {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   label     String
   value     String
   prefix    String?
   suffix    String?
-  order     Int      @default(0)
-  isVisible Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  order     Int       @default(0)
+  isVisible Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
+  @@index([isVisible])
+  @@index([deletedAt])
   @@map("statistics")
 }
 
 // --- 13. Testimonial ---
 model Testimonial {
-  id        String   @id @default(cuid())
-  quote     String   @db.Text
-  author    String
-  title     String?
-  company   String?
-  avatar    String?
-  rating    Int      @default(5)
-  status    Boolean  @default(true)
-  order     Int      @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String    @id @default(cuid())
+  quote       String    @db.Text
+  author      String
+  title       String?
+  company     String?
+  avatar      String?
+  imageUrl    String?
+  rating      Int       @default(5)
+  status      Boolean   @default(true)
+  order       Int       @default(0)
+  createdById String?
+  createdBy   User?     @relation("TestimonialCreatedBy", fields: [createdById], references: [id])
+  updatedById String?
+  updatedBy   User?     @relation("TestimonialUpdatedBy", fields: [updatedById], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
 
   @@index([status])
+  @@index([deletedAt])
   @@map("testimonials")
 }
 
-// --- 14. Client ---
+// --- 14. Partner ---
+model Partner {
+  id          String    @id @default(cuid())
+  name        String
+  website     String?
+  description String?   @db.Text
+  logo        String?
+  order       Int       @default(0)
+  status      Boolean   @default(true)
+  isVerified  Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  @@index([status])
+  @@index([isVerified])
+  @@index([deletedAt])
+  @@map("partners")
+}
+
+// --- 15. Certification ---
+model Certification {
+  id          String    @id @default(cuid())
+  name        String
+  issuer      String?
+  description String?   @db.Text
+  icon        String?
+  order       Int       @default(0)
+  status      Boolean   @default(true)
+  isVerified  Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  @@index([status])
+  @@index([isVerified])
+  @@index([deletedAt])
+  @@map("certifications")
+}
+
+// --- 16. CoreValue ---
+model CoreValue {
+  id          String    @id @default(cuid())
+  title       String
+  description String    @db.Text
+  icon        String?
+  order       Int       @default(0)
+  status      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  @@index([status])
+  @@index([deletedAt])
+  @@map("core_values")
+}
+
+// --- 17. Client ---
 model Client {
   id          String   @id @default(cuid())
   name        String
@@ -368,6 +464,10 @@ model Client {
   industry    String?
   order       Int      @default(0)
   status      Boolean  @default(true)
+  createdById String?
+  createdBy   User?    @relation("ClientCreatedBy", fields: [createdById], references: [id])
+  updatedById String?
+  updatedBy   User?    @relation("ClientUpdatedBy", fields: [updatedById], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -378,21 +478,25 @@ model Client {
 
 // --- 15. Career ---
 model Career {
-  id          String        @id @default(cuid())
-  title       String
-  slug        String        @unique
-  department  String?
-  location    String?
-  type        CareerType    @default(FULL_TIME)
-  description String?       @db.Text
+  id           String     @id @default(cuid())
+  title        String
+  slug         String     @unique
+  department   String?
+  location     String?
+  type         CareerType @default(FULL_TIME)
+  description  String?    @db.Text
   requirements Json?
-  benefits    Json?
-  salaryMin   Int?
-  salaryMax   Int?
-  status      Boolean       @default(true)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  deletedAt   DateTime?
+  benefits     Json?
+  salaryMin    Int?
+  salaryMax    Int?
+  status       Boolean    @default(true)
+  createdById  String?
+  createdBy    User?      @relation("CareerCreatedBy", fields: [createdById], references: [id])
+  updatedById  String?
+  updatedBy    User?      @relation("CareerUpdatedBy", fields: [updatedById], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  deletedAt    DateTime?
 
   applications CareerApplication[]
 
@@ -427,28 +531,28 @@ model CareerApplication {
 
 // --- 17. BlogPost ---
 model BlogPost {
-  id            String         @id @default(cuid())
-  title         String
-  slug          String         @unique
-  content       String?        @db.Text
-  excerpt       String?        @db.Text
-  featuredImage String?
-  authorId      String
-  author        User           @relation(fields: [authorId], references: [id])
-  categoryId    String
-  category      BlogCategory   @relation(fields: [categoryId], references: [id])
-  status        BlogPostStatus @default(DRAFT)
-  publishedAt   DateTime?
-  scheduledAt   DateTime?
-  seoTitle      String?
+  id             String         @id @default(cuid())
+  title          String
+  slug           String         @unique
+  content        String?        @db.Text
+  excerpt        String?        @db.Text
+  featuredImage  String?
+  authorId       String
+  author         User           @relation(fields: [authorId], references: [id])
+  categoryId     String
+  category       BlogCategory   @relation(fields: [categoryId], references: [id])
+  status         BlogPostStatus @default(DRAFT)
+  publishedAt    DateTime?
+  scheduledAt    DateTime?
+  seoTitle       String?
   seoDescription String?
-  seoKeywords   String?
-  canonicalUrl  String?
-  ogImage       String?
-  viewCount     Int            @default(0)
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  deletedAt     DateTime?
+  seoKeywords    String?
+  canonicalUrl   String?
+  ogImage        String?
+  viewCount      Int            @default(0)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  deletedAt      DateTime?
 
   tags TagOnPost[]
 
@@ -463,12 +567,12 @@ model BlogPost {
 
 // --- 18. BlogCategory ---
 model BlogCategory {
-  id          String     @id @default(cuid())
+  id          String   @id @default(cuid())
   name        String
-  slug        String     @unique
-  description String?    @db.Text
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  slug        String   @unique
+  description String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   posts BlogPost[]
 
@@ -478,11 +582,11 @@ model BlogCategory {
 
 // --- 19. Tag ---
 model Tag {
-  id        String      @id @default(cuid())
+  id        String   @id @default(cuid())
   name      String
-  slug      String      @unique
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   posts TagOnPost[]
 
@@ -506,15 +610,19 @@ model TagOnPost {
 
 // --- 21. FAQ ---
 model FAQ {
-  id          String       @id @default(cuid())
+  id          String      @id @default(cuid())
   question    String
-  answer      String       @db.Text
+  answer      String      @db.Text
   categoryId  String
-  category    FAQCategory  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  order       Int          @default(0)
-  status      Boolean      @default(true)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  category    FAQCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  order       Int         @default(0)
+  status      Boolean     @default(true)
+  createdById String?
+  createdBy   User?       @relation("FAQCreatedBy", fields: [createdById], references: [id])
+  updatedById String?
+  updatedBy   User?       @relation("FAQUpdatedBy", fields: [updatedById], references: [id])
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 
   @@index([categoryId])
   @@index([status])
@@ -550,6 +658,10 @@ model Resource {
   tags          Json?
   downloadCount Int      @default(0)
   status        Boolean  @default(true)
+  createdById   String?
+  createdBy     User?    @relation("ResourceCreatedBy", fields: [createdById], references: [id])
+  updatedById   String?
+  updatedBy     User?    @relation("ResourceUpdatedBy", fields: [updatedById], references: [id])
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -583,14 +695,14 @@ model Download {
 
 // --- 25. Newsletter ---
 model Newsletter {
-  id              String   @id @default(cuid())
-  subject         String
-  body            String   @db.Text
-  sentAt          DateTime?
-  status          String   @default("draft")
-  recipientCount  Int      @default(0)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id             String    @id @default(cuid())
+  subject        String
+  body           String    @db.Text
+  sentAt         DateTime?
+  status         String    @default("draft")
+  recipientCount Int       @default(0)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   sends NewsletterSend[]
 
@@ -599,14 +711,14 @@ model Newsletter {
 
 // --- 26. Subscriber ---
 model Subscriber {
-  id             String          @id @default(cuid())
-  email          String          @unique
+  id             String    @id @default(cuid())
+  email          String    @unique
   name           String?
-  status         String          @default("active")
+  status         String    @default("active")
   source         String?
-  subscribedAt   DateTime        @default(now())
+  subscribedAt   DateTime  @default(now())
   unsubscribedAt DateTime?
-  createdAt      DateTime        @default(now())
+  createdAt      DateTime  @default(now())
 
   newsletterSends NewsletterSend[]
 
@@ -617,14 +729,14 @@ model Subscriber {
 
 // --- 27. NewsletterSend ---
 model NewsletterSend {
-  id            String     @id @default(cuid())
-  newsletterId  String
-  newsletter    Newsletter @relation(fields: [newsletterId], references: [id], onDelete: Cascade)
-  subscriberId  String
-  subscriber    Subscriber @relation(fields: [subscriberId], references: [id], onDelete: Cascade)
-  sentAt        DateTime?
-  openedAt      DateTime?
-  clickedAt     DateTime?
+  id           String     @id @default(cuid())
+  newsletterId String
+  newsletter   Newsletter @relation(fields: [newsletterId], references: [id], onDelete: Cascade)
+  subscriberId String
+  subscriber   Subscriber @relation(fields: [subscriberId], references: [id], onDelete: Cascade)
+  sentAt       DateTime?
+  openedAt     DateTime?
+  clickedAt    DateTime?
 
   @@unique([newsletterId, subscriberId])
   @@index([newsletterId])
@@ -713,16 +825,16 @@ model LeadActivity {
 
 // --- 31. Form ---
 model Form {
-  id                 String   @id @default(cuid())
-  name               String
-  slug               String   @unique
-  description        String?  @db.Text
-  submitButtonText   String   @default("Submit")
-  successMessage     String?  @db.Text
-  emailNotification  String?
-  status             Boolean  @default(true)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  id                String   @id @default(cuid())
+  name              String
+  slug              String   @unique
+  description       String?  @db.Text
+  submitButtonText  String   @default("Submit")
+  successMessage    String?  @db.Text
+  emailNotification String?
+  status            Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
   fields      FormField[]
   submissions FormSubmission[]
@@ -766,30 +878,30 @@ model FormSubmission {
 
 // --- 34. Media ---
 model Media {
-  id              String      @id @default(cuid())
-  filename        String
-  originalName    String
-  mimeType        String?
-  size            Int?
-  width           Int?
-  height          Int?
-  altText         String?
-  caption         String?     @db.Text
-  tags            Json?
-  folderId        String?
-  folder          MediaFolder? @relation(fields: [folderId], references: [id], onDelete: SetNull)
-  uploadedById    String
-  uploadedBy      User        @relation(fields: [uploadedById], references: [id])
-  url             String
-  thumbnailSm     String?
-  thumbnailMd     String?
-  thumbnailLg     String?
-  webpUrl         String?
-  originalSize    Int?
-  compressedSize  Int?
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
-  deletedAt       DateTime?
+  id             String       @id @default(cuid())
+  filename       String
+  originalName   String
+  mimeType       String?
+  size           Int?
+  width          Int?
+  height         Int?
+  altText        String?
+  caption        String?      @db.Text
+  tags           Json?
+  folderId       String?
+  folder         MediaFolder? @relation(fields: [folderId], references: [id], onDelete: SetNull)
+  uploadedById   String
+  uploadedBy     User         @relation(fields: [uploadedById], references: [id])
+  url            String
+  thumbnailSm    String?
+  thumbnailMd    String?
+  thumbnailLg    String?
+  webpUrl        String?
+  originalSize   Int?
+  compressedSize Int?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  deletedAt      DateTime?
 
   @@index([folderId])
   @@index([uploadedById])
@@ -819,12 +931,12 @@ model MediaFolder {
 
 // --- 36. Menu ---
 model Menu {
-  id        String     @id @default(cuid())
+  id        String   @id @default(cuid())
   name      String
-  slug      String     @unique
+  slug      String   @unique
   location  String?
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   items MenuItem[]
 
@@ -834,23 +946,23 @@ model Menu {
 
 // --- 37. MenuItem ---
 model MenuItem {
-  id              String    @id @default(cuid())
+  id              String     @id @default(cuid())
   menuId          String
-  menu            Menu      @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  menu            Menu       @relation(fields: [menuId], references: [id], onDelete: Cascade)
   parentId        String?
-  parent          MenuItem? @relation("MenuItemHierarchy", fields: [parentId], references: [id])
+  parent          MenuItem?  @relation("MenuItemHierarchy", fields: [parentId], references: [id])
   children        MenuItem[] @relation("MenuItemHierarchy")
   label           String
   url             String?
-  target          String?   @default("_self")
+  target          String?    @default("_self")
   icon            String?
   cssClass        String?
-  isVisible       Boolean   @default(true)
-  isMegaMenu      Boolean   @default(false)
+  isVisible       Boolean    @default(true)
+  isMegaMenu      Boolean    @default(false)
   megaMenuColumns Json?
-  order           Int       @default(0)
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  order           Int        @default(0)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
 
   @@index([menuId])
   @@index([parentId])
@@ -859,10 +971,10 @@ model MenuItem {
 
 // --- 38. Footer ---
 model Footer {
-  id        String         @id @default(cuid())
+  id        String   @id @default(cuid())
   name      String
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   columns FooterColumn[]
 
@@ -871,13 +983,13 @@ model Footer {
 
 // --- 39. FooterColumn ---
 model FooterColumn {
-  id        String       @id @default(cuid())
+  id        String   @id @default(cuid())
   footerId  String
-  footer    Footer       @relation(fields: [footerId], references: [id], onDelete: Cascade)
+  footer    Footer   @relation(fields: [footerId], references: [id], onDelete: Cascade)
   title     String?
-  width     Int          @default(3)
-  order     Int          @default(0)
-  createdAt DateTime     @default(now())
+  width     Int      @default(3)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
 
   links FooterLink[]
 

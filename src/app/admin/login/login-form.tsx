@@ -191,7 +191,7 @@ function LoginFormInner() {
               id="login-email"
               type="email"
               autoComplete="email"
-              placeholder="admin@synovainfotech.com"
+              placeholder="admin@synovainfo.com"
               aria-invalid={errors.email ? "true" : "false"}
               aria-describedby={errors.email ? "email-error" : undefined}
               className={cn(

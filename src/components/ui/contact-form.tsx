@@ -7,7 +7,8 @@ import { z } from 'zod'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Loader2, CheckCircle2, AlertCircle, SendHorizonal } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { env } from '@/env'
+import { appEvents } from '@/lib/events'
+
 
 /* ──────────────────────────────────────────────────────────────────── */
 /*  Zod schema                                                         */
@@ -109,10 +110,7 @@ export function ContactForm({ className }: ContactFormProps) {
 
   /* ── Listen for prefill-inquiry event from Careers ── */
   const handlePrefill = useCallback(
-    (e: Event) => {
-      const detail = (e as CustomEvent).detail as
-        | { type: string; position?: string }
-        | undefined
+    (detail: { type: string; position?: string }) => {
       if (detail?.type && inquiryTypes.includes(detail.type as ContactFormData['inquiryType'])) {
         setValue('inquiryType', detail.type as ContactFormData['inquiryType'])
       }
@@ -124,8 +122,8 @@ export function ContactForm({ className }: ContactFormProps) {
   )
 
   useEffect(() => {
-    window.addEventListener('prefill-inquiry', handlePrefill)
-    return () => window.removeEventListener('prefill-inquiry', handlePrefill)
+    const unsubscribe = appEvents.on('prefill-inquiry', handlePrefill)
+    return unsubscribe
   }, [handlePrefill])
 
   /* ── Submit handler ── */
@@ -133,7 +131,7 @@ export function ContactForm({ className }: ContactFormProps) {
     setSubmitStatus('submitting')
 
     try {
-      const endpoint = env.NEXT_PUBLIC_FORM_ENDPOINT
+      const endpoint = process.env.NEXT_PUBLIC_FORM_ENDPOINT
       if (!endpoint) {
         // Simulate success when no endpoint is configured
         await new Promise((resolve) => setTimeout(resolve, 1200))
@@ -282,10 +280,10 @@ export function ContactForm({ className }: ContactFormProps) {
             <span>
               Failed to send your message. Please try again or email us directly at{' '}
               <a
-                href="mailto:info@synovainfotech.com"
+                href="mailto:info@synovainfo.com"
                 className="font-medium underline underline-offset-2 hover:text-red-800"
               >
-                info@synovainfotech.com
+                info@synovainfo.com
               </a>
               .
             </span>

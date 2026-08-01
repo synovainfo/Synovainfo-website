@@ -1,62 +1,55 @@
-'use client'
+import { prisma } from '@/lib/prisma'
+import { CoreValuesClient, type CoreValueItem } from './core-values-client'
 
-import { Lightbulb, Award, Handshake, ShieldCheck } from 'lucide-react'
-import { SectionWrapper } from '@/components/layout/section-wrapper'
-import { SectionHeader } from '@/components/ui/section-header'
-import { ValueCard } from '@/components/ui/value-card'
-
-const values = [
+// Fallback content used only when the database is unavailable or empty.
+// Admins manage the canonical list via the CoreValue model.
+const FALLBACK_VALUES: CoreValueItem[] = [
   {
-    icon: Lightbulb,
+    id: 'innovation',
     title: 'Innovation',
     description:
-      'Pioneering solutions that anticipate tomorrow\'s challenges and unlock new possibilities for enterprise growth.',
+      "Pioneering solutions that anticipate tomorrow's challenges and unlock new possibilities for enterprise growth.",
+    icon: 'lightbulb',
   },
   {
-    icon: Award,
+    id: 'excellence',
     title: 'Excellence',
     description:
       'Uncompromising quality in every line of code, every architecture decision, and every client interaction.',
+    icon: 'award',
   },
   {
-    icon: Handshake,
+    id: 'partnership',
     title: 'Partnership',
     description:
       'Deep collaboration that transforms vendor relationships into strategic alliances built on trust and shared success.',
+    icon: 'handshake',
   },
   {
-    icon: ShieldCheck,
+    id: 'integrity',
     title: 'Integrity',
     description:
       'Transparent communication, ethical practices, and unwavering commitment to client confidentiality.',
+    icon: 'shield-check',
   },
 ]
 
-export function CoreValues() {
-  return (
-    <SectionWrapper id="core-values" dark>
-      <SectionHeader
-        badge="Our Values"
-        title="What Drives Us"
-        subtitle="The principles that guide every engagement, every architecture decision, and every line of code we deliver."
-        alignment="center"
-        dark
-      />
+export async function CoreValues() {
+  let values: CoreValueItem[] = FALLBACK_VALUES
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {values.map((value, index) => {
-          const Icon = value.icon
-          return (
-            <ValueCard
-              key={value.title}
-              icon={<Icon className="h-6 w-6" />}
-              title={value.title}
-              description={value.description}
-              index={index}
-            />
-          )
-        })}
-      </div>
-    </SectionWrapper>
-  )
+  try {
+    const dbValues = await prisma.coreValue.findMany({
+      where: { status: true },
+      orderBy: { order: 'asc' },
+      select: { id: true, title: true, description: true, icon: true },
+    })
+
+    if (dbValues.length > 0) {
+      values = dbValues
+    }
+  } catch (error) {
+    console.error('CoreValues: database fallback engaged:', error)
+  }
+
+  return <CoreValuesClient values={values} />
 }

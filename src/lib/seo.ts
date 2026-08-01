@@ -38,7 +38,7 @@ export interface SEOParams {
 // =============================================================================
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://synovainfotech.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://synovainfo.com";
 
 function resolveUrl(slug?: string): string {
   if (!slug) return BASE_URL;

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import type { Service } from '@/data/services'
@@ -9,9 +10,13 @@ import { ServiceModal } from './service-modal'
 interface ServiceCardProps {
   service: Service
   index?: number
+  /** Branded SVG icon chip (64×64) replacing the Lucide glyph. */
+  svgIconAsset?: string
+  /** Larger SVG illustration rendered as a full-bleed art band at the top of the card. */
+  artAsset?: string
 }
 
-export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
+export function ServiceCard({ service, index = 0, svgIconAsset, artAsset }: ServiceCardProps) {
   const [modalOpen, setModalOpen] = useState(false)
   const prefersReducedMotion = useReducedMotion()
   const Icon = service.icon
@@ -29,12 +34,15 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
         }
       }}
       className={cn(
-        'group relative cursor-pointer rounded-xl border border-[var(--glass-border)]',
-        'bg-[var(--glass-bg)] p-6 shadow-sm backdrop-blur-xl',
-        'transition-colors duration-300',
-        'hover:border-[var(--color-accent-blue)]/30 hover:shadow-lg',
+        'group relative cursor-pointer overflow-hidden rounded-xl border border-[var(--glass-border)]',
+        'bg-[var(--glass-bg)] shadow-sm backdrop-blur-xl',
+        'transition-all duration-300',
+        'hover:border-[var(--color-accent-blue)]/30 hover:shadow-[0_24px_100px_rgba(59,130,246,0.14)]',
         'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent-blue)]',
       )}
+      style={{
+        boxShadow: '0 30px 90px rgba(59,130,246,0.12)',
+      }}
     >
       {/* Subtle gradient overlay on hover */}
       <div
@@ -46,7 +54,22 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
         aria-hidden="true"
       />
 
-      <div className="relative z-10">
+      {/* Art band — curated SVG illustration */}
+      {artAsset && (
+        <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-[var(--glass-border)] bg-gradient-to-br from-[var(--color-accent-blue)]/[0.07] via-[var(--color-surface-secondary)] to-[var(--color-accent-cyan)]/[0.07]">
+          <Image
+            src={artAsset}
+            alt={`${service.title} illustration`}
+            width={600}
+            height={400}
+            loading="lazy"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+            className="absolute inset-0 h-full w-full object-contain p-3 transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        </div>
+      )}
+
+      <div className="relative z-10 p-6">
         {/* Icon */}
         <motion.div
           className={cn(
@@ -58,7 +81,18 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
           whileHover={prefersReducedMotion ? undefined : { scale: 1.1, rotate: -3 }}
           transition={{ type: 'spring', stiffness: 400, damping: 15 }}
         >
-          <Icon className="h-6 w-6 text-[var(--color-accent-blue)] transition-colors duration-300 group-hover:text-[var(--color-accent-cyan)]" />
+          {svgIconAsset ? (
+            <Image
+              src={svgIconAsset}
+              alt={`${service.title} icon`}
+              width={48}
+              height={48}
+              loading="lazy"
+              className="h-12 w-12 object-contain"
+            />
+          ) : (
+            <Icon className="h-6 w-6 text-[var(--color-accent-blue)] transition-colors duration-300 group-hover:text-[var(--color-accent-cyan)]" />
+          )}
         </motion.div>
 
         {/* Title */}

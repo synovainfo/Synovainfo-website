@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import type { MetadataRoute } from "next";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://synovainfotech.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://synovainfo.com";
 
 // =============================================================================
 // Static pages

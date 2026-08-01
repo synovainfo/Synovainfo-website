@@ -1221,7 +1221,7 @@ function GlobalSettingsTab({
                 <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400">@</span>
                 <input
                   {...register("twitterHandle")}
-                  placeholder="synovainfotech"
+                  placeholder="synovainfo"
                   className={cn(inputCls(errors.twitterHandle), "pl-7")}
                 />
               </div>

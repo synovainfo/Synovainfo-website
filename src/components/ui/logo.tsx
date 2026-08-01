@@ -3,18 +3,20 @@
 import { useId } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 /* ── Brand Colors ── */
-const NAVY = '#0F1B2D'
+const NAVY = '#1E3A5F'
 const WHITE = '#FFFFFF'
-const ACCENT = '#2563EB'
+const ACCENT = '#F97316'
+const ACCENT_DARK = '#EA580C'
 
 /* ── Size Presets ── */
 const SIZE_MAP = {
-  sm: { icon: 32, viewBox: 48, textSize: 'text-sm', subTextSize: 'text-[10px]', gap: 'gap-2' },
-  md: { icon: 48, viewBox: 48, textSize: 'text-lg', subTextSize: 'text-xs', gap: 'gap-2.5' },
-  lg: { icon: 64, viewBox: 48, textSize: 'text-xl', subTextSize: 'text-sm', gap: 'gap-3' },
-  xl: { icon: 96, viewBox: 48, textSize: 'text-3xl', subTextSize: 'text-base', gap: 'gap-4' },
+  sm: { icon: 32, viewBox: 48, textSize: 'text-base', subTextSize: 'text-[9px]', gap: 'gap-2' },
+  md: { icon: 40, viewBox: 48, textSize: 'text-xl', subTextSize: 'text-[10px]', gap: 'gap-2.5' },
+  lg: { icon: 52, viewBox: 48, textSize: 'text-2xl', subTextSize: 'text-xs', gap: 'gap-3' },
+  xl: { icon: 72, viewBox: 48, textSize: 'text-4xl', subTextSize: 'text-sm', gap: 'gap-4' },
 } as const
 
 type LogoSize = keyof typeof SIZE_MAP
@@ -32,7 +34,7 @@ interface LogoProps {
   className?: string
   /** Enable subtle gradient animation on the S-mark accent */
   animated?: boolean
-  /** Optional href — renders as <a> when provided */
+  /** Optional href — renders as Link/a when provided */
   href?: string
 }
 
@@ -56,47 +58,45 @@ function SMark({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="Synova Infotech geometric S mark"
+      aria-label="Synova Infotech geometric logo mark"
     >
-      <title>Synova Infotech S Mark</title>
+      <title>Synova Infotech Logo Mark</title>
 
       {/* ── Defs ── */}
       <defs>
-        {animated && (
-          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor={accent} />
-            <stop offset="50%" stopColor={fill} />
-            <stop offset="100%" stopColor={accent} />
-          </linearGradient>
-        )}
+        <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={NAVY} />
+          <stop offset="50%" stopColor={ACCENT} />
+          <stop offset="100%" stopColor={ACCENT_DARK} />
+        </linearGradient>
       </defs>
 
-      {/* ── Main S-body — thick geometric path ── */}
+      {/* ── Main S-body path ── */}
       <path
         d={
-          'M 10 10 ' +        // start top-left
-          'H 34 ' +            // top bar rightward
-          'A 4 4 0 0 1 38 14 ' +  // top-right outer curve
-          'V 18 ' +            // right vertical down
-          'A 4 4 0 0 1 34 22 ' +  // inner curve left
-          'L 14 22 ' +         // middle cross-bar leftward
-          'V 26 ' +            // middle vertical down
-          'A 4 4 0 0 0 10 30 ' +  // bottom-left outer curve
-          'V 34 ' +            // left vertical down
-          'A 4 4 0 0 0 14 38 ' +  // bottom curve right
-          'H 38 '              // bottom bar rightward
+          'M 10 10 ' +
+          'H 34 ' +
+          'A 4 4 0 0 1 38 14 ' +
+          'V 18 ' +
+          'A 4 4 0 0 1 34 22 ' +
+          'L 14 22 ' +
+          'V 26 ' +
+          'A 4 4 0 0 0 10 30 ' +
+          'V 34 ' +
+          'A 4 4 0 0 0 14 38 ' +
+          'H 38 '
         }
-        stroke={fill}
-        strokeWidth="7"
+        stroke={fill === WHITE ? 'url(#' + gradientId + ')' : fill}
+        strokeWidth="6"
         strokeLinecap="round"
         strokeLinejoin="round"
         fill="none"
       />
 
-      {/* ── Accent facet — diagonal parallelogram overlay ── */}
+      {/* ── Accent facet overlay ── */}
       <motion.path
         d="M 34 14 L 42 20 L 38 26 L 30 20 Z"
-        fill={animated ? `url(#${gradientId})` : accent}
+        fill={`url(#${gradientId})`}
         className={cn(animated && 'origin-center')}
         {...(animated && {
           animate: {
@@ -111,13 +111,13 @@ function SMark({
         })}
       />
 
-      {/* ── Secondary accent — small diamond highlight ── */}
+      {/* ── Secondary accent diamond ── */}
       <motion.path
         d="M 14 12 L 18 10 L 20 14 L 16 16 Z"
         fill={accent}
-        opacity="0.6"
+        opacity="0.8"
         {...(animated && {
-          animate: { opacity: [0.4, 0.8, 0.4] },
+          animate: { opacity: [0.5, 0.9, 0.5] },
           transition: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
         })}
       />
@@ -132,29 +132,23 @@ export function Logo({
   showText = true,
   className,
   animated = false,
-  href,
+  href = '/',
 }: LogoProps) {
   const s = SIZE_MAP[size]
   const fillColor = variant === 'light' ? WHITE : NAVY
   const accentColor = ACCENT
 
-  const Wrapper = href ? 'a' : 'div'
-  const wrapperProps = href
-    ? { href, 'aria-label': 'Synova Infotech — Home' as const }
-    : {}
-
-  return (
-    <Wrapper
-      {...wrapperProps}
+  const content = (
+    <div
       className={cn(
-        'group inline-flex items-center no-underline',
+        'group inline-flex items-center no-underline cursor-pointer select-none transition-transform duration-300 ease-out hover:scale-[1.05]',
         s.gap,
-        className,
+        className
       )}
     >
       {/* Icon mark */}
       <div
-        className="flex-shrink-0"
+        className="flex-shrink-0 transition-transform duration-300 group-hover:rotate-[3deg]"
         style={{ width: s.icon, height: s.icon }}
       >
         <SMark fill={fillColor} accent={accentColor} animated={animated} />
@@ -165,27 +159,33 @@ export function Logo({
         <div className="flex flex-col">
           <span
             className={cn(
-              'font-bold tracking-[0.12em] leading-none',
-              s.textSize,
+              'font-extrabold tracking-[0.14em] leading-none transition-opacity duration-200 group-hover:opacity-90',
+              variant === 'light' ? 'text-white' : 'text-[#1E3A5F]',
+              s.textSize
             )}
-            style={{ color: fillColor }}
           >
             SYNOVA
           </span>
           <span
             className={cn(
-              'font-medium tracking-[0.25em] leading-tight',
-              s.subTextSize,
+              'font-light tracking-[0.28em] leading-tight text-slate-400 dark:text-slate-400 uppercase mt-0.5',
+              s.subTextSize
             )}
-            style={{
-              color: fillColor,
-              opacity: variant === 'light' ? 0.7 : 0.55,
-            }}
           >
             INFOTECH
           </span>
         </div>
       )}
-    </Wrapper>
+    </div>
   )
+
+  if (href) {
+    return (
+      <Link href={href} aria-label="SYNOVA INFOTECH Home">
+        {content}
+      </Link>
+    )
+  }
+
+  return content
 }

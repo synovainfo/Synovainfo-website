@@ -10,44 +10,44 @@ export interface V2PageContent {
 
 export const v2Pages = {
   home: {
-    eyebrow: "Synova Enterprise Systems Studio",
-    title: "Digital infrastructure for companies that cannot afford fragile technology.",
+    eyebrow: "Synova Enterprise Ecosystems",
+    title: "Orchestrating digital infrastructure for organizations that demand absolute resilience.",
     summary:
-      "Synova designs, builds, secures, and operates business-critical software platforms across cloud, data, AI, automation, and customer experience.",
+      "Synova architects, secures, and operationalizes mission-critical software platforms across cloud deployments, AI integration, and core operational workflows.",
     primaryCta: "Request architecture audit",
     primaryHref: "/contact",
-    secondaryCta: "Explore services",
+    secondaryCta: "Explore capabilities",
     secondaryHref: "/services",
   },
   about: {
-    eyebrow: "Operating Philosophy",
-    title: "A senior engineering partner for durable enterprise transformation.",
+    eyebrow: "Strategic Philosophy",
+    title: "Your definitive engineering partner for sustainable enterprise transformation.",
     summary:
-      "We combine architecture discipline, product thinking, security governance, and pragmatic delivery to create systems that executives can trust and teams can evolve.",
+      "We fuse architectural governance, zero-trust security, and pragmatic delivery to construct ecosystems that C-suite executives trust and engineering teams can seamlessly scale.",
   },
   services: {
-    eyebrow: "Service Portfolio",
-    title: "From strategic architecture to managed operations.",
+    eyebrow: "Capability Realization",
+    title: "Strategic enablement from foundational architecture to managed operational excellence.",
     summary:
-      "Each service is structured as a business capability: discovery, solution architecture, delivery governance, observability, security, and measurable adoption.",
+      "Each service is executed as a core business capability: strategic discovery, solution blueprinting, delivery governance, proactive observability, and measurable ROI.",
   },
   solutions: {
-    eyebrow: "Solution Blueprints",
-    title: "Reusable enterprise patterns adapted to your operating model.",
+    eyebrow: "Enterprise Blueprints",
+    title: "Reusable architectural paradigms tailored to your complex operating model.",
     summary:
-      "We convert recurring business problems into secure reference architectures for workflow modernization, AI enablement, cloud migration, and digital operations.",
+      "We synthesize recurring business challenges into secure reference architectures for legacy modernization, AI operationalization, and global cloud migration.",
   },
   technologies: {
     eyebrow: "Technology Ecosystem",
-    title: "A composable stack for resilient, governed, high-performance systems.",
+    title: "A composable tech stack for resilient, governed, and hyper-scalable systems.",
     summary:
-      "Synova evaluates technology through maintainability, security posture, integration cost, operational maturity, and long-term talent availability.",
+      "Synova leverages technology strictly through the lenses of maintainability, security posture, integration feasibility, and long-term talent availability.",
   },
   industries: {
-    eyebrow: "Industry Systems",
-    title: "Domain-aware platforms for regulated and operationally complex sectors.",
+    eyebrow: "Sector Paradigms",
+    title: "Domain-aware ecosystems engineered for highly regulated and operationally rigorous sectors.",
     summary:
-      "We map industry constraints into architecture decisions: compliance, latency, data quality, auditability, uptime, and field operations.",
+      "We translate industry-specific constraints into definitive architectural decisions: compliance mapping, sub-millisecond latency, data integrity, and strict auditability.",
   },
   caseStudies: {
     eyebrow: "Implementation Stories",

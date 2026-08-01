@@ -13,14 +13,13 @@ import { CoreValues } from '@/components/sections/core-values'
 
 import {
   V2CaseStudyEditorial,
-  V2Hero,
   V2IndustryAtlas,
   V2ProcessRail,
   V2ServicesShowcase,
   V2TechnologyTopology,
   V2Cta,
 } from '@/components/v2/enterprise-visuals'
-import { v2Pages } from '@/components/v2/experience-data'
+import { SynovaHero } from '@/components/sections/synova-hero'
 
 export const revalidate = 60
 
@@ -38,7 +37,7 @@ export default async function Home() {
   // If Prisma has custom section configurations, render them dynamically
   if (dbSections.length > 0) {
     const sectionComponents: Record<string, React.ComponentType> = {
-      hero: () => <V2Hero content={v2Pages.home} variant="home" />,
+      hero: SynovaHero,
       'trust-bar': TrustBar,
       'transformation-showcase': TransformationShowcase,
       services: V2ServicesShowcase,
@@ -72,13 +71,13 @@ export default async function Home() {
   // Default Fortune 500 Enterprise Homepage Sequence (V2 + V1 Rich Content)
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
-      <V2Hero content={v2Pages.home} variant="home" />
+      <SynovaHero />
       <TrustBar />
       <TransformationShowcase />
       <V2ServicesShowcase />
       <V2IndustryAtlas />
-      <WhySynova />
       <V2ProcessRail />
+      <WhySynova />
       <V2TechnologyTopology />
       <V2CaseStudyEditorial />
       <Testimonials />
@@ -87,9 +86,9 @@ export default async function Home() {
       <About />
       <CoreValues />
       <Careers />
-      <Contact />
       <Clients />
       <V2Cta />
+      <Contact />
     </div>
   )
 }

@@ -9,9 +9,10 @@ interface MagneticButtonProps extends HTMLMotionProps<"button"> {
   className?: string;
   strength?: number;
   glow?: boolean;
+  "aria-label"?: string; // Explicitly define aria-label for strict accessibility
 }
 
-export function MagneticButton({ children, className, strength = 40, glow = true, ...props }: MagneticButtonProps) {
+export function MagneticButton({ children, className, strength = 40, glow = true, "aria-label": ariaLabel, ...props }: MagneticButtonProps) {
   const ref = useRef<HTMLButtonElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const x = useMotionValue(0);
@@ -44,18 +45,28 @@ export function MagneticButton({ children, className, strength = 40, glow = true
   return (
     <motion.button
       ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onMouseEnter={handleMouseEnter}
-      style={{ x: springX, y: springY }}
-      whileTap={{ scale: 0.95 }}
+      aria-label={ariaLabel}
+      {...props}
+      onMouseMove={(e) => {
+        handleMouseMove(e);
+        props.onMouseMove?.(e);
+      }}
+      onMouseLeave={(e) => {
+        handleMouseLeave();
+        props.onMouseLeave?.(e);
+      }}
+      onMouseEnter={(e) => {
+        handleMouseEnter();
+        props.onMouseEnter?.(e);
+      }}
+      style={{ ...props.style, x: springX, y: springY }}
+      whileTap={props.whileTap ?? { scale: 0.95 }}
       className={cn(
         "relative inline-flex items-center justify-center overflow-hidden rounded-xl font-semibold transition-all duration-300",
         "bg-[var(--color-corporate-navy)] text-white hover:bg-[var(--color-corporate-gold)] hover:text-[var(--color-corporate-navy)]",
         "dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200",
         className
       )}
-      {...props}
     >
       {glow && (
         <motion.div

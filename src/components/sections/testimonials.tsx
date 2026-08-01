@@ -12,14 +12,22 @@ function getInitials(name: string): string {
 }
 
 export async function Testimonials() {
-  const testimonials = await prisma.testimonial.findMany({
-    where: { status: true },
-    orderBy: { order: 'asc' },
-  })
+  let testimonials: Awaited<ReturnType<typeof prisma.testimonial.findMany>> = []
+  let section: Awaited<ReturnType<typeof prisma.homepageSection.findFirst>> = null
 
-  const section = await prisma.homepageSection.findFirst({
-    where: { sectionType: 'testimonials', isVisible: true },
-  })
+  try {
+    ;[testimonials, section] = await Promise.all([
+      prisma.testimonial.findMany({
+        where: { status: true },
+        orderBy: { order: 'asc' },
+      }),
+      prisma.homepageSection.findFirst({
+        where: { sectionType: 'testimonials', isVisible: true },
+      }),
+    ])
+  } catch (error) {
+    console.error('Testimonials: database fallback engaged:', error)
+  }
 
   const badge = (section?.content as Record<string, string> | null)?.badge ?? 'Client Testimonials'
   const title = section?.title ?? 'Trusted by Enterprise Leaders'
@@ -27,7 +35,7 @@ export async function Testimonials() {
     (section?.content as Record<string, string> | null)?.subtitle ??
     'Hear from the technology leaders who partner with us to drive their digital transformation initiatives.'
 
-  const mapped = testimonials.length > 0 
+  const mapped = testimonials.length > 0
     ? testimonials.map((t, i) => {
         const imageIndex = (i % 3) + 1
         return {
@@ -37,7 +45,7 @@ export async function Testimonials() {
           title: t.title ?? '',
           company: t.company ?? '',
           initials: getInitials(t.author),
-          imageUrl: `/images/home/executive-${imageIndex}.png`,
+          imageUrl: t.imageUrl ?? `/images/home/executive-${imageIndex}.png`,
         }
       })
     : defaultTestimonials.map((t, i) => {

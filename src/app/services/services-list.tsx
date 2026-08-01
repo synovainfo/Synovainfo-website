@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { resolveIcon } from '@/lib/resolve-icon'
 import type { LucideIcon } from 'lucide-react'
 import { ServiceCard } from '@/components/ui/service-card'
+import { resolveServiceArtAsset, resolveServiceIconAsset } from './service-assets'
 
 interface MappedService {
   id: string
@@ -24,6 +25,8 @@ interface MappedService {
   securityCompliance?: string[]
   faqs?: Array<{ question: string; answer: string }>
   relatedCaseStudies?: string[]
+  svgIconAsset?: string
+  artAsset?: string
 }
 
 interface ServicesListProps {
@@ -44,6 +47,8 @@ export function ServicesList({ services, categories }: ServicesListProps) {
       filteredServices.map((s) => ({
         ...s,
         icon: resolveIcon(s.icon) as LucideIcon,
+        svgIconAsset: resolveServiceIconAsset(s.icon),
+        artAsset: resolveServiceArtAsset(s.icon),
       })),
     [filteredServices],
   )
@@ -81,7 +86,12 @@ export function ServicesList({ services, categories }: ServicesListProps) {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3, delay: index * 0.04 }}
               >
-                <ServiceCard service={service} index={index} />
+                <ServiceCard
+                  service={service}
+                  index={index}
+                  svgIconAsset={service.svgIconAsset}
+                  artAsset={service.artAsset}
+                />
               </motion.div>
             ))}
           </AnimatePresence>

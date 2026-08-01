@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import type { Metadata } from 'next'
@@ -49,6 +50,22 @@ export default async function ContactPage() {
       </nav>
 
       <ContactForm services={services} contactInfo={contactInfo} />
+
+      {/* ── Office / Location Band ── */}
+      <section className="pb-20 md:pb-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xl shadow-[var(--color-accent-blue)]/10 sm:aspect-[21/9]">
+            <Image
+              src="/images/contact/office-building.webp"
+              alt="Modern corporate office building housing the Synova Infotech headquarters"
+              fill
+              loading="lazy"
+              sizes="(min-width: 1024px) 80rem, 100vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </section>
     </>
   )
 }

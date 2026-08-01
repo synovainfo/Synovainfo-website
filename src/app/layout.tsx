@@ -1,14 +1,11 @@
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import {
-  ThemeProvider,
-  ThemeScript,
-} from "@/components/providers/theme-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import { AuthProvider } from "@/components/auth/auth-provider";
 import { PageTransition } from "@/components/animations/page-transition";
 import JsonLd from "./json-ld";
-import { inter, plusJakartaSans, manrope } from "@/styles/fonts";
+import { inter, plusJakartaSans, manrope, instrumentSerif } from "@/styles/fonts";
 import { CookieConsent } from "@/components/ui/cookie-consent";
 
 export { metadata } from "./seo";
@@ -22,16 +19,20 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${plusJakartaSans.variable} ${manrope.variable} h-full scroll-smooth antialiased`}
+      className={`${inter.variable} ${plusJakartaSans.variable} ${manrope.variable} ${instrumentSerif.variable} h-full scroll-smooth antialiased`}
     >
       <head>
-        <ThemeScript />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('synova-theme');if(!t){t=window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"}document.documentElement.setAttribute("data-theme",t);if(t==="dark")document.documentElement.classList.add("dark");else document.documentElement.classList.remove("dark");}catch(e){}})()`,
+          }}
+        />
         <JsonLd />
-        <link rel="alternate" hrefLang="en-IN" href="https://synovainfotech.com/" />
-        <link rel="alternate" hrefLang="en-US" href="https://synovainfotech.com/" />
-        <link rel="alternate" hrefLang="en-GB" href="https://synovainfotech.com/" />
-        <link rel="alternate" hrefLang="en-SG" href="https://synovainfotech.com/" />
-        <link rel="alternate" hrefLang="x-default" href="https://synovainfotech.com/" />
+        <link rel="alternate" hrefLang="en-IN" href="https://synovainfo.com/" />
+        <link rel="alternate" hrefLang="en-US" href="https://synovainfo.com/" />
+        <link rel="alternate" hrefLang="en-GB" href="https://synovainfo.com/" />
+        <link rel="alternate" hrefLang="en-SG" href="https://synovainfo.com/" />
+        <link rel="alternate" hrefLang="x-default" href="https://synovainfo.com/" />
       </head>
       <body className="min-h-full flex flex-col">
         {/* Skip-to-content link for keyboard users */}

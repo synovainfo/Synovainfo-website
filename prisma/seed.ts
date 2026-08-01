@@ -22,6 +22,8 @@ import { advantages } from "../src/data/advantages";
 import { processStages } from "../src/data/process";
 import { caseStudies } from "../src/data/case-studies";
 import { certifications } from "../src/data/certifications";
+import { partners } from "../src/data/partners";
+import { coreValues } from "../src/data/core-values";
 
 const prisma = new PrismaClient({
   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
@@ -293,11 +295,8 @@ async function main(): Promise<void> {
 
   // ── 7. Statistics ─────────────────────────────────────────────────────────
   console.log("\n── Statistics ───────────────────────────────────────────");
-  const statOrder: Record<string, number> = {
-    projects: 0, clients: 1, countries: 2,
-    experience: 3, retention: 4, support: 5,
-  };
-  for (const stat of stats) {
+  for (let idx = 0; idx < stats.length; idx++) {
+    const stat = stats[idx];
     await prisma.statistic.upsert({
       where: { id: stat.id },
       update: {
@@ -305,7 +304,7 @@ async function main(): Promise<void> {
         value: String(stat.value),
         prefix: stat.prefix ?? null,
         suffix: stat.suffix === "" ? null : stat.suffix,
-        order: statOrder[stat.id] ?? 0,
+        order: idx,
       },
       create: {
         id: stat.id,
@@ -313,7 +312,7 @@ async function main(): Promise<void> {
         value: String(stat.value),
         prefix: stat.prefix ?? null,
         suffix: stat.suffix === "" ? null : stat.suffix,
-        order: statOrder[stat.id] ?? 0,
+        order: idx,
         isVisible: true,
       },
     });
@@ -331,6 +330,7 @@ async function main(): Promise<void> {
         author: t.name,
         title: t.title,
         company: t.company,
+        imageUrl: t.imageUrl ?? null,
         order: idx,
       },
       create: {
@@ -339,11 +339,91 @@ async function main(): Promise<void> {
         author: t.name,
         title: t.title,
         company: t.company,
+        imageUrl: t.imageUrl ?? null,
         status: true,
         order: idx,
       },
     });
     console.log(`  ✓ Testimonial: ${t.name}`);
+  }
+
+  // ── 8b. Partners ──────────────────────────────────────────────────────────
+  // Seeded as UNVERIFIED — hidden from the public site until an admin verifies
+  // each relationship in the admin panel (only isVerified + status=true show).
+  console.log("\n── Partners ─────────────────────────────────────────────");
+  for (let idx = 0; idx < partners.length; idx++) {
+    const p = partners[idx];
+    await prisma.partner.upsert({
+      where: { id: p.id },
+      update: {
+        name: p.name,
+        website: p.website ?? null,
+        description: p.description ?? null,
+        order: idx,
+      },
+      create: {
+        id: p.id,
+        name: p.name,
+        website: p.website ?? null,
+        description: p.description ?? null,
+        order: idx,
+        status: true,
+        isVerified: false,
+      },
+    });
+    console.log(`  ✓ Partner: ${p.name} (unverified)`);
+  }
+
+  // ── 8c. Certifications ────────────────────────────────────────────────────
+  // Seeded from the certifications data file as UNVERIFIED — an admin must
+  // verify each certification before it is displayed.
+  console.log("\n── Certifications ───────────────────────────────────────");
+  for (let idx = 0; idx < certifications.length; idx++) {
+    const cert = certifications[idx];
+    const iconName = resolveIcon(cert.icon);
+    await prisma.certification.upsert({
+      where: { id: cert.id },
+      update: {
+        name: cert.name,
+        description: cert.description,
+        icon: iconName,
+        order: idx,
+      },
+      create: {
+        id: cert.id,
+        name: cert.name,
+        description: cert.description,
+        icon: iconName,
+        order: idx,
+        status: true,
+        isVerified: false,
+      },
+    });
+    console.log(`  ✓ Certification: ${cert.name} (unverified)`);
+  }
+
+  // ── 8d. Core Values ───────────────────────────────────────────────────────
+  console.log("\n── Core Values ──────────────────────────────────────────");
+  for (let idx = 0; idx < coreValues.length; idx++) {
+    const v = coreValues[idx];
+    await prisma.coreValue.upsert({
+      where: { id: v.id },
+      update: {
+        title: v.title,
+        description: v.description,
+        icon: resolveIcon(v.icon),
+        order: idx,
+      },
+      create: {
+        id: v.id,
+        title: v.title,
+        description: v.description,
+        icon: resolveIcon(v.icon),
+        order: idx,
+        status: true,
+      },
+    });
+    console.log(`  ✓ Core Value: ${v.title}`);
   }
 
   // ── 9. Careers ────────────────────────────────────────────────────────────
@@ -532,7 +612,7 @@ async function main(): Promise<void> {
     },
     {
       key: "contact_email",
-      value: JSON.stringify("contact@synovainfotech.com"),
+      value: JSON.stringify("contact@synovainfo.com"),
       type: "string",
       description: "Primary contact email",
     },

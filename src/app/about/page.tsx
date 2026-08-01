@@ -2,8 +2,17 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { prisma } from '@/lib/prisma'
-import { AboutIllustration } from './about-illustration'
 import { AboutStats } from './about-stats'
+import {
+  GlobalReachSection,
+  HeroVisual,
+  HqPhoto,
+  JourneySection,
+  LeadershipSection,
+  MissionVisual,
+  TeamOfficeBand,
+  ValuesVisuals,
+} from './about-visuals'
 import { ValueCard } from '@/components/ui/value-card'
 import {
   Lightbulb,
@@ -182,10 +191,10 @@ export default async function AboutPage() {
               )}
             </div>
 
-            {/* Right: illustration */}
+            {/* Right: hero visual */}
             <div className="flex items-center justify-center">
               <div className="w-full max-w-lg">
-                <AboutIllustration />
+                <HeroVisual />
               </div>
             </div>
           </div>
@@ -233,6 +242,11 @@ export default async function AboutPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Headquarters photo */}
+              <div className="mt-10">
+                <HqPhoto />
+              </div>
             </div>
 
             {/* Vision & Mission */}
@@ -258,11 +272,26 @@ export default async function AboutPage() {
                 <p className="text-sm leading-relaxed text-[var(--color-text-secondary)] md:text-base">
                   {content.mission}
                 </p>
+                <div className="mt-6 overflow-hidden rounded-xl border border-[var(--color-border)]">
+                  <MissionVisual />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* ── Inside Synova ── */}
+      <TeamOfficeBand />
+
+      {/* ── Our Journey ── */}
+      <JourneySection />
+
+      {/* ── Leadership ── */}
+      <LeadershipSection />
+
+      {/* ── Global Presence ── */}
+      <GlobalReachSection />
 
       {/* ── Core Values ── */}
       {values.length > 0 && (
@@ -280,6 +309,8 @@ export default async function AboutPage() {
                 deliver.
               </p>
             </div>
+
+            <ValuesVisuals />
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {values.map((value, index) => {

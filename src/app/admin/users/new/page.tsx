@@ -220,7 +220,7 @@ export default function CreateUserPage() {
               type="email"
               value={form.email}
               onChange={(e) => handleChange("email", e.target.value)}
-              placeholder="john@synovainfotech.com"
+              placeholder="john@synovainfo.com"
               autoComplete="off"
               aria-invalid={!!errors.email}
               className={cn(

@@ -1,47 +1,39 @@
 export interface Stat {
   id: string
-  value: number
+  value: number | string
   suffix: string
   prefix?: string
   label: string
 }
 
+/**
+ * Honest, capability-based statistics.
+ * No fabricated numbers — these are verifiable statements about how we work.
+ * The same data seeds the `Statistic` table and is admin-editable.
+ */
 export const stats: Stat[] = [
   {
-    id: 'deployments',
-    value: 250,
-    suffix: '+',
-    label: 'Enterprise Deployments',
-  },
-  {
-    id: 'clients',
-    value: 85,
-    suffix: '+',
-    label: 'Fortune 500 & Enterprise Clients',
-  },
-  {
-    id: 'uptime',
-    value: 99.999,
-    suffix: '%',
-    label: 'Contractual SLA Guarantee',
-  },
-  {
-    id: 'engineers',
-    value: 1200,
-    suffix: '+',
-    label: 'Global Engineering Team',
-  },
-  {
-    id: 'inference',
-    value: 5,
-    suffix: 'ms',
-    prefix: '<',
-    label: 'Edge Inference Latency',
-  },
-  {
-    id: 'certifications',
-    value: 12,
+    id: 'delivery',
+    value: 'Enterprise-grade',
     suffix: '',
-    label: 'Enterprise Compliance Certifications',
+    label: 'Delivery Model',
+  },
+  {
+    id: 'talent',
+    value: 'Global',
+    suffix: '',
+    label: 'Engineering Talent',
+  },
+  {
+    id: 'security',
+    value: 'Security-first',
+    suffix: '',
+    label: 'Development Approach',
+  },
+  {
+    id: 'partnership',
+    value: 'Long-term',
+    suffix: '',
+    label: 'Client Partnerships',
   },
 ]

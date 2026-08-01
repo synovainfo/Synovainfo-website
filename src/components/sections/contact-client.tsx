@@ -378,7 +378,7 @@ export function ContactClient({
   ]
 
   return (
-    <SectionWrapper id="contact" className="bg-[var(--color-surface-secondary)]">
+    <SectionWrapper id="contact" className="bg-[var(--color-surface-secondary)]" glow glowVariant="blue">
       <SectionHeader
         badge={badge}
         title={title}

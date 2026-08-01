@@ -451,7 +451,7 @@ function GeneralTab({
               <input
                 {...register("contactEmail")}
                 type="email"
-                placeholder="contact@synovainfotech.com"
+                placeholder="contact@synovainfo.com"
                 className={inputCls(errors.contactEmail)}
               />
             </Field>
@@ -770,7 +770,7 @@ function SeoTab({
             </span>
             <input
               {...register("twitterHandle")}
-              placeholder="synovainfotech"
+              placeholder="synovainfo"
               className={cn(inputCls(errors.twitterHandle), "pl-7")}
             />
           </div>
@@ -885,7 +885,7 @@ function EmailTab({
           <input
             {...register("fromAddress")}
             type="email"
-            placeholder="noreply@synovainfotech.com"
+            placeholder="noreply@synovainfo.com"
             className={inputCls(errors.fromAddress)}
           />
         </Field>

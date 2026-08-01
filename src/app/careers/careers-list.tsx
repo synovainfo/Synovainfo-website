@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import {
@@ -212,6 +213,30 @@ export function CareersList({ careers, departments, locations }: CareersListProp
                 </motion.div>
               )
             })}
+          </div>
+
+          {/* ── Growth & Perks Visuals ── */}
+          <div className="mt-14 grid gap-6 md:grid-cols-2">
+            <div className="relative aspect-[5/4] w-full overflow-hidden rounded-xl border border-[var(--glass-border)] shadow-sm md:aspect-[16/11]">
+              <Image
+                src="/images/careers/careers-growth.svg"
+                alt="Illustration of the career growth path with rising progress bars at Synova"
+                fill
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
+                className="object-cover object-center"
+              />
+            </div>
+            <div className="relative aspect-[5/4] w-full overflow-hidden rounded-xl border border-[var(--glass-border)] shadow-sm md:aspect-[16/11]">
+              <Image
+                src="/images/careers/careers-perks.png"
+                alt="Illustration of the employee perks and benefits offered at Synova"
+                fill
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
+                className="object-cover object-center"
+              />
+            </div>
           </div>
         </div>
       </section>

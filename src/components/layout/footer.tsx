@@ -49,8 +49,8 @@ const CONTACT_INFO = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'contact@synovainfotech.com',
-    href: 'mailto:contact@synovainfotech.com',
+    value: 'contact@synovainfo.com',
+    href: 'mailto:contact@synovainfo.com',
   },
   {
     icon: Phone,
@@ -83,7 +83,7 @@ const LEGAL_LINKS = [
 
 function ColumnHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
+    <h3 className="mb-5 text-xs font-bold uppercase tracking-[0.18em] text-corporate-gold">
       {children}
     </h3>
   )
@@ -175,12 +175,12 @@ export function Footer() {
 
   return (
     <footer
-      className="relative overflow-hidden border-t border-[var(--color-border-light)]/60 bg-[var(--color-primary)]"
+      className="relative overflow-hidden border-t border-white/10 bg-navy-dark"
       role="contentinfo"
     >
       {/* Subtle top glow */}
       <div
-        className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[800px] -translate-x-1/2 opacity-[0.04]"
+        className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[800px] -translate-x-1/2 opacity-[0.06]"
         style={{
           background:
             'radial-gradient(ellipse at center, var(--color-corporate-gold) 0%, transparent 70%)',
@@ -201,7 +201,7 @@ export function Footer() {
           <div className="sm:col-span-2 lg:col-span-4">
             <Logo variant="light" size="sm" />
 
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-zinc-400">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-300/80">
               Pune-based IT consultancy delivering enterprise-grade custom software, cloud
               solutions, and digital transformation — engineered for scale, secured by design.
             </p>
@@ -214,7 +214,7 @@ export function Footer() {
                     key={s.label}
                     href={s.href}
                     aria-label={s.label}
-                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-700/60 text-zinc-500 transition-all duration-200 hover:border-accent-blue/40 hover:text-accent-blue hover:shadow-[0_0_12px_rgba(37,99,235,0.15)]"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-slate-300 transition-all duration-200 hover:border-corporate-gold/50 hover:text-corporate-gold hover:shadow-[0_0_12px_rgba(249,115,22,0.2)]"
                   >
                     {s.icon}
                   </a>
@@ -230,11 +230,11 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="group inline-flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] transition-colors duration-200 hover:text-[var(--color-corporate-gold)]"
+                      className="group inline-flex items-center gap-1.5 text-sm text-slate-300 transition-colors duration-200 hover:text-corporate-gold"
                     >
                       <ChevronRight
                         size={12}
-                        className="shrink-0 text-[var(--color-text-tertiary)] opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:text-[var(--color-corporate-gold)]"
+                        className="shrink-0 text-slate-500 opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:text-corporate-gold"
                         aria-hidden="true"
                       />
                       <span>{link.label}</span>
@@ -253,11 +253,11 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={`/services/${link.slug}`}
-                    className="group inline-flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] transition-colors duration-200 hover:text-[var(--color-corporate-gold)]"
+                    className="group inline-flex items-center gap-1.5 text-sm text-slate-300 transition-colors duration-200 hover:text-corporate-gold"
                   >
                     <ChevronRight
                       size={12}
-                      className="shrink-0 text-[var(--color-text-tertiary)] opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:text-[var(--color-corporate-gold)]"
+                      className="shrink-0 text-slate-500 opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:text-corporate-gold"
                       aria-hidden="true"
                     />
                     <span>{link.label}</span>
@@ -275,11 +275,11 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={`/industries/${link.slug}`}
-                    className="group inline-flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] transition-colors duration-200 hover:text-[var(--color-corporate-gold)]"
+                    className="group inline-flex items-center gap-1.5 text-sm text-slate-300 transition-colors duration-200 hover:text-corporate-gold"
                   >
                     <ChevronRight
                       size={12}
-                      className="shrink-0 text-[var(--color-text-tertiary)] opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:text-[var(--color-corporate-gold)]"
+                      className="shrink-0 text-slate-500 opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:text-corporate-gold"
                       aria-hidden="true"
                     />
                     <span>{link.label}</span>
@@ -302,11 +302,11 @@ export function Footer() {
                   ? {
                       href: item.href,
                       className:
-                        'group inline-flex items-center gap-3 text-sm text-[var(--color-text-secondary)] transition-colors duration-200 hover:text-[var(--color-corporate-gold)]',
+                        'group inline-flex items-center gap-3 text-sm text-slate-300 transition-colors duration-200 hover:text-corporate-gold',
                     }
                   : {
                       className:
-                        'inline-flex items-center gap-3 text-sm text-[var(--color-text-secondary)]',
+                        'inline-flex items-center gap-3 text-sm text-slate-300',
                     }
 
                 return (
@@ -314,7 +314,7 @@ export function Footer() {
                     <Wrapper {...wrapperProps}>
                       <Icon
                         size={16}
-                        className="shrink-0 text-[var(--color-text-tertiary)] group-hover:text-[var(--color-corporate-gold)]"
+                        className="shrink-0 text-slate-500 group-hover:text-corporate-gold"
                         aria-hidden="true"
                       />
                       <span>{item.value}</span>
@@ -326,7 +326,7 @@ export function Footer() {
 
             {/* ── Newsletter ── */}
             <div className="mt-6">
-              <p className="mb-3 text-xs font-medium uppercase tracking-[0.12em] text-[var(--color-text-tertiary)]">
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.12em] text-corporate-gold">
                 Stay Updated
               </p>
               <form onSubmit={handleNewsletterSubmit} className="relative">
@@ -341,17 +341,17 @@ export function Footer() {
                     placeholder="Enter your email"
                     aria-label="Email for newsletter"
                     className={cn(
-                      'w-full rounded-lg border bg-[var(--color-surface-secondary)]/50 px-3.5 py-2.5 pr-10 text-sm text-[var(--color-text)] placeholder-[var(--color-text-tertiary)] outline-none transition-all duration-200',
+                      'w-full rounded-lg border border-white/10 bg-white/5 px-3.5 py-2.5 pr-10 text-sm text-white placeholder:text-slate-500 outline-none transition-all duration-200',
                       newsletterStatus === 'error'
                         ? 'border-[var(--color-compliance-red)]/60 focus:border-[var(--color-compliance-red)]'
-                        : 'border-[var(--color-border-light)]/60 focus:border-[var(--color-corporate-gold)]/60',
+                        : 'border-white/10 focus:border-corporate-gold/60',
                     )}
                   />
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     aria-label="Subscribe"
-                    className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-md p-1.5 text-[var(--color-text-tertiary)] transition-all duration-200 hover:text-[var(--color-corporate-gold)] hover:bg-[var(--color-surface-secondary)]/80 disabled:opacity-50"
+                    className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-md p-1.5 text-slate-400 transition-all duration-200 hover:text-corporate-gold hover:bg-white/10 disabled:opacity-50"
                   >
                     <SendHorizonal size={16} aria-hidden="true" />
                   </button>
@@ -374,11 +374,11 @@ export function Footer() {
       </div>
 
       {/* ── Bottom Bar ────────────────────────────────────────── */}
-      <div className="border-t border-zinc-800/40 bg-[#060C14]">
+      <div className="border-t border-white/10 bg-navy-dark">
         <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
           <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
             {/* Copyright */}
-            <p className="text-xs text-zinc-500">
+            <p className="text-xs text-slate-400">
               &copy; {year} Synova Infotech Private Limited. All rights reserved.
             </p>
 
@@ -388,18 +388,18 @@ export function Footer() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="text-xs text-zinc-600 transition-colors duration-200 hover:text-zinc-400"
+                  className="text-xs text-slate-400 transition-colors duration-200 hover:text-corporate-gold"
                 >
                   {link.label}
                 </Link>
               ))}
-              <span className="hidden text-zinc-700/50 sm:inline" aria-hidden="true">|</span>
-              <span className="text-xs text-zinc-600">
-                CIN: <span className="font-mono text-zinc-500">U62099PN2026PTC257266</span>
+              <span className="hidden text-white/20 sm:inline" aria-hidden="true">|</span>
+              <span className="text-xs text-slate-400">
+                CIN: <span className="font-mono text-slate-400">U62099PN2026PTC257266</span>
               </span>
-              <span className="hidden text-zinc-700/50 sm:inline" aria-hidden="true">|</span>
-              <span className="text-xs text-zinc-600">
-                ROC: <span className="font-mono text-zinc-500">RoC-Pune</span>
+              <span className="hidden text-white/20 sm:inline" aria-hidden="true">|</span>
+              <span className="text-xs text-slate-400">
+                ROC: <span className="font-mono text-slate-400">RoC-Pune</span>
               </span>
             </div>
           </div>

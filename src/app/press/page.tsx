@@ -153,7 +153,7 @@ export default function PressPage() {
                 </p>
                 <div className="mt-4 space-y-1 text-xs text-[var(--color-text)] font-medium">
                   <p>Global Communications Team</p>
-                  <p className="text-[var(--color-accent-blue)]">press@synovainfotech.com</p>
+                  <p className="text-[var(--color-accent-blue)]">press@synovainfo.com</p>
                   <p className="text-[var(--color-text-tertiary)]">Response SLA: Within 4 business hours</p>
                 </div>
               </div>

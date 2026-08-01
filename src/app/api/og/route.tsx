@@ -305,7 +305,7 @@ function OgTemplate({
               letterSpacing: "0.05em",
             }}
           >
-            synovainfotech.com
+            synovainfo.com
           </span>
 
           <span

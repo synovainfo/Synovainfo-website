@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import {
   Send,
   Loader2,
@@ -352,15 +353,30 @@ export function ContactForm({ services, contactInfo }: ContactFormProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-14 text-center"
+          className="mb-14 grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
         >
-          <h1 className="font-heading text-3xl font-bold text-[var(--color-text)] md:text-4xl lg:text-5xl">
-            Let&apos;s Start a Conversation
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)] md:text-lg">
-            Tell us about your project, and we&apos;ll help you turn your vision
-            into reality.
-          </p>
+          <div className="text-center lg:text-left">
+            <h1 className="font-heading text-3xl font-bold text-[var(--color-text)] md:text-4xl lg:text-5xl">
+              Let&apos;s Start a Conversation
+            </h1>
+            <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)] md:text-lg lg:mx-0">
+              Tell us about your project, and we&apos;ll help you turn your vision
+              into reality.
+            </p>
+          </div>
+
+          {/* Hero visual (LCP → priority) */}
+          <div className="w-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xl shadow-[var(--color-accent-blue)]/10">
+            <Image
+              src="/images/contact/contact-hero.svg"
+              alt="Illustration inviting visitors to get in touch with Synova Infotech"
+              width={900}
+              height={500}
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="h-auto w-full"
+            />
+          </div>
         </motion.div>
 
         <div className="grid gap-10 lg:grid-cols-5">
@@ -546,6 +562,25 @@ export function ContactForm({ services, contactInfo }: ContactFormProps) {
                 </div>
               </motion.div>
             )}
+
+            {/* Map illustration */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-8 w-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)]"
+            >
+              <Image
+                src="/images/contact/contact-map-illustration.svg"
+                alt="Illustrated map showing the location of the Synova Infotech office"
+                width={600}
+                height={400}
+                loading="lazy"
+                sizes="(min-width: 1024px) 30vw, 100vw"
+                className="h-auto w-full"
+              />
+            </motion.div>
           </div>
         </div>
       </div>

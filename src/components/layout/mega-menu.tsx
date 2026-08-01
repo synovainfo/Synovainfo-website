@@ -10,18 +10,11 @@ import {
   Smartphone,
   Cloud,
   Brain,
-  Cpu,
-  Link2,
   Users,
   KanbanSquare,
-  Server,
-  BugPlay,
-  LifeBuoy,
-  ArrowRight,
-  LineChart,
   Shield,
-  Palette,
-  Building2,
+  Sparkles,
+  ArrowRight,
 } from "lucide-react";
 
 interface ServiceItem {
@@ -29,6 +22,7 @@ interface ServiceItem {
   description: string;
   icon: React.ReactNode;
   slug: string;
+  badge?: string;
 }
 
 interface ServiceCategory {
@@ -36,50 +30,90 @@ interface ServiceCategory {
   items: ServiceItem[];
 }
 
-const SERVICE_CATEGORIES: ServiceCategory[] = [
+const SOLUTION_CATEGORIES: ServiceCategory[] = [
   {
-    title: "Development",
+    title: "Enterprise Strategy",
     items: [
-      { name: "Custom Software Dev", description: "Tailored solutions for your unique business needs", icon: <Code2 className="h-5 w-5" />, slug: "custom-software-development" },
-      { name: "Web Development", description: "Modern, scalable web applications", icon: <Monitor className="h-5 w-5" />, slug: "web-development" },
-      { name: "Mobile Apps", description: "Native & cross-platform mobile experiences", icon: <Smartphone className="h-5 w-5" />, slug: "mobile-app-development" },
-      { name: "Cloud Solutions", description: "Scalable cloud infrastructure & migration", icon: <Cloud className="h-5 w-5" />, slug: "cloud-infrastructure-solutions" },
-      { name: "AI/ML", description: "Intelligent automation & predictive analytics", icon: <Brain className="h-5 w-5" />, slug: "ai-machine-learning" },
-      { name: "IoT", description: "Connected devices & smart systems", icon: <Cpu className="h-5 w-5" />, slug: "internet-of-things" },
-      { name: "Blockchain", description: "Distributed ledger & smart contracts", icon: <Link2 className="h-5 w-5" />, slug: "blockchain-solutions" },
+      {
+        name: "Digital Transformation",
+        description: "Modernize operations with scalable platforms and cloud-native architecture.",
+        icon: <Sparkles className="h-5 w-5" />,
+        slug: "digital-transformation",
+        badge: "Strategic",
+      },
+      {
+        name: "IT Consulting",
+        description: "Align technology initiatives to corporate strategy and growth objectives.",
+        icon: <Users className="h-5 w-5" />,
+        slug: "it-consulting",
+      },
+      {
+        name: "Project Delivery",
+        description: "Deliver complex programs with predictable cost, schedule, and governance.",
+        icon: <KanbanSquare className="h-5 w-5" />,
+        slug: "project-management",
+      },
     ],
   },
   {
-    title: "Management",
+    title: "Digital Engineering",
     items: [
-      { name: "IT Consulting", description: "Strategic technology advisory services", icon: <Users className="h-5 w-5" />, slug: "it-consulting" },
-      { name: "Project Management", description: "End-to-end project delivery excellence", icon: <KanbanSquare className="h-5 w-5" />, slug: "project-management" },
-      { name: "Infrastructure Mgmt", description: "Reliable IT infrastructure operations", icon: <Server className="h-5 w-5" />, slug: "infrastructure-management" },
-      { name: "QA Testing", description: "Comprehensive quality assurance & testing", icon: <BugPlay className="h-5 w-5" />, slug: "qa-testing" },
-      { name: "Support & Maintenance", description: "24/7 technical support & system upkeep", icon: <LifeBuoy className="h-5 w-5" />, slug: "support-maintenance" },
+      {
+        name: "Custom Software Development",
+        description: "Build secure, scalable systems tailored to enterprise workflows.",
+        icon: <Code2 className="h-5 w-5" />,
+        slug: "custom-software-development",
+        badge: "Core",
+      },
+      {
+        name: "Cloud Engineering",
+        description: "Design resilient multi-cloud infrastructure and migration paths.",
+        icon: <Cloud className="h-5 w-5" />,
+        slug: "cloud-infrastructure-solutions",
+      },
+      {
+        name: "AI & Machine Learning",
+        description: "Operationalize intelligence for automation, forecasting, and decision support.",
+        icon: <Brain className="h-5 w-5" />,
+        slug: "ai-machine-learning",
+        badge: "Emerging",
+      },
     ],
   },
   {
-    title: "Solutions",
+    title: "Experience & Operations",
     items: [
-      { name: "Digital Transformation", description: "End-to-end digital modernization", icon: <ArrowRight className="h-5 w-5" />, slug: "digital-transformation" },
-      { name: "Enterprise Solutions", description: "Large-scale enterprise systems", icon: <Building2 className="h-5 w-5" />, slug: "enterprise-solutions" },
-      { name: "Data Analytics", description: "Actionable insights from your data", icon: <LineChart className="h-5 w-5" />, slug: "data-analytics" },
-      { name: "Cybersecurity", description: "Protect your digital assets", icon: <Shield className="h-5 w-5" />, slug: "cybersecurity" },
-      { name: "UI/UX Design", description: "Human-centered design experiences", icon: <Palette className="h-5 w-5" />, slug: "ui-ux-design" },
+      {
+        name: "Web Applications",
+        description: "Create performant digital experiences for internal and external users.",
+        icon: <Monitor className="h-5 w-5" />,
+        slug: "web-development",
+      },
+      {
+        name: "Mobile Applications",
+        description: "Deliver enterprise mobility with secure native and cross-platform apps.",
+        icon: <Smartphone className="h-5 w-5" />,
+        slug: "mobile-app-development",
+      },
+      {
+        name: "Cybersecurity Services",
+        description: "Protect systems with zero-trust controls and compliance-first design.",
+        icon: <Shield className="h-5 w-5" />,
+        slug: "cybersecurity",
+      },
     ],
   },
 ];
 
 interface MegaMenuProps {
-  isOpen: boolean;
+  activeCategory: string | null;
   onClose: () => void;
   triggerRef: React.RefObject<HTMLButtonElement | null>;
 }
 
-export function MegaMenu({ isOpen, onClose, triggerRef }: MegaMenuProps) {
+export function MegaMenu({ activeCategory, onClose, triggerRef }: MegaMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
-  const [activeCategory, setActiveCategory] = useState(0);
+  const isOpen = activeCategory !== null;
 
   // Handle keyboard navigation
   const handleKeyDown = useCallback(
@@ -89,13 +123,12 @@ export function MegaMenu({ isOpen, onClose, triggerRef }: MegaMenuProps) {
         triggerRef.current?.focus();
       }
     },
-    [onClose, triggerRef],
+    [onClose, triggerRef]
   );
 
   // Close on click outside
   useEffect(() => {
     if (!isOpen) return;
-
     const handleClickOutside = (e: MouseEvent) => {
       if (
         menuRef.current &&
@@ -106,32 +139,26 @@ export function MegaMenu({ isOpen, onClose, triggerRef }: MegaMenuProps) {
         onClose();
       }
     };
-
-    // Delay to prevent immediate close on trigger click
     const timer = setTimeout(() => {
       document.addEventListener("mousedown", handleClickOutside);
     }, 0);
-
     return () => {
       clearTimeout(timer);
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen, onClose, triggerRef]);
 
-  // Trap focus when open
+  // Focus trap inside mega menu
   useEffect(() => {
     if (!isOpen) return;
-
     const handleTabKey = (e: KeyboardEvent) => {
       if (e.key === "Tab" && menuRef.current) {
-        const focusableElements = menuRef.current.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        const focusable = menuRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
         );
-        if (focusableElements.length === 0) return;
-
-        const first = focusableElements[0];
-        const last = focusableElements[focusableElements.length - 1];
-
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
         if (e.shiftKey && document.activeElement === first) {
           e.preventDefault();
           last.focus();
@@ -141,114 +168,113 @@ export function MegaMenu({ isOpen, onClose, triggerRef }: MegaMenuProps) {
         }
       }
     };
-
     document.addEventListener("keydown", handleTabKey);
     return () => document.removeEventListener("keydown", handleTabKey);
   }, [isOpen]);
+
+  // Dynamic Content based on Category
+  const renderContent = () => {
+    if (activeCategory === "Solutions" || activeCategory === "Services") {
+      return (
+        <div className="grid gap-3 sm:grid-cols-3">
+          {SOLUTION_CATEGORIES.map((category) => (
+            <div key={category.title} className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-corporate-gold">
+                {category.title}
+              </p>
+              <div className="mt-4 space-y-2">
+                {category.items.map((item) => (
+                  <Link
+                    key={item.slug}
+                    href={`/services/${item.slug}`}
+                    className="flex items-start gap-3 rounded-2xl px-3 py-3 transition hover:bg-white hover:shadow-sm"
+                  >
+                    <span className="mt-1 flex h-9 w-9 items-center justify-center rounded-2xl bg-white text-corporate-gold">
+                      {item.icon}
+                    </span>
+                    <div>
+                      <p className="font-semibold text-slate-900">{item.name}</p>
+                      <p className="text-sm text-slate-600">{item.description}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    if (activeCategory === "Industries") {
+      return (
+        <div className="grid gap-6 sm:grid-cols-2 p-4">
+          <div>
+            <h3 className="text-lg font-bold text-corporate-navy mb-4">Target Industries</h3>
+            <ul className="space-y-3">
+              <li><Link href="/industries/financial-services" className="text-sm text-slate-600 hover:text-corporate-gold">Financial Services & Fintech</Link></li>
+              <li><Link href="/industries/healthcare" className="text-sm text-slate-600 hover:text-corporate-gold">Healthcare & Life Sciences</Link></li>
+              <li><Link href="/industries/manufacturing" className="text-sm text-slate-600 hover:text-corporate-gold">Manufacturing & Supply Chain</Link></li>
+              <li><Link href="/industries/retail" className="text-sm text-slate-600 hover:text-corporate-gold">Retail & E-commerce</Link></li>
+            </ul>
+          </div>
+          <div className="rounded-2xl bg-corporate-navy p-6 text-white">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-corporate-gold mb-2">Featured Case Study</h3>
+            <p className="font-semibold text-lg mb-2">Global Bank Cloud Migration</p>
+            <p className="text-sm text-white/70 mb-4">How we achieved 99.999% uptime during a legacy modernization.</p>
+            <Link href="/case-studies" className="inline-flex items-center text-sm font-bold text-corporate-gold hover:text-white transition-colors">Read Case Study <ArrowRight className="ml-1 h-4 w-4" /></Link>
+          </div>
+        </div>
+      );
+    }
+
+    if (activeCategory === "Resources") {
+      return (
+        <div className="grid gap-4 sm:grid-cols-4 p-4">
+          {['Blog', 'Case Studies', 'Whitepapers', 'Architecture Diagrams'].map((res) => (
+             <Link key={res} href={`/${res.toLowerCase().replace(' ', '-')}`} className="block rounded-2xl p-4 bg-slate-50 hover:bg-slate-100 transition">
+               <p className="font-semibold text-corporate-navy">{res}</p>
+               <p className="text-xs text-slate-500 mt-1">Explore our latest {res.toLowerCase()}</p>
+             </Link>
+          ))}
+        </div>
+      );
+    }
+
+    if (activeCategory === "Company") {
+      return (
+        <div className="grid gap-6 sm:grid-cols-2 p-4">
+          <ul className="space-y-3">
+            <li><Link href="/about" className="text-sm font-semibold text-corporate-navy hover:text-corporate-gold">About Synova</Link></li>
+            <li><Link href="/careers" className="text-sm font-semibold text-corporate-navy hover:text-corporate-gold">Careers</Link></li>
+            <li><Link href="/press" className="text-sm font-semibold text-corporate-navy hover:text-corporate-gold">Press & Media</Link></li>
+          </ul>
+          <div className="rounded-2xl bg-slate-50 p-6">
+            <h3 className="text-sm font-bold text-corporate-navy mb-2">Global Headquarters</h3>
+            <p className="text-sm text-slate-600">Pune, India</p>
+            <Link href="/contact" className="mt-4 inline-block text-sm font-bold text-corporate-gold">Contact Sales &rarr;</Link>
+          </div>
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
           ref={menuRef}
-          initial={{ opacity: 0, y: -8, scaleY: 0.95 }}
-          animate={{ opacity: 1, y: 0, scaleY: 1 }}
-          exit={{ opacity: 0, y: -8, scaleY: 0.95 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-          className="glass-mega absolute left-1/2 top-full mt-2 w-[720px] -translate-x-1/2 rounded-2xl p-1 origin-top"
+          initial={{ opacity: 0, y: 10, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 8, scale: 0.98 }}
+          transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute left-1/2 top-full mt-3 w-[min(100vw-2rem,800px)] -translate-x-1/2 rounded-3xl border border-slate-200 bg-white p-2 shadow-[0_30px_90px_rgba(15,23,42,0.12)] z-50 transform-gpu origin-top"
           role="menu"
-          aria-label="Services menu"
+          aria-label={`${activeCategory} dropdown`}
           onKeyDown={handleKeyDown}
         >
-          <div className="flex gap-1">
-            {/* Category tabs */}
-            <div className="flex w-44 flex-col gap-0.5 p-2">
-              {SERVICE_CATEGORIES.map((category, index) => (
-                <button
-                  key={category.title}
-                  onClick={() => setActiveCategory(index)}
-                  onMouseEnter={() => setActiveCategory(index)}
-                  className={cn(
-                    "flex items-center gap-2 rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-all duration-200",
-                    activeCategory === index
-                      ? "bg-[var(--color-corporate-gold)]/10 text-[var(--color-corporate-navy)] font-semibold"
-                      : "text-[var(--color-text-secondary)] hover:text-[var(--color-corporate-navy)]",
-                  )}
-                  role="menuitem"
-                >
-                  <span
-                    className={cn(
-                      "flex h-6 w-6 items-center justify-center rounded-md transition-colors",
-                      activeCategory === index
-                        ? "bg-[var(--color-corporate-gold)] text-white"
-                        : "bg-[var(--color-surface-secondary)] text-[var(--color-text-tertiary)]",
-                    )}
-                  >
-                    {category.items[0]?.icon}
-                  </span>
-                  <span>{category.title}</span>
-                </button>
-              ))}
-            </div>
-
-            {/* Divider */}
-            <div className="my-2 w-px bg-[var(--color-border)]" />
-
-            {/* Category items */}
-            <div className="flex-1 p-2">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeCategory}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 12 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <div className="mb-2 px-3 py-1">
-                    <h3 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-corporate-navy)]">
-                      {SERVICE_CATEGORIES[activeCategory].title}
-                    </h3>
-                  </div>
-                  <div className="grid grid-cols-1 gap-0.5">
-                    {SERVICE_CATEGORIES[activeCategory].items.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={`/services/${item.slug}`}
-                        className="group flex items-start gap-3 rounded-lg px-3 py-2.5 transition-all duration-200 hover:bg-[var(--color-corporate-gold)]/5"
-                        role="menuitem"
-                        onClick={() => onClose()}
-                      >
-                        <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-corporate-navy)]/10 text-[var(--color-corporate-navy)] transition-colors group-hover:bg-[var(--color-corporate-gold)]/20">
-                          {item.icon}
-                        </span>
-                        <div className="min-w-0">
-                          <div className="text-sm font-medium text-[var(--color-text)]">
-                            {item.name}
-                          </div>
-                          <div className="text-xs text-[var(--color-text-secondary)] truncate">
-                            {item.description}
-                          </div>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="border-t border-[var(--color-border-light)] px-4 py-2.5 dark:border-white/5">
-            <Link
-              href="/services"
-              className="group inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-corporate-navy)] transition-colors hover:text-[var(--color-corporate-gold)]"
-              role="menuitem"
-              onClick={() => onClose()}
-            >
-              View all services
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          </div>
+          {renderContent()}
         </motion.div>
       )}
     </AnimatePresence>

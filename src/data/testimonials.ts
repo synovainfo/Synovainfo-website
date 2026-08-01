@@ -5,6 +5,8 @@ export interface Testimonial {
   title: string
   company: string
   initials: string
+  /** Optional per-testimonial image. Falls back to the rotating avatars when absent. */
+  imageUrl?: string
 }
 
 export const testimonials: Testimonial[] = [

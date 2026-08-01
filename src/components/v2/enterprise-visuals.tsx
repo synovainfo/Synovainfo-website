@@ -72,7 +72,7 @@ export function V2ServicesShowcase() {
     <section className="v2-section v2-light">
       <div className="v2-shell">
         <div className="v2-section-heading v2-wide">
-          <p className="v2-eyebrow">Service Architecture</p>
+          <p className="v2-eyebrow">Chapter 2: Service Architecture</p>
           <h2>Each capability is designed as an operating system for business change.</h2>
         </div>
         <div className="v2-service-stories">
@@ -104,7 +104,7 @@ export function V2IndustryAtlas() {
     <section className="v2-section v2-dark">
       <div className="v2-shell v2-atlas-grid">
         <div>
-          <p className="v2-eyebrow">Industry Atlas</p>
+          <p className="v2-eyebrow">Chapter 3: Industry Atlas</p>
           <h2>Domain decisions shape the architecture before implementation begins.</h2>
           <p className="v2-muted">
             Compliance rules, uptime expectations, field workflows, integration dependencies, and data quality thresholds become design constraints.
@@ -127,7 +127,7 @@ export function V2ProcessRail() {
     <section className="v2-section">
       <div className="v2-shell">
         <div className="v2-section-heading">
-          <p className="v2-eyebrow">Delivery System</p>
+          <p className="v2-eyebrow">Chapter 4: Delivery System</p>
           <h2>Cinematic to read. Operationally strict to run.</h2>
         </div>
         <ol className="v2-process">

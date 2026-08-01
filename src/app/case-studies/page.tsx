@@ -4,6 +4,11 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { CaseStudiesClient } from './case-studies-client'
+import {
+  ArchitectureShowcase,
+  ResultsChartBand,
+  DashboardShowcase,
+} from './case-studies-visuals'
 
 export const dynamic = 'force-dynamic'
 
@@ -98,6 +103,10 @@ export default async function CaseStudiesPage() {
       </section>
 
       <CaseStudiesClient caseStudies={caseStudies} industries={industries} />
+
+      <ArchitectureShowcase industries={industries} />
+      <ResultsChartBand />
+      <DashboardShowcase />
     </>
   )
 }

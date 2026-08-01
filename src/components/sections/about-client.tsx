@@ -3,23 +3,23 @@
 import { useMemo } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { SectionWrapper } from '@/components/layout/section-wrapper'
-import { SectionHeader } from '@/components/ui/section-header'
 
 /* ------------------------------------------------------------------ */
 /*  Inline animated SVG — abstract digital transformation illustration  */
+/*  ITHPL palette: corporate navy + corporate gold (orange)             */
 /* ------------------------------------------------------------------ */
 
 function AboutIllustration() {
   const prefersReducedMotion = useReducedMotion()
 
-  // SVG coordinates
+  // SVG coordinates — node fills reference the ITHPL navy/orange gradients
   const nodes = useMemo(
     () => [
-      { id: 1, cx: 130, cy: 110, r: 18, gradient: 'url(#gradBlue)' },
-      { id: 2, cx: 470, cy: 85, r: 16, gradient: 'url(#gradPurple)' },
-      { id: 3, cx: 300, cy: 230, r: 30, gradient: 'url(#gradEmerald)' },
-      { id: 4, cx: 145, cy: 370, r: 17, gradient: 'url(#gradBlue)' },
-      { id: 5, cx: 455, cy: 385, r: 15, gradient: 'url(#gradPurple)' },
+      { id: 1, cx: 130, cy: 110, r: 18, gradient: 'url(#gradGold)' },
+      { id: 2, cx: 470, cy: 85, r: 16, gradient: 'url(#gradNavyDark)' },
+      { id: 3, cx: 300, cy: 230, r: 30, gradient: 'url(#gradNavy)' },
+      { id: 4, cx: 145, cy: 370, r: 17, gradient: 'url(#gradGold)' },
+      { id: 5, cx: 455, cy: 385, r: 15, gradient: 'url(#gradNavyDark)' },
     ],
     [],
   )
@@ -89,7 +89,7 @@ function AboutIllustration() {
         {/* Glows */}
         <radialGradient id="bgGlow" cx="50%" cy="50%" r="55%">
           <stop offset="0%" stopColor="var(--color-corporate-gold)" stopOpacity="0.07" />
-          <stop offset="60%" stopColor="var(--color-accent-blue)" stopOpacity="0.03" />
+          <stop offset="60%" stopColor="var(--color-corporate-navy)" stopOpacity="0.03" />
           <stop offset="100%" stopColor="transparent" stopOpacity="0" />
         </radialGradient>
 
@@ -103,18 +103,18 @@ function AboutIllustration() {
           <stop offset="100%" stopColor="var(--color-corporate-navy)" stopOpacity="0" />
         </radialGradient>
 
-        {/* Node fills */}
-        <linearGradient id="gradBlue" x1="0" y1="0" x2="1" y2="1">
+        {/* Node fills — navy + orange only */}
+        <linearGradient id="gradGold" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="var(--color-corporate-gold)" />
-          <stop offset="100%" stopColor="var(--color-accent-blue)" />
+          <stop offset="100%" stopColor="var(--color-corporate-gold-light)" />
         </linearGradient>
-        <linearGradient id="gradPurple" x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id="gradNavy" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="var(--color-corporate-navy)" />
           <stop offset="100%" stopColor="var(--color-corporate-gold)" />
         </linearGradient>
-        <linearGradient id="gradEmerald" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="var(--color-trust-green)" />
-          <stop offset="100%" stopColor="var(--color-accent-blue)" />
+        <linearGradient id="gradNavyDark" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="var(--color-corporate-navy-dark)" />
+          <stop offset="100%" stopColor="var(--color-corporate-navy)" />
         </linearGradient>
 
         {/* Grid pattern */}
@@ -305,6 +305,26 @@ function AboutIllustration() {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Title — navy headline with orange-gradient accent on the last word  */
+/* ------------------------------------------------------------------ */
+
+function TitleWithAccent({ title }: { title: string }) {
+  const words = title.trim().split(/\s+/)
+
+  if (words.length < 2) {
+    return <>{title}</>
+  }
+
+  const accent = words[words.length - 1]
+
+  return (
+    <>
+      {words.slice(0, -1).join(' ')} <span className="text-gradient-orange">{accent}</span>
+    </>
+  )
+}
+
+/* ------------------------------------------------------------------ */
 /*  About Section Client                                               */
 /* ------------------------------------------------------------------ */
 
@@ -322,16 +342,39 @@ interface AboutContent {
 
 export function AboutClient({ content }: { content: AboutContent }) {
   return (
-    <SectionWrapper
-      id="about"
-      className="bg-[var(--color-surface)] text-black"
-    >
-      <SectionHeader
-        badge={content.badge ?? 'Enterprise Technology Partner'}
-        title={content.title ?? 'Enterprise Technology Innovation'}
-        subtitle={content.subtitle}
-        alignment="center"
-      />
+    <SectionWrapper id="about" className="bg-[var(--color-surface-secondary)]">
+      {/* ─── Header — orange badge, navy headline, orange accent word ─── */}
+      <div className="mb-12 text-center md:mb-16">
+        <motion.span
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="inline-block rounded-full border border-corporate-gold/30 bg-corporate-gold/10 px-4 py-1.5 text-sm font-semibold text-corporate-gold"
+          style={{ marginBottom: '1rem' }}
+        >
+          {content.badge ?? 'Enterprise Technology Partner'}
+        </motion.span>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="mx-auto mb-4 max-w-3xl text-3xl font-extrabold tracking-tight text-corporate-navy md:text-4xl lg:text-5xl"
+        >
+          <TitleWithAccent title={content.title ?? 'Engineering Enterprise Technology'} />
+        </motion.h2>
+        {content.subtitle && (
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mx-auto max-w-2xl text-lg leading-relaxed text-corporate-gray md:text-xl"
+          >
+            {content.subtitle}
+          </motion.p>
+        )}
+      </div>
 
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         {/* ─── Left column: content ─── */}
@@ -343,43 +386,43 @@ export function AboutClient({ content }: { content: AboutContent }) {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h3 className="mb-3 font-heading text-xl font-semibold text-[var(--color-text)]">
+            <h3 className="mb-3 border-l-4 border-corporate-gold pl-3 font-heading text-xl font-semibold text-corporate-navy">
               Who We Are
             </h3>
-            <p className="text-base leading-relaxed text-[var(--color-text-secondary)]">
+            <p className="text-base leading-relaxed text-corporate-gray">
               {content.whoWeAre}
             </p>
           </motion.div>
 
-          {/* Company details */}
+          {/* Company details — white stat cards */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="grid grid-cols-2 gap-4 rounded-xl border border-[var(--border)] bg-[var(--color-surface)] p-5"
+            className="grid grid-cols-2 gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
           >
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+              <span className="text-xs font-semibold uppercase tracking-wider text-corporate-gold">
                 Incorporated
               </span>
-              <p className="mt-1 text-sm font-medium text-[var(--color-text)]">
+              <p className="mt-1 text-lg font-bold text-corporate-navy">
                 {content.incorporated}
               </p>
             </div>
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+              <span className="text-xs font-semibold uppercase tracking-wider text-corporate-gold">
                 Headquarters
               </span>
-              <p className="mt-1 text-sm font-medium text-[var(--color-text)]">
+              <p className="mt-1 text-lg font-bold text-corporate-navy">
                 {content.headquarters}
               </p>
             </div>
             <div className="col-span-2">
-              <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+              <span className="text-xs font-semibold uppercase tracking-wider text-corporate-gold">
                 Directors
               </span>
-              <p className="mt-1 text-sm font-medium text-[var(--color-text)]">
+              <p className="mt-1 text-lg font-bold text-corporate-navy">
                 {content.directors}
               </p>
             </div>
@@ -393,10 +436,10 @@ export function AboutClient({ content }: { content: AboutContent }) {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <h4 className="mb-2 font-heading text-lg font-semibold text-[var(--color-text)]">
+              <h4 className="mb-2 border-l-4 border-corporate-gold pl-3 font-heading text-lg font-semibold text-corporate-navy">
                 Our Vision
               </h4>
-              <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
+              <p className="text-sm leading-relaxed text-corporate-gray">
                 {content.vision}
               </p>
             </motion.div>
@@ -407,17 +450,17 @@ export function AboutClient({ content }: { content: AboutContent }) {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <h4 className="mb-2 font-heading text-lg font-semibold text-[var(--color-text)]">
+              <h4 className="mb-2 border-l-4 border-corporate-gold pl-3 font-heading text-lg font-semibold text-corporate-navy">
                 Our Mission
               </h4>
-              <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
+              <p className="text-sm leading-relaxed text-corporate-gray">
                 {content.mission}
               </p>
             </motion.div>
           </div>
         </div>
 
-        {/* ─── Right column: SVG illustration ─── */}
+        {/* ─── Right column: SVG illustration in clean framed card ─── */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -425,7 +468,9 @@ export function AboutClient({ content }: { content: AboutContent }) {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="flex items-center justify-center"
         >
-          <div className="w-full max-w-lg">
+          <div className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-corporate-gold/20 bg-white p-5 shadow-xl shadow-corporate-gold/5">
+            {/* Orange accent bar */}
+            <div className="absolute inset-x-10 top-0 h-1 rounded-b-full bg-gradient-orange" aria-hidden="true" />
             <AboutIllustration />
           </div>
         </motion.div>

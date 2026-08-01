@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import {
   Cloud,
@@ -31,6 +32,10 @@ interface SolutionItem {
   businessProblems: string[]
   architectureHighlights: string[]
   quantifiedImpact: string
+  photo?: {
+    src: string
+    alt: string
+  }
 }
 
 const SOLUTIONS: SolutionItem[] = [
@@ -60,6 +65,10 @@ const SOLUTIONS: SolutionItem[] = [
     subtitle: 'Streamline real-time analytics and petabyte-scale data pipelines',
     badge: 'Data Intelligence',
     iconName: 'Database',
+    photo: {
+      src: '/images/solutions/coding-workspace.webp',
+      alt: 'Engineering team building high-throughput data streaming pipelines in a modern workspace',
+    },
     overview:
       'Engineered for Fortune 500 data volumes, our data solutions unite Apache Kafka, Snowflake, and Spark into unified real-time event streaming architectures with sub-second latency.',
     businessProblems: [
@@ -80,6 +89,10 @@ const SOLUTIONS: SolutionItem[] = [
     subtitle: 'Deploy secure, domain-specific AI agents and vector retrieval pipelines',
     badge: 'Cognitive Computing',
     iconName: 'Cpu',
+    photo: {
+      src: '/images/solutions/ai-tech.webp',
+      alt: 'Enterprise AI infrastructure with GPU-accelerated machine learning compute clusters',
+    },
     overview:
       'Construct enterprise RAG (Retrieval-Augmented Generation) systems and custom model pipelines with strict data privacy boundaries, ensuring enterprise IP is never exposed to public LLM models.',
     businessProblems: [
@@ -100,6 +113,10 @@ const SOLUTIONS: SolutionItem[] = [
     subtitle: 'Embed security into continuous deployment pipelines and identity perimeters',
     badge: 'Security Engineering',
     iconName: 'ShieldCheck',
+    photo: {
+      src: '/images/solutions/cyber-security.webp',
+      alt: 'Security operations center monitoring zero-trust cyber defense systems',
+    },
     overview:
       'Deploy identity-first perimeter defense, continuous vulnerability posture management, and automated SOC 2 / ISO 27001 audit logging across all hybrid cloud environments.',
     businessProblems: [
@@ -194,6 +211,18 @@ export default function SolutionsPage() {
                   </div>
 
                   <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-secondary)] p-6 lg:col-span-5">
+                    {solution.photo && (
+                      <div className="relative mb-5 aspect-video overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]">
+                        <Image
+                          src={solution.photo.src}
+                          alt={solution.photo.alt}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                          sizes="(min-width: 1024px) 40vw, 100vw"
+                        />
+                      </div>
+                    )}
                     <h4 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
                       Architecture Blueprint Highlights
                     </h4>

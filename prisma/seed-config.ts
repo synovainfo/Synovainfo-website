@@ -4,13 +4,13 @@
 
 export const seedConfig = {
   admin: {
-    email: "admin@synovainfotech.com",
+    email: "admin@synovainfo.com",
     password: process.env.SEED_ADMIN_PASSWORD || "Admin@Synova2026!",
     name: "Super Admin",
   },
   site: {
     name: "Synova Infotech",
-    url: "https://synovainfotech.com",
+    url: "https://synovainfo.com",
     description: "Enterprise IT Consulting & Digital Transformation",
   },
 } as const;

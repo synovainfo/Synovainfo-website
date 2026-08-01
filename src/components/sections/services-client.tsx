@@ -3,10 +3,9 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { ArrowRight, CheckCircle2, Cpu, ShieldCheck, Zap, Layers, Sparkles, Activity } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import { SectionWrapper } from '@/components/layout/section-wrapper'
-import { SectionHeader } from '@/components/ui/section-header'
 import type { Service } from '@/data/services'
 interface ServicesClientProps {
   initialServices: Service[]
@@ -92,15 +91,38 @@ export function ServicesClient({ initialServices }: ServicesClientProps) {
   const currentService = KEYNOTE_SERVICES[activeIdx]
 
   return (
-    <SectionWrapper id="services" className="bg-[var(--color-primary)] text-white py-24">
-      <SectionHeader
-        badge="Enterprise Capabilities"
-        title="Mission-Critical Solutions"
-        subtitle="Architected for Fortune 500 enterprises requiring security, scalability, and measurable ROI"
-        alignment="center"
-      />
+    <SectionWrapper id="services" className="py-24" glow>
+      {/* Section Header — ITHPL orange label + navy heading on light surface */}
+      <div className="mb-12 text-center md:mb-16">
+        <motion.span
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="section-label inline-block"
+        >
+          Enterprise Capabilities
+        </motion.span>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="mb-4 mt-4 text-3xl font-bold tracking-tight text-corporate-navy md:text-4xl lg:text-5xl"
+        >
+          Mission-Critical Solutions
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="mx-auto max-w-2xl text-lg text-slate-600 md:text-xl"
+        >
+          Architected for Fortune 500 enterprises requiring security, scalability, and measurable ROI
+        </motion.p>
+      </div>
 
-      {/* Corporate Tab Bar */}
+      {/* Corporate Tab Bar — orange active state */}
       <div className="flex flex-wrap justify-center gap-3 my-10 max-w-4xl mx-auto">
         {KEYNOTE_SERVICES.map((s, idx) => {
           const isActive = idx === activeIdx
@@ -109,8 +131,8 @@ export function ServicesClient({ initialServices }: ServicesClientProps) {
               key={s.id}
               onClick={() => setActiveIdx(idx)}
               className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 ${isActive
-                  ? 'bg-gradient-to-r from-corporate-gold to-amber-500 text-corporate-navy shadow-lg shadow-corporate-gold/25 scale-105'
-                  : 'bg-white/[0.05] text-zinc-400 hover:bg-white/10 hover:text-white border border-[var(--color-corporate-gold)]/30'
+                  ? 'bg-corporate-gold text-white shadow-lg shadow-corporate-gold/25 scale-105'
+                  : 'border border-slate-200 bg-white text-slate-500 hover:text-corporate-navy hover:border-corporate-gold/40'
                 }`}
             >
               {s.title}
@@ -119,8 +141,8 @@ export function ServicesClient({ initialServices }: ServicesClientProps) {
         })}
       </div>
 
-      {/* Corporate Panel */}
-      <div className="max-w-6xl mx-auto rounded-3xl border border-[var(--color-corporate-gold)]/30 bg-[var(--color-surface)]/90 backdrop-blur-2xl p-6 md:p-12 shadow-2xl overflow-hidden text-black">
+      {/* Corporate Panel — light card, image on right */}
+      <div className="max-w-6xl mx-auto rounded-3xl border border-slate-200 bg-white p-6 md:p-12 shadow-xl overflow-hidden transition-colors hover:border-corporate-gold/60">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentService.id}
@@ -132,37 +154,37 @@ export function ServicesClient({ initialServices }: ServicesClientProps) {
           >
             {/* Left Content Column */}
             <div className="lg:col-span-6 space-y-6">
-              <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-cyan-400">
+              <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-corporate-gold">
                 <Sparkles className="h-4 w-4" /> {currentService.tagline}
               </span>
-              <h3 className="text-3xl font-extrabold md:text-4xl text-white leading-tight">
+              <h3 className="text-3xl font-extrabold md:text-4xl text-corporate-navy leading-tight">
                 {currentService.title}
               </h3>
-              <p className="text-sm text-zinc-300 leading-relaxed font-light">
+              <p className="text-sm text-slate-600 leading-relaxed">
                 {currentService.description}
               </p>
 
               {/* Quantified Business Outcomes */}
-              <div className="grid grid-cols-3 gap-3 border-y border-white/10 py-4 text-center my-6">
+              <div className="grid grid-cols-3 gap-3 border-y border-slate-200 py-4 text-center my-6">
                 <div>
-                  <div className="text-lg font-extrabold text-blue-400">{currentService.outcomes.roi}</div>
-                  <div className="text-[10px] text-zinc-400 uppercase font-medium mt-0.5">Financial ROI</div>
+                  <div className="text-lg font-extrabold text-corporate-gold">{currentService.outcomes.roi}</div>
+                  <div className="text-[10px] text-slate-500 uppercase font-medium mt-0.5">Financial ROI</div>
                 </div>
                 <div>
-                  <div className="text-lg font-extrabold text-cyan-400">{currentService.outcomes.velocity}</div>
-                  <div className="text-[10px] text-zinc-400 uppercase font-medium mt-0.5">Velocity Boost</div>
+                  <div className="text-lg font-extrabold text-corporate-gold">{currentService.outcomes.velocity}</div>
+                  <div className="text-[10px] text-slate-500 uppercase font-medium mt-0.5">Velocity Boost</div>
                 </div>
                 <div>
-                  <div className="text-lg font-extrabold text-emerald-400">{currentService.outcomes.uptime}</div>
-                  <div className="text-[10px] text-zinc-400 uppercase font-medium mt-0.5">SLA Target</div>
+                  <div className="text-lg font-extrabold text-corporate-gold">{currentService.outcomes.uptime}</div>
+                  <div className="text-[10px] text-slate-500 uppercase font-medium mt-0.5">SLA Target</div>
                 </div>
               </div>
 
               {/* Milestones */}
               <div className="space-y-2.5">
                 {currentService.benefits.map((b, idx) => (
-                  <div key={idx} className="flex items-start gap-3 text-xs text-zinc-300">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <div key={idx} className="flex items-start gap-3 text-xs text-slate-600">
+                    <CheckCircle2 className="h-4 w-4 text-corporate-gold shrink-0 mt-0.5" />
                     <span>{b}</span>
                   </div>
                 ))}
@@ -173,7 +195,7 @@ export function ServicesClient({ initialServices }: ServicesClientProps) {
                 {currentService.techPills.map((tech) => (
                   <span
                     key={tech}
-                    className="rounded-lg bg-white/[0.05] border border-white/10 px-3 py-1 text-xs font-mono text-zinc-300"
+                    className="rounded-lg bg-slate-50 border border-slate-200 px-3 py-1 text-xs font-mono text-corporate-navy"
                   >
                     {tech}
                   </span>
@@ -183,20 +205,22 @@ export function ServicesClient({ initialServices }: ServicesClientProps) {
               <div className="pt-6">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-xs font-semibold text-white hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/20"
+                  className="inline-flex items-center gap-2 rounded-xl bg-corporate-gold px-6 py-3 text-xs font-semibold text-white hover:bg-corporate-gold-dark transition-colors shadow-lg shadow-corporate-gold/25"
                 >
                   Request Technical Blueprint <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>
 
-            {/* Right Large Custom SVG Visualizer */}
+            {/* Right Service Image — framed rounded card */}
             <div className="lg:col-span-6 flex justify-center">
-              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 p-2 shadow-2xl">
-                <img
+              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 p-2 shadow-xl transition-shadow hover:ring-1 hover:ring-corporate-gold/40">
+                <Image
                   src={currentService.svgAsset}
                   alt={currentService.title}
-                  className="w-full h-full object-contain"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
               </div>
             </div>
@@ -207,17 +231,17 @@ export function ServicesClient({ initialServices }: ServicesClientProps) {
       {/* Comprehensive Service Matrix — Data table layout */}
       <div className="mt-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
-          <h3 className="text-2xl font-bold text-white mb-2">Service Architecture Matrix</h3>
-          <p className="text-zinc-400">Complete portfolio of enterprise-grade engineering capabilities.</p>
+          <h3 className="text-2xl font-bold text-corporate-navy mb-2">Service Architecture Matrix</h3>
+          <p className="text-slate-600">Complete portfolio of enterprise-grade engineering capabilities.</p>
         </div>
-        <div className="overflow-x-auto rounded-2xl border border-white/10">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
           <table className="w-full min-w-[640px] border-collapse">
             <thead>
-              <tr className="border-b border-white/10 bg-white/[0.02]">
-                <th className="text-left text-xs font-bold uppercase tracking-widest text-zinc-500 p-5">Service Domain</th>
-                <th className="text-left text-xs font-bold uppercase tracking-widest text-zinc-500 p-5">Delivery Model</th>
-                <th className="text-left text-xs font-bold uppercase tracking-widest text-zinc-500 p-5">Compliance</th>
-                <th className="text-right text-xs font-bold uppercase tracking-widest text-zinc-500 p-5">Avg. ROI</th>
+              <tr className="border-b-2 border-corporate-gold-dark bg-corporate-gold text-white">
+                <th className="text-left text-xs font-bold uppercase tracking-widest p-5">Service Domain</th>
+                <th className="text-left text-xs font-bold uppercase tracking-widest p-5">Delivery Model</th>
+                <th className="text-left text-xs font-bold uppercase tracking-widest p-5">Compliance</th>
+                <th className="text-right text-xs font-bold uppercase tracking-widest p-5">Avg. ROI</th>
               </tr>
             </thead>
             <tbody>
@@ -230,29 +254,29 @@ export function ServicesClient({ initialServices }: ServicesClientProps) {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: idx * 0.03 }}
-                    className="border-b border-white/5 hover:bg-white/[0.02] transition-colors group cursor-pointer"
+                    className="border-b border-slate-100 hover:bg-orange-50 transition-colors group cursor-pointer"
                     onClick={() => window.location.href = `/services/${service.id}`}
                   >
                     <td className="p-5">
                       <div className="flex items-center gap-3">
-                        <div className="bg-blue-500/10 w-10 h-10 rounded-lg flex items-center justify-center group-hover:bg-blue-500/20 transition-colors shrink-0">
-                          <Icon className="w-5 h-5 text-blue-400" />
+                        <div className="bg-corporate-gold/10 w-10 h-10 rounded-lg flex items-center justify-center group-hover:bg-corporate-gold/20 transition-colors shrink-0">
+                          <Icon className="w-5 h-5 text-corporate-gold" />
                         </div>
                         <div>
-                          <span className="text-sm font-semibold text-white">{service.title}</span>
-                          <p className="text-[11px] text-zinc-500 mt-0.5 line-clamp-1">{service.shortDescription}</p>
+                          <span className="text-sm font-semibold text-corporate-navy">{service.title}</span>
+                          <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-1">{service.shortDescription}</p>
                         </div>
                       </div>
                     </td>
                     <td className="p-5">
-                      <span className="text-xs text-zinc-400">Agile / Scrum</span>
+                      <span className="text-xs text-slate-600">Agile / Scrum</span>
                     </td>
                     <td className="p-5">
-                      <span className="inline-flex rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-400">ISO 27001</span>
+                      <span className="inline-flex rounded-full bg-corporate-gold/10 px-2.5 py-0.5 text-[11px] font-semibold text-corporate-gold-dark">ISO 27001</span>
                     </td>
                     <td className="p-5 text-right">
-                      <span className="text-sm font-bold text-white">3.2x</span>
-                      <span className="text-[10px] text-zinc-500 ml-1">avg</span>
+                      <span className="text-sm font-bold text-corporate-navy">3.2x</span>
+                      <span className="text-[10px] text-slate-500 ml-1">avg</span>
                     </td>
                   </motion.tr>
                 )
@@ -264,4 +288,3 @@ export function ServicesClient({ initialServices }: ServicesClientProps) {
     </SectionWrapper>
   )
 }
-

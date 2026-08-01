@@ -2,15 +2,22 @@ import { prisma } from '@/lib/prisma'
 import { ClientsClient } from './clients-client'
 
 export async function Clients() {
-  const [clients, section] = await Promise.all([
-    prisma.client.findMany({
-      where: { status: true },
-      orderBy: { order: 'asc' },
-    }),
-    prisma.homepageSection.findFirst({
-      where: { sectionType: 'clients', isVisible: true },
-    }),
-  ])
+  let clients: Awaited<ReturnType<typeof prisma.client.findMany>> = []
+  let section: Awaited<ReturnType<typeof prisma.homepageSection.findFirst>> = null
+
+  try {
+    ;[clients, section] = await Promise.all([
+      prisma.client.findMany({
+        where: { status: true },
+        orderBy: { order: 'asc' },
+      }),
+      prisma.homepageSection.findFirst({
+        where: { sectionType: 'clients', isVisible: true },
+      }),
+    ])
+  } catch (error) {
+    console.error('Clients: database fallback engaged:', error)
+  }
 
   if (clients.length === 0) return null
 

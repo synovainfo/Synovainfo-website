@@ -15,24 +15,30 @@ interface AboutContent {
 
 const DEFAULT_CONTENT: AboutContent = {
   badge: 'About Synova Infotech',
-  title: 'Engineering Enterprise Technology',
+  title: 'Orchestrating Digital Paradigms',
   subtitle:
-    'We are a team of architects, engineers, and problem-solvers dedicated to building technology that powers business transformation.',
+    'We are a consortium of strategic visionaries and enterprise architects dedicated to orchestrating digital transformations that drive sustainable growth, mitigate systemic risk, and redefine industry paradigms.',
   whoWeAre:
-    'Synova Infotech is a Pune-based enterprise technology company specializing in digital transformation, custom software development, and AI-driven solutions. Founded by industry professionals with deep expertise in enterprise architecture, our team brings together decades of collective experience across Fortune 500 environments.',
+    'Synova Infotech is a premier enterprise technology consultancy specializing in massive-scale digital transformation, custom ecosystem development, and AI-driven capability realization. Founded by industry veterans with deep expertise in global architecture, our team brings together decades of collective experience delivering mission-critical outcomes across Fortune 500 environments.',
   vision:
-    'To be the most trusted technology partner for enterprises seeking digital transformation — delivering solutions that create measurable business impact.',
+    'To be the definitive strategic technology partner for global enterprises — orchestrating synergistic solutions that unlock shareholder value and create measurable, sustainable market dominance.',
   mission:
-    'Empower organizations with enterprise-grade software solutions that combine cutting-edge technology with robust architecture, enabling them to achieve operational excellence and sustainable growth.',
+    'Empower organizations with enterprise-grade software paradigms that combine cutting-edge agility with uncompromising architectural governance, enabling them to achieve operational excellence and hyper-scalability.',
   incorporated: '30 June 2026',
   headquarters: 'Pune, India',
   directors: 'Amir Khaja Baig · Tazeen Shahnawaz Shaikh',
 }
 
 export async function About() {
-  const section = await prisma.homepageSection.findFirst({
-    where: { sectionType: 'about', isVisible: true },
-  })
+  let section: Awaited<ReturnType<typeof prisma.homepageSection.findFirst>> = null
+
+  try {
+    section = await prisma.homepageSection.findFirst({
+      where: { sectionType: 'about', isVisible: true },
+    })
+  } catch (error) {
+    console.error('About: database fallback engaged:', error)
+  }
 
   const content: AboutContent = section?.content
     ? { ...DEFAULT_CONTENT, ...(section.content as Record<string, unknown>) }

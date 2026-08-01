@@ -223,7 +223,7 @@ export default async function CareerDetailPage({
     hiringOrganization: {
       '@type': 'Organization',
       name: 'Synova Infotech',
-      sameAs: 'https://synovainfotech.com',
+      sameAs: 'https://synovainfo.com',
     },
     ...(career.type === 'REMOTE' && { jobLocationType: 'TELECOMMUTE' }),
   }

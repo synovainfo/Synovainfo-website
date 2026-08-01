@@ -22,12 +22,12 @@ export const metadata: Metadata = {
   authors: [{ name: "Synova Infotech Private Limited" }],
   creator: "Synova Infotech Private Limited",
   publisher: "Synova Infotech Private Limited",
-  metadataBase: new URL("https://synovainfotech.com"),
+  metadataBase: new URL("https://synovainfo.com"),
   openGraph: {
     title: "Synova Infotech | Enterprise Architecture & Digital Engineering",
     description:
       "Mission-critical platforms engineered for Fortune 500 scale. Multi-cloud infrastructure, agentic AI pipelines, and zero-trust security architectures with 99.999% SLA guarantees.",
-    url: "https://synovainfotech.com",
+    url: "https://synovainfo.com",
     siteName: "Synova Infotech",
     locale: "en_US",
     type: "website",

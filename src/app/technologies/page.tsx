@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import {
   Code2,
@@ -24,6 +25,10 @@ interface TechCategory {
   category: string
   description: string
   icon: string
+  photo?: {
+    src: string
+    alt: string
+  }
   stack: Array<{
     name: string
     role: string
@@ -124,6 +129,10 @@ const TECH_CATEGORIES: TechCategory[] = [
     category: 'Cloud Infrastructure & DevOps',
     description: 'Automated CI/CD pipelines, container orchestration, and multi-region cloud topology.',
     icon: 'Cloud',
+    photo: {
+      src: '/images/technologies/server-rack.webp',
+      alt: 'Enterprise server racks in a data center powering cloud infrastructure and DevOps pipelines',
+    },
     stack: [
       {
         name: 'AWS & GCP',
@@ -165,6 +174,17 @@ export default function TechnologiesPage() {
               Every tool in our stack is selected for enterprise resilience, strict type-safety, maintainability, and zero-compromise security posture.
             </p>
           </div>
+
+          <div className="relative mx-auto mt-12 aspect-[21/9] max-w-5xl overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-secondary)]">
+            <Image
+              src="/images/technologies/network-globe.webp"
+              alt="Digital globe visualizing Synova's global enterprise network infrastructure"
+              fill
+              priority
+              className="object-cover"
+              sizes="(min-width: 1024px) 1024px, 100vw"
+            />
+          </div>
         </div>
       </section>
 
@@ -174,6 +194,18 @@ export default function TechnologiesPage() {
           <div className="space-y-16">
             {TECH_CATEGORIES.map((cat, idx) => (
               <div key={idx} className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8 shadow-lg md:p-10">
+                {cat.photo && (
+                  <div className="relative mb-8 aspect-[21/9] overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-secondary)]">
+                    <Image
+                      src={cat.photo.src}
+                      alt={cat.photo.alt}
+                      fill
+                      className="object-cover"
+                      loading="lazy"
+                      sizes="(min-width: 1280px) 1280px, 100vw"
+                    />
+                  </div>
+                )}
                 <div className="mb-8 border-b border-[var(--color-border)] pb-6">
                   <h2 className="font-heading text-2xl font-bold text-[var(--color-text)] md:text-3xl">
                     {cat.category}

@@ -22,9 +22,11 @@ const SUGGESTIONS = [
 export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
   const router = useRouter();
 
-  // Handle Ctrl+K shortcut globally
+  // Handle Ctrl+K shortcut globally and trap focus
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === "k") {
@@ -34,6 +36,27 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
       if (e.key === "Escape" && isOpen) {
         onClose();
       }
+      if (e.key === "Tab" && isOpen && dialogRef.current) {
+        const focusableElements = dialogRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length > 0) {
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
+
+          if (e.shiftKey) {
+            if (document.activeElement === firstElement || document.activeElement === dialogRef.current) {
+              lastElement.focus();
+              e.preventDefault();
+            }
+          } else {
+            if (document.activeElement === lastElement) {
+              firstElement.focus();
+              e.preventDefault();
+            }
+          }
+        }
+      }
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
@@ -42,17 +65,23 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
   // Focus input when opened
   useEffect(() => {
     if (isOpen) {
+      previousFocusRef.current = document.activeElement as HTMLElement | null;
+      const originalOverflow = document.body.style.overflow;
+      
       setTimeout(() => {
         inputRef.current?.focus();
       }, 100);
       document.body.style.overflow = "hidden";
+      
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        if (previousFocusRef.current) {
+          previousFocusRef.current.focus();
+        }
+      };
     } else {
       setQuery("");
-      document.body.style.overflow = "";
     }
-    return () => {
-      document.body.style.overflow = "";
-    };
   }, [isOpen]);
 
   const handleSearch = (e: React.FormEvent) => {
@@ -78,6 +107,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
           />
           <div className="fixed inset-0 z-[101] flex items-start justify-center pt-[10vh] sm:pt-[15vh] px-4 pointer-events-none">
             <motion.div
+              ref={dialogRef}
               initial={{ opacity: 0, scale: 0.95, y: -20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}

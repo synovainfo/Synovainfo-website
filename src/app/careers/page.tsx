@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
 import { ChevronRight } from 'lucide-react'
 import { CareersList } from './careers-list'
@@ -94,6 +95,20 @@ export default async function CareersPage() {
             </p>
           )}
         </div>
+
+        {/* ── Hero Visual ── */}
+        <div className="mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative aspect-[16/5] w-full overflow-hidden rounded-2xl border border-[var(--color-border)] shadow-xl sm:aspect-[21/6]">
+            <Image
+              src="/images/careers/careers-hero.svg"
+              alt="Synova careers hero illustration of a team building enterprise software solutions"
+              fill
+              priority
+              sizes="(max-width: 640px) 100vw, (max-width: 1280px) 90vw, 1280px"
+              className="object-cover object-center"
+            />
+          </div>
+        </div>
       </section>
 
       {/* ── Stats Bar ── */}
@@ -122,6 +137,22 @@ export default async function CareersPage() {
               {mapped.filter((c) => c.type === 'REMOTE').length}
             </p>
             <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Remote Friendly</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Team Culture ── */}
+      <section className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-lg sm:aspect-[16/9] lg:aspect-[21/9]">
+            <Image
+              src="/images/careers/team-collab.webp"
+              alt="Synova team members collaborating around a shared workspace"
+              fill
+              loading="lazy"
+              sizes="(max-width: 640px) 100vw, (max-width: 1280px) 90vw, 1280px"
+              className="object-cover object-center"
+            />
           </div>
         </div>
       </section>

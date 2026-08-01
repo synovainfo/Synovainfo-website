@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -8,37 +8,29 @@ import { NavLinks } from "./nav-links";
 import { Logo } from "@/components/ui/logo";
 import Link from "next/link";
 
-const MOBILE_SERVICES = [
+const MOBILE_SERVICE_CATEGORIES = [
   {
-    title: "Development",
+    title: "Core Engineering",
     items: [
-      { name: "Custom Software Dev", slug: "custom-software-development" },
+      { name: "Custom Software Development", slug: "custom-software-development" },
       { name: "Web Development", slug: "web-development" },
-      { name: "Mobile Apps", slug: "mobile-app-development" },
-      { name: "Cloud Solutions", slug: "cloud-infrastructure-solutions" },
-      { name: "AI/ML", slug: "ai-machine-learning" },
-      { name: "IoT", slug: "internet-of-things" },
-      { name: "Blockchain", slug: "blockchain-solutions" },
+      { name: "Mobile Applications", slug: "mobile-app-development" },
     ],
   },
   {
-    title: "Management",
+    title: "Cloud & AI",
+    items: [
+      { name: "Cloud Engineering", slug: "cloud-infrastructure-solutions" },
+      { name: "AI & Machine Learning", slug: "ai-machine-learning" },
+      { name: "Cybersecurity", slug: "cybersecurity" },
+    ],
+  },
+  {
+    title: "Strategy & Growth",
     items: [
       { name: "IT Consulting", slug: "it-consulting" },
       { name: "Project Management", slug: "project-management" },
-      { name: "Infrastructure Mgmt", slug: "infrastructure-management" },
-      { name: "QA Testing", slug: "qa-testing" },
-      { name: "Support & Maintenance", slug: "support-maintenance" },
-    ],
-  },
-  {
-    title: "Solutions",
-    items: [
       { name: "Digital Transformation", slug: "digital-transformation" },
-      { name: "Enterprise Solutions", slug: "enterprise-solutions" },
-      { name: "Data Analytics", slug: "data-analytics" },
-      { name: "Cybersecurity", slug: "cybersecurity" },
-      { name: "UI/UX Design", slug: "ui-ux-design" },
     ],
   },
 ];
@@ -46,10 +38,11 @@ const MOBILE_SERVICES = [
 interface MobileNavProps {
   isOpen: boolean;
   onToggle: () => void;
+  isScrolled?: boolean;
+  isLightTheme?: boolean;
 }
 
-export function MobileNav({ isOpen, onToggle }: MobileNavProps) {
-  const [servicesExpanded, setServicesExpanded] = useState(false);
+export function MobileNav({ isOpen, onToggle, isScrolled = false, isLightTheme = false }: MobileNavProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -62,7 +55,7 @@ export function MobileNav({ isOpen, onToggle }: MobileNavProps) {
         onToggle(); // automatically close if sized to desktop
       }
     };
-    
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [isOpen, onToggle]);
@@ -154,7 +147,12 @@ export function MobileNav({ isOpen, onToggle }: MobileNavProps) {
       <button
         ref={buttonRef}
         onClick={onToggle}
-        className="relative z-[60] flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-zinc-100 dark:hover:bg-white/10"
+        className={cn(
+          "relative z-[60] flex h-11 w-11 items-center justify-center rounded-xl transition-colors",
+          isScrolled || isLightTheme
+            ? "text-corporate-navy hover:bg-slate-100"
+            : "text-white hover:bg-white/10"
+        )}
         aria-label={isOpen ? "Close menu" : "Open menu"}
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
@@ -162,17 +160,17 @@ export function MobileNav({ isOpen, onToggle }: MobileNavProps) {
         <div className="flex w-5 flex-col items-center gap-1.5">
           <motion.span
             animate={isOpen ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }}
-            className="block h-[2px] w-5 rounded-full bg-zinc-800 dark:bg-zinc-200"
+            className="block h-[2px] w-5 rounded-full bg-current"
             transition={{ duration: 0.2 }}
           />
           <motion.span
             animate={isOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
-            className="block h-[2px] w-5 rounded-full bg-zinc-800 dark:bg-zinc-200"
+            className="block h-[2px] w-5 rounded-full bg-current"
             transition={{ duration: 0.15 }}
           />
           <motion.span
             animate={isOpen ? { rotate: -45, y: -3.5 } : { rotate: 0, y: 0 }}
-            className="block h-[2px] w-5 rounded-full bg-zinc-800 dark:bg-zinc-200"
+            className="block h-[2px] w-5 rounded-full bg-current"
             transition={{ duration: 0.2 }}
           />
         </div>
@@ -190,21 +188,29 @@ export function MobileNav({ isOpen, onToggle }: MobileNavProps) {
             exit="closed"
             className={cn(
               "fixed inset-0 z-50 flex flex-col",
-              "bg-white/95 backdrop-blur-xl dark:bg-zinc-950/98",
+              isLightTheme
+                ? "bg-white/95 backdrop-blur-xl"
+                : "bg-corporate-navy-dark/98 backdrop-blur-xl",
             )}
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"
           >
             {/* Top bar inside overlay */}
-            <div className="flex items-center justify-between px-5 pt-4 pb-2">
-              <Logo variant="dark" />
-              <button
-                onClick={onToggle}
-                className="flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-zinc-100 dark:hover:bg-white/10"
-                aria-label="Close menu"
-              >
-                <X className="h-5 w-5 text-zinc-700 dark:text-zinc-300" />
+<div className={cn(
+                "flex items-center justify-between px-5 pt-4 pb-2",
+                isLightTheme ? "border-b border-slate-200" : "border-b border-white/10"
+              )}>
+                <Logo size="md" variant={isLightTheme ? "dark" : "light"} href="/" />
+                <button
+                  onClick={onToggle}
+                  className={cn(
+                    "flex h-10 w-10 items-center justify-center rounded-lg transition-colors",
+                    isLightTheme ? "hover:bg-slate-100" : "dark:hover:bg-white/10"
+                  )}
+                  aria-label="Close menu"
+                >
+                  <X className={cn("h-5 w-5", isLightTheme ? "text-corporate-navy" : "text-white")} />
               </button>
             </div>
 
@@ -220,84 +226,58 @@ export function MobileNav({ isOpen, onToggle }: MobileNavProps) {
                   variant="mobile"
                   onItemClick={handleLinkClick}
                   className="mb-8"
+                  isLightTheme={isLightTheme}
                 />
               </motion.div>
 
-              {/* Services accordion on mobile */}
-              <motion.div variants={linkVariants} className="border-t border-zinc-100 pt-6 dark:border-zinc-800">
-                <button
-                  onClick={() => setServicesExpanded(!servicesExpanded)}
-                  className="flex w-full items-center justify-between text-left"
-                  aria-expanded={servicesExpanded}
-                >
-                  <span className="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
-                    Our Services
-                  </span>
-                  <motion.svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    animate={{ rotate: servicesExpanded ? 180 : 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="text-zinc-400"
-                  >
-                    <path
-                      d="M6 9L12 15L18 9"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </motion.svg>
-                </button>
+              <motion.div
+                variants={linkVariants}
+                className="border-t border-slate-200 pt-6 dark:border-white/10"
+              >
+                <div className="mb-4 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-corporate-gold dark:text-corporate-gold">
+                      Popular services
+                    </p>
+                    <p className="mt-1 text-sm text-slate-500 dark:text-slate-300">
+                      Quick access to the services enterprise teams request most.
+                    </p>
+                  </div>
+                </div>
 
-                <AnimatePresence>
-                  {servicesExpanded && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <div className="pt-4 pb-2 space-y-5">
-                        {MOBILE_SERVICES.map((cat) => (
-                          <div key={cat.title}>
-                            <h4 className="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
-                              {cat.title}
-                            </h4>
-                            <ul className="space-y-1">
-                              {cat.items.map((item) => (
-                                <li key={item.name}>
-                                  <Link
-                                    href={`/services/${item.slug}`}
-                                    onClick={handleLinkClick}
-                                    className="block rounded-lg px-3 py-2 text-sm text-zinc-500 transition-colors hover:bg-zinc-50 hover:text-zinc-800 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-zinc-200"
-                                  >
-                                    {item.name}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                <div className="grid gap-3">
+                  {MOBILE_SERVICE_CATEGORIES.map((category) => (
+                    <div key={category.title} className="rounded-3xl border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-slate-950">
+                      <h4 className="text-sm font-semibold text-corporate-navy dark:text-white mb-3">
+                        {category.title}
+                      </h4>
+                      <div className="grid gap-2">
+                        {category.items.map((item) => (
+                          <Link
+                            key={item.slug}
+                            href={`/services/${item.slug}`}
+                            onClick={handleLinkClick}
+                            className="rounded-2xl px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-slate-100 hover:text-corporate-gold dark:text-slate-200 dark:hover:bg-white/5 dark:hover:text-corporate-gold"
+                          >
+                            {item.name}
+                          </Link>
                         ))}
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    </div>
+                  ))}
+                </div>
               </motion.div>
             </motion.div>
 
             {/* Bottom CTA */}
             <motion.div
               variants={linkVariants}
-              className="border-t border-zinc-100 px-5 py-5 dark:border-zinc-800"
+              className="border-t border-slate-200 px-5 py-5 dark:border-white/10"
             >
               <Link
                 href="/contact"
                 onClick={handleLinkClick}
-                className="flex w-full items-center justify-center rounded-xl bg-zinc-900 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+                className="flex w-full items-center justify-center rounded-xl bg-corporate-gold px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-corporate-gold-dark hover:shadow-lg hover:shadow-corporate-gold/25"
               >
                 Let&apos;s Talk
               </Link>
