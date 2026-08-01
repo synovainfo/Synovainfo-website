@@ -172,7 +172,7 @@ export function Logo({
               s.subTextSize
             )}
           >
-            INFOTECH
+            INFO
           </span>
         </div>
       )}
@@ -181,7 +181,7 @@ export function Logo({
 
   if (href) {
     return (
-      <Link href={href} aria-label="SYNOVA INFOTECH Home">
+      <Link href={href} aria-label="SYNOVA INFO Home">
         {content}
       </Link>
     )

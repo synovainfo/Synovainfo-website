@@ -26,7 +26,7 @@ const DEFAULT_CONTENT: AboutContent = {
     'Empower organizations with enterprise-grade software paradigms that combine cutting-edge agility with uncompromising architectural governance, enabling them to achieve operational excellence and hyper-scalability.',
   incorporated: '30 June 2026',
   headquarters: 'Pune, India',
-  directors: 'Amir Khaja Baig · Tazeen Shahnawaz Shaikh',
+  directors: 'Amir Khaja Baig · Tazeen Shahnawaz Shaikh · Sachin Nikam',
 }
 
 export async function About() {
