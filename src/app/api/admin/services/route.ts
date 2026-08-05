@@ -62,8 +62,8 @@ export const GET = withPermission(async (request: NextRequest) => {
     const where: Record<string, unknown> = {};
     if (search) {
       where.OR = [
-        { title: { contains: search, mode: "insensitive" } },
-        { shortDescription: { contains: search, mode: "insensitive" } },
+        { title: { contains: search } },
+        { shortDescription: { contains: search } },
       ];
     }
     if (category) where.category = category;

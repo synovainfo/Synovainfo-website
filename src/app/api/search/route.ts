@@ -18,9 +18,9 @@ async function searchServices(query: string): Promise<SearchResult[]> {
       status: true,
       deletedAt: null,
       OR: [
-        { title: { contains: query, mode: 'insensitive' } },
-        { shortDescription: { contains: query, mode: 'insensitive' } },
-        { fullDescription: { contains: query, mode: 'insensitive' } },
+        { title: { contains: query } },
+        { shortDescription: { contains: query } },
+        { fullDescription: { contains: query } },
       ],
     },
     select: {
@@ -47,8 +47,8 @@ async function searchIndustries(query: string): Promise<SearchResult[]> {
       status: true,
       deletedAt: null,
       OR: [
-        { name: { contains: query, mode: 'insensitive' } },
-        { description: { contains: query, mode: 'insensitive' } },
+        { name: { contains: query } },
+        { description: { contains: query } },
       ],
     },
     select: {
@@ -75,9 +75,9 @@ async function searchBlogPosts(query: string): Promise<SearchResult[]> {
       status: 'PUBLISHED',
       deletedAt: null,
       OR: [
-        { title: { contains: query, mode: 'insensitive' } },
-        { content: { contains: query, mode: 'insensitive' } },
-        { excerpt: { contains: query, mode: 'insensitive' } },
+        { title: { contains: query } },
+        { content: { contains: query } },
+        { excerpt: { contains: query } },
       ],
     },
     select: {
@@ -106,8 +106,8 @@ async function searchPages(query: string): Promise<SearchResult[]> {
       deletedAt: null,
       slug: { not: 'home' },
       OR: [
-        { title: { contains: query, mode: 'insensitive' } },
-        { excerpt: { contains: query, mode: 'insensitive' } },
+        { title: { contains: query } },
+        { excerpt: { contains: query } },
       ],
     },
     select: {
@@ -134,8 +134,8 @@ async function searchCareers(query: string): Promise<SearchResult[]> {
       status: true,
       deletedAt: null,
       OR: [
-        { title: { contains: query, mode: 'insensitive' } },
-        { description: { contains: query, mode: 'insensitive' } },
+        { title: { contains: query } },
+        { description: { contains: query } },
       ],
     },
     select: {
@@ -161,8 +161,8 @@ async function searchFAQs(query: string): Promise<SearchResult[]> {
     where: {
       status: true,
       OR: [
-        { question: { contains: query, mode: 'insensitive' } },
-        { answer: { contains: query, mode: 'insensitive' } },
+        { question: { contains: query } },
+        { answer: { contains: query } },
       ],
     },
     select: {

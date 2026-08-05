@@ -76,8 +76,8 @@ export const GET = withPermission(async (request: NextRequest) => {
     const where: Record<string, unknown> = { deletedAt: null };
     if (search) {
       where.OR = [
-        { title: { contains: search, mode: "insensitive" } },
-        { excerpt: { contains: search, mode: "insensitive" } },
+        { title: { contains: search } },
+        { excerpt: { contains: search } },
       ];
     }
     if (status) where.status = status;

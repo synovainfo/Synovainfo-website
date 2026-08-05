@@ -36,8 +36,8 @@ async function getPosts(
 
   if (search) {
     where.OR = [
-      { title: { contains: search, mode: 'insensitive' } },
-      { excerpt: { contains: search, mode: 'insensitive' } },
+      { title: { contains: search } },
+      { excerpt: { contains: search } },
     ]
   }
 

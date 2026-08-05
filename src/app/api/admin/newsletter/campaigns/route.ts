@@ -49,7 +49,7 @@ export const GET = withPermission(async (request: NextRequest) => {
     const where: Record<string, unknown> = {};
     if (search) {
       where.OR = [
-        { subject: { contains: search, mode: "insensitive" } },
+        { subject: { contains: search } },
       ];
     }
     if (status) where.status = status;

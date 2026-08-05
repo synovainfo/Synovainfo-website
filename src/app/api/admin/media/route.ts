@@ -71,9 +71,9 @@ export const GET = withPermission(async (request: NextRequest) => {
 
     if (search) {
       where.OR = [
-        { originalName: { contains: search, mode: "insensitive" } },
-        { altText: { contains: search, mode: "insensitive" } },
-        { caption: { contains: search, mode: "insensitive" } },
+        { originalName: { contains: search } },
+        { altText: { contains: search } },
+        { caption: { contains: search } },
       ];
     }
 

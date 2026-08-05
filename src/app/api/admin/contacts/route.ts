@@ -88,10 +88,10 @@ export const GET = withPermission(async (request: NextRequest) => {
 
     if (search) {
       where.OR = [
-        { name: { contains: search, mode: "insensitive" } },
-        { email: { contains: search, mode: "insensitive" } },
-        { company: { contains: search, mode: "insensitive" } },
-        { phone: { contains: search, mode: "insensitive" } },
+        { name: { contains: search } },
+        { email: { contains: search } },
+        { company: { contains: search } },
+        { phone: { contains: search } },
       ];
     }
 
@@ -100,7 +100,7 @@ export const GET = withPermission(async (request: NextRequest) => {
     }
 
     if (service) {
-      where.service = { contains: service, mode: "insensitive" };
+      where.service = { contains: service };
     }
 
     if (dateFrom || dateTo) {

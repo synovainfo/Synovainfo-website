@@ -58,8 +58,8 @@ export const GET = withPermission(async (request: NextRequest) => {
     const where: Record<string, unknown> = {};
     if (search) {
       where.OR = [
-        { email: { contains: search, mode: "insensitive" } },
-        { name: { contains: search, mode: "insensitive" } },
+        { email: { contains: search } },
+        { name: { contains: search } },
       ];
     }
     if (status) where.status = status;

@@ -53,14 +53,14 @@ function buildWhere(q: AuditLogQuery) {
   // Search across action, resource, resourceId, and user name/email
   if (q.search) {
     where.OR = [
-      { action: { contains: q.search, mode: "insensitive" } },
-      { resource: { contains: q.search, mode: "insensitive" } },
-      { resourceId: { contains: q.search, mode: "insensitive" } },
+      { action: { contains: q.search } },
+      { resource: { contains: q.search } },
+      { resourceId: { contains: q.search } },
       {
         user: {
           OR: [
-            { name: { contains: q.search, mode: "insensitive" } },
-            { email: { contains: q.search, mode: "insensitive" } },
+            { name: { contains: q.search } },
+            { email: { contains: q.search } },
           ],
         },
       },
