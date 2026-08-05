@@ -30,76 +30,118 @@ interface ServiceCategory {
   items: ServiceItem[];
 }
 
-const SOLUTION_CATEGORIES: ServiceCategory[] = [
+const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
-    title: "Enterprise Strategy",
+    title: "Core Engineering",
     items: [
       {
-        name: "Digital Transformation",
-        description: "Modernize operations with scalable platforms and cloud-native architecture.",
-        icon: <Sparkles className="h-5 w-5" />,
-        slug: "digital-transformation",
-        badge: "Strategic",
-      },
-      {
-        name: "IT Consulting",
-        description: "Align technology initiatives to corporate strategy and growth objectives.",
-        icon: <Users className="h-5 w-5" />,
-        slug: "it-consulting",
-      },
-      {
-        name: "Project Delivery",
-        description: "Deliver complex programs with predictable cost, schedule, and governance.",
-        icon: <KanbanSquare className="h-5 w-5" />,
-        slug: "project-management",
-      },
-    ],
-  },
-  {
-    title: "Digital Engineering",
-    items: [
-      {
-        name: "Custom Software Development",
+        name: "Custom Software",
         description: "Build secure, scalable systems tailored to enterprise workflows.",
         icon: <Code2 className="h-5 w-5" />,
-        slug: "custom-software-development",
+        slug: "custom-software",
         badge: "Core",
       },
       {
-        name: "Cloud Engineering",
-        description: "Design resilient multi-cloud infrastructure and migration paths.",
-        icon: <Cloud className="h-5 w-5" />,
-        slug: "cloud-infrastructure-solutions",
+        name: "Software Customization",
+        description: "Extend and customize existing enterprise platforms.",
+        icon: <Sparkles className="h-5 w-5" />,
+        slug: "software-customization",
       },
       {
-        name: "AI & Machine Learning",
-        description: "Operationalize intelligence for automation, forecasting, and decision support.",
-        icon: <Brain className="h-5 w-5" />,
-        slug: "ai-machine-learning",
-        badge: "Emerging",
+        name: "Mobile App Development",
+        description: "Deliver enterprise mobility with secure native applications.",
+        icon: <Smartphone className="h-5 w-5" />,
+        slug: "mobile-app-development",
       },
     ],
   },
   {
-    title: "Experience & Operations",
+    title: "Innovation & Support",
     items: [
       {
-        name: "Web Applications",
-        description: "Create performant digital experiences for internal and external users.",
+        name: "VR Development",
+        description: "Immersive virtual reality solutions for training and visualization.",
         icon: <Monitor className="h-5 w-5" />,
-        slug: "web-development",
+        slug: "vr-development",
+        badge: "Emerging",
       },
       {
-        name: "Mobile Applications",
-        description: "Deliver enterprise mobility with secure native and cross-platform apps.",
-        icon: <Smartphone className="h-5 w-5" />,
-        slug: "mobile-app-development",
-      },
-      {
-        name: "Cybersecurity Services",
-        description: "Protect systems with zero-trust controls and compliance-first design.",
+        name: "Support & Maintenance",
+        description: "24/7 proactive monitoring and legacy system support.",
         icon: <Shield className="h-5 w-5" />,
-        slug: "cybersecurity",
+        slug: "support-maintenance",
+      },
+    ],
+  },
+];
+
+const SOLUTION_CATEGORIES: ServiceCategory[] = [
+  {
+    title: "Operations & Assets",
+    items: [
+      {
+        name: "Asset Management",
+        description: "Track and optimize physical and digital assets across the enterprise.",
+        icon: <Monitor className="h-5 w-5" />,
+        slug: "asset-management",
+      },
+      {
+        name: "IT Asset Management",
+        description: "Comprehensive lifecycle management for IT infrastructure.",
+        icon: <Cloud className="h-5 w-5" />,
+        slug: "it-asset-management",
+      },
+      {
+        name: "Logistics Management",
+        description: "Streamline supply chain and global logistics tracking.",
+        icon: <KanbanSquare className="h-5 w-5" />,
+        slug: "logistics-management",
+      },
+    ],
+  },
+  {
+    title: "Enterprise Processes",
+    items: [
+      {
+        name: "Workflow Approval",
+        description: "Automate complex business routing and multi-stage approvals.",
+        icon: <Users className="h-5 w-5" />,
+        slug: "workflow-approval",
+      },
+      {
+        name: "Quality Management",
+        description: "Ensure compliance and product quality through automated checks.",
+        icon: <Shield className="h-5 w-5" />,
+        slug: "quality-management",
+      },
+      {
+        name: "Smart Procurement",
+        description: "Intelligent vendor selection and procurement automation.",
+        icon: <Brain className="h-5 w-5" />,
+        slug: "smart-procurement",
+      },
+    ],
+  },
+  {
+    title: "HR & Compliance",
+    items: [
+      {
+        name: "HR Resume Screening",
+        description: "AI-driven talent acquisition and automated resume parsing.",
+        icon: <Users className="h-5 w-5" />,
+        slug: "hr-resume-screening",
+      },
+      {
+        name: "Recruitment Management",
+        description: "End-to-end recruitment lifecycle and candidate tracking.",
+        icon: <KanbanSquare className="h-5 w-5" />,
+        slug: "recruitment-management",
+      },
+      {
+        name: "Software Licensing",
+        description: "Centralized tracking of enterprise software compliance.",
+        icon: <Shield className="h-5 w-5" />,
+        slug: "software-licensing",
       },
     ],
   },
@@ -174,10 +216,41 @@ export function MegaMenu({ activeCategory, onClose, triggerRef }: MegaMenuProps)
 
   // Dynamic Content based on Category
   const renderContent = () => {
-    if (activeCategory === "Solutions" || activeCategory === "Services") {
+    if (activeCategory === "Solutions") {
       return (
         <div className="grid gap-3 sm:grid-cols-3">
           {SOLUTION_CATEGORIES.map((category) => (
+            <div key={category.title} className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-corporate-gold">
+                {category.title}
+              </p>
+              <div className="mt-4 space-y-2">
+                {category.items.map((item) => (
+                  <Link
+                    key={item.slug}
+                    href={`/services/${item.slug}`}
+                    className="flex items-start gap-3 rounded-2xl px-3 py-3 transition hover:bg-white hover:shadow-sm"
+                  >
+                    <span className="mt-1 flex h-9 w-9 items-center justify-center rounded-2xl bg-white text-corporate-gold">
+                      {item.icon}
+                    </span>
+                    <div>
+                      <p className="font-semibold text-slate-900">{item.name}</p>
+                      <p className="text-sm text-slate-600">{item.description}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    if (activeCategory === "Services") {
+      return (
+        <div className="grid gap-3 sm:grid-cols-2">
+          {SERVICE_CATEGORIES.map((category) => (
             <div key={category.title} className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
               <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-corporate-gold">
                 {category.title}
@@ -211,7 +284,7 @@ export function MegaMenu({ activeCategory, onClose, triggerRef }: MegaMenuProps)
           <div>
             <h3 className="text-lg font-bold text-corporate-navy mb-4">Target Industries</h3>
             <ul className="space-y-3">
-              <li><Link href="/industries/financial-services" className="text-sm text-slate-600 hover:text-corporate-gold">Financial Services & Fintech</Link></li>
+              <li><Link href="/industries/finance" className="text-sm text-slate-600 hover:text-corporate-gold">Financial Services & Fintech</Link></li>
               <li><Link href="/industries/healthcare" className="text-sm text-slate-600 hover:text-corporate-gold">Healthcare & Life Sciences</Link></li>
               <li><Link href="/industries/manufacturing" className="text-sm text-slate-600 hover:text-corporate-gold">Manufacturing & Supply Chain</Link></li>
               <li><Link href="/industries/retail" className="text-sm text-slate-600 hover:text-corporate-gold">Retail & E-commerce</Link></li>
