@@ -2,7 +2,6 @@ import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs";
 
 let nextConfig: NextConfig = {
-  outputFileTracingRoot: "C:\\Users\\Dinesh Nikam\\Desktop\\mirai\\synova",
   reactCompiler: true,
   images: {
     remotePatterns: [

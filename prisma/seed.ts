@@ -7,7 +7,7 @@
 import "dotenv/config";
 import { PrismaClient } from "../src/generated/prisma/client";
 import type * as runtime from "@prisma/client/runtime/client";
-import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import bcrypt from "bcryptjs";
 import { seedConfig } from "./seed-config";
 
@@ -26,7 +26,7 @@ import { partners } from "../src/data/partners";
 import { coreValues } from "../src/data/core-values";
 
 const prisma = new PrismaClient({
-  adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
+  adapter: new PrismaMariaDb(process.env.DATABASE_URL!),
 });
 
 // =============================================================================
