@@ -230,7 +230,7 @@ export function MegaMenu({ activeCategory, onClose, triggerRef }: MegaMenuProps)
     if (activeCategory === "Resources") {
       return (
         <div className="grid gap-4 sm:grid-cols-4 p-4">
-          {['Blog', 'Case Studies', 'Whitepapers', 'Architecture Diagrams'].map((res) => (
+          {['Blog', 'Success Stories', 'Whitepapers', 'Architecture Diagrams'].map((res) => (
              <Link key={res} href={`/${res.toLowerCase().replace(' ', '-')}`} className="block rounded-2xl p-4 bg-slate-50 hover:bg-slate-100 transition">
                <p className="font-semibold text-corporate-navy">{res}</p>
                <p className="text-xs text-slate-500 mt-1">Explore our latest {res.toLowerCase()}</p>
@@ -245,6 +245,7 @@ export function MegaMenu({ activeCategory, onClose, triggerRef }: MegaMenuProps)
         <div className="grid gap-6 sm:grid-cols-2 p-4">
           <ul className="space-y-3">
             <li><Link href="/about" className="text-sm font-semibold text-corporate-navy hover:text-corporate-gold">About Synova</Link></li>
+            <li><Link href="/approach" className="text-sm font-semibold text-corporate-navy hover:text-corporate-gold">Our Approach</Link></li>
             <li><Link href="/careers" className="text-sm font-semibold text-corporate-navy hover:text-corporate-gold">Careers</Link></li>
             <li><Link href="/press" className="text-sm font-semibold text-corporate-navy hover:text-corporate-gold">Press & Media</Link></li>
           </ul>

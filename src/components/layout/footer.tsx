@@ -55,8 +55,8 @@ const CONTACT_INFO = [
   {
     icon: Phone,
     label: 'Phone',
-    value: '+91 20 4850 1234',
-    href: 'tel:+912048501234',
+    value: '+91 90118 96656 ',
+    href: 'tel:+919011896656',
   },
   {
     icon: MapPin,
