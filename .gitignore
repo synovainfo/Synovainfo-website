@@ -34,6 +34,7 @@ yarn-error.log*
 .env*
 .env*.local
 
+
 # Docker
 postgres_data/
 redis_data/
@@ -46,9 +47,18 @@ redis_data/
 next-env.d.ts
 .codegraph
 .omo
+.freebuff
+.AGENTS/
+.kilo/
+.omx/
+
+
 
 
 /src/generated/prisma
 .codegraph/
 .omo/
 AGENTS.md 
+claude.md
+*.txt
+

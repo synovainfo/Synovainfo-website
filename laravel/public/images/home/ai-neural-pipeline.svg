@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-ai" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b090a" />
+      <stop offset="50%" stop-color="#161a1d" />
+      <stop offset="100%" stop-color="#001219" />
+    </linearGradient>
+    <linearGradient id="neon-cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#4facfe" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" rx="16" fill="url(#bg-ai)" />
+
+  <text x="40" y="50" fill="#ffffff" font-family="Inter, sans-serif" font-size="16" font-weight="700" letter-spacing="1">SYNOVA ENTERPRISE AI &amp; LLM INFERENCE PIPELINE</text>
+  <text x="40" y="72" fill="#00f2fe" font-family="Inter, sans-serif" font-size="12" font-weight="500">RETRIEVAL-AUGMENTED GENERATION (RAG) &amp; VECTOR EMBEDDINGS</text>
+
+  <!-- Pipeline Step 1: Data Ingestion -->
+  <g transform="translate(60, 140)">
+    <rect width="180" height="240" rx="12" fill="#161a1d" stroke="#00f2fe" stroke-width="1.5" />
+    <text x="90" y="35" fill="#00f2fe" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">1. Data Ingestion</text>
+    <rect x="20" y="60" width="140" height="36" rx="6" fill="#0b090a" stroke="#6c757d" />
+    <text x="90" y="82" fill="#e9ecef" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">Unstructured Docs</text>
+    <rect x="20" y="110" width="140" height="36" rx="6" fill="#0b090a" stroke="#6c757d" />
+    <text x="90" y="132" fill="#e9ecef" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">Enterprise APIs</text>
+    <rect x="20" y="160" width="140" height="36" rx="6" fill="#0b090a" stroke="#6c757d" />
+    <text x="90" y="182" fill="#e9ecef" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">SQL / Data Lakes</text>
+  </g>
+
+  <path d="M240 260 H310" stroke="#00f2fe" stroke-width="2" stroke-dasharray="6 4" />
+
+  <!-- Pipeline Step 2: Vector Embedding & Chunking -->
+  <g transform="translate(310, 140)">
+    <rect width="180" height="240" rx="12" fill="#161a1d" stroke="#ffb703" stroke-width="1.5" />
+    <text x="90" y="35" fill="#ffb703" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">2. Vector Engine</text>
+    <rect x="20" y="60" width="140" height="45" rx="6" fill="#0b090a" stroke="#ffb703" stroke-width="1" />
+    <text x="90" y="80" fill="#ffffff" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="middle">text-embedding-3</text>
+    <text x="90" y="94" fill="#8d99ae" font-family="Inter, sans-serif" font-size="9" text-anchor="middle">1536 Dimensional Vectors</text>
+    <rect x="20" y="125" width="140" height="85" rx="6" fill="#0b090a" stroke="#ffb703" stroke-width="1" />
+    <text x="90" y="150" fill="#ffb703" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="middle">pgvector / Qdrant</text>
+    <text x="90" y="170" fill="#e9ecef" font-family="Inter, sans-serif" font-size="10" text-anchor="middle">HNSW Cosine Index</text>
+    <text x="90" y="190" fill="#8d99ae" font-family="Inter, sans-serif" font-size="9" text-anchor="middle">&lt; 5ms Similarity Match</text>
+  </g>
+
+  <path d="M490 260 H560" stroke="#ffb703" stroke-width="2" stroke-dasharray="6 4" />
+
+  <!-- Pipeline Step 3: LLM Inference & Guardrails -->
+  <g transform="translate(560, 140)">
+    <rect width="180" height="240" rx="12" fill="#161a1d" stroke="#7209b7" stroke-width="1.5" />
+    <text x="90" y="35" fill="#f72585" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">3. Autonomous LLM</text>
+    <rect x="20" y="60" width="140" height="45" rx="6" fill="#0b090a" stroke="#7209b7" stroke-width="1" />
+    <text x="90" y="80" fill="#ffffff" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="middle">DeepSeek V4 / Claude</text>
+    <text x="90" y="94" fill="#8d99ae" font-family="Inter, sans-serif" font-size="9" text-anchor="middle">Fine-Tuned MoE Model</text>
+    <rect x="20" y="125" width="140" height="85" rx="6" fill="#0b090a" stroke="#f72585" stroke-width="1" />
+    <text x="90" y="150" fill="#f72585" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="middle">Zero-Leak Guard</text>
+    <text x="90" y="170" fill="#e9ecef" font-family="Inter, sans-serif" font-size="10" text-anchor="middle">PII Anonymization</text>
+    <text x="90" y="190" fill="#8d99ae" font-family="Inter, sans-serif" font-size="9" text-anchor="middle">Strict Audit Output</text>
+  </g>
+
+  <!-- Telemetry Footer -->
+  <rect x="60" y="410" width="680" height="45" rx="8" fill="#001219" stroke="#ffffff" stroke-opacity="0.1" />
+  <text x="90" y="437" fill="#00f2fe" font-family="Inter, sans-serif" font-size="11" font-weight="600">Throughput: 12,400 Tokens/sec</text>
+  <text x="320" y="437" fill="#ffb703" font-family="Inter, sans-serif" font-size="11" font-weight="600">Context Window: 200k Tokens</text>
+  <text x="560" y="437" fill="#f72585" font-family="Inter, sans-serif" font-size="11" font-weight="600">Hallucination Rate: &lt; 0.01%</text>
+</svg>

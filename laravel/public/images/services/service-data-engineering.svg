@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d" />
+      <stop offset="100%" stop-color="#040711" />
+    </linearGradient>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="400" rx="12" fill="url(#bgGrad)" />
+  <rect x="20" y="20" width="560" height="360" rx="8" stroke="url(#primaryGrad)" stroke-width="1.5" stroke-dasharray="6 4" fill="none" opacity="0.6" />
+
+  <!-- Diagram Outer Rings -->
+  <circle cx="300" cy="180" r="95" stroke="#10b981" stroke-width="1" stroke-dasharray="4 4" opacity="0.4" />
+  <circle cx="300" cy="180" r="70" stroke="#34d399" stroke-width="1.5" opacity="0.8" />
+  
+  <!-- Core Box -->
+  <rect x="220" y="145" width="160" height="70" rx="10" fill="#0f172a" stroke="url(#primaryGrad)" stroke-width="2" />
+  <text x="300" y="178" fill="#ffffff" font-family="Inter, sans-serif" font-size="13" font-weight="800" text-anchor="middle">SYNOVA</text>
+  <text x="300" y="196" fill="#10b981" font-family="Inter, sans-serif" font-size="9" font-weight="600" text-anchor="middle">ENTERPRISE ENGINE</text>
+
+  <!-- Orbital Nodes based on name -->
+  <circle cx="180" cy="110" r="14" fill="#10b981" />
+  <circle cx="420" cy="110" r="14" fill="#34d399" />
+  <circle cx="180" cy="250" r="14" fill="#34d399" />
+  <circle cx="420" cy="250" r="14" fill="#10b981" />
+
+  <line x1="180" y1="110" x2="220" y2="145" stroke="#10b981" stroke-width="1.5" />
+  <line x1="420" y1="110" x2="380" y2="145" stroke="#34d399" stroke-width="1.5" />
+  <line x1="180" y1="250" x2="220" y2="215" stroke="#34d399" stroke-width="1.5" />
+  <line x1="420" y1="250" x2="380" y2="215" stroke="#10b981" stroke-width="1.5" />
+
+  <!-- Bottom Labels -->
+  <rect x="40" y="300" width="520" height="55" rx="8" fill="#090e1a" stroke="url(#primaryGrad)" stroke-width="1" opacity="0.9" />
+  <text x="300" y="325" fill="#ffffff" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">REAL-TIME KAFKA STREAM PROCESSING</text>
+  <text x="300" y="343" fill="#10b981" font-family="Inter, sans-serif" font-size="10" font-weight="500" text-anchor="middle">1,000,000 Events/Sec Data Mesh</text>
+</svg>
