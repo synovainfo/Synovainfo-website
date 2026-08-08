@@ -23,4 +23,14 @@ enum UserRole: string
     {
         return array_column(self::cases(), 'value');
     }
+
+    /** @return array<string, string> value => human label */
+    public static function labels(): array
+    {
+        $labels = [];
+        foreach (self::cases() as $case) {
+            $labels[$case->value] = $case->label();
+        }
+        return $labels;
+    }
 }

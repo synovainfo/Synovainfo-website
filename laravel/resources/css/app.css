@@ -1,0 +1,675 @@
+@import 'tailwindcss';
+
+/* ── Theme variant: driven by the `data-theme` attribute (set before paint
+   by the inline head script), not the OS media query — mirrors the Next.js app. ── */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
+
+@theme {
+    /* ── Type: technical-geometric display, humanist body, engineering mono ── */
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Outfit', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Fraunces', 'Georgia', ui-serif, serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+    /* ── Synova "Abyss Command" palette ──
+       Abyss navy is the dominant tone; ember is the single accent;
+       cyan/emerald/blue are orbital node accents used sparingly. */
+    --color-abyss-950: #030a16;
+    --color-abyss-900: #071324;
+    --color-abyss-800: #0c1d36;
+    --color-abyss-700: #13294a;
+    --color-abyss-600: #1e3a5f;
+    --color-abyss: #071324;
+
+    --color-ember-50: #fff7ed;
+    --color-ember-100: #ffedd5;
+    --color-ember-400: #fb923c;
+    --color-ember-500: #f97316;
+    --color-ember-600: #ea580c;
+
+    --color-node-cyan: #22d3ee;
+    --color-node-emerald: #34d399;
+    --color-node-blue: #60a5fa;
+
+    --color-canvas: #f6f8fb;
+
+    /* ── Semantic surface/ink tokens — day values, overridden under [data-theme="dark"] ── */
+    --color-surface: #ffffff;
+    --color-surface-muted: #f6f8fb;
+    --color-surface-raised: #ffffff;
+    --color-ink: #0b1830;
+    --color-ink-muted: #46586f;
+    --color-ink-faint: #7b8ca3;
+    --color-surface-border: #e3eaf3;
+    --color-surface-border-strong: #ccd9e8;
+
+    --shadow-ember: 0 8px 30px -6px rgb(249 115 22 / 0.35);
+}
+
+/* ── Night-mode token overrides ──
+   `--color-*` utilities compile to var() lookups, so overriding the custom
+   properties under the data-theme attribute re-skins every surface utility. */
+[data-theme="dark"] {
+    --color-canvas: #071324;
+    --color-surface: #0c1d36;
+    --color-surface-muted: #071324;
+    --color-surface-raised: #13294a;
+    --color-ink: #eef2f7;
+    --color-ink-muted: #a7b8cc;
+    --color-ink-faint: #6e829c;
+    --color-surface-border: #1c3352;
+    --color-surface-border-strong: #2c4f7c;
+
+    /* ── Slate scale remap — lets legacy `text-slate-*` / `bg-slate-*` / `border-slate-*`
+       utilities (inner pages, about page, welcome) adapt automatically to the night theme. ── */
+    --color-slate-50: #0a1628;
+    --color-slate-100: #0c1d36;
+    --color-slate-200: #1c3352;
+    --color-slate-300: #2c4f7c;
+    --color-slate-400: #54739c;
+    --color-slate-500: #6e829c;
+    --color-slate-600: #9fb0c5;
+    --color-slate-700: #c0cddd;
+    --color-slate-800: #dbe4ef;
+    --color-slate-900: #eef2f7;
+    --color-slate-950: #f8fafc;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 6rem;
+    }
+
+    /* Inner pages need header clearance; the premium experience is full-bleed. */
+    main:not(:has(#premium-experience)) {
+        padding-top: 5rem;
+    }
+
+    /* Hide Alpine-managed elements until Alpine boots (prevents flash of hidden UI) */
+    [x-cloak] {
+        display: none !important;
+    }
+
+    body {
+        font-family: var(--font-sans);
+        background-color: var(--color-canvas);
+        color: var(--color-ink);
+        -webkit-font-smoothing: antialiased;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    ::selection {
+        background-color: var(--color-ember-500);
+        color: #fff;
+    }
+
+    h1, h2, h3, h4, .font-display {
+        font-family: var(--font-display);
+        letter-spacing: -0.02em;
+    }
+}
+
+@layer utilities {
+    /* ── Engineering grid texture (hero + command bands) ── */
+    .bg-grid {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+        background-size: 56px 56px;
+    }
+
+    .bg-grid-light {
+        background-image: linear-gradient(rgba(7, 19, 36, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(7, 19, 36, 0.05) 1px, transparent 1px);
+        background-size: 56px 56px;
+    }
+
+    /* ── Mono technical eyebrow ── */
+    .eyebrow {
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+    }
+
+    /* ── Ember underline flourish for section headings ── */
+    .heading-flourish {
+        position: relative;
+    }
+    .heading-flourish::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -0.5rem;
+        height: 3px;
+        width: 3.5rem;
+        border-radius: 9999px;
+        background: linear-gradient(90deg, var(--color-ember-500), var(--color-node-cyan));
+    }
+
+    /* ── Card edge glow on hover ── */
+    .card-lift {
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    /* Hover lift must out-specify the reveal transform so both can coexist */
+    .card-lift:hover,
+    .card-lift.reveal.is-visible:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 40px -12px rgb(7 19 36 / 0.18);
+    }
+    [data-theme="dark"] .card-lift:hover,
+    [data-theme="dark"] .card-lift.reveal.is-visible:hover {
+        box-shadow: 0 18px 40px -12px rgb(0 0 0 / 0.55);
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ── Theme-aware surface card (light sections, day + night) ── */
+    .card-surface {
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-surface-border);
+        border-radius: 1rem;
+        box-shadow: 0 1px 2px rgb(7 19 36 / 0.04);
+    }
+    [data-theme="dark"] .card-surface {
+        box-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+    }
+
+    /* ── Theme-aware form fields ── */
+    .field-input {
+        width: 100%;
+        border-radius: 0.5rem;
+        border: 1px solid var(--color-surface-border-strong);
+        background-color: var(--color-surface-muted);
+        color: var(--color-ink);
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .field-input::placeholder {
+        color: var(--color-ink-faint);
+    }
+    .field-input:focus {
+        outline: none;
+        border-color: var(--color-ember-500);
+        box-shadow: 0 0 0 3px rgb(249 115 22 / 0.18);
+    }
+
+    /* ── Theme-aware glass header (light glass by day, abyss glass by night) ── */
+    .header-glass {
+        background-color: rgba(255, 255, 255, 0.82);
+        border-bottom: 1px solid rgb(7 19 36 / 0.06);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+    [data-theme="dark"] .header-glass {
+        background-color: rgba(7, 19, 36, 0.72);
+        border-bottom: 1px solid rgb(255 255 255 / 0.08);
+    }
+
+    /* ── Soft fade from dark command bands into the page canvas ── */
+    .band-fade {
+        background: linear-gradient(to top, var(--color-canvas) 0%, transparent 100%);
+    }
+
+    /* ── Legacy abyss-900 text/borders on light surfaces — night remap ──
+       Inner pages were authored with `text-abyss-900/*` on white cards; under the
+       night theme those remap to the semantic ink scale so they stay legible.
+       (Specificity (0,2,0) beats Tailwind's plain utilities but never the
+       `dark:*` variants, which carry extra attribute-scoped rules when present.) */
+    [data-theme="dark"] .text-abyss-900 { color: var(--color-ink); }
+    [data-theme="dark"] .text-abyss-900\/80 { color: var(--color-ink); }
+    [data-theme="dark"] .text-abyss-900\/70 { color: var(--color-ink-muted); }
+    [data-theme="dark"] .text-abyss-900\/60 { color: var(--color-ink-muted); }
+    [data-theme="dark"] .text-abyss-900\/50 { color: var(--color-ink-faint); }
+    [data-theme="dark"] .text-abyss-900\/40 { color: var(--color-ink-faint); }
+    [data-theme="dark"] .text-abyss-900\/30 { color: var(--color-ink-faint); }
+    [data-theme="dark"] .bg-abyss-900\/10 { background-color: rgb(255 255 255 / 0.08); }
+    [data-theme="dark"] .bg-abyss-900\/5 { background-color: rgb(255 255 255 / 0.06); }
+    [data-theme="dark"] .border-abyss-900\/10 { border-color: rgb(255 255 255 / 0.12); }
+    [data-theme="dark"] .border-abyss-900\/15 { border-color: rgb(255 255 255 / 0.16); }
+
+    /* Prose content rendered on surface cards */
+    [data-theme="dark"] .prose { color: var(--color-ink-muted); }
+    [data-theme="dark"] .prose :where(h1, h2, h3, h4, h5, strong) { color: var(--color-ink); }
+    [data-theme="dark"] .prose :where(a) { color: var(--color-ember-400); }
+    [data-theme="dark"] .prose :where(blockquote) { color: var(--color-ink-muted); }
+
+    @media (prefers-reduced-motion: reduce) {
+        .reveal {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+        html {
+            scroll-behavior: auto;
+        }
+    }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PREMIUM EXPERIENCE — editorial "paper & ink" layer
+   Built on the Abyss/Ember tokens; adds the award-site motion system.
+   ════════════════════════════════════════════════════════════════ */
+
+/* Split-text plumbing */
+.split-line {
+    display: block;
+    overflow: hidden;
+}
+.split-line-inner {
+    display: block;
+    will-change: transform;
+}
+.split-word {
+    display: inline-block;
+    white-space: nowrap;
+}
+.split-char {
+    display: inline-block;
+    will-change: transform;
+}
+
+/* Hero display type */
+.premium-display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.98;
+}
+
+.premium-serif {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+}
+
+/* Custom cursor */
+.has-custom-cursor,
+.has-custom-cursor a,
+.has-custom-cursor button,
+.has-custom-cursor [role="button"],
+.has-custom-cursor input,
+.has-custom-cursor textarea,
+.has-custom-cursor select,
+.has-custom-cursor label {
+    cursor: none !important;
+}
+.cursor-dot,
+.cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    pointer-events: none;
+    border-radius: 9999px;
+    will-change: transform;
+}
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: var(--color-ember-500);
+}
+.cursor-ring {
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 35%, transparent);
+    display: grid;
+    place-items: center;
+}
+[data-theme="dark"] .cursor-ring {
+    border-color: color-mix(in srgb, #fff 35%, transparent);
+}
+.cursor-ring .cursor-label {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.cursor-ring.is-active {
+    background: var(--color-ember-500);
+    border-color: var(--color-ember-500);
+}
+.cursor-ring.is-active .cursor-label {
+    opacity: 1;
+    transform: scale(1);
+}
+@media (hover: none), (pointer: coarse) {
+    .cursor-dot,
+    .cursor-ring {
+        display: none;
+    }
+}
+
+/* Preloader */
+.preload-lock {
+    overflow: hidden;
+}
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-canvas);
+}
+.preloader-mark svg {
+    overflow: visible;
+}
+.preloader-mark path {
+    stroke: var(--color-ember-500);
+    stroke-width: 2.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.preloader-bar {
+    width: min(280px, 60vw);
+    height: 1px;
+    background: color-mix(in srgb, var(--color-ink) 12%, transparent);
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+.preloader-bar-fill {
+    position: absolute;
+    inset: 0;
+    transform-origin: left;
+    transform: scaleX(0);
+    background: var(--color-ember-500);
+}
+.preloader-count {
+    margin-top: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--color-ink-faint);
+}
+
+/* Statement scrub text */
+.premium-statement .split-word {
+    opacity: 0.12;
+    transition: opacity 0.4s ease;
+}
+
+/* Service rows (capabilities) */
+.service-row {
+    position: relative;
+    border-top: 1px solid var(--color-surface-border);
+    overflow: hidden;
+}
+.service-row:last-of-type {
+    border-bottom: 1px solid var(--color-surface-border);
+}
+.service-row .service-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--color-abyss-900);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 0;
+}
+.service-row:hover .service-bg {
+    transform: scaleY(1);
+}
+.service-row:hover .service-title,
+.service-row:hover .service-index,
+.service-row:hover .service-tag,
+.service-row:hover .service-desc {
+    color: #fff !important;
+}
+.service-row:hover .service-arrow {
+    transform: translateX(8px);
+    color: var(--color-ember-400) !important;
+}
+.service-row .service-body {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: baseline;
+    padding: clamp(1.5rem, 3.5vw, 2.75rem) 0;
+    transition: padding 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.service-row:hover .service-body {
+    padding-block: clamp(2rem, 4.5vw, 3.5rem);
+}
+.service-row .service-desc-wrap {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    grid-column: 2 / -1;
+    transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+}
+.service-row:hover .service-desc-wrap {
+    max-height: 12rem;
+    opacity: 1;
+}
+.service-row .service-arrow {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
+}
+.service-row .service-line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--color-ember-500);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 2;
+}
+.service-row:hover .service-line {
+    transform: scaleX(1);
+}
+
+/* Case study visuals */
+.case-visual {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-abyss-900);
+}
+.case-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.12);
+}
+.case-visual .curtain-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--color-abyss-900);
+    z-index: 2;
+}
+.case-visual .case-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(3, 10, 22, 0.6), transparent 55%);
+    z-index: 1;
+}
+
+/* Mobile/tablet case-study swipe carousel */
+.js-carousel {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: max-content;
+    gap: 1.5rem;
+    padding: 0 6vw 3rem;
+    cursor: grab;
+    touch-action: pan-y;
+}
+.js-carousel:active {
+    cursor: grabbing;
+}
+.js-carousel > article {
+    width: 82vw;
+    flex-shrink: 0;
+}
+@media (min-width: 640px) {
+    .js-carousel > article {
+        width: 58vw;
+    }
+}
+@media (min-width: 768px) {
+    .js-carousel > article {
+        width: 48vw;
+    }
+}
+
+/* Page transitions — full-screen cover that wipes across on navigation and
+   lifts to reveal the incoming page. Built by animations/page-transition.js
+   and pre-painted by the inline <head> script to avoid content flash. */
+.pt-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background: var(--color-abyss-950, #030a16);
+    clip-path: inset(0 100% 0 0); /* hidden by default — JS sets the active state */
+    pointer-events: none;
+    will-change: clip-path;
+}
+.pt-overlay .pt-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+    opacity: 0.5;
+}
+.pt-overlay .pt-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-ember-500), var(--color-node-cyan));
+    transform-origin: left;
+    transform: scaleX(0);
+}
+.pt-overlay .pt-brand {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.4rem, 4vw, 2.4rem);
+    letter-spacing: 0.02em;
+    color: #fff;
+    opacity: 0;
+}
+.pt-overlay .pt-dot {
+    color: var(--color-ember-500);
+}
+@media (prefers-reduced-motion: reduce) {
+    .pt-overlay {
+        display: none;
+    }
+}
+
+/* Carousel progress dots — rendered by JS only when the carousel is live */
+[data-carousel-dots]:not(:empty) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 2.5rem 0 1.5rem;
+}
+.carousel-dot {
+    width: 2rem;
+    height: 4px;
+    border-radius: 9999px;
+    border: 0;
+    padding: 0;
+    background: rgb(255 255 255 / 0.25);
+    cursor: pointer;
+    transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.4s ease;
+}
+.carousel-dot:hover {
+    background: rgb(255 255 255 / 0.5);
+}
+.carousel-dot.is-active {
+    width: 3.5rem;
+    background: var(--color-ember-400);
+}
+
+/* Marquee */
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: premium-marquee 42s linear infinite;
+}
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+@keyframes premium-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+.marquee-mask {
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* Testimonial stage */
+.testimonial-slide {
+    display: none;
+}
+.testimonial-slide.is-active {
+    display: block;
+}
+
+/* Scroll hint */
+.scroll-hint {
+    writing-mode: vertical-rl;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+        animation: none;
+    }
+    .service-row .service-bg {
+        transform: none;
+        opacity: 0;
+    }
+    .service-row .service-desc-wrap {
+        max-height: none;
+        opacity: 1;
+    }
+    .premium-statement .split-word {
+        opacity: 1;
+    }
+}

@@ -2,19 +2,24 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\HasAuthorship;
+use App\Models\Concerns\HasCamelCaseColumns;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Service extends Model
 {
-    use HasAuthorship;
-    use HasUlids;
-    use SoftDeletes;
+    use HasUlids, HasCamelCaseColumns, SoftDeletes;
 
+    protected const DELETED_AT = 'deletedAt';
+
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $table = 'services';
+    
     protected $fillable = [
         'title',
         'slug',
@@ -29,9 +34,9 @@ class Service extends Model
         'seo_description',
         'seo_keywords',
         'created_by_id',
-        'updated_by_id',
+        'updated_by_id'
     ];
-
+    
     protected function casts(): array
     {
         return [
@@ -40,74 +45,26 @@ class Service extends Model
             'status' => 'boolean',
         ];
     }
-
-    public function getRouteKeyName(): string
+    
+    public function createdBy(): BelongsTo
     {
-        return 'slug';
+        return $this->belongsTo(User::class, 'createdById');
     }
 
+    public function updatedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'updatedById');
+    }
+    
     public function technologies(): BelongsToMany
     {
-        return $this->belongsToMany(Technology::class, 'service_technologies')
-            ->using(ServiceTechnology::class)
-            ->withPivot('id');
+        return $this->belongsToMany(Technology::class, 'service_technologies', 'serviceId', 'technologyId')
+                    ->using(ServiceTechnology::class);
     }
-
+    
     public function industries(): BelongsToMany
     {
-        return $this->belongsToMany(Industry::class, 'service_industries')
-            ->using(ServiceIndustry::class)
-            ->withPivot('id');
-    }
-
-    public function serviceTechnologies(): HasMany
-    {
-        return $this->hasMany(ServiceTechnology::class);
-    }
-
-    public function serviceIndustries(): HasMany
-    {
-        return $this->hasMany(ServiceIndustry::class);
-    }
-
-    /**
-     * The pivot tables carry their own ULID primary key, which attach() cannot
-     * populate because it bypasses model events. Use these helpers instead of
-     * technologies()->attach() / industries()->attach().
-     *
-     * @param  array<int, string>  $technologyIds
-     */
-    public function syncTechnologies(array $technologyIds): void
-    {
-        $this->serviceTechnologies()
-            ->whereNotIn('technology_id', $technologyIds)
-            ->delete();
-
-        $existing = $this->serviceTechnologies()->pluck('technology_id')->all();
-
-        foreach (array_diff($technologyIds, $existing) as $technologyId) {
-            $this->serviceTechnologies()->create(['technology_id' => $technologyId]);
-        }
-    }
-
-    /**
-     * @param  array<int, string>  $industryIds
-     */
-    public function syncIndustries(array $industryIds): void
-    {
-        $this->serviceIndustries()
-            ->whereNotIn('industry_id', $industryIds)
-            ->delete();
-
-        $existing = $this->serviceIndustries()->pluck('industry_id')->all();
-
-        foreach (array_diff($industryIds, $existing) as $industryId) {
-            $this->serviceIndustries()->create(['industry_id' => $industryId]);
-        }
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('status', true);
+        return $this->belongsToMany(Industry::class, 'service_industries', 'serviceId', 'industryId')
+                    ->using(ServiceIndustry::class);
     }
 }

@@ -3,12 +3,16 @@
 namespace App\Models;
 
 use App\Enums\RedirectType;
+use App\Models\Concerns\HasCamelCaseColumns;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class Redirect extends Model
 {
-    use HasUlids;
+    use HasUlids, HasCamelCaseColumns;
+
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     protected $fillable = [
         'source',
@@ -26,21 +30,7 @@ class Redirect extends Model
             'type' => RedirectType::class,
             'is_wildcard' => 'boolean',
             'status' => 'boolean',
-            'hit_count' => 'integer',
             'last_hit_at' => 'datetime',
         ];
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('status', true);
-    }
-
-    public function recordHit(): void
-    {
-        $this->forceFill([
-            'hit_count' => $this->hit_count + 1,
-            'last_hit_at' => now(),
-        ])->saveQuietly();
     }
 }

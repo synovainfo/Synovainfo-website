@@ -1,0 +1,104 @@
+[
+  {
+    "id": "manufacturing-erp",
+    "title": "Digital Transformation for Manufacturing Giant",
+    "industry": "Manufacturing",
+    "overview": "Complete ERP integration with IoT sensor network and real-time analytics dashboard for a Fortune 500 manufacturer. Legacy silos eliminated, production data unified, and decision latency reduced from days to seconds.",
+    "challenge": "The client operated 14 plants across 6 countries, each running independent legacy systems for inventory, production scheduling, quality control, and maintenance. Data lived in disconnected silos — SAP instances, custom .NET applications, spreadsheets, and paper logs. Plant managers made decisions on 3-day-old data, resulting in costly overstocking, undetected quality deviations, and reactive maintenance that caused 180+ hours of unplanned downtime per quarter.",
+    "solution": "We deployed a unified event-driven architecture connecting every plant floor via IoT sensor gateways. Apache Kafka streams production metrics, quality readings, and equipment telemetry into a real-time analytics pipeline. A React-based command center dashboard gives operations leadership a single pane of glass across all 14 plants, with AI-powered anomaly detection flagging deviations before they become incidents.",
+    "technologies": [
+      "Java",
+      "Spring Boot",
+      "React",
+      "Apache Kafka",
+      "PostgreSQL",
+      "Docker",
+      "Kubernetes",
+      "Prometheus"
+    ],
+    "results": [
+      {
+        "metric": "Operational Efficiency",
+        "value": "+35%"
+      },
+      {
+        "metric": "Unplanned Downtime",
+        "value": "-60%"
+      },
+      {
+        "metric": "ROI",
+        "value": "3.2× in 18 months"
+      }
+    ],
+    "timeline": "9 months — Discovery to Deployment",
+    "architecture": "manufacturing"
+  },
+  {
+    "id": "supply-chain-optimization",
+    "title": "AI-Powered Supply Chain Optimization",
+    "industry": "Logistics & Supply Chain",
+    "overview": "Machine learning forecasting engine and dynamic route optimization system that reduced logistics costs by 28% while improving on-time delivery rates to 98.5% across a pan-India distribution network.",
+    "challenge": "A large logistics provider managing 2,400+ trucks across 300+ routes relied on static delivery schedules and manual dispatch decisions. Demand volatility, traffic patterns, and vehicle breakdowns were addressed reactively — resulting in 22% empty-return trips, frequent missed SLAs, and annual fuel costs spiralling 15% year-over-year. Dispatchers had no visibility into real-time fleet status or predictive demand signals.",
+    "solution": "We built an ML-powered supply chain brain. Time-series forecasting models (Prophet + LSTM ensembles) predict demand at the warehouse-SKU level with 94% accuracy. A custom route optimisation engine solves the vehicle routing problem with time windows (VRPTW) using a hybrid genetic algorithm, updating routes dynamically based on real-time traffic, weather, and fleet telemetry. Dispatchers monitor everything through a live geospatial dashboard built with React and Mapbox.",
+    "technologies": [
+      "Python",
+      "TensorFlow",
+      "Node.js",
+      "React",
+      "PostgreSQL",
+      "Redis",
+      "Mapbox",
+      "Docker"
+    ],
+    "results": [
+      {
+        "metric": "Logistics Cost Reduction",
+        "value": "-28%"
+      },
+      {
+        "metric": "On-Time Delivery",
+        "value": "98.5%"
+      },
+      {
+        "metric": "Empty-Run Reduction",
+        "value": "-65%"
+      }
+    ],
+    "timeline": "7 months — Pilot to Full Rollout",
+    "architecture": "supply-chain"
+  },
+  {
+    "id": "cloud-migration-financial",
+    "title": "Cloud Migration for Financial Services",
+    "industry": "Financial Services",
+    "overview": "End-to-end migration of a banking-grade wealth management platform from on-premise data centers to AWS, with microservices decomposition achieving 99.99% uptime and 40% infrastructure cost reduction.",
+    "challenge": "A wealth management firm serving 200,000+ high-net-worth clients operated a monolithic .NET platform across three on-premise data centres. Quarterly releases took 6+ weeks, scaling for peak tax-season load required over-provisioning 3× baseline, and a single P0 incident in Q2 caused 14 hours of downtime — triggering regulatory scrutiny. Compliance with SEBI, RBI, and GDPR required immutable audit trails, encryption at rest and in transit, and strict geographic data residency.",
+    "solution": "We decomposed the monolith into 23 domain-aligned microservices running on Amazon EKS with Fargate. An API gateway (Kong) handles auth, rate limiting, and routing. PostgreSQL on Aurora with Multi-AZ provides financial-grade durability, while ElastiCache Redis handles session state and market-data caching. A custom chaos engineering pipeline (built with AWS Fault Injection Simulator) validates resilience monthly. All infrastructure is defined as Terraform modules with GitOps delivery via ArgoCD.",
+    "technologies": [
+      "AWS",
+      "Kubernetes",
+      "Terraform",
+      "Java",
+      "Spring Boot",
+      "PostgreSQL",
+      "Kong",
+      "ArgoCD"
+    ],
+    "results": [
+      {
+        "metric": "Platform Uptime",
+        "value": "99.99%"
+      },
+      {
+        "metric": "Infra Cost Reduction",
+        "value": "-40%"
+      },
+      {
+        "metric": "Release Cadence",
+        "value": "2 weeks"
+      }
+    ],
+    "timeline": "12 months — Assessment to Cutover",
+    "architecture": "financial"
+  }
+]

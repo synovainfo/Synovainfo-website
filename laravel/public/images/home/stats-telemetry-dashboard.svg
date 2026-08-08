@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-stats" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#03071e" />
+      <stop offset="100%" stop-color="#10002b" />
+    </linearGradient>
+    <linearGradient id="chart-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4361ee" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#4361ee" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" rx="16" fill="url(#bg-stats)" />
+
+  <text x="40" y="45" fill="#ffffff" font-family="Inter, sans-serif" font-size="16" font-weight="700">LIVE TELEMETRY &amp; SLA PERFORMANCE MONITORING</text>
+
+  <!-- Metric Card 1 -->
+  <rect x="40" y="70" width="220" height="100" rx="10" fill="#181823" stroke="#4361ee" stroke-width="1" />
+  <text x="60" y="98" fill="#8d99ae" font-family="Inter, sans-serif" font-size="11" font-weight="600">UPTIME SLA</text>
+  <text x="60" y="135" fill="#4cc9f0" font-family="Inter, sans-serif" font-size="28" font-weight="800">99.999%</text>
+
+  <!-- Metric Card 2 -->
+  <rect x="290" y="70" width="220" height="100" rx="10" fill="#181823" stroke="#f72585" stroke-width="1" />
+  <text x="310" y="98" fill="#8d99ae" font-family="Inter, sans-serif" font-size="11" font-weight="600">TRANSACTIONS / SEC</text>
+  <text x="310" y="135" fill="#f72585" font-family="Inter, sans-serif" font-size="28" font-weight="800">142,500+</text>
+
+  <!-- Metric Card 3 -->
+  <rect x="540" y="70" width="220" height="100" rx="10" fill="#181823" stroke="#4895ef" stroke-width="1" />
+  <text x="560" y="98" fill="#8d99ae" font-family="Inter, sans-serif" font-size="11" font-weight="600">GLOBAL LATENCY</text>
+  <text x="560" y="135" fill="#4895ef" font-family="Inter, sans-serif" font-size="28" font-weight="800">&lt; 8.4ms</text>
+
+  <!-- Main Chart Area -->
+  <rect x="40" y="195" width="720" height="210" rx="10" fill="#0f0e17" stroke="#ffffff" stroke-opacity="0.1" />
+  
+  <path d="M60 360 Q 150 310, 240 330 T 420 250 T 600 230 T 740 220 V 380 H 60 Z" fill="url(#chart-grad)" />
+  <path d="M60 360 Q 150 310, 240 330 T 420 250 T 600 230 T 740 220" stroke="#4cc9f0" stroke-width="3" fill="none" />
+
+  <circle cx="240" cy="330" r="5" fill="#f72585" />
+  <circle cx="420" cy="250" r="5" fill="#4cc9f0" />
+  <circle cx="600" cy="230" r="5" fill="#4361ee" />
+</svg>

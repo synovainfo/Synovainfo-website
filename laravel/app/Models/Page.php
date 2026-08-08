@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\PageStatus;
+use App\Models\Concerns\HasCamelCaseColumns;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,8 +12,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Page extends Model
 {
-    use HasUlids;
-    use SoftDeletes;
+    use HasUlids, HasCamelCaseColumns, SoftDeletes;
+
+    protected const DELETED_AT = 'deletedAt';
+
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $table = 'pages';
 
     protected $fillable = [
         'title',
@@ -39,40 +46,28 @@ class Page extends Model
         ];
     }
 
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
-
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'authorId');
     }
 
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(self::class, 'parent_id');
+        return $this->belongsTo(Page::class, 'parentId');
     }
 
     public function children(): HasMany
     {
-        return $this->hasMany(self::class, 'parent_id');
+        return $this->hasMany(Page::class, 'parentId');
     }
 
     public function sections(): HasMany
     {
-        return $this->hasMany(PageSection::class)->orderBy('order');
+        return $this->hasMany(PageSection::class, 'pageId');
     }
 
     public function versions(): HasMany
     {
-        return $this->hasMany(PageVersion::class)->orderByDesc('version_number');
-    }
-
-    public function scopePublished($query)
-    {
-        return $query->where('status', PageStatus::PUBLISHED)
-            ->whereNotNull('published_at')
-            ->where('published_at', '<=', now());
+        return $this->hasMany(PageVersion::class, 'pageId');
     }
 }

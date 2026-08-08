@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\HasAuthorship;
+use App\Models\Concerns\HasCamelCaseColumns;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Resource extends Model
 {
-    use HasAuthorship;
-    use HasUlids;
+    use HasUlids, HasCamelCaseColumns;
 
+    public $incrementing = false;
+    protected $keyType = 'string';
+    
     protected $fillable = [
         'title',
         'slug',
@@ -20,32 +23,27 @@ class Resource extends Model
         'cover_image',
         'category',
         'tags',
+        'download_count',
         'status',
         'created_by_id',
-        'updated_by_id',
+        'updated_by_id'
     ];
-
+    
     protected function casts(): array
     {
         return [
             'tags' => 'array',
             'status' => 'boolean',
-            'download_count' => 'integer',
         ];
     }
-
-    public function getRouteKeyName(): string
+    
+    public function createdBy(): BelongsTo
     {
-        return 'slug';
+        return $this->belongsTo(User::class, 'createdById');
     }
 
-    public function scopeActive($query)
+    public function updatedBy(): BelongsTo
     {
-        return $query->where('status', true);
-    }
-
-    public function incrementDownloadCount(): void
-    {
-        $this->newQuery()->whereKey($this->getKey())->increment('download_count');
+        return $this->belongsTo(User::class, 'updatedById');
     }
 }

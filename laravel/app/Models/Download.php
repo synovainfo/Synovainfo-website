@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasCamelCaseColumns;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class Download extends Model
 {
-    use HasUlids;
+    use HasUlids, HasCamelCaseColumns;
 
+    public $incrementing = false;
+    protected $keyType = 'string';
+    
     protected $fillable = [
         'title',
         'file_type',
@@ -18,31 +22,15 @@ class Download extends Model
         'category',
         'icon',
         'is_featured',
-        'status',
+        'download_count',
+        'status'
     ];
-
+    
     protected function casts(): array
     {
         return [
-            'file_size' => 'integer',
             'is_featured' => 'boolean',
             'status' => 'boolean',
-            'download_count' => 'integer',
         ];
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('status', true);
-    }
-
-    public function scopeFeatured($query)
-    {
-        return $query->where('is_featured', true);
-    }
-
-    public function incrementDownloadCount(): void
-    {
-        $this->newQuery()->whereKey($this->getKey())->increment('download_count');
     }
 }

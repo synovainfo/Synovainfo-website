@@ -2,37 +2,28 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasCamelCaseColumns;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class FaqCategory extends Model
+class FAQCategory extends Model
 {
-    use HasUlids;
+    use HasUlids, HasCamelCaseColumns;
 
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $table = 'faq_categories';
-
+    
     protected $fillable = [
         'name',
         'slug',
         'description',
-        'order',
+        'order'
     ];
-
-    protected function casts(): array
-    {
-        return [
-            'order' => 'integer',
-        ];
-    }
-
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
-
+    
     public function faqs(): HasMany
     {
-        return $this->hasMany(Faq::class, 'category_id')->orderBy('order');
+        return $this->hasMany(FAQ::class, 'categoryId');
     }
 }

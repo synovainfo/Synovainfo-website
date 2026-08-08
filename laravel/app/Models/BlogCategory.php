@@ -2,27 +2,26 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasCamelCaseColumns;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class BlogCategory extends Model
 {
-    use HasUlids;
+    use HasUlids, HasCamelCaseColumns;
 
+    public $incrementing = false;
+    protected $keyType = 'string';
+    
     protected $fillable = [
         'name',
         'slug',
-        'description',
+        'description'
     ];
-
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
-
+    
     public function posts(): HasMany
     {
-        return $this->hasMany(BlogPost::class, 'category_id');
+        return $this->hasMany(BlogPost::class, 'categoryId');
     }
 }

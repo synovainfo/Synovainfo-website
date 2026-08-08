@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasCamelCaseColumns;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PageSection extends Model
 {
-    use HasUlids;
+    use HasUlids, HasCamelCaseColumns;
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $table = 'page_sections';
 
     protected $fillable = [
         'page_id',
@@ -24,19 +29,13 @@ class PageSection extends Model
     {
         return [
             'content' => 'array',
-            'settings' => 'array',
             'is_visible' => 'boolean',
-            'order' => 'integer',
+            'settings' => 'array',
         ];
     }
 
     public function page(): BelongsTo
     {
-        return $this->belongsTo(Page::class);
-    }
-
-    public function scopeVisible($query)
-    {
-        return $query->where('is_visible', true);
+        return $this->belongsTo(Page::class, 'pageId');
     }
 }

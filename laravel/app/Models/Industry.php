@@ -2,19 +2,24 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\HasAuthorship;
+use App\Models\Concerns\HasCamelCaseColumns;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Industry extends Model
 {
-    use HasAuthorship;
-    use HasUlids;
-    use SoftDeletes;
+    use HasUlids, HasCamelCaseColumns, SoftDeletes;
 
+    protected const DELETED_AT = 'deletedAt';
+
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $table = 'industries';
+    
     protected $fillable = [
         'name',
         'slug',
@@ -23,9 +28,9 @@ class Industry extends Model
         'capabilities',
         'status',
         'created_by_id',
-        'updated_by_id',
+        'updated_by_id'
     ];
-
+    
     protected function casts(): array
     {
         return [
@@ -33,26 +38,20 @@ class Industry extends Model
             'status' => 'boolean',
         ];
     }
-
-    public function getRouteKeyName(): string
+    
+    public function createdBy(): BelongsTo
     {
-        return 'slug';
+        return $this->belongsTo(User::class, 'createdById');
     }
 
+    public function updatedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'updatedById');
+    }
+    
     public function services(): BelongsToMany
     {
-        return $this->belongsToMany(Service::class, 'service_industries')
-            ->using(ServiceIndustry::class)
-            ->withPivot('id');
-    }
-
-    public function serviceIndustries(): HasMany
-    {
-        return $this->hasMany(ServiceIndustry::class);
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('status', true);
+        return $this->belongsToMany(Service::class, 'service_industries', 'industryId', 'serviceId')
+                    ->using(ServiceIndustry::class);
     }
 }

@@ -2,18 +2,19 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasCamelCaseColumns;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PageVersion extends Model
 {
-    use HasUlids;
+    use HasUlids, HasCamelCaseColumns;
 
-    /**
-     * The Prisma model only records createdAt.
-     */
-    public const UPDATED_AT = null;
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    const UPDATED_AT = null;
 
     protected $fillable = [
         'page_id',
@@ -30,18 +31,17 @@ class PageVersion extends Model
     {
         return [
             'content' => 'array',
-            'version_number' => 'integer',
             'published_at' => 'datetime',
         ];
     }
 
     public function page(): BelongsTo
     {
-        return $this->belongsTo(Page::class);
+        return $this->belongsTo(Page::class, 'pageId');
     }
 
     public function createdBy(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by_id');
+        return $this->belongsTo(User::class, 'createdById');
     }
 }

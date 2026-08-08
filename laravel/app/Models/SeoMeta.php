@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasCamelCaseColumns;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SeoMeta extends Model
 {
-    use HasUlids;
+    use HasUlids, HasCamelCaseColumns;
 
     protected $table = 'seo_meta';
 
