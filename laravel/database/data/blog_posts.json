@@ -1,0 +1,62 @@
+[
+  {
+    "id": "zero-downtime-migration-playbook",
+    "title": "The Zero-Downtime Migration Playbook: Retiring Legacy Cores Without a Single Unplanned Minute",
+    "category": "cloud-architecture",
+    "tags": ["migration", "microservices", "reliability"],
+    "excerpt": "Replatforming a payments core or clinical platform is a trust exercise as much as an engineering one. Here is the strangler-fig playbook Synovainfo has used to retire monoliths with zero unplanned downtime.",
+    "featuredImage": "images/blog/blog-featured-1.png",
+    "publishedAt": "2026-07-14T09:00:00+05:30",
+    "content": "<p>Every legacy core holds two kinds of value: the business value it has accumulated over decades, and the <em>risk</em> value — the small, undocumented decisions that keep it running. A migration that ignores either will fail, regardless of how clean the target architecture is.</p><h2>Why Strangler-Fig, Not Big Bang</h2><p>Big-bang rewrites carry a simple arithmetic problem: the cost of proving the new system is identical to the old one grows quadratically with the system's surface area. The strangler-fig pattern inverts this — you wrap the monolith, intercept traffic at the boundary, and migrate one capability at a time behind feature flags.</p><h2>The Three Guarantees</h2><ul><li><strong>Contract first.</strong> Every migrated capability is defined by its observable contract — request schema, error semantics, latency budget, and data ownership.</li><li><strong>Dual-run and compare.</strong> Production traffic runs through both paths in shadow mode; discrepancies surface in the diff before any cutover.</li><li><strong>Rollback as a first-class artifact.</strong> If the new path cannot be reverted in under five minutes, it is not ready for the dark.</li></ul><h2>Sequencing That Retires Risk Early</h2><p>We start with read-only, low-coupling capabilities to build confidence in the harness, then move to write paths with transactional integrity, and finally to the hot path. Each stage has an exit criterion tied to a business metric — not a code review — so stakeholders know precisely when a migration is <em>done</em>.</p><p>The result across our engagements: 1.2M transactions per minute processed on the new core with zero unplanned downtime over a two-year window.</p>"
+  },
+  {
+    "id": "event-driven-architecture-at-scale",
+    "title": "Event-Driven Architecture at Scale: Lessons From a Real-Time Payments Core",
+    "category": "cloud-architecture",
+    "tags": ["kafka", "event-sourcing", "cqrs"],
+    "excerpt": "Real-time payments are the purest stress test of an event-driven system. What we learned rebuilding a payments core around an immutable event backbone — and where event-driven design still hurts.",
+    "featuredImage": "images/blog/blog-featured-2.png",
+    "publishedAt": "2026-06-02T10:30:00+05:30",
+    "content": "<p>An event backbone is only as strong as its weakest replay. Teams adopt event-driven architecture for scalability, but the discipline that makes it work is about <em>auditability and recovery</em>, not throughput.</p><h2>Exactly-Once Is a Contract, Not a Feature</h2><p>Idempotent consumers, deterministic replay, and a single writer per aggregate are what deliver the guarantee. Kafka's transactional API gives you atomicity at the producer level; the consumer side must still be built idempotently.</p><h2>Where CQRS Pays for Itself</h2><p>Payments workloads have a brutal read/write asymmetry — millions of balance queries for every mutation. Splitting the write model from the read model lets each be scaled and schemed independently, and lets the read model lag behind the write model by design.</p><h2>The Outbox Pattern Is Non-Negotiable</h2><p>Atomicity between a database transaction and a published event is the hardest correctness problem in the stack. The transactional outbox solves it: write the event to the same transaction as the domain change, and let a relay publish it. It costs little and removes an entire class of silently-lost-events bugs.</p><p>The proof in production: a payments core handling 1.2M transactions per minute across three regions, with event replay used for settlement reconciliation.</p>"
+  },
+  {
+    "id": "production-ready-enterprise-ai",
+    "title": "Production-Ready Enterprise AI: Beyond the Demo",
+    "category": "ai-data",
+    "tags": ["llm", "rag", "governance"],
+    "excerpt": "The gap between a compelling AI demo and a governed production system is where most enterprise AI programs fail. RAG, guardrails, and evaluation pipelines are the difference.",
+    "featuredImage": "images/blog/blog-featured-3.png",
+    "publishedAt": "2026-04-21T08:00:00+05:30",
+    "content": "<p>Every enterprise AI program starts with a demo that impresses the board and ends with a deployment that must not embarrass the company. The distance between those two points is engineering discipline.</p><h2>Grounded Retrieval Beats Brute-Force Scaling</h2><p>Retrieval-augmented generation keeps the model honest by binding every answer to your corpus. The real work is in the retrieval layer: chunking strategy, embedding freshness, hybrid search, and — critically — <em>semantic access control</em> that filters what the model can retrieve based on who is asking.</p><h2>Guardrails Are a Product Requirement</h2><p>Prompt injection, hallucinated citations, and data leakage are not edge cases in a production system — they are the threat model. Every enterprise deployment needs input sanitization, output validation against retrieved context, and a human-in-the-loop path for high-risk actions.</p><h2>You Cannot Ship What You Cannot Evaluate</h2><p>An evaluation harness — golden datasets, offline evals, and production telemetry on answer quality — is what turns a model from a toy into a feature. If your AI roadmap does not include an eval pipeline, it does not yet include a deployment date.</p>"
+  },
+  {
+    "id": "zero-trust-in-practice",
+    "title": "Zero Trust in Practice: Identity, Microsegmentation, and the Death of the VPN",
+    "category": "security-compliance",
+    "tags": ["zero-trust", "identity", "compliance"],
+    "excerpt": "Zero trust is a posture, not a product. How Synovainfo operationalizes identity-first access, mTLS mesh security, and compliance-as-code across regulated multi-cloud estates.",
+    "featuredImage": "images/blog/blog-featured-4.png",
+    "publishedAt": "2026-03-10T11:15:00+05:30",
+    "content": "<p>If zero trust were a product, you could buy it. It is not — it is a set of operating principles that change how you treat every network, every workload, and every session.</p><h2>Identity Is the New Perimeter</h2><p>The perimeter moved from the network boundary to the identity boundary. Every request is authenticated, authorized, and encrypted — including east-west traffic between your own services. Service meshes with mutual TLS (mTLS) and SPIFFE-style workload identities make this practical rather than aspirational.</p><h2>Microsegmentation Ends Lateral Movement</h2><p>Flat networks let one compromised workload roam freely. Microsegmentation shrinks the blast radius to the workload itself — policy is applied at the pod and node level, and changes are versioned like code.</p><h2>Compliance as Code</h2><p>SOC 2 and ISO 27001 audits should not be archaeological digs. When security controls are declared in the same repositories as the infrastructure, audit readiness becomes a continuous property: drift is detected and remediated in real time instead of discovered in the annual review.</p><p>The operational outcome across our regulated clients: 100% audit readiness, zero unsanctioned data transfers, and automated evidence collection that turns the audit from a project into a report.</p>"
+  },
+  {
+    "id": "observability-slo-driven-engineering",
+    "title": "SLO-Driven Engineering: Why Uptime Percentages Lie",
+    "category": "cloud-architecture",
+    "tags": ["observability", "slo", "reliability"],
+    "excerpt": "99.99% availability sounds reassuring until you realize it says nothing about latency, correctness, or user experience. Error budgets and SLOs are the honest alternative.",
+    "featuredImage": "images/blog/blog-featured-5.png",
+    "publishedAt": "2026-01-28T13:00:00+05:30",
+    "content": "<p>Availability percentages describe the past; SLOs govern the future. The shift from monitoring uptime to managing error budgets changes how an entire engineering organization prioritizes work.</p><h2>Measure What Users Experience</h2><p>A service can be up and still be broken — slow responses, stale data, and silent failures all pass the uptime check. SLOs should be defined around request latency, correctness, and freshness, measured from the user's vantage point.</p><h2>Error Budgets Make Tradeoffs Explicit</h2><p>When reliability is a budget rather than a slogan, every feature launch has a cost. Teams can spend their budget on velocity — and must stop to pay down reliability debt when the budget is exhausted. This turns a values statement into a decision rule.</p><h2>Alerting on Burn Rate, Not Symptoms</h2><p>Alerting on the SLO burn rate catches problems while there is still time to act, instead of paging engineers when users have already felt the pain. A page every 30 minutes of burning budget is the classic starting threshold.</p><p>This is the discipline we hold ourselves to — and the same SLAs we write into client architectures, because we believe the standards we design are the standards we should be measured by.</p>"
+  },
+  {
+    "id": "finops-multi-cloud-cost-governance",
+    "title": "FinOps in the Multi-Cloud Era: Cost Governance Without the Surprises",
+    "category": "cloud-architecture",
+    "tags": ["finops", "cloud-cost", "governance"],
+    "excerpt": "Cloud spend is the second-largest line item in most enterprise IT budgets — and the least governed. How to build cost visibility, allocation, and enforcement that survive scale.",
+    "featuredImage": "images/blog/blog-featured-1.png",
+    "publishedAt": "2025-12-15T09:45:00+05:30",
+    "content": "<p>Every cloud migration eventually produces the same boardroom moment: the invoice that is 40% larger than the forecast. FinOps is the discipline that prevents that moment from recurring.</p><h2>Visibility Before Optimization</h2><p>You cannot optimize what you cannot see. Cost data must be allocated to the workload and the team that owns it — not parked in a shared 'miscellaneous' bucket. Tagging discipline and chargeback are the foundations everything else builds on.</p><h2>Policy as Code Reaches the Wallet</h2><p>Infrastructure-as-code guardrails should extend to cost: instance sizes are constrained, unrequested regions are denied, and orphaned resources are reclaimed automatically. What gets enforced in the pipeline never makes it to the invoice.</p><h2>The 30% Rule of Waste</h2><p>In our engagements, the average enterprise wastes roughly 30-34% of its cloud spend on idle capacity, over-provisioned instances, and duplicated environments. Most of it is reclaimable with automation, not sacrifice — right-sizing, autoscaling, and lifecycle policies on non-production estates.</p><p>Cost governance is not an accounting exercise; it is an engineering practice with a measurable return. In our own client programs, FinOps engines have reduced infrastructure waste by up to 34%.</p>"
+  }
+]

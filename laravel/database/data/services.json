@@ -1,0 +1,1907 @@
+[
+  {
+    "id": "custom-software",
+    "title": "Custom Software Development",
+    "shortDescription": "End-to-end bespoke software engineering tailored to your enterprise workflows and scalability goals.",
+    "fullDescription": "We architect and build custom enterprise software that maps precisely to your business processes — not the other way around. From discovery and domain modelling through CI/CD deployment and beyond, our full-stack engineers deliver secure, high-performance applications using modern frameworks, microservices architecture, and cloud-native infrastructure. Every solution is designed for horizontal scalability, audit compliance, and long-term maintainability.",
+    "icon": "CodeXml",
+    "category": "development",
+    "technologies": [
+      "Java",
+      "Spring Boot",
+      "React",
+      "Node.js",
+      "Python",
+      "Kubernetes",
+      "PostgreSQL"
+    ],
+    "industries": [
+      "Manufacturing",
+      "Healthcare",
+      "Logistics",
+      "Finance",
+      "Retail"
+    ],
+    "benefits": [
+      "Tailored to your exact business processes — no workflow compromises",
+      "Enterprise-grade security baked in from day one",
+      "Cloud-native architecture that scales horizontally on demand"
+    ],
+    "businessOutcomes": [
+      "40% faster operational throughput within 6 months",
+      "60% reduction in manual data entry and processing errors",
+      "3× ROI within 18 months of deployment"
+    ],
+    "businessProblems": [
+      "Legacy systems that cannot integrate with modern cloud platforms",
+      "Manual workarounds consuming 30-40% of employee productivity",
+      "Inconsistent data across departments causing decision latency",
+      "Vendor lock-in preventing innovation and competitive agility",
+      "Compliance gaps exposing the organisation to regulatory penalties"
+    ],
+    "solutionArchitecture": "We employ a domain-driven design (DDD) approach, decomposing the monolith into bounded contexts aligned with your business capabilities. Each context becomes an independent microservice with its own database, API contract, and deployment pipeline. The frontend uses a component-driven architecture with React and TypeScript, connected via a GraphQL gateway for efficient data fetching. Infrastructure is provisioned as code using Terraform, with Kubernetes orchestrating containerised workloads across multi-AZ clusters.",
+    "keyFeatures": [
+      {
+        "title": "Domain-Driven Design",
+        "description": "Bounded contexts aligned with business capabilities for maintainable, evolvable architecture."
+      },
+      {
+        "title": "Event-Driven Microservices",
+        "description": "Asynchronous communication via Apache Kafka ensures loose coupling and high throughput."
+      },
+      {
+        "title": "GraphQL API Gateway",
+        "description": "Single endpoint for frontend clients with type-safe contracts and real-time subscriptions."
+      },
+      {
+        "title": "CI/CD Pipeline Automation",
+        "description": "GitOps-driven deployment with automated testing, security scanning, and progressive rollouts."
+      },
+      {
+        "title": "Observability Stack",
+        "description": "Distributed tracing, metrics, and structured logging via OpenTelemetry and Prometheus."
+      },
+      {
+        "title": "Multi-Cloud Ready",
+        "description": "Infrastructure abstractions enable deployment across AWS, Azure, or GCP without code changes."
+      },
+      {
+        "title": "Audit Trail Engine",
+        "description": "Immutable event sourcing for every state change, satisfying SOX and GDPR requirements."
+      },
+      {
+        "title": "Auto-Scaling Policies",
+        "description": "Horizontal pod autoscaling based on custom metrics ensures cost-efficient resource utilisation."
+      }
+    ],
+    "securityCompliance": [
+      "ISO 27001 certified development lifecycle",
+      "SOC 2 Type II compliant infrastructure",
+      "OWASP Top 10 mitigation in every code review",
+      "GDPR-ready data processing agreements",
+      "Static and dynamic application security testing (SAST/DAST)",
+      "Secrets management via HashiCorp Vault"
+    ],
+    "faqs": [
+      {
+        "question": "What is your typical engagement model for custom software?",
+        "answer": "We offer fixed-price, time-and-materials, and dedicated team models. For most enterprise engagements, we recommend a 3-phase approach: Discovery (2-4 weeks), MVP (8-12 weeks), and Scale (ongoing)."
+      },
+      {
+        "question": "How do you handle requirement changes during development?",
+        "answer": "We use Agile sprints with formal change-request governance. Scope changes are assessed for impact, documented, and approved before inclusion — ensuring predictability without sacrificing flexibility."
+      },
+      {
+        "question": "Can you integrate with our existing ERP or CRM systems?",
+        "answer": "Yes. Our team has extensive experience integrating with SAP, Oracle, Salesforce, Microsoft Dynamics, and custom legacy systems. We build adapters and middleware to ensure bi-directional data synchronisation."
+      },
+      {
+        "question": "What is your post-launch support model?",
+        "answer": "We provide L1-L3 support tiers with defined SLAs. Our managed services include 24/7 monitoring, security patching, performance optimisation, and a dedicated technical account manager."
+      },
+      {
+        "question": "How do you ensure code quality and maintainability?",
+        "answer": "Every commit undergoes peer review, automated testing (unit, integration, E2E), and static analysis. We maintain a minimum 85% code coverage target and enforce architecture decision records (ADRs) for all significant design choices."
+      },
+      {
+        "question": "What technologies do you specialise in?",
+        "answer": "Our core stack includes Java/Spring Boot, React/Next.js, Node.js, Python, PostgreSQL, Kubernetes, and AWS/Azure/GCP. We continuously evaluate emerging technologies and have delivered projects with Rust, Go, and Flutter where appropriate."
+      }
+    ],
+    "relatedCaseStudies": [
+      "manufacturing-erp",
+      "cloud-migration-financial"
+    ]
+  },
+  {
+    "id": "software-customization",
+    "title": "Software Customization",
+    "shortDescription": "Extend and tailor existing enterprise platforms to eliminate workflow gaps without rip-and-replace.",
+    "fullDescription": "Rather than forcing your team to adapt to off-the-shelf software limitations, we customise existing platforms — ERP, CRM, HRMS, or proprietary systems — to match your operational reality. Our approach includes plugin development, API integration, UI/UX overhauls, workflow automation, and legacy module enhancement. We extend the life and value of your current software investments while minimising business disruption.",
+    "icon": "SlidersVertical",
+    "category": "development",
+    "technologies": [
+      "Java",
+      "Python",
+      "REST APIs",
+      "GraphQL",
+      "Docker",
+      "Jenkins"
+    ],
+    "industries": [
+      "Manufacturing",
+      "Healthcare",
+      "Finance",
+      "Government",
+      "Education"
+    ],
+    "benefits": [
+      "Preserve existing software investments — no costly replacements",
+      "Minimal downtime during customisation and rollout",
+      "Seamless integration with your existing data pipelines"
+    ],
+    "businessOutcomes": [
+      "70% faster time-to-value vs. building from scratch",
+      "50% reduction in workaround processes and manual patches",
+      "Extended platform lifecycle by 3–5 years"
+    ],
+    "businessProblems": [
+      "Off-the-shelf ERP forcing teams into rigid workflows",
+      "Multiple disconnected systems requiring duplicate data entry",
+      "Custom business rules impossible to configure in standard modules",
+      "Legacy systems lacking modern APIs for integration",
+      "User resistance due to poor UX in enterprise software"
+    ],
+    "solutionArchitecture": "We apply an adapter-layer pattern, building a customisation tier between your enterprise platform and business operations. This layer handles workflow orchestration, data transformation, and UI enhancement without modifying core platform code. We use REST and GraphQL APIs for integration, event-driven patterns for real-time synchronisation, and containerised sidecars for non-intrusive deployment.",
+    "keyFeatures": [
+      {
+        "title": "Non-Invasive Adapter Layer",
+        "description": "Custom logic sits outside the core platform, enabling safe upgrades and patches."
+      },
+      {
+        "title": "API-First Integration",
+        "description": "REST and GraphQL connectors with retry logic, circuit breakers, and idempotency."
+      },
+      {
+        "title": "Workflow Automation Engine",
+        "description": "Visual workflow designer for complex approval chains and business rule execution."
+      },
+      {
+        "title": "UI/UX Modernisation",
+        "description": "Progressive web app shell overlaying legacy interfaces for improved usability."
+      },
+      {
+        "title": "Data Pipeline Orchestration",
+        "description": "ETL/ELT workflows with Apache Airflow for cross-system data synchronisation."
+      },
+      {
+        "title": "Legacy Wrapper Services",
+        "description": "Encapsulate monolith modules behind clean APIs for gradual modernisation."
+      },
+      {
+        "title": "Configuration Management",
+        "description": "Environment-specific settings with feature flags for safe rollout."
+      },
+      {
+        "title": "Automated Regression Suite",
+        "description": "Synthetic monitoring and regression tests protect customisations during platform upgrades."
+      }
+    ],
+    "securityCompliance": [
+      "Platform-native security model preserved and extended",
+      "Role-based access control (RBAC) aligned with organisational hierarchy",
+      "Audit logging for all customisation-layer transactions",
+      "Encryption in transit (TLS 1.3) and at rest (AES-256)",
+      "Regular penetration testing of integration points",
+      "Change management aligned with ITIL processes"
+    ],
+    "faqs": [
+      {
+        "question": "Will customisations survive platform upgrades?",
+        "answer": "Yes, our adapter-layer pattern ensures customisations are decoupled from core platform code. We test every upgrade against our regression suite and provide upgrade guardrails."
+      },
+      {
+        "question": "Which platforms do you customise?",
+        "answer": "We have deep expertise in SAP ECC/S4HANA, Oracle E-Business Suite, Salesforce, Microsoft Dynamics 365, ServiceNow, and open-source ERP platforms like Odoo and ERPNext."
+      },
+      {
+        "question": "How do you minimise disruption during customisation?",
+        "answer": "We use blue-green deployments and feature flags. Customisations are rolled out to pilot groups first, with rollback mechanisms and 24/7 monitoring during cutover weekends."
+      },
+      {
+        "question": "Can you customise cloud-based SaaS platforms?",
+        "answer": "Yes. We work within the extension frameworks provided by SaaS vendors — Salesforce Lightning, ServiceNow Scripted REST, Dynamics 365 Power Platform — to deliver deep customisation without violating terms of service."
+      },
+      {
+        "question": "What is the typical ROI of customisation vs replacement?",
+        "answer": "Customisation typically delivers 60-70% lower total cost of ownership compared to replacement, with 3-5x faster time-to-value. We conduct a detailed TCO analysis during Discovery."
+      },
+      {
+        "question": "Do you provide documentation and knowledge transfer?",
+        "answer": "Every engagement includes comprehensive technical documentation, runbooks, and hands-on knowledge transfer sessions. We also offer post-go-live support contracts with defined SLAs."
+      }
+    ],
+    "relatedCaseStudies": [
+      "cloud-migration-financial"
+    ]
+  },
+  {
+    "id": "asset-management",
+    "title": "Asset Management Solutions",
+    "shortDescription": "Comprehensive digital asset lifecycle management from procurement through decommissioning.",
+    "fullDescription": "Our asset management platform gives enterprises real-time visibility into every physical and digital asset across the organisation. We implement automated tracking, depreciation calculation, maintenance scheduling, audit trails, and compliance reporting — all within a unified dashboard. RFID and barcode integration enable instant inventory reconciliation, while predictive analytics flag maintenance needs before they become critical failures.",
+    "icon": "Package",
+    "category": "solutions",
+    "technologies": [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "RFID APIs",
+      "Power BI",
+      "AWS"
+    ],
+    "industries": [
+      "Manufacturing",
+      "IT Services",
+      "Healthcare",
+      "Energy",
+      "Telecom"
+    ],
+    "benefits": [
+      "Single source of truth for all asset data across locations",
+      "Automated depreciation and compliance reporting",
+      "Predictive maintenance alerts reduce unplanned downtime"
+    ],
+    "businessOutcomes": [
+      "35% reduction in asset downtime through predictive maintenance",
+      "25% lower total cost of ownership over asset lifecycle",
+      "100% audit-ready compliance reporting at any time"
+    ],
+    "businessProblems": [
+      "Shadow IT and unrecorded assets creating security vulnerabilities",
+      "Manual asset tracking prone to human error and stockouts",
+      "Unplanned equipment failures disrupting production schedules",
+      "Compliance audits delayed by missing or inaccurate asset records",
+      "Over-provisioning of software licences and cloud resources"
+    ],
+    "solutionArchitecture": "The platform follows a centralised asset registry pattern with edge-aware synchronisation. RFID/barcode scanners feed data to an IoT ingestion layer (AWS IoT Core), which streams to a time-series database for telemetry and a relational database for master data. A React dashboard with real-time WebSocket updates provides operational visibility, while Power BI embeds advanced analytics for financial and maintenance teams.",
+    "keyFeatures": [
+      {
+        "title": "RFID/Barcode Integration",
+        "description": "Plug-and-play scanner support with configurable encoding schemes for asset tagging."
+      },
+      {
+        "title": "Automated Depreciation Engine",
+        "description": "GAAP-compliant depreciation calculations with support for multiple methods and asset classes."
+      },
+      {
+        "title": "Predictive Maintenance AI",
+        "description": "Machine learning models predict failure probability based on usage patterns and environmental factors."
+      },
+      {
+        "title": "Audit Trail & Compliance",
+        "description": "Immutable transaction logs with role-based access for internal and external auditors."
+      },
+      {
+        "title": "Real-Time Dashboard",
+        "description": "Live asset location, status, and utilisation metrics with configurable alerting thresholds."
+      },
+      {
+        "title": "Software License Reconciliation",
+        "description": "Automated discovery and reconciliation against procurement records and usage data."
+      },
+      {
+        "title": "CMDB Integration",
+        "description": "Bidirectional synchronisation with ITSM tools like ServiceNow and Jira Service Management."
+      },
+      {
+        "title": "Multi-Site Support",
+        "description": "Hierarchical location model supporting global enterprises with regional administrators."
+      }
+    ],
+    "securityCompliance": [
+      "ISO 55000 (Asset Management) aligned processes",
+      "SOC 2 controls for asset data confidentiality",
+      "GDPR-compliant handling of employee-linked assets",
+      "Role-based access with segregation of duties (SoD)",
+      "Encrypted asset tag data transmission (TLS 1.3)",
+      "Retention policies aligned with statutory audit requirements"
+    ],
+    "faqs": [
+      {
+        "question": "How does RFID integration work with existing systems?",
+        "answer": "We deploy middleware that normalises RFID reader data into standardised asset events. This middleware exposes REST APIs and message queues, enabling integration with ERP, EAM, and CMMS systems."
+      },
+      {
+        "question": "Can the system track both physical and digital assets?",
+        "answer": "Yes. Physical assets (machinery, vehicles, equipment) are tracked via RFID/barcode, while digital assets (software, cloud resources, licences) are discovered via API connectors and agent-based scanning."
+      },
+      {
+        "question": "What reporting capabilities are included?",
+        "answer": "The platform includes 40+ pre-built reports covering depreciation schedules, maintenance history, compliance audits, utilisation rates, and vendor performance. Custom reports can be built using our embedded Power BI instance."
+      },
+      {
+        "question": "How does predictive maintenance reduce costs?",
+        "answer": "By analysing sensor telemetry and maintenance history, our ML models predict failures 2-4 weeks in advance. This shifts maintenance from reactive to preventive, reducing unplanned downtime by 35-50% and extending asset life by 20%."
+      },
+      {
+        "question": "Is the system compliant with industry regulations?",
+        "answer": "Yes. The platform supports ISO 55000, SOX asset controls, and industry-specific regulations (FDA 21 CFR Part 11 for medical devices, NIST for government assets)."
+      },
+      {
+        "question": "What is the deployment timeline?",
+        "answer": "A typical enterprise deployment spans 12-16 weeks: Discovery (2 weeks), Configuration (4 weeks), Integration (4 weeks), Pilot (2 weeks), and Rollout (2-4 weeks)."
+      }
+    ],
+    "relatedCaseStudies": [
+      "manufacturing-erp"
+    ]
+  },
+  {
+    "id": "logistics-management",
+    "title": "Logistics Management",
+    "shortDescription": "End-to-end logistics orchestration with real-time tracking, route optimization, and warehouse automation.",
+    "fullDescription": "We deliver a unified logistics management ecosystem that connects warehouse operations, fleet management, last-mile delivery, and supply chain analytics into a single pane of glass. Real-time GPS tracking, dynamic route optimisation, load balancing, and automated dispatch ensure every shipment reaches its destination faster and at lower cost. Our platform integrates with major 3PL providers and supports multi-modal transportation planning.",
+    "icon": "Truck",
+    "category": "solutions",
+    "technologies": [
+      "Node.js",
+      "React",
+      "PostgreSQL",
+      "Google Maps API",
+      "Redis",
+      "Docker"
+    ],
+    "industries": [
+      "Logistics",
+      "E-Commerce",
+      "Manufacturing",
+      "Retail",
+      "Automotive"
+    ],
+    "benefits": [
+      "Real-time visibility across the entire supply chain",
+      "AI-powered route optimisation reduces fuel and time costs",
+      "Seamless integration with existing ERP and WMS systems"
+    ],
+    "businessOutcomes": [
+      "30% reduction in fuel and fleet operational costs",
+      "50% faster last-mile delivery through smart dispatching",
+      "99.5% on-time delivery rate with automated SLA monitoring"
+    ],
+    "businessProblems": [
+      "Fleet visibility gaps causing delayed exception handling",
+      "Static routing leading to fuel inefficiency and missed SLAs",
+      "Manual dispatch creating bottlenecks during peak volumes",
+      "Warehouse-picking errors resulting in returns and customer dissatisfaction",
+      "Lack of predictive analytics for demand planning"
+    ],
+    "solutionArchitecture": "The platform uses a microservices architecture with event sourcing for logistics events (shipment created, dispatched, delivered). A real-time stream processor ingests GPS telemetry and updates shipment status via WebSockets. The routing engine solves the Vehicle Routing Problem with Time Windows (VRPTW) using a hybrid genetic algorithm, considering traffic, weather, vehicle capacity, and delivery windows. Warehouse management uses a slotting algorithm for optimal pick-path optimisation.",
+    "keyFeatures": [
+      {
+        "title": "Real-Time Fleet Tracking",
+        "description": "GPS-based vehicle location with ETA predictions updated every 30 seconds via WebSocket."
+      },
+      {
+        "title": "Dynamic Route Optimisation",
+        "description": "Genetic algorithm solves VRPTW with live traffic integration, reducing fuel costs by 25-35%."
+      },
+      {
+        "title": "Automated Dispatch",
+        "description": "Rule-based and ML-powered order-to-driver matching with capacity and SLA constraints."
+      },
+      {
+        "title": "Warehouse Management",
+        "description": "Pick-path optimisation, slotting algorithms, and barcode/RFID-based inventory tracking."
+      },
+      {
+        "title": "Last-Mile Delivery Suite",
+        "description": "Proof-of-delivery with photo capture, digital signature, and customer notification engine."
+      },
+      {
+        "title": "3PL Integration Hub",
+        "description": "Pre-built connectors for major logistics providers with standardised tracking event model."
+      },
+      {
+        "title": "SLA Monitoring & Alerts",
+        "description": "Configurable SLA rules with automated escalation via SMS, email, and push notifications."
+      },
+      {
+        "title": "Analytics & Forecasting",
+        "description": "Demand forecasting, capacity planning, and carrier performance scorecards."
+      }
+    ],
+    "securityCompliance": [
+      "GDPR-compliant driver and customer data handling",
+      "TLS 1.3 encryption for all API and WebSocket communications",
+      "Role-based access with driver and warehouse-specific permissions",
+      "Audit logging for all shipment state transitions",
+      "ISO 28000 (Supply Chain Security) aligned processes",
+      "Regular security assessments of third-party integrations"
+    ],
+    "faqs": [
+      {
+        "question": "How does the system handle peak delivery volumes?",
+        "answer": "Our cloud-native architecture auto-scales compute and database capacity based on order volume. During peak seasons, we pre-provision resources and activate burst capacity across multiple availability zones."
+      },
+      {
+        "question": "Can you integrate with our existing WMS and TMS?",
+        "answer": "Yes. We maintain pre-built connectors for major WMS platforms (Manhattan, Blue Yonder, SAP EWM) and TMS systems. For custom systems, we provide REST APIs and event-based integrations."
+      },
+      {
+        "question": "What tracking hardware is required?",
+        "answer": "We support standard GPS trackers, smartphone-based tracking via our driver app, and RFID gateways for warehouse tracking. The platform is hardware-agnostic and works with most commercial GPS devices."
+      },
+      {
+        "question": "How accurate are the ETA predictions?",
+        "answer": "Our ETA model combines historical travel times, live traffic, weather, and driver behaviour patterns. In production deployments, we achieve ±15 minute accuracy for 85% of deliveries in urban environments."
+      },
+      {
+        "question": "Do you support international shipping and customs?",
+        "answer": "Yes. The platform supports multi-currency, multi-language, and integrates with customs clearance systems. We handle HS code classification, duty calculation, and regulatory documentation generation."
+      },
+      {
+        "question": "What is the integration timeline?",
+        "answer": "A standard integration spans 8-14 weeks: API development (3-4 weeks), pilot deployment (2 weeks), and phased rollout (4-8 weeks). Complex WMS/TMS integrations may extend to 20 weeks."
+      }
+    ],
+    "relatedCaseStudies": [
+      "supply-chain-optimization"
+    ]
+  },
+  {
+    "id": "software-licensing",
+    "title": "Software Licensing",
+    "shortDescription": "Enterprise license lifecycle management ensuring compliance, optimization, and cost control.",
+    "fullDescription": "Our software licensing solutions help enterprises manage the complete lifecycle of software entitlements — from procurement and deployment to renewal and retirement. We provide centralised license repository management, usage metering, compliance gap analysis, vendor entitlement reconciliation, and renewal forecasting. Our analytics engine identifies under-utilised licenses for reallocation and over-deployment risks before audit windows.",
+    "icon": "FileCheck",
+    "category": "management",
+    "technologies": [
+      "Python",
+      "React",
+      "PostgreSQL",
+      "PowerShell",
+      "Tableau"
+    ],
+    "industries": [
+      "IT Services",
+      "Finance",
+      "Healthcare",
+      "Education",
+      "Government"
+    ],
+    "benefits": [
+      "Eliminate license compliance risk and audit exposure",
+      "Optimise license spend through usage analytics",
+      "Automated renewal tracking eliminates grace-period lapses"
+    ],
+    "businessOutcomes": [
+      "40% reduction in software licensing overspend",
+      "Zero audit non-compliance incidents across managed estate",
+      "30% improvement in license utilisation rates"
+    ],
+    "businessProblems": [
+      "Shadow IT deployments bypassing procurement controls",
+      "License audits resulting in six-figure penalty payments",
+      "Over-purchasing due to lack of usage visibility",
+      "Renewal deadlines missed, triggering penalty clauses",
+      "SaaS sprawl with no centralised visibility or cost accountability"
+    ],
+    "solutionArchitecture": "The platform uses a centralised license repository with distributed discovery agents. Each agent inventories installed software and running processes, reporting to a central PostgreSQL database via secure channel. Usage telemetry is processed through a stream analytics pipeline, with anomaly detection flagging over-deployment. A Tableau embedded analytics layer provides finance and procurement teams with spend visibility dashboards.",
+    "keyFeatures": [
+      {
+        "title": "Automated Discovery Agents",
+        "description": "Cross-platform agents (Windows, macOS, Linux) inventory installed software, usage patterns, and licence metadata."
+      },
+      {
+        "title": "License Repository",
+        "description": "Centralised catalogue of entitlements, PO records, and vendor agreements with full version tracking."
+      },
+      {
+        "title": "Compliance Gap Analysis",
+        "description": "Automated comparison of deployed instances vs entitlements, with remediation recommendations."
+      },
+      {
+        "title": "Usage Analytics Dashboard",
+        "description": "Power BI dashboards showing adoption rates, peak usage, and optimisation opportunities."
+      },
+      {
+        "title": "Renewal Forecasting",
+        "description": "AI-powered renewal predictions with vendor negotiation intelligence and budget planning."
+      },
+      {
+        "title": "SaaS Spend Management",
+        "description": "API connectors for major SaaS platforms (Salesforce, Adobe, Microsoft 365) providing real-time usage data."
+      },
+      {
+        "title": "Vendor Reconciliation",
+        "description": "Automated matching of deployment records against vendor invoices and entitlement certificates."
+      },
+      {
+        "title": "Audit Readiness Mode",
+        "description": "One-click report generation for audit windows, including SCOPE, reconciliation, and evidence packages."
+      }
+    ],
+    "securityCompliance": [
+      "Read-only agent architecture with no data exfiltration risk",
+      "TLS 1.3 encryption for all telemetry and API communications",
+      "SOC 2 Type II controls for platform security and availability",
+      "GDPR-compliant processing of employee software usage data",
+      "Role-based access with least-privilege principles",
+      "Immutable audit logs for all licence state changes"
+    ],
+    "faqs": [
+      {
+        "question": "How does automated software discovery work?",
+        "answer": "Lightweight agents scan installed software, running processes, and registry entries. Data is hashed and transmitted securely to the central repository. No sensitive user data is collected — only software identifiers, versions, and usage timestamps."
+      },
+      {
+        "question": "Can you handle vendor-specific licence models?",
+        "answer": "Yes. We support concurrent, named user, processor-based, core-based, subscription, and consumption-based models. Our rule engine is configurable for vendor-specific metrics and usage calculations."
+      },
+      {
+        "question": "What happens during a vendor audit?",
+        "answer": "Our platform generates comprehensive audit packages including reconciliation reports, deployment evidence, and remediation plans. We have a 100% audit pass rate across 200+ engagements."
+      },
+      {
+        "question": "How do you measure license optimisation savings?",
+        "answer": "We baseline current spend, identify unused or under-utilised licences, and project savings based on reallocation or downgrade recommendations. Typical customers see 30-40% reduction in licence spend within the first year."
+      },
+      {
+        "question": "Do you support cloud and SaaS licences?",
+        "answer": "Yes. We integrate via APIs with major SaaS platforms and cloud marketplaces (AWS, Azure, GCP). We track seat assignments, feature usage, and auto-scaling events to prevent over-provisioning."
+      },
+      {
+        "question": "How is the solution deployed?",
+        "answer": "The central platform is deployed on your infrastructure or as a managed SaaS. Discovery agents are deployed via standard endpoint management tools (Intune, SCCM, Jamf) or manually."
+      }
+    ],
+    "relatedCaseStudies": [
+      "cloud-migration-financial"
+    ]
+  },
+  {
+    "id": "vendor-management",
+    "title": "Vendor Management",
+    "shortDescription": "Strategic vendor lifecycle management with performance tracking, contract governance, and risk scoring.",
+    "fullDescription": "Our vendor management platform transforms chaotic supplier relationships into a strategic advantage. We centralise vendor onboarding, contract management, SLA tracking, performance scorecards, and risk profiling into a single system. Automated workflows handle vendor assessments, compliance documentation, invoice reconciliation, and periodic review cycles. Built-in analytics provide spend aggregation, vendor concentration heatmaps, and negotiation intelligence.",
+    "icon": "Users",
+    "category": "management",
+    "technologies": [
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "Power BI",
+      "DocuSign API"
+    ],
+    "industries": [
+      "Manufacturing",
+      "Retail",
+      "Healthcare",
+      "Government",
+      "Energy"
+    ],
+    "benefits": [
+      "Centralised vendor data eliminates silos and duplication",
+      "Automated SLA monitoring with real-time breach alerts",
+      "Data-driven negotiation backed by spend analytics"
+    ],
+    "businessOutcomes": [
+      "25% reduction in vendor-related operational overhead",
+      "20% improvement in vendor SLA compliance rates",
+      "15% cost savings through strategic spend consolidation"
+    ],
+    "businessProblems": [
+      "Vendor data scattered across spreadsheets and departmental systems",
+      "Manual contract tracking leading to auto-renewals and over-spend",
+      "No visibility into vendor concentration risk",
+      "Inconsistent onboarding processes creating compliance gaps",
+      "Reactive vendor management — issues addressed after breaches occur"
+    ],
+    "solutionArchitecture": "The platform follows a hub-and-spoke model with a central vendor registry and modular capability rings (onboarding, contract management, performance, risk). Each ring publishes events to a central event bus, enabling cross-module workflows. The contract repository uses a graph database to model complex vendor relationships and obligation hierarchies.",
+    "keyFeatures": [
+      {
+        "title": "Vendor Onboarding Portal",
+        "description": "Self-service vendor registration with document collection, due diligence questionnaires, and approval workflows."
+      },
+      {
+        "title": "Contract Repository",
+        "description": "Full-text searchable contract library with clause extraction, obligation tracking, and renewal calendars."
+      },
+      {
+        "title": "SLA Scorecards",
+        "description": "Automated SLA measurement against contractual thresholds with breach notifications and remedy tracking."
+      },
+      {
+        "title": "Risk Scoring Engine",
+        "description": "Multi-factor risk model incorporating financial health, compliance status, and performance history."
+      },
+      {
+        "title": "Spend Analytics",
+        "description": "Consolidated spend views with vendor concentration heatmaps and maverick spend detection."
+      },
+      {
+        "title": "Invoice Reconciliation",
+        "description": "Three-way matching (PO, receipt, invoice) with automated discrepancy flagging."
+      },
+      {
+        "title": "Performance Reviews",
+        "description": "Scheduled vendor assessments with KPI tracking, scorecards, and improvement plans."
+      },
+      {
+        "title": "Negotiation Intelligence",
+        "description": "Market benchmarking data and contract clause library to strengthen negotiation position."
+      }
+    ],
+    "securityCompliance": [
+      "ISO 20400 (Sustainable Procurement) aligned workflows",
+      "GDPR-compliant vendor data processing agreements",
+      "SOC 2 controls for vendor data confidentiality",
+      "Encrypted document storage with key rotation",
+      "Audit trails for all contract and performance actions",
+      "Multi-factor authentication for vendor portal access"
+    ],
+    "faqs": [
+      {
+        "question": "How does vendor onboarding work?",
+        "answer": "Vendors complete a self-service registration portal, upload compliance documents, and respond to due diligence questionnaires. The platform routes submissions through configurable approval workflows with automated background checks."
+      },
+      {
+        "question": "Can you integrate with our procurement system?",
+        "answer": "Yes. We integrate with major procurement platforms (SAP Ariba, Coupa, Oracle Procurement Cloud) and ERP systems. For custom procurement systems, we provide REST APIs and ETL connectors."
+      },
+      {
+        "question": "How is contract data secured?",
+        "answer": "Contracts are stored in encrypted object storage with AES-256 encryption. Access is controlled via RBAC with granular permissions. All view, edit, and download actions are logged for audit purposes."
+      },
+      {
+        "question": "What risk factors does the scoring engine consider?",
+        "answer": "The model evaluates financial stability (credit scores, annual reports), compliance status (certifications, audit results), performance history (SLA adherence, defect rates), and geopolitical risk (sanctions, trade restrictions)."
+      },
+      {
+        "question": "How do you handle vendor communication?",
+        "answer": "The platform includes a secure messaging system for vendor correspondence, with templated communications for RFPs, contracts, and performance reviews. All communications are archived for compliance."
+      },
+      {
+        "question": "Can the system support multi-entity or subsidiary structures?",
+        "answer": "Yes. The platform supports hierarchical organisational structures with entity-level isolation, shared vendor registries, and consolidated reporting for group-level visibility."
+      }
+    ],
+    "relatedCaseStudies": [
+      "manufacturing-erp"
+    ]
+  },
+  {
+    "id": "mobile-app-development",
+    "title": "Mobile App Development",
+    "shortDescription": "Cross-platform and native mobile applications engineered for performance, security, and user delight.",
+    "fullDescription": "We design and develop enterprise-grade mobile applications for iOS and Android — both native and cross-platform — that extend your business capabilities to wherever your teams and customers are. Our mobile solutions include offline-first architecture, biometric authentication, push notification ecosystems, real-time synchronisation, and deep analytics instrumentation. Every app is built with accessibility standards and performance optimisation as non-negotiable requirements.",
+    "icon": "Smartphone",
+    "category": "development",
+    "technologies": [
+      "React Native",
+      "Flutter",
+      "Swift",
+      "Kotlin",
+      "Firebase",
+      "GraphQL"
+    ],
+    "industries": [
+      "Healthcare",
+      "E-Commerce",
+      "Logistics",
+      "Finance",
+      "Education"
+    ],
+    "benefits": [
+      "Offline-first architecture ensures productivity without connectivity",
+      "Biometric and SSO authentication for enterprise-grade security",
+      "Push notification engine for real-time user engagement"
+    ],
+    "businessOutcomes": [
+      "3× increase in mobile employee productivity with field apps",
+      "60% faster customer response times through mobile enablement",
+      "4.8+ average app store rating across delivered applications"
+    ],
+    "businessProblems": [
+      "Field teams relying on desktop systems with no mobile access",
+      "Customer service delays due to lack of mobile tools",
+      "Data silos between mobile and backend systems",
+      "Security concerns preventing adoption of consumer-grade apps",
+      "Poor app performance and battery drain causing user abandonment"
+    ],
+    "solutionArchitecture": "For cross-platform apps, we use React Native with a shared TypeScript business logic layer. Native modules handle performance-critical features (camera, AR, biometrics). Offline data is synchronised via a custom sync engine with conflict resolution. For native apps, we use SwiftUI and Kotlin Compose with shared KMM/TypeScript business logic. The backend uses GraphQL subscriptions for real-time data push and Firebase Cloud Messaging for push notifications.",
+    "keyFeatures": [
+      {
+        "title": "Offline-First Architecture",
+        "description": "Local database (SQLite/Realm) with background sync and conflict resolution for uninterrupted offline operation."
+      },
+      {
+        "title": "Biometric Authentication",
+        "description": "Face ID, Touch ID, and fingerprint authentication with fallback to PIN and SSO."
+      },
+      {
+        "title": "Push Notification Engine",
+        "description": "Segment-based notification targeting with A/B testing and delivery analytics."
+      },
+      {
+        "title": "Real-Time Synchronisation",
+        "description": "GraphQL subscriptions and WebSocket connections keep data fresh across devices."
+      },
+      {
+        "title": "Deep Linking & Navigation",
+        "description": "Universal links and app shortcuts for seamless navigation from external sources."
+      },
+      {
+        "title": "Analytics Instrumentation",
+        "description": "Custom event tracking with user journey mapping, funnel analysis, and crash reporting."
+      },
+      {
+        "title": "Accessibility Layer",
+        "description": "VoiceOver/TalkBack support, dynamic type, and high contrast modes for WCAG 2.1 AA compliance."
+      },
+      {
+        "title": "Performance Monitoring",
+        "description": "Real-time performance metrics (startup time, frame rate, memory) with automated regression detection."
+      }
+    ],
+    "securityCompliance": [
+      "OWASP Mobile Top 10 mitigation in every release",
+      "Biometric data never leaves the device (local authentication only)",
+      "Certificate pinning and network security config for Android",
+      "App Transport Security (ATS) enforcement for iOS",
+      "Regular penetration testing via external security firms",
+      "GDPR and HIPAA-aligned data handling for health and personal data"
+    ],
+    "faqs": [
+      {
+        "question": "React Native vs native — which do you recommend?",
+        "answer": "We evaluate based on performance requirements, budget, and timeline. React Native is ideal for most enterprise apps (80% code reuse, faster time-to-market). Native (Swift/Kotlin) is recommended for apps requiring maximum performance, complex animations, or deep OS integration."
+      },
+      {
+        "question": "How do you handle app store approval?",
+        "answer": "We follow platform guidelines meticulously and maintain a pre-submission checklist. Our average first-time approval rate exceeds 90%. For enterprise apps, we leverage Apple Business Manager and Google Managed Play for internal distribution."
+      },
+      {
+        "question": "Can the app work offline?",
+        "answer": "Yes. We design offline-first architectures where the app functions fully without connectivity and synchronises data when the connection is restored. Conflict resolution strategies ensure data consistency across devices."
+      },
+      {
+        "question": "What is your approach to app security?",
+        "answer": "Security is built-in from the first sprint. We implement code obfuscation, jailbreak/root detection, encrypted local storage, certificate pinning, and runtime application self-protection (RASP)."
+      },
+      {
+        "question": "Do you provide ongoing maintenance?",
+        "answer": "Yes. Our maintenance contracts include OS update compatibility, security patching, performance monitoring, and feature enhancements. We offer Bronze, Silver, and Gold support tiers with 8-hour to 24-hour response SLAs."
+      },
+      {
+        "question": "How do you measure app success post-launch?",
+        "answer": "We track adoption rate, session duration, feature usage, crash-free sessions, and user satisfaction (CSAT). Monthly performance reports include optimisation recommendations and roadmap input."
+      }
+    ],
+    "relatedCaseStudies": [
+      "supply-chain-optimization"
+    ]
+  },
+  {
+    "id": "workflow-approval",
+    "title": "Workflow Approval",
+    "shortDescription": "Configurable approval orchestration engine that automates multi-stage business decisions.",
+    "fullDescription": "Our workflow approval engine eliminates bottlenecks in your business processes by automating multi-tier approval chains — purchase orders, leave requests, expense reports, contract sign-offs, and compliance checkpoints. The platform features drag-and-drop workflow designer, conditional routing, escalation rules, SLA timers, and full audit logging. Approvers receive notifications across email, mobile push, and in-app channels with one-tap approve/reject actions.",
+    "icon": "ClipboardCheck",
+    "category": "management",
+    "technologies": [
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "Redis",
+      "Docker",
+      "ELK Stack"
+    ],
+    "industries": [
+      "Manufacturing",
+      "Healthcare",
+      "Finance",
+      "Government",
+      "IT Services"
+    ],
+    "benefits": [
+      "Visual workflow designer — no coding required to build approval chains",
+      "Automatic escalation on SLA breach keeps processes moving",
+      "Complete audit trail for every approval decision"
+    ],
+    "businessOutcomes": [
+      "80% faster approval cycle times across all business processes",
+      "Zero lost approvals through automated escalation and reminders",
+      "100% audit-ready approval history with timestamped evidence"
+    ],
+    "businessProblems": [
+      "Approval requests stuck in email inboxes for days",
+      "Manual routing creating bottlenecks during manager absences",
+      "No visibility into process bottlenecks or SLA compliance",
+      "Auditors unable to reconstruct approval chains",
+      "Shadow approvals via WhatsApp or phone calls bypassing controls"
+    ],
+    "solutionArchitecture": "The platform uses a state-machine engine for workflow execution, with each approval stage represented as a state transition. The workflow designer generates JSON-based process definitions stored in PostgreSQL. A job scheduler (BullMQ on Redis) handles SLA timers and escalation rules. The notification dispatcher supports email, SMS, push, and in-app channels with template engine for personalised messages.",
+    "keyFeatures": [
+      {
+        "title": "Drag-and-Drop Workflow Designer",
+        "description": "Visual BPMN-style designer for building approval chains without code. Supports conditional branching, parallel approvals, and sub-processes."
+      },
+      {
+        "title": "SLA Engine",
+        "description": "Configurable SLAs with timer-based escalation, auto-approval, and cascade notifications."
+      },
+      {
+        "title": "Multi-Channel Notifications",
+        "description": "Email, SMS, mobile push, and in-app notifications with template engine and delivery tracking."
+      },
+      {
+        "title": "Audit Logging",
+        "description": "Immutable log of every action, decision, and state change with tamper-evident storage."
+      },
+      {
+        "title": "Delegation & Proxy",
+        "description": "Approval delegation during absences with automatic return and handover notifications."
+      },
+      {
+        "title": "Form Builder",
+        "description": "Dynamic form rendering with conditional fields, validation rules, and attachment support."
+      },
+      {
+        "title": "Analytics Dashboard",
+        "description": "Process cycle time, SLA compliance, approval rates, and bottleneck identification."
+      },
+      {
+        "title": "Integration Hub",
+        "description": "Pre-built connectors for ERP, HRMS, and procurement systems with webhook support."
+      }
+    ],
+    "securityCompliance": [
+      "SOX-compliant approval trails with digital signatures",
+      "Role-based access with approval authority matrices",
+      "Immutable audit logs stored in write-once storage",
+      "TLS 1.3 encryption for all API and notification communications",
+      "GDPR-compliant handling of requestor and approver data",
+      "Regular access reviews and least-privilege enforcement"
+    ],
+    "faqs": [
+      {
+        "question": "How quickly can we deploy a new approval workflow?",
+        "answer": "Standard workflows (purchase orders, leave requests, expense reports) can be deployed in 1-2 weeks using our pre-built templates. Custom workflows typically take 3-4 weeks including testing and training."
+      },
+      {
+        "question": "Can the system handle parallel approvals?",
+        "answer": "Yes. The workflow engine supports AND gates (all must approve), OR gates (any one approval), weighted voting, and consensus-based approval patterns."
+      },
+      {
+        "question": "What happens if an approver is unavailable?",
+        "answer": "Configurable delegation rules automatically route to a proxy approver. If no proxy is set, the request escalates to the next level in the hierarchy. All delegations are logged and communicated transparently."
+      },
+      {
+        "question": "Can we integrate with our existing ERP?",
+        "answer": "Yes. We provide pre-built connectors for SAP, Oracle, Microsoft Dynamics, and custom ERPs via REST APIs. Approval decisions can trigger ERP transactions (PO creation, GL posting) automatically."
+      },
+      {
+        "question": "How do you ensure audit compliance?",
+        "answer": "Every approval action is logged with timestamp, user identity, decision, and supporting evidence. Logs are stored in tamper-evident storage and can be exported in standard formats (PDF, CSV) for auditors."
+      },
+      {
+        "question": "Is the platform mobile-friendly?",
+        "answer": "Yes. Approvers can review and act on requests from any device via our mobile-responsive web app or native mobile notifications. One-tap approve/reject actions with optional comments."
+      }
+    ],
+    "relatedCaseStudies": [
+      "manufacturing-erp"
+    ]
+  },
+  {
+    "id": "quality-management",
+    "title": "Quality Management",
+    "shortDescription": "Integrated QMS platform for ISO-compliant quality planning, control, assurance, and improvement.",
+    "fullDescription": "Our quality management system digitises and automates your entire quality framework — document control, non-conformance tracking, CAPA management, internal audits, supplier quality, and customer feedback loops. The platform is pre-configured for ISO 9001, ISO 13485, and IATF 16949 compliance but fully customisable to your industry standards. Real-time dashboards give quality managers instant visibility into defect trends, audit findings, and quality KPIs.",
+    "icon": "Shield",
+    "category": "management",
+    "technologies": [
+      "React",
+      "Python",
+      "PostgreSQL",
+      "Tableau",
+      "Docker",
+      "S3"
+    ],
+    "industries": [
+      "Manufacturing",
+      "Healthcare",
+      "Pharma",
+      "Automotive",
+      "Food Processing"
+    ],
+    "benefits": [
+      "Pre-built compliance templates for ISO and industry standards",
+      "Real-time quality KPI dashboards for management reviews",
+      "Closed-loop CAPA management with root cause analysis tools"
+    ],
+    "businessOutcomes": [
+      "50% reduction in non-conformance incidents within first year",
+      "40% faster audit preparation with centralised document control",
+      "35% improvement in first-pass yield through data-driven quality"
+    ],
+    "businessProblems": [
+      "Paper-based quality records difficult to retrieve and analyse",
+      "CAPA processes lacking structure and follow-through",
+      "Audit preparation consuming weeks of manual document compilation",
+      "No real-time visibility into quality metrics across facilities",
+      "Supplier quality issues discovered only after customer complaints"
+    ],
+    "solutionArchitecture": "The platform follows a modular QMS architecture with core modules for document control, NC/CAPA, audit management, and supplier quality. Each module publishes quality events to a central event bus, enabling cross-module workflows (e.g., an NC triggers a CAPA, which triggers an audit). The analytics layer uses a semantic data model aligned with ISO 9001 quality concepts.",
+    "keyFeatures": [
+      {
+        "title": "Document Control",
+        "description": "Version-controlled document repository with electronic signatures, review cycles, and controlled distribution."
+      },
+      {
+        "title": "NC/CAPA Management",
+        "description": "Structured non-conformance recording with root cause analysis (5-Why, Fishbone) and corrective action tracking."
+      },
+      {
+        "title": "Audit Management",
+        "description": "Internal audit scheduling, checklists, finding management, and automated follow-up tracking."
+      },
+      {
+        "title": "Supplier Quality Portal",
+        "description": "Vendor scorecards, incoming inspection plans, and supplier corrective action requests (SCAR)."
+      },
+      {
+        "title": "Quality KPI Dashboard",
+        "description": "Real-time metrics for first-pass yield, defect density, CAPA closure rate, and audit findings."
+      },
+      {
+        "title": "Customer Feedback Loop",
+        "description": "Structured complaint intake, 8D reporting, and trend analysis for continuous improvement."
+      },
+      {
+        "title": "Training Management",
+        "description": "Quality training records with competency assessments and certification tracking."
+      },
+      {
+        "title": "Compliance Mapping",
+        "description": "Auto-generated compliance matrices mapping records to ISO, IATF, and regulatory requirements."
+      }
+    ],
+    "securityCompliance": [
+      "ISO 9001:2015 certified QMS processes",
+      "21 CFR Part 11 compliant electronic signatures (FDA)",
+      "GDPR-compliant handling of quality records with personal data",
+      "Role-based access with quality function segregation",
+      "Encrypted storage for sensitive quality and customer data",
+      "Regular internal audits and management reviews per ISO requirements"
+    ],
+    "faqs": [
+      {
+        "question": "How long does a typical QMS implementation take?",
+        "answer": "A standard implementation spans 16-24 weeks: Requirements and gap analysis (2-3 weeks), system configuration (6-8 weeks), data migration (3-4 weeks), pilot (2-3 weeks), and enterprise rollout (4-6 weeks)."
+      },
+      {
+        "question": "Can the system support multiple quality standards simultaneously?",
+        "answer": "Yes. The platform is designed for multi-standard compliance. A single set of processes can satisfy ISO 9001, IATF 16949, ISO 13485, and industry-specific regulations with configurable compliance mappings."
+      },
+      {
+        "question": "How do you handle document control and electronic signatures?",
+        "answer": "We implement a closed-loop document control system with versioning, review/approval workflows, and electronic signatures compliant with 21 CFR Part 11 and EU Annex 11. Signature certificates are time-stamped and tamper-evident."
+      },
+      {
+        "question": "Can the system integrate with our ERP and MES?",
+        "answer": "Yes. We provide standard connectors for major ERP systems (SAP, Oracle, Microsoft Dynamics) and MES platforms. Real-time quality data (defect rates, inspection results) flows bidirectionally between systems."
+      },
+      {
+        "question": "How does the CAPA module ensure effectiveness?",
+        "answer": "The CAPA module tracks corrective actions through to verification of effectiveness. Automated reminders, escalation rules, and management review checkpoints ensure actions are completed and verified, not just assigned."
+      },
+      {
+        "question": "Do you provide training for quality teams?",
+        "answer": "Yes. Every implementation includes role-based training for quality managers, engineers, auditors, and operators. We provide comprehensive user documentation, video tutorials, and post-go-live support sessions."
+      }
+    ],
+    "relatedCaseStudies": [
+      "manufacturing-erp"
+    ]
+  },
+  {
+    "id": "hr-resume-screening",
+    "title": "HR Resume Screening",
+    "shortDescription": "AI-powered resume parsing and candidate matching that accelerates hiring decisions.",
+    "fullDescription": "Our intelligent resume screening platform leverages natural language processing and machine learning to parse thousands of resumes in minutes, extract key candidate attributes, and match them against job descriptions with precision scoring. The system learns from recruiter feedback to continuously improve matching accuracy. Integration with major ATS platforms ensures seamless workflow embedding, while bias-detection algorithms promote fair hiring practices.",
+    "icon": "FileSearch",
+    "category": "management",
+    "technologies": [
+      "Python",
+      "TensorFlow",
+      "Node.js",
+      "React",
+      "PostgreSQL",
+      "Elasticsearch"
+    ],
+    "industries": [
+      "IT Services",
+      "Finance",
+      "Healthcare",
+      "Manufacturing",
+      "Staffing"
+    ],
+    "benefits": [
+      "AI-powered parsing handles 30+ resume formats with 98% accuracy",
+      "Bias detection algorithms promote equitable candidate evaluation",
+      "Seamless two-way sync with major ATS platforms"
+    ],
+    "businessOutcomes": [
+      "80% reduction in manual resume screening effort",
+      "3× faster time-to-shortlist for critical positions",
+      "40% improvement in quality-of-hire through precision matching"
+    ],
+    "businessProblems": [
+      "Recruiters spending 70% of time on manual resume screening",
+      "Inconsistent evaluation criteria leading to hiring bias",
+      "High-volume campuses generating thousands of resumes per season",
+      "ATS keyword matching missing qualified candidates with non-standard resumes",
+      "Delayed hiring causing competitive talent loss"
+    ],
+    "solutionArchitecture": "The platform uses a microservices architecture with an ingestion service for resume parsing, an NLP service for entity extraction and scoring, and a matching engine for candidate-job ranking. Resumes are parsed using a fine-tuned BERT model fine-tuned on 10M+ resumes. The matching engine combines semantic similarity (SBERT embeddings) with rule-based filters (skills, experience, location) for explainable ranking.",
+    "keyFeatures": [
+      {
+        "title": "Multi-Format Resume Parser",
+        "description": "Extracts structured data from PDF, DOC, DOCX, HTML, and image-based resumes with 98% accuracy across 30+ templates."
+      },
+      {
+        "title": "Semantic Matching Engine",
+        "description": "SBERT-powered semantic similarity scoring goes beyond keyword matching to understand candidate-job fit."
+      },
+      {
+        "title": "Bias Detection & Mitigation",
+        "description": "Real-time bias alerts for gender, age, and educational institution skew with anonymisation mode."
+      },
+      {
+        "title": "ATS Integration",
+        "description": "Two-way sync with Greenhouse, Lever, Workday, Taleo, and custom ATS via REST APIs."
+      },
+      {
+        "title": "Interview Scheduler",
+        "description": "Automated interview coordination with calendar integration, panel composition, and candidate communication."
+      },
+      {
+        "title": "Analytics & Reporting",
+        "description": "Recruiter productivity, time-to-fill, source quality, and diversity metrics with drill-down capabilities."
+      },
+      {
+        "title": "Bulk Processing",
+        "description": "Parallel processing pipeline handles 10,000+ resumes per hour for campus and bulk hiring scenarios."
+      },
+      {
+        "title": "Compliance & Audit Trail",
+        "description": "EEOC-compliant records with decision audit trails for regulatory compliance and dispute resolution."
+      }
+    ],
+    "securityCompliance": [
+      "GDPR-compliant handling of candidate personal data",
+      "EEOC-compliant screening processes with audit trails",
+      "SOC 2 Type II controls for platform security",
+      "Encryption in transit (TLS 1.3) and at rest (AES-256)",
+      "Role-based access with recruiter and hiring manager permissions",
+      "Regular bias audits and model fairness assessments"
+    ],
+    "faqs": [
+      {
+        "question": "How does the AI parsing handle non-standard resume formats?",
+        "answer": "Our NLP model is trained on 10M+ resumes spanning 30+ formats and languages. It uses layout analysis to identify sections (experience, education, skills) even in unconventional layouts, achieving 98% extraction accuracy."
+      },
+      {
+        "question": "Can the system reduce hiring bias?",
+        "answer": "Yes. Our bias detection module monitors demographic parity across gender, ethnicity, and educational background. Anonymisation mode removes identifiable information during initial screening, and diversity dashboards provide transparency."
+      },
+      {
+        "question": "Which ATS platforms do you integrate with?",
+        "answer": "We maintain certified integrations with Greenhouse, Lever, Workday, Oracle Taleo, SAP SuccessFactors, and iCIMS. For custom ATS platforms, we provide REST APIs and webhook support for bidirectional sync."
+      },
+      {
+        "question": "How does the system learn from recruiter feedback?",
+        "answer": "The matching engine uses active learning — when recruiters override AI rankings, the system records the feedback and adjusts model weights. This continuous learning loop improves matching accuracy by 15-20% over 6 months."
+      },
+      {
+        "question": "Is candidate data stored securely?",
+        "answer": "Yes. All candidate data is encrypted at rest and in transit. We comply with GDPR, EEOC, and local data protection regulations. Candidates can request data deletion at any time, and we provide full data portability."
+      },
+      {
+        "question": "What is the typical deployment timeline?",
+        "answer": "A standard deployment spans 6-8 weeks: ATS integration (2-3 weeks), model calibration with historical data (2 weeks), pilot with one job family (1-2 weeks), and enterprise rollout (1-2 weeks)."
+      }
+    ],
+    "relatedCaseStudies": [
+      "cloud-migration-financial"
+    ]
+  },
+  {
+    "id": "smart-onboarding",
+    "title": "Smart Onboarding",
+    "shortDescription": "Automated employee onboarding platform that delivers consistent, engaging new-hire experiences.",
+    "fullDescription": "Our smart onboarding solution transforms the new-hire experience from paperwork chaos to a structured, engaging journey. Pre-boarding document collection, role-based learning paths, equipment provisioning workflows, buddy assignments, and milestone-based check-ins are all orchestrated through a single platform. Managers gain real-time visibility into onboarding progress, while new employees receive a personalised portal that guides their first 90 days.",
+    "icon": "UserPlus",
+    "category": "solutions",
+    "technologies": [
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "SendGrid API",
+      "Slack API",
+      "Docker"
+    ],
+    "industries": [
+      "IT Services",
+      "Finance",
+      "Healthcare",
+      "Manufacturing",
+      "Retail"
+    ],
+    "benefits": [
+      "Pre-boarding automation eliminates day-one paperwork bottlenecks",
+      "Role-based learning paths accelerate time-to-productivity",
+      "Real-time onboarding dashboard for HR and managers"
+    ],
+    "businessOutcomes": [
+      "50% reduction in new-hire administrative overhead",
+      "30% faster employee time-to-productivity",
+      "85% improvement in new-hire satisfaction scores"
+    ],
+    "businessProblems": [
+      "New-hire paperwork scattered across email, paper, and multiple systems",
+      "Inconsistent onboarding experiences across departments and locations",
+      "Equipment provisioning delays leaving new employees idle",
+      "No visibility into onboarding progress until day 90 reviews",
+      "High early attrition due to poor onboarding experience"
+    ],
+    "solutionArchitecture": "The platform follows a journey-based orchestration model. Each new hire is assigned a personalised onboarding journey composed of modular steps (document collection, training, provisioning, introductions). A workflow engine orchestrates step execution with SLA timers. The new-hire portal provides a mobile-friendly interface with progress tracking, while manager dashboards offer real-time visibility and intervention alerts.",
+    "keyFeatures": [
+      {
+        "title": "Pre-Boarding Portal",
+        "description": "New hires complete I-9, tax forms, and policy acknowledgements before day one with guided workflows."
+      },
+      {
+        "title": "Role-Based Learning Paths",
+        "description": "Curated training sequences (videos, quizzes, assignments) tailored to role, department, and seniority."
+      },
+      {
+        "title": "Equipment Provisioning",
+        "description": "Automated asset allocation with IT ticket creation, delivery tracking, and setup verification."
+      },
+      {
+        "title": "Buddy Assignment",
+        "description": "Algorithmic buddy matching based on role, location, and interests with structured check-in schedule."
+      },
+      {
+        "title": "Milestone Check-Ins",
+        "description": "Automated check-ins at 30, 60, and 90 days with pulse surveys and manager review prompts."
+      },
+      {
+        "title": "Manager Dashboard",
+        "description": "Real-time visibility into team onboarding progress with intervention alerts for at-risk new hires."
+      },
+      {
+        "title": "Integration Hub",
+        "description": "Connectors for HRIS (Workday, BambooHR), ITSM (ServiceNow), and communication tools (Slack, Teams)."
+      },
+      {
+        "title": "Analytics & Insights",
+        "description": "Onboarding completion rates, time-to-productivity, satisfaction scores, and early attrition predictors."
+      }
+    ],
+    "securityCompliance": [
+      "GDPR-compliant handling of new-hire personal and sensitive data",
+      "SOC 2 controls for data security and availability",
+      "Role-based access with HR, manager, and new-hire permissions",
+      "Encrypted document storage and transmission (TLS 1.3, AES-256)",
+      "Audit logging for all onboarding actions and document access",
+      "Data retention policies aligned with employment law requirements"
+    ],
+    "faqs": [
+      {
+        "question": "How does pre-boarding work?",
+        "answer": "Once an offer is accepted, the new hire receives a secure portal link to complete paperwork, review policies, and upload documents. HR is notified of completion and can review submissions before the start date."
+      },
+      {
+        "question": "Can onboarding be customised by department?",
+        "answer": "Yes. Each department defines its own onboarding journey with department-specific training, introductions, and check-ins. Global programs (compliance, security) are mandatory, while department content is modular."
+      },
+      {
+        "question": "How does equipment provisioning integrate with IT?",
+        "answer": "The platform creates automated tickets in your ITSM system (ServiceNow, Jira) with pre-configured asset assignments. IT receives notifications, marks items as delivered, and the new hire confirms setup completion."
+      },
+      {
+        "question": "What if a new hire is remote?",
+        "answer": "The platform is designed for distributed workforces. Pre-boarding, training, and check-ins are fully remote-capable. Equipment is shipped to the new hires home with tracking, and virtual introductions are scheduled automatically."
+      },
+      {
+        "question": "How do you measure onboarding effectiveness?",
+        "answer": "We track completion rate, time-to-productivity, 90-day retention, and new-hire satisfaction (eNPS). Analytics dashboards help HR identify bottlenecks and continuously improve the onboarding experience."
+      },
+      {
+        "question": "Can the system integrate with our HRIS?",
+        "answer": "Yes. We integrate with Workday, BambooHR, SAP SuccessFactors, and custom HRIS platforms via REST APIs. Employee data syncs bi-directionally, ensuring the onboarding portal reflects the latest HR records."
+      }
+    ],
+    "relatedCaseStudies": [
+      "cloud-migration-financial"
+    ]
+  },
+  {
+    "id": "smart-procurement",
+    "title": "Smart Procurement",
+    "shortDescription": "AI-driven procurement platform automating source-to-contract and purchase-to-pay workflows.",
+    "fullDescription": "Our smart procurement platform digitises and optimises the entire procurement lifecycle — from requisition and sourcing through contract management and payment. AI-powered spend classification, supplier recommendation engines, automated PO matching with invoices (three-way matching), and contract compliance monitoring ensure every procurement decision is data-backed and policy-compliant. Built-in analytics provide category management insights and savings opportunity identification.",
+    "icon": "ShoppingCart",
+    "category": "solutions",
+    "technologies": [
+      "React",
+      "Python",
+      "Node.js",
+      "PostgreSQL",
+      "Redis",
+      "Tableau"
+    ],
+    "industries": [
+      "Manufacturing",
+      "Retail",
+      "Healthcare",
+      "Energy",
+      "Government"
+    ],
+    "benefits": [
+      "Three-way matching automation eliminates invoice discrepancies",
+      "AI-powered spend classification for actionable procurement insights",
+      "Policy-based approval workflows enforce compliance automatically"
+    ],
+    "businessOutcomes": [
+      "35% reduction in procurement processing costs",
+      "20% improvement in contract compliance rates",
+      "40% faster purchase-to-pay cycle time"
+    ],
+    "businessProblems": [
+      "Maverick spend outside approved vendor contracts",
+      "Manual PO-invoice matching causing payment delays and errors",
+      "Lack of spend visibility preventing strategic sourcing",
+      "Contract compliance monitoring relying on spreadsheets",
+      "Lengthy approval chains creating procurement bottlenecks"
+    ],
+    "solutionArchitecture": "The platform uses a microservices architecture with domain-aligned services for requisition, sourcing, contracting, and payment. An AI orchestration layer classifies spend, recommends suppliers, and detects anomalies. The matching engine performs three-way matching (PO, receipt, invoice) with tolerance rules and exception handling. A contract repository with obligation tracking ensures compliance throughout the procurement lifecycle.",
+    "keyFeatures": [
+      {
+        "title": "AI Spend Classification",
+        "description": "Machine learning models categorise procurement spend into standard taxonomies with 95% accuracy, enabling category management."
+      },
+      {
+        "title": "Supplier Recommendation Engine",
+        "description": "Multi-factor supplier scoring (price, quality, delivery, compliance) with automated shortlisting for sourcing events."
+      },
+      {
+        "title": "Three-Way Matching",
+        "description": "Automated PO, receipt, and invoice reconciliation with tolerance thresholds and exception workflows."
+      },
+      {
+        "title": "Contract Compliance Monitor",
+        "description": "Obligation tracking with automated alerts for renewal dates, price caps, and SLA thresholds."
+      },
+      {
+        "title": "Policy-Based Approval",
+        "description": "Configurable approval matrices based on amount, category, and vendor risk with automated routing."
+      },
+      {
+        "title": "Sourcing Event Management",
+        "description": "RFx (RFI, RFP, RFQ) management with bid evaluation, scoring, and award workflows."
+      },
+      {
+        "title": "Spend Analytics Dashboard",
+        "description": "Tableau-powered analytics showing spend by category, vendor, department, and time period."
+      },
+      {
+        "title": "Invoice Processing Automation",
+        "description": "OCR-based invoice extraction with validation, matching, and payment scheduling."
+      }
+    ],
+    "securityCompliance": [
+      "SOX-compliant procurement controls with approval hierarchies",
+      "GDPR-compliant handling of vendor and transaction data",
+      "Role-based access with procurement function segregation",
+      "Encryption in transit (TLS 1.3) and at rest (AES-256)",
+      "Audit trails for all procurement actions and decisions",
+      "Regular vendor security assessments and compliance reviews"
+    ],
+    "faqs": [
+      {
+        "question": "How does AI spend classification work?",
+        "answer": "Our ML model is trained on millions of procurement transactions across industries. It analyses line-item descriptions, vendor names, and purchase contexts to categorise spend into standard taxonomies (G-Sheets, UNSPSC). The model improves over time with user corrections."
+      },
+      {
+        "question": "Can the system handle complex approval hierarchies?",
+        "answer": "Yes. Approval workflows support multi-level hierarchies with matrix-based routing (amount, category, department, vendor). Parallel approvals, conditional routing, and budget checks are fully configurable."
+      },
+      {
+        "question": "How does three-way matching reduce errors?",
+        "answer": "The engine automatically matches PO line items against goods receipts and supplier invoices. Tolerance rules handle minor discrepancies (quantity ±5%, price ±2%), while larger variances trigger exception workflows for manual resolution."
+      },
+      {
+        "question": "Which ERP systems do you integrate with?",
+        "answer": "We integrate with SAP, Oracle E-Business Suite, Microsoft Dynamics 365, and custom ERPs via REST APIs. Procurement data syncs bidirectionally, ensuring consistency between the procurement platform and ERP."
+      },
+      {
+        "question": "How do you ensure contract compliance?",
+        "answer": "The contract repository extracts key obligations (price, volume, SLA, renewal) and monitors compliance throughout the procurement lifecycle. Automated alerts notify procurement teams of approaching deadlines or threshold breaches."
+      },
+      {
+        "question": "What ROI can we expect?",
+        "answer": "Typical customers see 35% reduction in procurement processing costs, 20% improvement in contract compliance, and 40% faster purchase-to-pay cycles. Additional savings come from maverick spend reduction and strategic sourcing enabled by spend analytics."
+      }
+    ],
+    "relatedCaseStudies": [
+      "manufacturing-erp"
+    ]
+  },
+  {
+    "id": "qr-label-solutions",
+    "title": "QR Label Solutions",
+    "shortDescription": "Enterprise QR label generation, tracking, and scanning ecosystem for inventory and traceability.",
+    "fullDescription": "We provide a complete QR/barcode label management ecosystem covering design, generation, batch printing, and scan-based tracking across the supply chain. Each label carries encoded product, batch, and location data that feeds directly into your inventory, quality, and logistics systems. Real-time scan analytics provide visibility into product movement, shelf-life monitoring, counterfeit detection, and recall readiness.",
+    "icon": "QrCode",
+    "category": "solutions",
+    "technologies": [
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "Zebra API",
+      "AWS Lambda",
+      "Docker"
+    ],
+    "industries": [
+      "Manufacturing",
+      "Logistics",
+      "Pharma",
+      "Retail",
+      "Food & Beverage"
+    ],
+    "benefits": [
+      "Batch and serialisation support for full traceability",
+      "Real-time scan analytics with geolocation tracking",
+      "Integration with existing ERP, WMS, and QMS platforms"
+    ],
+    "businessOutcomes": [
+      "100% product traceability from manufacture to point-of-sale",
+      "75% faster recall response with instant batch location data",
+      "Zero manual data entry errors in inventory tracking"
+    ],
+    "businessProblems": [
+      "Counterfeit products entering the supply chain undetected",
+      "Manual inventory counts causing stockouts and overstocking",
+      "Recall processes taking days to identify affected batches",
+      "Shelf-life monitoring relying on spreadsheets and visual checks",
+      "Serialisation compliance gaps for regulated industries"
+    ],
+    "solutionArchitecture": "The platform follows a label-centric architecture with design, generation, and tracking modules. The label designer uses a canvas-based React component with drag-and-drop fields. The generation engine produces QR/barcode images via Zebra API and ZPL. Scan events are ingested via AWS Lambda and streamed to PostgreSQL for real-time analytics. A traceability graph maps product genealogy from raw material to end customer.",
+    "keyFeatures": [
+      {
+        "title": "Visual Label Designer",
+        "description": "Drag-and-drop label design tool with QR, barcode, text, and image fields. Template library for common label types."
+      },
+      {
+        "title": "Batch & Serialisation Engine",
+        "description": "High-volume label generation with serial number management, check digits, and compliance encoding (GS1, HIBCC)."
+      },
+      {
+        "title": "Multi-Brand Printer Support",
+        "description": "Native integration with Zebra, Honeywell, TSC, and SATO printers via ZPL, EPL, and CPCL protocols."
+      },
+      {
+        "title": "Scan Event Analytics",
+        "description": "Real-time scan dashboard with location tracking, timestamp analysis, and exception detection."
+      },
+      {
+        "title": "Traceability Graph",
+        "description": "Product genealogy mapping from raw material through manufacturing, distribution, and retail."
+      },
+      {
+        "title": "Counterfeit Detection",
+        "description": "Cryptographic QR codes with digital signatures and scan-location anomaly detection."
+      },
+      {
+        "title": "Shelf-Life Monitoring",
+        "description": "Automated expiry tracking with alerting for near-expiry and expired products."
+      },
+      {
+        "title": "ERP/WMS/QMS Integration",
+        "description": "Bidirectional sync with inventory, quality, and logistics systems via REST APIs and message queues."
+      }
+    ],
+    "securityCompliance": [
+      "GS1-compliant barcode encoding and serialisation",
+      "FDA 21 CFR Part 11 compliant traceability records (pharma)",
+      "GDPR-compliant handling of product and location data",
+      "Cryptographic QR signatures preventing counterfeiting",
+      "Role-based access to label design and printing functions",
+      "Immutable scan logs for recall and audit evidence"
+    ],
+    "faqs": [
+      {
+        "question": "Which barcode formats do you support?",
+        "answer": "We support all major 1D and 2D formats: QR Code, Data Matrix, Code 128, Code 39, EAN-13, UPC-A, PDF417, and Aztec. The platform automatically selects the optimal format based on data density and industry requirements."
+      },
+      {
+        "question": "Can the system handle high-volume printing?",
+        "answer": "Yes. The generation engine is built on AWS Lambda with concurrent execution, capable of generating 100,000+ labels per hour. Print jobs are queued and load-balanced across available printers."
+      },
+      {
+        "question": "How does traceability work across the supply chain?",
+        "answer": "Each product receives a unique QR code at the point of manufacture. Every scan event (warehouse receipt, dispatch, retail receipt) is recorded with timestamp, location, and actor. The traceability graph reconstructs the complete product journey in seconds."
+      },
+      {
+        "question": "Can we integrate with our existing printers?",
+        "answer": "Yes. We support network-connected printers from Zebra, Honeywell, TSC, and SATO via ZPL, EPL, and CPCL protocols. For non-supported printers, we provide a print server component that translates label formats."
+      },
+      {
+        "question": "How does counterfeit detection work?",
+        "answer": "Each QR code contains a cryptographic signature unique to the product batch. Scanning the code verifies the signature against our registry. Anomaly detection flags suspicious scan patterns (e.g., same code scanned from distant locations within minutes)."
+      },
+      {
+        "question": "What about regulatory compliance for pharma and food?",
+        "answer": "The platform supports serialisation and traceability requirements for FDA (DSCSA), EU Falsified Medicines Directive, and GS1 standards. Audit trails and recall readiness reports are generated automatically for regulatory submissions."
+      }
+    ],
+    "relatedCaseStudies": [
+      "supply-chain-optimization"
+    ]
+  },
+  {
+    "id": "it-asset-management",
+    "title": "IT Asset Management",
+    "shortDescription": "Hardware and software asset lifecycle management with compliance tracking and cost optimization.",
+    "fullDescription": "Our ITAM solution provides comprehensive visibility into your technology estate — desktops, servers, network equipment, cloud resources, and software licenses. Automated discovery agents inventory all connected assets, while lifecycle tracking covers procurement, provisioning, moves, changes, and retirement. Software license reconciliation prevents over-deployment, and hardware warranty/support tracking ensures timely renewals. Integrated CMDB provides the foundation for ITSM processes.",
+    "icon": "Monitor",
+    "category": "management",
+    "technologies": [
+      "React",
+      "Python",
+      "PostgreSQL",
+      "PowerShell",
+      "SNMP",
+      "Docker"
+    ],
+    "industries": [
+      "IT Services",
+      "Finance",
+      "Healthcare",
+      "Education",
+      "Government"
+    ],
+    "benefits": [
+      "Automated asset discovery eliminates manual inventory efforts",
+      "Integrated CMDB powers incident and change management",
+      "Software license reconciliation prevents compliance exposure"
+    ],
+    "businessOutcomes": [
+      "45% reduction in IT asset-spend leakage",
+      "Zero software license audit penalties",
+      "30% faster incident resolution with accurate asset data"
+    ],
+    "businessProblems": [
+      "Shadow IT and unrecorded assets creating security blind spots",
+      "Manual inventory processes taking weeks per quarter",
+      "Software license over-deployment triggering audit penalties",
+      "No visibility into hardware warranty and support expiration",
+      "ITSM incidents delayed by missing or inaccurate asset data"
+    ],
+    "solutionArchitecture": "The platform follows a discovery-centric architecture. Distributed agents (PowerShell for Windows, Bash for Linux/macOS, SNMP for network devices) continuously inventory assets and report to a central PostgreSQL database. A CMDB stores configuration items with relationship mapping. License reconciliation compares discovered software against entitlements. The React dashboard provides real-time asset visibility with filtering, search, and reporting.",
+    "keyFeatures": [
+      {
+        "title": "Automated Discovery",
+        "description": "Agent-based and agentless discovery covering endpoints, servers, network devices, and cloud resources."
+      },
+      {
+        "title": "CMDB Integration",
+        "description": "Bidirectional sync with ITSM tools (ServiceNow, Jira, BMC) for accurate configuration management."
+      },
+      {
+        "title": "License Reconciliation",
+        "description": "Automated comparison of discovered software against procurement records and entitlements."
+      },
+      {
+        "title": "Hardware Lifecycle Tracking",
+        "description": "Procurement, deployment, moves, changes, and retirement with warranty and support tracking."
+      },
+      {
+        "title": "Cloud Asset Visibility",
+        "description": "AWS, Azure, and GCP resource discovery with cost allocation and utilisation metrics."
+      },
+      {
+        "title": "Software Metering",
+        "description": "Real-time usage tracking for licensed applications with peak usage and concurrent user metrics."
+      },
+      {
+        "title": "Automated Alerts",
+        "description": "Warranty expiration, end-of-support, license compliance, and anomaly detection alerts."
+      },
+      {
+        "title": "Self-Service Portal",
+        "description": "Employee self-service for asset requests, software installation, and support ticketing."
+      }
+    ],
+    "securityCompliance": [
+      "ISO 19770-1 (Software Asset Management) certified processes",
+      "SOC 2 controls for asset data confidentiality and integrity",
+      "GDPR-compliant handling of employee device data",
+      "Role-based access with IT, finance, and auditor permissions",
+      "Encrypted discovery communications (TLS 1.3)",
+      "Immutable audit logs for all asset state changes"
+    ],
+    "faqs": [
+      {
+        "question": "How does automated discovery work without impacting performance?",
+        "answer": "Discovery agents use delta-scanning — only changed assets are reported after the initial full inventory. Network discovery uses SNMP with configurable scan windows. CPU and network impact is typically less than 2% during scans."
+      },
+      {
+        "question": "Can you discover cloud resources?",
+        "answer": "Yes. We use cloud provider APIs (AWS Config, Azure Resource Graph, GCP Asset Inventory) to discover virtual machines, databases, storage, and serverless resources. Cloud costs are attributed to departments and projects for chargeback."
+      },
+      {
+        "question": "How does license reconciliation prevent audit penalties?",
+        "answer": "The reconciliation engine compares discovered installations against purchased entitlements, flagging over-deployment before vendor auditors arrive. We maintain a 100% audit pass rate across 150+ vendor audit engagements."
+      },
+      {
+        "question": "Does the system integrate with our ITSM tool?",
+        "answer": "Yes. We maintain certified integrations with ServiceNow, Jira Service Management, BMC Helix, and Freshservice. The CMDB sync ensures incidents and changes are tied to accurate asset data."
+      },
+      {
+        "question": "What happens when hardware reaches end-of-life?",
+        "answer": "The platform tracks warranty and support contracts, sending alerts 90, 60, and 30 days before expiration. Retirement workflows include data sanitisation verification, disposal vendor management, and financial depreciation posting."
+      },
+      {
+        "question": "Can employees request assets through the system?",
+        "answer": "Yes. The self-service portal lets employees request hardware, software, and access rights. Requests are routed through approval workflows with budget checking and automated provisioning via integration with IT systems."
+      }
+    ],
+    "relatedCaseStudies": [
+      "cloud-migration-financial"
+    ]
+  },
+  {
+    "id": "recruitment-management",
+    "title": "Recruitment Management",
+    "shortDescription": "End-to-end recruitment orchestration platform connecting talent acquisition from sourcing to offer.",
+    "fullDescription": "Our recruitment management platform streamlines the entire talent acquisition lifecycle — job requisition, multi-channel sourcing, applicant tracking, interview scheduling, offer management, and onboarding handoff. AI-powered candidate ranking, automated interview workflow coordination, and collaborative feedback tools help hiring teams move faster without sacrificing quality. Built-in analytics provide source-of-hire attribution, pipeline health metrics, and diversity tracking.",
+    "icon": "UserCheck",
+    "category": "management",
+    "technologies": [
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "Elasticsearch",
+      "Redis",
+      "Docker"
+    ],
+    "industries": [
+      "IT Services",
+      "Finance",
+      "Healthcare",
+      "Manufacturing",
+      "Retail"
+    ],
+    "benefits": [
+      "Multi-channel sourcing with unified candidate profile view",
+      "AI-powered candidate ranking reduces screening effort",
+      "Collaborative feedback tools streamline hiring decisions"
+    ],
+    "businessOutcomes": [
+      "50% faster time-to-fill across all open positions",
+      "40% reduction in cost-per-hire through sourcing optimisation",
+      "90% recruiter satisfaction with streamlined workflow"
+    ],
+    "businessProblems": [
+      "Job postings scattered across 10+ job boards and social platforms",
+      "Candidate data trapped in email threads and spreadsheets",
+      "Interview scheduling consuming hours of coordination effort",
+      "Hiring decisions delayed by missing or inconsistent feedback",
+      "No visibility into sourcing channel effectiveness or ROI"
+    ],
+    "solutionArchitecture": "The platform uses a centralised candidate registry with multi-channel ingestion (job boards, referrals, career site, LinkedIn). Elasticsearch powers full-text candidate search with semantic ranking. Interview scheduling uses a constraint-solver algorithm to find optimal slots across participants. The offer management module handles approval workflows, e-signature integration, and onboarding handoff.",
+    "keyFeatures": [
+      {
+        "title": "Multi-Channel Sourcing",
+        "description": "Unified inbox for candidates from job boards, social media, referrals, and career site with duplicate detection."
+      },
+      {
+        "title": "AI-Powered Ranking",
+        "description": "Candidate-job matching using semantic similarity, skill gap analysis, and historical hire patterns."
+      },
+      {
+        "title": "Interview Scheduler",
+        "description": "Automated scheduling with panel coordination, room booking, and calendar sync for all participants."
+      },
+      {
+        "title": "Collaborative Feedback",
+        "description": "Structured scorecards with rubric-based evaluation, consensus building, and hiring manager review."
+      },
+      {
+        "title": "Offer Management",
+        "description": "Offer letter generation with e-signature, approval workflows, and onboarding handoff automation."
+      },
+      {
+        "title": "Pipeline Analytics",
+        "description": "Conversion rates, time-to-fill, source-of-hire attribution, and recruiter performance dashboards."
+      },
+      {
+        "title": "Diversity Tracking",
+        "description": "Demographic reporting with EEOC compliance, diversity hiring goals, and bias detection."
+      },
+      {
+        "title": "Candidate CRM",
+        "description": "Relationship nurturing with talent pools, drip campaigns, and re-engagement for future opportunities."
+      }
+    ],
+    "securityCompliance": [
+      "GDPR-compliant candidate data handling and right-to-erasure",
+      "EEOC-compliant hiring processes with audit trails",
+      "SOC 2 controls for candidate data confidentiality",
+      "Role-based access with recruiter, hiring manager, and HR permissions",
+      "Encrypted candidate data in transit (TLS 1.3) and at rest (AES-256)",
+      "Regular security assessments and penetration testing"
+    ],
+    "faqs": [
+      {
+        "question": "Which job boards and channels do you integrate with?",
+        "answer": "We maintain one-click integrations with LinkedIn, Indeed, Naukri, Monster, Glassdoor, and 20+ regional job boards. Postings are syndicated automatically, and candidate applications are unified in the ATS."
+      },
+      {
+        "question": "How does AI-powered candidate ranking work?",
+        "answer": "The ranking engine combines semantic similarity (resume vs job description), skill gap analysis, and historical hire patterns. Recruiters can adjust ranking weights and provide feedback to improve accuracy over time."
+      },
+      {
+        "question": "Can the system handle campus hiring volumes?",
+        "answer": "Yes. Our bulk processing pipeline handles 10,000+ applications per day with automated screening, test scheduling, and shortlisting. Group interview management and offer batch processing streamline campus hiring."
+      },
+      {
+        "question": "How does interview scheduling work?",
+        "answer": "The scheduler reads interviewer calendars, identifies optimal time slots, and sends interview invites with one-click confirmation. It handles timezone conversion, room booking, and video conference link generation."
+      },
+      {
+        "question": "Do you provide diversity hiring tools?",
+        "answer": "Yes. The platform tracks demographic data (voluntary self-identification), generates diversity reporting, and provides bias detection in job descriptions and screening criteria. Anonymisation mode removes identifiable information during initial screening."
+      },
+      {
+        "question": "How do you ensure data privacy for candidates?",
+        "answer": "Candidate data is encrypted at rest and in transit. We comply with GDPR, CCPA, and local data protection regulations. Candidates can request data access, correction, or deletion at any time. Data retention policies are configurable."
+      }
+    ],
+    "relatedCaseStudies": [
+      "cloud-migration-financial"
+    ]
+  },
+  {
+    "id": "vr-development",
+    "title": "VR Development",
+    "shortDescription": "Immersive virtual reality experiences for enterprise training, simulation, and product visualisation.",
+    "fullDescription": "We develop immersive VR applications that transform how enterprises train employees, simulate environments, and visualise products. From photorealistic training simulations for manufacturing floor operations to interactive architectural walkthroughs and safety scenario rehearsals, our VR solutions reduce risk, accelerate learning, and eliminate the need for physical prototypes. We deliver across major VR platforms including Meta Quest, HTC Vive, and PICO headsets.",
+    "icon": "Eye",
+    "category": "development",
+    "technologies": [
+      "Unity",
+      "Unreal Engine",
+      "C#",
+      "Blender",
+      "WebXR",
+      "Three.js"
+    ],
+    "industries": [
+      "Manufacturing",
+      "Healthcare",
+      "Education",
+      "Real Estate",
+      "Automotive"
+    ],
+    "benefits": [
+      "Photorealistic environments for high-fidelity simulations",
+      "Cross-platform deployment across all major VR headsets",
+      "Real-time performance optimisation for smooth 90fps experiences"
+    ],
+    "businessOutcomes": [
+      "60% faster skill acquisition compared to traditional training",
+      "90% reduction in training-related physical resource costs",
+      "Zero workplace safety incidents during VR-based hazard training"
+    ],
+    "businessProblems": [
+      "Traditional training expensive, dangerous, or impossible for certain scenarios",
+      "Geographically dispersed teams unable to attend in-person training",
+      "Physical prototypes costly and time-consuming to produce",
+      "Knowledge retention declining after classroom training",
+      "Safety training exposing employees to real hazards"
+    ],
+    "solutionArchitecture": "We use a modular VR architecture separating content, logic, and presentation. 3D environments are built in Unity or Unreal Engine with physically-based rendering for realism. Interaction logic uses a component-based system supporting hand tracking, controller input, and gaze-based interaction. Multi-user support uses Photon or Mirror networking for collaborative training scenarios. WebXR enables browser-based VR for broader accessibility.",
+    "keyFeatures": [
+      {
+        "title": "Photorealistic Environment Design",
+        "description": "PBR materials, dynamic lighting, and spatial audio create immersive training environments indistinguishable from reality."
+      },
+      {
+        "title": "Physics-Based Interaction",
+        "description": "Natural object manipulation with haptic feedback, force simulation, and realistic tool behaviour."
+      },
+      {
+        "title": "Multi-User Collaboration",
+        "description": "Shared virtual spaces for team training with voice chat, avatar representation, and instructor control."
+      },
+      {
+        "title": "Performance Analytics",
+        "description": "Tracker-based metrics (task completion time, error rate, gaze path) for skills assessment and improvement tracking."
+      },
+      {
+        "title": "Scenario Branching",
+        "description": "Non-linear training scenarios with decision points, consequence simulation, and adaptive difficulty."
+      },
+      {
+        "title": "Cross-Platform Deployment",
+        "description": "Single codebase deploys to Meta Quest, HTC Vive, PICO, and WebXR-enabled browsers."
+      },
+      {
+        "title": "Accessibility Features",
+        "description": "Seated mode, comfort settings, alternative input methods, and subtitles for hearing-impaired users."
+      },
+      {
+        "title": "Content Management System",
+        "description": "Admin interface for updating training content, scenarios, and assessments without developer involvement."
+      }
+    ],
+    "securityCompliance": [
+      "GDPR-compliant handling of trainee performance data",
+      "SOC 2 controls for platform security and availability",
+      "Encrypted data transmission between VR clients and servers",
+      "Role-based access for training content and performance data",
+      "Regular security assessments of multiplayer networking code",
+      "Compliance with platform-specific VR safety guidelines"
+    ],
+    "faqs": [
+      {
+        "question": "Which VR platforms do you support?",
+        "answer": "We develop for Meta Quest 2/3/Pro, HTC Vive Focus 3, PICO 4, and Windows Mixed Reality. For broader accessibility, we also deploy WebXR experiences that run in Chrome, Firefox, and Edge browsers without a headset."
+      },
+      {
+        "question": "How realistic are the training simulations?",
+        "answer": "We use physically-based rendering (PBR), spatial audio, and haptic feedback to create high-fidelity environments. For medical training, we partner with surgical instrument manufacturers for accurate 3D models. For manufacturing, we scan real facilities for 1:1 digital twins."
+      },
+      {
+        "question": "Can multiple trainees use the system simultaneously?",
+        "answer": "Yes. Our multiplayer architecture supports up to 50 concurrent users in shared virtual environments. Instructors can observe, guide, and assess multiple trainees simultaneously from a control panel."
+      },
+      {
+        "question": "How do you measure training effectiveness?",
+        "answer": "The platform captures detailed performance metrics: task completion time, error rate, gaze path, hand movement efficiency, and decision accuracy. Pre- and post-training assessments quantify knowledge retention and skills improvement."
+      },
+      {
+        "question": "What hardware do we need to deploy?",
+        "answer": "For standalone VR (Quest, PICO), no additional hardware is needed. For PC VR, we specify workstations with RTX 4070 or better. For multi-user setups, we recommend a dedicated VR server with 10Gbps network connectivity."
+      },
+      {
+        "question": "Can you create custom content for our specific equipment or processes?",
+        "answer": "Yes. Our 3D artists and subject matter experts work with your team to create accurate digital twins of your equipment, facilities, and processes. Content authoring tools enable your team to update scenarios independently."
+      }
+    ],
+    "relatedCaseStudies": [
+      "manufacturing-erp"
+    ]
+  },
+  {
+    "id": "support-maintenance",
+    "title": "Support & Maintenance",
+    "shortDescription": "Proactive application support and managed maintenance with SLA-backed reliability guarantees.",
+    "fullDescription": "Our support and maintenance services keep your business applications running at peak performance around the clock. We provide multi-tiered support — L1 helpdesk, L2 technical support, and L3 engineering — with defined SLAs for response and resolution times. Our proactive monitoring infrastructure detects anomalies before they become incidents, while our maintenance cadence covers security patching, performance tuning, database optimisation, and version upgrades.",
+    "icon": "Wrench",
+    "category": "support",
+    "technologies": [
+      "Docker",
+      "Kubernetes",
+      "Prometheus",
+      "Grafana",
+      "ELK Stack",
+      "PagerDuty"
+    ],
+    "industries": [
+      "Manufacturing",
+      "Finance",
+      "Healthcare",
+      "IT Services",
+      "Government"
+    ],
+    "benefits": [
+      "24/7 proactive monitoring with automated incident response",
+      "Multi-tier support structure ensures appropriate escalation",
+      "Regular security patching and performance optimisation included"
+    ],
+    "businessOutcomes": [
+      "99.9% application uptime with SLA-backed guarantees",
+      "60% faster mean-time-to-resolution for critical incidents",
+      "40% reduction in unplanned downtime through proactive maintenance"
+    ],
+    "businessProblems": [
+      "Reactive support causing extended outages and business impact",
+      "Lack of specialised expertise for legacy or custom systems",
+      "Security patches delayed due to change management bottlenecks",
+      "No visibility into application health until users report issues",
+      "High contractor costs with inconsistent service quality"
+    ],
+    "solutionArchitecture": "The support delivery platform uses an observability-first architecture. Prometheus and Grafana provide real-time metrics, while the ELK stack centralises logs. PagerDuty handles on-call rotation and escalation. A remediation runbook engine automates common fixes (service restart, cache flush, connection pool resize). The knowledge base captures resolutions for recurring issues, enabling L1 resolution without L2 escalation.",
+    "keyFeatures": [
+      {
+        "title": "24/7 Proactive Monitoring",
+        "description": "Prometheus-based metrics collection with Grafana dashboards and PagerDuty alerting across all application tiers."
+      },
+      {
+        "title": "Multi-Tier Support Model",
+        "description": "L1 helpdesk (triage, password resets), L2 technical (application issues), L3 engineering (code-level fixes) with clear escalation paths."
+      },
+      {
+        "title": "Automated Incident Response",
+        "description": "Runbook automation for common remediation actions with approval gates and rollback mechanisms."
+      },
+      {
+        "title": "Security Patching Cadence",
+        "description": "Monthly patch assessment, testing, and deployment with emergency patch capability for critical CVEs."
+      },
+      {
+        "title": "Performance Optimisation",
+        "description": "Quarterly performance reviews with query optimisation, connection pool tuning, and cache strategy refinement."
+      },
+      {
+        "title": "Knowledge Base",
+        "description": "Searchable resolution library with runbooks, known issues, and troubleshooting guides for L1 self-service."
+      },
+      {
+        "title": "Change Management",
+        "description": "Structured change process with CAB approval, testing, deployment, and rollback procedures."
+      },
+      {
+        "title": "Customer Success Reviews",
+        "description": "Quarterly business reviews with health metrics, improvement roadmap, and strategic recommendations."
+      }
+    ],
+    "securityCompliance": [
+      "ISO 27001 certified support delivery processes",
+      "SOC 2 Type II controls for service security and availability",
+      "GDPR-compliant handling of customer data during support activities",
+      "Role-based access with least-privilege principles",
+      "Encrypted communication channels (TLS 1.3) for all support interactions",
+      "Regular security audits of support infrastructure and access controls"
+    ],
+    "faqs": [
+      {
+        "question": "What are your SLA commitments?",
+        "answer": "We offer three tiers: Bronze (business hours, 8-hour response), Silver (24/7, 4-hour response for P1), and Gold (24/7, 1-hour response for P1 with dedicated TAM). All tiers include 99.9% uptime guarantee with financial penalties for breaches."
+      },
+      {
+        "question": "How do you handle after-hours emergencies?",
+        "answer": "Our 24/7 NOC uses PagerDuty for intelligent alert routing. On-call engineers are equipped with remote access tools and runbooks for rapid diagnosis. Critical incidents (P1) trigger a war-room conference bridge within 15 minutes."
+      },
+      {
+        "question": "Can you support custom or legacy applications?",
+        "answer": "Yes. Our L3 engineering team specialises in maintaining and modernising legacy systems (Java 8, .NET Framework, COBOL integrations). We document undocumented systems, create automated tests, and implement observability where missing."
+      },
+      {
+        "question": "What does proactive maintenance include?",
+        "answer": "Proactive maintenance includes: security patching (monthly), performance tuning (quarterly), database optimisation (monthly), log rotation and archival, backup verification, dependency updates, and capacity planning reviews."
+      },
+      {
+        "question": "How do you manage changes to production?",
+        "answer": "All changes follow ITIL change management: RFC submission, CAB review (for standard changes), testing in staging, production deployment during maintenance windows, and rollback procedures. Emergency changes follow an expedited process with post-implementation review."
+      },
+      {
+        "question": "Can you take over support from a previous vendor?",
+        "answer": "Yes. We follow a structured transition process: knowledge transfer (1-2 weeks), environment access and documentation review, shadowing period (2-4 weeks), and full ownership transfer. We have successfully transitioned 40+ engagements from previous vendors."
+      }
+    ],
+    "relatedCaseStudies": [
+      "manufacturing-erp",
+      "cloud-migration-financial"
+    ]
+  }
+]

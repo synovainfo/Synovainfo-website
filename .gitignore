@@ -34,6 +34,7 @@ yarn-error.log*
 .env*
 .env*.local
 
+
 # Docker
 postgres_data/
 redis_data/
@@ -46,12 +47,19 @@ redis_data/
 next-env.d.ts
 .codegraph
 .omo
+.freebuff
+.AGENTS/
+.kilo/
+.omx/
+
+
 
 
 /src/generated/prisma
 .codegraph/
 .omo/
 AGENTS.md 
+<<<<<<< HEAD
 
 # Laravel
 /laravel/vendor/
@@ -62,4 +70,8 @@ AGENTS.md
 /laravel/storage/framework/views/*
 /laravel/storage/logs/*
 /laravel_scaffold/
+=======
+claude.md
+*.txt
+>>>>>>> c05ecdb6ad438865977435b644e98e5f97a9d67f
 

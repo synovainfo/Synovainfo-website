@@ -1,0 +1,176 @@
+[
+  {
+    "id": "react",
+    "name": "React",
+    "category": "frontend",
+    "description": "Component-based UI library"
+  },
+  {
+    "id": "angular",
+    "name": "Angular",
+    "category": "frontend",
+    "description": "Platform for web applications"
+  },
+  {
+    "id": "nextjs",
+    "name": "Next.js",
+    "category": "frontend",
+    "description": "Full-stack React framework"
+  },
+  {
+    "id": "flutter",
+    "name": "Flutter",
+    "category": "frontend",
+    "description": "Cross-platform UI toolkit"
+  },
+  {
+    "id": "vuejs",
+    "name": "Vue.js",
+    "category": "frontend",
+    "description": "Progressive JavaScript framework"
+  },
+  {
+    "id": "java",
+    "name": "Java",
+    "category": "backend",
+    "description": "Enterprise-grade runtime"
+  },
+  {
+    "id": "spring-boot",
+    "name": "Spring Boot",
+    "category": "backend",
+    "description": "Microservices framework"
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "category": "backend",
+    "description": "General-purpose programming"
+  },
+  {
+    "id": "dotnet",
+    "name": ".NET",
+    "category": "backend",
+    "description": "Cross-platform framework"
+  },
+  {
+    "id": "nodejs",
+    "name": "Node.js",
+    "category": "backend",
+    "description": "Server-side JavaScript"
+  },
+  {
+    "id": "php",
+    "name": "PHP",
+    "category": "backend",
+    "description": "Web scripting language"
+  },
+  {
+    "id": "go",
+    "name": "Go",
+    "category": "backend",
+    "description": "Systems programming language"
+  },
+  {
+    "id": "postgresql",
+    "name": "PostgreSQL",
+    "category": "database",
+    "description": "Advanced relational database"
+  },
+  {
+    "id": "oracle",
+    "name": "Oracle",
+    "category": "database",
+    "description": "Enterprise database"
+  },
+  {
+    "id": "sql-server",
+    "name": "SQL Server",
+    "category": "database",
+    "description": "Microsoft RDBMS"
+  },
+  {
+    "id": "mongodb",
+    "name": "MongoDB",
+    "category": "database",
+    "description": "NoSQL document store"
+  },
+  {
+    "id": "redis",
+    "name": "Redis",
+    "category": "database",
+    "description": "In-memory data store"
+  },
+  {
+    "id": "aws",
+    "name": "AWS",
+    "category": "cloud",
+    "description": "Amazon Web Services"
+  },
+  {
+    "id": "azure",
+    "name": "Azure",
+    "category": "cloud",
+    "description": "Microsoft cloud platform"
+  },
+  {
+    "id": "gcp",
+    "name": "GCP",
+    "category": "cloud",
+    "description": "Google Cloud Platform"
+  },
+  {
+    "id": "docker",
+    "name": "Docker",
+    "category": "cloud",
+    "description": "Container platform"
+  },
+  {
+    "id": "kubernetes",
+    "name": "Kubernetes",
+    "category": "cloud",
+    "description": "Container orchestration"
+  },
+  {
+    "id": "kafka",
+    "name": "Kafka",
+    "category": "cloud",
+    "description": "Event streaming platform"
+  },
+  {
+    "id": "ai",
+    "name": "AI",
+    "category": "ai",
+    "description": "Artificial Intelligence"
+  },
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "category": "ai",
+    "description": "LLM & generative AI"
+  },
+  {
+    "id": "tensorflow",
+    "name": "TensorFlow",
+    "category": "ai",
+    "description": "ML framework"
+  },
+  {
+    "id": "computer-vision",
+    "name": "Computer Vision",
+    "category": "ai",
+    "description": "Image & video intelligence"
+  },
+  {
+    "id": "iot",
+    "name": "IoT",
+    "category": "ai",
+    "description": "Internet of Things"
+  },
+  {
+    "id": "qr",
+    "name": "QR",
+    "category": "ai",
+    "description": "QR & barcode solutions"
+  }
+]

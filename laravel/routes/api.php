@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -105,4 +106,14 @@ Route::post('/contacts', function (Request $request) {
     ]);
 
     return response()->json(['success' => true, 'message' => 'Thank you! Your inquiry has been received.', 'id' => $id], 201);
+=======
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+// API Endpoints for frontend interactivity (if any)
+Route::prefix('v1')->group(function () {
+    //
+>>>>>>> c05ecdb6ad438865977435b644e98e5f97a9d67f
 });
