@@ -1,0 +1,22 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-BUQL0bKL.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DNXFiSsG.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/three/enterprise-scene.js"
+    ]
+  },
+  "resources/js/three/enterprise-scene.js": {
+    "file": "assets/enterprise-scene-FlvueOoO.js",
+    "name": "enterprise-scene",
+    "src": "resources/js/three/enterprise-scene.js",
+    "isDynamicEntry": true
+  }
+}

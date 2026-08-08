@@ -1,0 +1,21 @@
+---
+deployment:
+  tasks:
+    # Set target deployment directories for GoDaddy cPanel
+    - export DEPLOYPATH=/home/$USER/public_html
+    - export LARAVELPATH=/home/$USER/laravel_app
+    
+    # 1. Ensure laravel application directory exists above public_html
+    - /bin/mkdir -p $LARAVELPATH
+    
+    # 2. Sync all Laravel backend code into laravel_app
+    - /bin/cp -R laravel/* $LARAVELPATH/
+    - /bin/cp -R laravel/.htaccess $LARAVELPATH/ 2>/dev/null || true
+    
+    # 3. Deploy front-facing public assets & index.php into public_html
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -R laravel/public/* $DEPLOYPATH/
+    - /bin/cp laravel/public/.htaccess $DEPLOYPATH/.htaccess 2>/dev/null || true
+    
+    # 4. Set secure storage & cache folder permissions (775)
+    - /bin/chmod -R 775 $LARAVELPATH/storage $LARAVELPATH/bootstrap/cache
