@@ -4,63 +4,29 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CareerApplication;
-use Illuminate\Http\Request;
+
 
 class CareerApplicationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
-        //
+        $query = \App\Models\CareerApplication::query()->latest('created_at');
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            $query->where('id', 'like', "%$search%");
+        }
+        $careerApplications = $query->paginate(15);
+        return view('admin.career-applications.index', compact('careerApplications'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show(\App\Models\CareerApplication $careerApplication)
     {
-        //
+        return view('admin.career-applications.show', compact('careerApplication'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function destroy(\App\Models\CareerApplication $careerApplication)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(CareerApplication $careerApplication)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(CareerApplication $careerApplication)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, CareerApplication $careerApplication)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(CareerApplication $careerApplication)
-    {
-        //
+        $careerApplication->delete();
+        return redirect()->route('admin.career-applications.index')->with('success', 'CareerApplication deleted successfully.');
     }
 }

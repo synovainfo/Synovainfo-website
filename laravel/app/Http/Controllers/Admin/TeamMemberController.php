@@ -4,63 +4,60 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\TeamMember;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\TeamMemberRequest;
 
 class TeamMemberController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
-        //
+        $query = \App\Models\TeamMember::query()->latest('created_at');
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            $query->where('id', 'like', "%$search%");
+        }
+        $teamMembers = $query->paginate(15);
+        return view('admin.team-members.index', compact('teamMembers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.team-members.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\Admin\TeamMemberRequest $request)
     {
-        //
+        $data = $request->validated();
+        if (\Illuminate\Support\Facades\Schema::hasColumn((new \App\Models\TeamMember)->getTable(), 'created_by_id')) {
+            $data['created_by_id'] = auth()->id();
+            $data['updated_by_id'] = auth()->id();
+        }
+        \App\Models\TeamMember::create($data);
+        return redirect()->route('admin.team-members.index')->with('success', 'TeamMember created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(TeamMember $teamMember)
+    public function show(\App\Models\TeamMember $teamMember)
     {
-        //
+        return view('admin.team-members.show', compact('teamMember'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(TeamMember $teamMember)
+    public function edit(\App\Models\TeamMember $teamMember)
     {
-        //
+        return view('admin.team-members.edit', compact('teamMember'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, TeamMember $teamMember)
+    public function update(\App\Http\Requests\Admin\TeamMemberRequest $request, \App\Models\TeamMember $teamMember)
     {
-        //
+        $data = $request->validated();
+        if (\Illuminate\Support\Facades\Schema::hasColumn((new \App\Models\TeamMember)->getTable(), 'updated_by_id')) {
+            $data['updated_by_id'] = auth()->id();
+        }
+        $teamMember->update($data);
+        return redirect()->route('admin.team-members.index')->with('success', 'TeamMember updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(TeamMember $teamMember)
+    public function destroy(\App\Models\TeamMember $teamMember)
     {
-        //
+        $teamMember->delete();
+        return redirect()->route('admin.team-members.index')->with('success', 'TeamMember deleted successfully.');
     }
 }

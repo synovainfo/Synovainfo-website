@@ -12,14 +12,10 @@ class PageController extends Controller
     {
         $page = Page::where('slug', '/')->with('sections')->first();
 
-        $seo = $this->seo([
-            'title' => 'Enterprise Software Solutions & Digital Transformation',
-            'description' => 'Synovainfo Infotech architects mission-critical enterprise platforms — cloud-native engineering, AI-driven automation, and zero-trust security for global organizations. ISO 27001 & SOC 2 aligned delivery from Pune, India.',
-            'keywords' => 'enterprise software development, cloud architecture, digital transformation, AI engineering, zero trust security, Synovainfo Infotech Pune, multi-cloud, microservices, DevOps consulting',
-            'ogImage' => 'images/global/og-home.png',
-        ]);
+        $seo = $this->seo(config('seo.home', []));
+        $content = config('content');
 
-        return view('pages.home', compact('page', 'seo'));
+        return view('pages.home', array_merge(compact('page', 'seo'), $content));
     }
 
     public function about(): View

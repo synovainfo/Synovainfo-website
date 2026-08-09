@@ -4,63 +4,60 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\TagRequest;
 
 class TagController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
-        //
+        $query = \App\Models\Tag::query()->latest('created_at');
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            $query->where('id', 'like', "%$search%");
+        }
+        $tags = $query->paginate(15);
+        return view('admin.tags.index', compact('tags'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.tags.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\Admin\TagRequest $request)
     {
-        //
+        $data = $request->validated();
+        if (\Illuminate\Support\Facades\Schema::hasColumn((new \App\Models\Tag)->getTable(), 'created_by_id')) {
+            $data['created_by_id'] = auth()->id();
+            $data['updated_by_id'] = auth()->id();
+        }
+        \App\Models\Tag::create($data);
+        return redirect()->route('admin.tags.index')->with('success', 'Tag created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tag $tag)
+    public function show(\App\Models\Tag $tag)
     {
-        //
+        return view('admin.tags.show', compact('tag'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tag $tag)
+    public function edit(\App\Models\Tag $tag)
     {
-        //
+        return view('admin.tags.edit', compact('tag'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Tag $tag)
+    public function update(\App\Http\Requests\Admin\TagRequest $request, \App\Models\Tag $tag)
     {
-        //
+        $data = $request->validated();
+        if (\Illuminate\Support\Facades\Schema::hasColumn((new \App\Models\Tag)->getTable(), 'updated_by_id')) {
+            $data['updated_by_id'] = auth()->id();
+        }
+        $tag->update($data);
+        return redirect()->route('admin.tags.index')->with('success', 'Tag updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Tag $tag)
+    public function destroy(\App\Models\Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect()->route('admin.tags.index')->with('success', 'Tag deleted successfully.');
     }
 }

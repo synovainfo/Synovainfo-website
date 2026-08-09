@@ -4,63 +4,60 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\GalleryAlbum;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\GalleryAlbumRequest;
 
 class GalleryAlbumController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
-        //
+        $query = \App\Models\GalleryAlbum::query()->latest('created_at');
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            $query->where('id', 'like', "%$search%");
+        }
+        $galleryAlbums = $query->paginate(15);
+        return view('admin.gallery-albums.index', compact('galleryAlbums'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.gallery-albums.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\Admin\GalleryAlbumRequest $request)
     {
-        //
+        $data = $request->validated();
+        if (\Illuminate\Support\Facades\Schema::hasColumn((new \App\Models\GalleryAlbum)->getTable(), 'created_by_id')) {
+            $data['created_by_id'] = auth()->id();
+            $data['updated_by_id'] = auth()->id();
+        }
+        \App\Models\GalleryAlbum::create($data);
+        return redirect()->route('admin.gallery-albums.index')->with('success', 'GalleryAlbum created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(GalleryAlbum $galleryAlbum)
+    public function show(\App\Models\GalleryAlbum $galleryAlbum)
     {
-        //
+        return view('admin.gallery-albums.show', compact('galleryAlbum'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(GalleryAlbum $galleryAlbum)
+    public function edit(\App\Models\GalleryAlbum $galleryAlbum)
     {
-        //
+        return view('admin.gallery-albums.edit', compact('galleryAlbum'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, GalleryAlbum $galleryAlbum)
+    public function update(\App\Http\Requests\Admin\GalleryAlbumRequest $request, \App\Models\GalleryAlbum $galleryAlbum)
     {
-        //
+        $data = $request->validated();
+        if (\Illuminate\Support\Facades\Schema::hasColumn((new \App\Models\GalleryAlbum)->getTable(), 'updated_by_id')) {
+            $data['updated_by_id'] = auth()->id();
+        }
+        $galleryAlbum->update($data);
+        return redirect()->route('admin.gallery-albums.index')->with('success', 'GalleryAlbum updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(GalleryAlbum $galleryAlbum)
+    public function destroy(\App\Models\GalleryAlbum $galleryAlbum)
     {
-        //
+        $galleryAlbum->delete();
+        return redirect()->route('admin.gallery-albums.index')->with('success', 'GalleryAlbum deleted successfully.');
     }
 }

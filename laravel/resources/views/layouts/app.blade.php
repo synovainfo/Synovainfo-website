@@ -44,36 +44,35 @@
         })();
     </script>
 
-    @php
-        // Slots are pre-escaped by their source views; render once, raw, to avoid double-encoding.
-        $pageTitle = ($title ?? config('app.name')) . (isset($title) ? ' | ' . config('app.name') : '');
-    @endphp
-    <title>{!! $pageTitle !!}</title>
+    <!-- Title: dynamic + brand suffix -->
+    <title>{{ $seo['title'] ?? 'Enterprise Software Solutions & Digital Transformation' }} | Synova Infotech</title>
 
-    {{-- ── SEO Meta ── --}}
-    <meta name="description" content="{{ $description ?? 'Synovainfo Infotech engineers mission-critical enterprise platforms — cloud-native architecture, AI-driven automation, and zero-trust security for global organizations.' }}">
-    <meta name="keywords" content="{{ $keywords ?? 'enterprise software, cloud architecture, digital transformation, AI engineering, cybersecurity, Synovainfo Infotech, Pune, multi-cloud, zero trust' }}">
+    <!-- Meta description / keywords -->
+    <meta name="description" content="{{ $seo['description'] ?? 'Synova Infotech delivers custom software, enterprise business solutions, IT infrastructure, and AI/VR technology services for organizations of all sizes.' }}">
+    <meta name="keywords" content="{{ $seo['keywords'] ?? 'enterprise software development, IT infrastructure, digital transformation, AI solutions, networking, Synova Infotech Pune' }}">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="author" content="Synovainfo Infotech Private Limited">
-    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="author" content="Synova Infotech Private Limited">
 
-    {{-- ── OpenGraph ── --}}
-    <meta property="og:site_name" content="{{ config('app.name') }}">
+    <!-- Canonical -->
+    <link rel="canonical" href="{{ $seo['canonical'] ?? request()->url() }}">
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Synova Infotech">
     <meta property="og:type" content="{{ $ogType ?? 'website' }}">
-    <meta property="og:title" content="{!! $pageTitle !!}">
-    <meta property="og:description" content="{{ $description ?? 'Synovainfo Infotech engineers mission-critical enterprise platforms for global organizations.' }}">
+    <meta property="og:title" content="{{ $seo['og_title'] ?? $seo['title'] ?? 'Enterprise Software Solutions & Digital Transformation' }} | Synova Infotech">
+    <meta property="og:description" content="{{ $seo['og_description'] ?? $seo['description'] ?? 'Synova Infotech delivers custom software, enterprise business solutions, IT infrastructure, and AI/VR technology services for organizations of all sizes.' }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="{{ asset($ogImage ?? 'images/global/og-default.webp') }}">
+    <meta property="og:image" content="{{ asset($seo['og_image'] ?? 'images/global/og-home.png') }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="{{ config('app.name') }} — Enterprise Technology Solutions">
+    <meta property="og:image:alt" content="Synova Infotech — Enterprise Technology Solutions">
 
-    {{-- ── Twitter Card ── --}}
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{!! $pageTitle !!}">
-    <meta name="twitter:description" content="{{ $description ?? 'Synovainfo Infotech engineers mission-critical enterprise platforms for global organizations.' }}">
-    <meta name="twitter:image" content="{{ asset($ogImage ?? 'images/global/og-default.webp') }}">
+    <meta name="twitter:title" content="{{ $seo['og_title'] ?? $seo['title'] ?? 'Enterprise Software Solutions & Digital Transformation' }} | Synova Infotech">
+    <meta name="twitter:description" content="{{ $seo['og_description'] ?? $seo['description'] ?? 'Synova Infotech delivers custom software, enterprise business solutions, IT infrastructure, and AI/VR technology services for organizations of all sizes.' }}">
+    <meta name="twitter:image" content="{{ asset($seo['og_image'] ?? 'images/global/og-home.png') }}">
 
     {{-- ── Theme color (browser chrome) ── --}}
     <meta name="theme-color" content="#f6f8fb" media="(prefers-color-scheme: light)">
@@ -88,47 +87,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    {{-- ── Structured data: Organization + WebSite (static, site-wide) ── --}}
-    <script type="application/ld+json">
-    {
-        "@@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "Organization",
-                "@id": "{{ url('/') }}#organization",
-                "name": "Synovainfo Infotech Private Limited",
-                "url": "{{ url('/') }}",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "{{ asset('images/global/synova-logo-dark.svg') }}"
-                },
-                "description": "Enterprise architecture, cloud-native engineering, AI systems, and cybersecurity for global organizations.",
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "Fl-24, Trish Manor, Kondhwa Kd, nr Kausar Baug",
-                    "addressLocality": "Pune",
-                    "addressRegion": "Maharashtra",
-                    "postalCode": "411048",
-                    "addressCountry": "IN"
-                },
-                "contactPoint": {
-                    "@type": "ContactPoint",
-                    "telephone": "+91-020-2683-1122",
-                    "contactType": "sales",
-                    "email": "contact@synovainfo.com",
-                    "availableLanguage": ["en"]
-                }
-            },
-            {
-                "@type": "WebSite",
-                "@id": "{{ url('/') }}#website",
-                "url": "{{ url('/') }}",
-                "name": "Synovainfo Infotech",
-                "publisher": { "@id": "{{ url('/') }}#organization" }
-            }
-        ]
-    }
-    </script>
+    <!-- Dynamic JSON-LD -->
+    @if(isset($seo['schema_json']))
+        <script type="application/ld+json">{!! $seo['schema_json'] !!}</script>
+    @endif
     @stack('jsonld')
 
     <!-- Vite (module scripts must register Alpine components before Alpine starts) -->
@@ -152,7 +114,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}" class="font-display font-extrabold text-2xl tracking-tight text-ink">
-                        SYNOVAINFO<span class="text-ember-500">.</span>
+                        SYNOVA<span class="text-ember-500">.</span>
                     </a>
                 </div>
 
@@ -196,7 +158,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-14">
                 <div class="col-span-1 md:col-span-1">
                     <a href="{{ route('home') }}" class="font-display font-extrabold text-2xl tracking-tight text-white">
-                        SYNOVAINFO<span class="text-ember-500">.</span>
+                        SYNOVA<span class="text-ember-500">.</span>
                     </a>
                     <p class="mt-4 text-sm text-white/50 leading-relaxed">
                         Enterprise software solutions engineered for scale, security, and performance.
@@ -241,7 +203,7 @@
             </div>
             <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-sm text-white/40">
-                    &copy; {{ date('Y') }} Synovainfo Infotech Private Limited. All rights reserved.
+                    &copy; {{ date('Y') }} Synova Infotech Private Limited. All rights reserved.
                 </p>
                 <p class="eyebrow text-white/25">Engineered in Pune, India</p>
             </div>
