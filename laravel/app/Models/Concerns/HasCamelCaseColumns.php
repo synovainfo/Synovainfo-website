@@ -59,4 +59,32 @@ trait HasCamelCaseColumns
         // Since the DB is now fully snake_case, we auto-convert them here.
         return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $key));
     }
+
+    public function belongsTo($related, $foreignKey = null, $ownerKey = null, $relation = null)
+    {
+        return parent::belongsTo($related, $this->fk($foreignKey), $this->fk($ownerKey), $relation);
+    }
+
+    public function hasMany($related, $foreignKey = null, $localKey = null)
+    {
+        return parent::hasMany($related, $this->fk($foreignKey), $this->fk($localKey));
+    }
+
+    public function hasOne($related, $foreignKey = null, $localKey = null)
+    {
+        return parent::hasOne($related, $this->fk($foreignKey), $this->fk($localKey));
+    }
+
+    public function belongsToMany($related, $table = null, $foreignPivotKey = null, $relatedPivotKey = null, $parentKey = null, $relatedKey = null, $relation = null)
+    {
+        return parent::belongsToMany(
+            $related,
+            $table,
+            $this->fk($foreignPivotKey),
+            $this->fk($relatedPivotKey),
+            $this->fk($parentKey),
+            $this->fk($relatedKey),
+            $relation
+        );
+    }
 }

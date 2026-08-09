@@ -17,5 +17,5 @@ class TagOnPost extends Pivot
     // The pivot table has no timestamp columns.
     public $timestamps = false;
 
-    protected $fillable = ['postId', 'tagId'];
+    protected $fillable = ['post_id', 'tag_id'];
 }

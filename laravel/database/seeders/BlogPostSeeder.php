@@ -81,7 +81,7 @@ class BlogPostSeeder extends Seeder
 
             $post->tagLinks()->create([
                 'id' => Str::ulid()->toString(),
-                'tagId' => $tag->id,
+                'tag_id' => $tag->id,
             ]);
         }
     }
