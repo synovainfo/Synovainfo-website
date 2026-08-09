@@ -10,9 +10,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Spatie\Permission\Traits\HasRoles;
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasUlids, HasCamelCaseColumns;
+    use HasFactory, Notifiable, HasUlids, HasCamelCaseColumns, HasRoles;
 
     public $incrementing = false;
     protected $keyType = 'string';
