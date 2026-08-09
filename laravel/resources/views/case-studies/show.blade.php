@@ -15,7 +15,7 @@
     @endphp
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // CASE STUDY"
+        eyebrow="SYNOVAINFOTECH // CASE STUDY"
         :title="$caseStudy->title"
         :subtitle="$caseStudy->client_name ? 'Client · ' . $caseStudy->client_name : null"
         :accent="$caseStudy->industry ?? 'enterprise-impact'"

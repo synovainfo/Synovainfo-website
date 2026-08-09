@@ -7,7 +7,7 @@ return [
     | Application Name
     |--------------------------------------------------------------------------
     */
-    'name' => env('APP_NAME', 'Synovainfo Infotech'),
+    'name' => env('APP_NAME', 'Synova Infotech Infotech'),
 
     /*
     |--------------------------------------------------------------------------

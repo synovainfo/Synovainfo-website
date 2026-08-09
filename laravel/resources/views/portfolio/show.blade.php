@@ -7,7 +7,7 @@
     @endphp
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // PORTFOLIO"
+        eyebrow="SYNOVAINFOTECH // PORTFOLIO"
         :title="$portfolio->title"
         :subtitle="$portfolio->client_name ? 'Client · ' . $portfolio->client_name : null"
         :accent="$portfolio->category ?? 'delivered-system'"

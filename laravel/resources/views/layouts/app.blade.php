@@ -114,7 +114,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}" class="font-display font-extrabold text-2xl tracking-tight text-ink">
-                        SYNOVA<span class="text-ember-500">.</span>
+                        SYNOVAINFOTECH<span class="text-ember-500">.</span>
                     </a>
                 </div>
 
@@ -158,7 +158,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-14">
                 <div class="col-span-1 md:col-span-1">
                     <a href="{{ route('home') }}" class="font-display font-extrabold text-2xl tracking-tight text-white">
-                        SYNOVA<span class="text-ember-500">.</span>
+                        SYNOVAINFOTECH<span class="text-ember-500">.</span>
                     </a>
                     <p class="mt-4 text-sm text-white/50 leading-relaxed">
                         Enterprise software solutions engineered for scale, security, and performance.

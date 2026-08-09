@@ -78,7 +78,7 @@
                 <div class="relative rounded-2xl overflow-hidden border border-white/10 bg-slate-800 p-2 shadow-2xl">
                     <img
                         src="{{ asset('images/home/architecture-blueprint.svg') }}"
-                        alt="Synovainfo Enterprise Architecture Blueprint"
+                        alt="Synova Infotech Enterprise Architecture Blueprint"
                         width="800"
                         height="500"
                         class="w-full h-auto rounded-xl object-cover"

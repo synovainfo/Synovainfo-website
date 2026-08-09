@@ -91,7 +91,7 @@ return [
         [
             'number' => 5,
             'title' => 'Support',
-            'description' => 'Synova remains your long-term technology partner, providing ongoing maintenance, updates, and responsive support to keep your systems running optimally.',
+            'description' => 'Synova Infotech remains your long-term technology partner, providing ongoing maintenance, updates, and responsive support to keep your systems running optimally.',
         ],
     ],
     
@@ -106,7 +106,7 @@ return [
         ],
         [
             'title' => 'One trusted technology partner',
-            'description' => 'From software development to IT infrastructure and support, Synova is your single, reliable partner across all technology needs — simplifying your journey.',
+            'description' => 'From software development to IT infrastructure and support, Synova Infotech is your single, reliable partner across all technology needs — simplifying your journey.',
         ],
     ],
 ];

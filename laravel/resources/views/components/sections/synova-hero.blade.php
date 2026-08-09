@@ -1,7 +1,7 @@
 @props([
     'eyebrow' => 'ENTERPRISE ARCHITECTURE & CLOUD TRANSFORMATION',
     'headline' => 'ARCHITECTING NEXT-GENERATION DIGITAL PARADIGMS',
-    'description' => 'Synovainfo empowers global enterprises to unlock synergistic value and achieve unprecedented operational agility. We orchestrate secure, scalable, and mission-critical technological ecosystems designed to dominate market complexities and accelerate digital transformation.',
+    'description' => 'Synova Infotech empowers global enterprises to unlock synergistic value and achieve unprecedented operational agility. We orchestrate secure, scalable, and mission-critical technological ecosystems designed to dominate market complexities and accelerate digital transformation.',
     'ctaLabel' => 'Explore Capabilities',
     'ctaHref' => '/services',
     'cardTag' => '[ 2026 ]',
@@ -12,7 +12,7 @@
 ])
 
 <section
-    aria-label="Synovainfo hero"
+    aria-label="Synova Infotech hero"
     class="relative w-full min-h-screen bg-abyss text-white overflow-hidden select-none"
     x-data="{
         initHls() {

@@ -1,13 +1,13 @@
 @props([
     'eyebrow' => 'ENTERPRISE PLATFORM ENGINEERING & DIGITAL INFRASTRUCTURE',
     'headline' => 'BUILDING THE NEXT GENERATION OF ENTERPRISE TECHNOLOGY',
-    'description' => 'Synovainfo engineers mission-critical digital ecosystems for global enterprises — combining cloud-native architecture, AI-driven automation, and zero-trust security to deliver unmatched operational resilience.',
+    'description' => 'Synova Infotech engineers mission-critical digital ecosystems for global enterprises — combining cloud-native architecture, AI-driven automation, and zero-trust security to deliver unmatched operational resilience.',
     'ctaLabel' => 'Explore Capabilities',
     'ctaHref' => '/services',
 ])
 
 {{--
-    Synovainfo 3D Enterprise Hero
+    Synova Infotech 3D Enterprise Hero
     ==========================
     Full-screen hero section with a procedural Three.js orbital network
     visualization rendered on a transparent canvas behind the content.
@@ -20,7 +20,7 @@
     x-data="synovaThreeHero"
     x-init="initThree"
     x-on:destroy="destroy"
-    aria-label="Synovainfo enterprise hero"
+    aria-label="Synova Infotech enterprise hero"
     class="relative w-full min-h-screen bg-abyss text-white overflow-hidden select-none"
 >
     <!-- ── WebGL Canvas (rendered by Three.js) ── -->

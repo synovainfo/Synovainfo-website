@@ -71,7 +71,7 @@
                 <div class="relative mb-8 overflow-hidden rounded-2xl border border-surface-border shadow-lg">
                     <img
                         src="{{ asset('images/contact/office-building.webp') }}"
-                        alt="Synovainfo Infotech office headquarters in Pune, India"
+                        alt="Synova Infotech Infotech office headquarters in Pune, India"
                         class="h-64 w-full object-cover"
                         loading="lazy"
                         width="640"

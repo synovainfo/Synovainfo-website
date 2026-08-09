@@ -58,7 +58,7 @@
                 Enterprise Insights & Technical Intelligence
             </h2>
             <p class="text-lg text-ink-muted max-w-2xl leading-relaxed">
-                Stay ahead with architectural whitepapers, industry benchmarks, and engineering insights authored by Synovainfo principal architects.
+                Stay ahead with architectural whitepapers, industry benchmarks, and engineering insights authored by Synova Infotech principal architects.
             </p>
         </div>
 

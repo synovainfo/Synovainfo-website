@@ -9,7 +9,7 @@
     @endif
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // ENTERPRISE STRATEGY"
+        eyebrow="SYNOVAINFOTECH // ENTERPRISE STRATEGY"
         :title="$page?->title ?? 'Enterprise Architecture & Strategy'"
         :subtitle="$page?->excerpt"
         accent="strategic-blueprint"

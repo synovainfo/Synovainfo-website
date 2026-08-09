@@ -7,7 +7,7 @@
             </h2>
             <p class="text-ink-muted text-lg md:text-xl leading-relaxed max-w-3xl">
                 From custom software to IT infrastructure, AI, and ongoing
-                support — Synova consolidates the full technology stack so
+                support — Synova Infotech consolidates the full technology stack so
                 you don't have to manage multiple vendors.
             </p>
         </div>

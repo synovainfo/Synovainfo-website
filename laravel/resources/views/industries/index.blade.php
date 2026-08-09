@@ -43,7 +43,7 @@
     @endphp
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // GLOBAL FOOTPRINT"
+        eyebrow="SYNOVAINFOTECH // GLOBAL FOOTPRINT"
         title="Engineering Excellence Across Key Industries"
         subtitle="Specialized architecture hubs delivering measurable outcomes across North America, EMEA, and Asia Pacific."
         accent="global-delivery-network"
@@ -57,7 +57,7 @@
                     <div class="relative rounded-3xl border border-surface-border bg-surface p-4 md:p-6 shadow-lg shadow-abyss-950/5 overflow-hidden">
                         <img
                             src="{{ asset('images/home/realistic/global-delivery-map.jpg') }}"
-                            alt="Synovainfo Global Delivery Network Map"
+                            alt="Synova Infotech Global Delivery Network Map"
                             class="w-full h-auto object-contain rounded-xl"
                             loading="lazy"
                         />

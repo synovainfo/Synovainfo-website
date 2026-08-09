@@ -3,7 +3,7 @@
     <x-slot name="description">A curated portfolio of mission-critical systems engineered for global enterprises — cloud platforms, AI pipelines, and secure digital products.</x-slot>
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // DEPLOYMENTS"
+        eyebrow="SYNOVAINFOTECH // DEPLOYMENTS"
         title="Enterprise Deployments That Speak"
         subtitle="A curated portfolio of mission-critical systems engineered for global enterprises."
         accent="delivered-systems"

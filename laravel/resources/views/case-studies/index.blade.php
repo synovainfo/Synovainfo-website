@@ -40,9 +40,9 @@
     @endphp
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // PROVEN IMPACT"
+        eyebrow="SYNOVAINFOTECH // PROVEN IMPACT"
         title="Executive Case Studies & ROI Verification"
-        subtitle="How Synovainfo partners with Fortune 500 leaders to architect secure, scalable, and high-performance digital ecosystems."
+        subtitle="How Synova Infotech partners with Fortune 500 leaders to architect secure, scalable, and high-performance digital ecosystems."
         accent="verified-enterprise-impact"
     />
 

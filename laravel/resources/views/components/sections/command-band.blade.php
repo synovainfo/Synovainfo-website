@@ -1,5 +1,5 @@
 @props([
-    'eyebrow' => 'SYNOVAINFO // ENTERPRISE SYSTEMS',
+    'eyebrow' => 'SYNOVAINFOTECH // ENTERPRISE SYSTEMS',
     'title' => 'Page Title',
     'subtitle' => null,
     'accent' => 'engineered',

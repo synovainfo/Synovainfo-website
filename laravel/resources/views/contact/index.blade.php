@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="title">Contact Us</x-slot>
-    <x-slot name="description">Talk to Synovainfo's enterprise architecture team about your next strategic initiative. Offices in Pune, India. We respond within 24 business hours.</x-slot>
+    <x-slot name="description">Talk to Synova Infotech's enterprise architecture team about your next strategic initiative. Offices in Pune, India. We respond within 24 business hours.</x-slot>
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // CONTACT"
+        eyebrow="SYNOVAINFOTECH // CONTACT"
         title="Ready to Transform Your Enterprise"
         subtitle="Get in touch with our architecture team to discuss your next strategic initiative."
         accent="enterprise-consultation"

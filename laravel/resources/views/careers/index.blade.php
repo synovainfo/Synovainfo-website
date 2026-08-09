@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="title">Careers</x-slot>
-    <x-slot name="description">Join Synovainfo Infotech — engineering careers in enterprise software, cloud platforms, AI systems, and cybersecurity. Pune & remote roles.</x-slot>
+    <x-slot name="description">Join Synova Infotech Infotech — engineering careers in enterprise software, cloud platforms, AI systems, and cybersecurity. Pune & remote roles.</x-slot>
 
     @php
         $mappedPositions = $careers->map(function($career) {
@@ -26,13 +26,13 @@
             <div class="relative h-[50vh] lg:h-full w-full">
                 <img
                     src="{{ asset('images/home/enterprise-office.png') }}"
-                    alt="Synovainfo Enterprise Engineering Team"
+                    alt="Synova Infotech Enterprise Engineering Team"
                     class="absolute inset-0 h-full w-full object-cover object-center"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-abyss-950 via-abyss-950/90 to-abyss-950/20"></div>
 
                 <div class="absolute inset-0 p-8 lg:p-16 flex flex-col justify-end lg:justify-center">
-                    <p class="eyebrow text-ember-400 mb-6">SYNOVAINFO // CAREERS</p>
+                    <p class="eyebrow text-ember-400 mb-6">SYNOVAINFOTECH // CAREERS</p>
                     <h2 class="font-display text-4xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-6">
                         Engineer <br />
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-ember-400 to-ember-600">

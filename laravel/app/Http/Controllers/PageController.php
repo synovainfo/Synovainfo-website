@@ -24,8 +24,8 @@ class PageController extends Controller
 
         $seo = $this->seo([
             'title' => 'About Us — Enterprise Technology Consulting',
-            'description' => 'Synovainfo Infotech is a premier enterprise technology consultancy specializing in large-scale digital transformation, custom ecosystem development, and AI-driven capability realization for Fortune 500 environments.',
-            'keywords' => 'about Synovainfo Infotech, enterprise technology consultancy, digital transformation company, IT consulting Pune, technology leadership',
+            'description' => 'Synova Infotech Infotech is a premier enterprise technology consultancy specializing in large-scale digital transformation, custom ecosystem development, and AI-driven capability realization for Fortune 500 environments.',
+            'keywords' => 'about Synova Infotech Infotech, enterprise technology consultancy, digital transformation company, IT consulting Pune, technology leadership',
             'ogImage' => 'images/global/og-about.png',
         ]);
 
@@ -38,7 +38,7 @@ class PageController extends Controller
 
         $seo = $this->seo([
             'title' => 'Our Approach — Enterprise Architecture Methodology',
-            'description' => 'Discover Synovainfo\'s disciplined enterprise engineering methodology: architecture-first design, governed delivery, and measurable business outcomes.',
+            'description' => 'Discover Synova Infotech\'s disciplined enterprise engineering methodology: architecture-first design, governed delivery, and measurable business outcomes.',
             'keywords' => 'enterprise architecture methodology, software delivery process, digital engineering approach, IT governance',
         ]);
 
@@ -51,7 +51,7 @@ class PageController extends Controller
 
         $seo = $this->seo([
             'title' => 'Architecture — Mission-Critical Platform Design',
-            'description' => 'Explore how Synovainfo designs mission-critical, AI-native multi-cloud architectures with zero-downtime migration, observability, and zero-trust security baked in.',
+            'description' => 'Explore how Synova Infotech designs mission-critical, AI-native multi-cloud architectures with zero-downtime migration, observability, and zero-trust security baked in.',
             'keywords' => 'enterprise architecture, multi-cloud platform design, zero trust architecture, microservices, event-driven systems',
         ]);
 

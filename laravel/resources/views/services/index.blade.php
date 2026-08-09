@@ -36,7 +36,7 @@
     @endphp
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // ENTERPRISE CAPABILITIES"
+        eyebrow="SYNOVAINFOTECH // ENTERPRISE CAPABILITIES"
         title="Mission-Critical Solutions"
         subtitle="Architected for Fortune 500 enterprises requiring security, scalability, and measurable ROI."
         accent="service-architecture"

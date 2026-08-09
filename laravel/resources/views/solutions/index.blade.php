@@ -3,7 +3,7 @@
     <x-slot name="description">Purpose-built enterprise solution blueprints combining cloud-native, AI, data, and security engineering for measurable business outcomes.</x-slot>
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // SOLUTIONS"
+        eyebrow="SYNOVAINFOTECH // SOLUTIONS"
         title="Architectures That Move Enterprises"
         subtitle="Purpose-built solution blueprints combining cloud-native, AI, data, and security engineering."
         accent="solution-blueprints"

@@ -35,7 +35,7 @@
         {{-- 7. Editorial story --}}
         <x-premium.editorial />
 
-        {{-- 7b. Why Choose Synova --}}
+        {{-- 7b. Why Choose Synova Infotech --}}
         <x-premium.why-choose />
 
         {{-- 8. Testimonials --}}

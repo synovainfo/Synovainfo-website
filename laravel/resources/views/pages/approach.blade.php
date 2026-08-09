@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="title">{{ $seo['title'] ?? 'Our Approach — Enterprise Architecture Methodology' }}</x-slot>
-    <x-slot name="description">{{ $seo['description'] ?? 'Discover Synovainfo\'s disciplined enterprise engineering methodology: architecture-first design, governed delivery, and measurable business outcomes across four phases — Discover, Design, Engineer, Operate.' }}</x-slot>
+    <x-slot name="description">{{ $seo['description'] ?? 'Discover Synova Infotech\'s disciplined enterprise engineering methodology: architecture-first design, governed delivery, and measurable business outcomes across four phases — Discover, Design, Engineer, Operate.' }}</x-slot>
     @if(!empty($seo['keywords']))
         <x-slot name="keywords">{{ $seo['keywords'] }}</x-slot>
     @endif
@@ -13,7 +13,7 @@
         "@id": "{{ url('/approach') }}#webpage",
         "url": "{{ url('/approach') }}",
         "name": "Our Approach — Enterprise Architecture Methodology",
-        "description": "Synovainfo delivers enterprise transformation through a four-phase methodology: Discover, Design, Engineer, Operate.",
+        "description": "Synova Infotech delivers enterprise transformation through a four-phase methodology: Discover, Design, Engineer, Operate.",
         "isPartOf": { "@id": "{{ url('/') }}#website" },
         "inLanguage": "en"
     }
@@ -21,7 +21,7 @@
     @endpush
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // ENTERPRISE STRATEGY"
+        eyebrow="SYNOVAINFOTECH // ENTERPRISE STRATEGY"
         title="The Discipline Behind Every Engagement"
         subtitle="A four-phase delivery methodology that turns enterprise ambition into governed, measurable, mission-critical systems — without the ambiguity most transformation programs inherit."
         accent="strategic-blueprint"

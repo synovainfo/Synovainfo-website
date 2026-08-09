@@ -7,7 +7,7 @@
     @endphp
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // SOLUTION"
+        eyebrow="SYNOVAINFOTECH // SOLUTION"
         :title="$solution->title"
         :subtitle="$solution->short_description"
         accent="solution-blueprint"

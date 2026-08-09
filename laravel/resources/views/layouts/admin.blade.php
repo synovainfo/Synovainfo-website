@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? 'Admin Dashboard' }} | Synova</title>
+    <title>{{ $title ?? 'Admin Dashboard' }} | Synova Infotech</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@
         <!-- Logo -->
         <div class="flex h-16 items-center px-6 bg-slate-950 shrink-0 border-b border-slate-800">
             <a href="{{ route('admin.dashboard') }}" class="font-outfit font-bold text-xl tracking-tight text-white flex items-center gap-2">
-                SYNOVA<span class="text-orange-500">.</span> <span class="text-xs font-semibold text-slate-400 bg-slate-800 px-2 py-0.5 rounded-md ml-2 tracking-widest uppercase">Admin</span>
+                SYNOVAINFOTECH<span class="text-orange-500">.</span> <span class="text-xs font-semibold text-slate-400 bg-slate-800 px-2 py-0.5 rounded-md ml-2 tracking-widest uppercase">Admin</span>
             </a>
         </div>
 

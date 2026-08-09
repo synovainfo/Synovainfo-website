@@ -14,7 +14,7 @@
     @endphp
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // CAREERS"
+        eyebrow="SYNOVAINFOTECH // CAREERS"
         :title="$career->title"
         :subtitle="$career->department ? $career->department . ' · ' . ($career->location ?? 'Pune / Remote') : null"
         accent="open-architecture-role"
@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-abyss-900 prose-p:text-abyss-900/75 prose-p:leading-relaxed prose-li:text-abyss-900/75">
-                            {!! $career->description ?? '<p>Join Synovainfo and help us engineer the enterprise technology ecosystem of tomorrow.</p>' !!}
+                            {!! $career->description ?? '<p>Join Synova Infotech and help us engineer the enterprise technology ecosystem of tomorrow.</p>' !!}
                         </div>
                     </div>
 

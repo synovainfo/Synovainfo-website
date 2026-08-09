@@ -53,7 +53,7 @@
         {{-- Top bar: logo + close --}}
         <div class="flex items-center justify-between px-5 pt-4 pb-2 border-b border-surface-border">
             <a href="{{ route('home') }}" @click="open = false" class="font-display font-extrabold text-2xl tracking-tight text-ink">
-                SYNOVAINFO<span class="text-ember-500">.</span>
+                SYNOVAINFOTECH<span class="text-ember-500">.</span>
             </a>
             <button
                 type="button"

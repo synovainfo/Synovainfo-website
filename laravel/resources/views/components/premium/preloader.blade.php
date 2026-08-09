@@ -10,7 +10,7 @@
         </div>
 
         <p class="font-display font-extrabold text-2xl tracking-tight" style="color: var(--color-ink);">
-            SYNOVAINFO<span class="premium-serif" style="color: var(--color-ember-500);">.</span>
+            SYNOVAINFOTECH<span class="premium-serif" style="color: var(--color-ember-500);">.</span>
         </p>
 
         <div class="preloader-bar" role="presentation">

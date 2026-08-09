@@ -9,7 +9,7 @@
     @endphp
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // SERVICE"
+        eyebrow="SYNOVAINFOTECH // SERVICE"
         :title="$service->title"
         :subtitle="$service->short_description"
         :accent="$service->category ?? 'enterprise-capability'"

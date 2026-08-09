@@ -13,7 +13,7 @@
     @endphp
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // TECHNOLOGY STACK"
+        eyebrow="SYNOVAINFOTECH // TECHNOLOGY STACK"
         title="Engineering With the Best Tools in Class"
         subtitle="The modern technology arsenal our architects use to deliver enterprise-grade systems."
         accent="weaponized-technology"

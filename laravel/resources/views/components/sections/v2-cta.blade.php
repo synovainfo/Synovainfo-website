@@ -12,7 +12,7 @@
             Bring your current platform, risk register, or transformation roadmap.
         </h2>
         <a href="/contact" class="inline-flex items-center gap-3 bg-white text-orange-600 rounded-full uppercase font-bold text-sm tracking-wider px-10 py-5 transition-transform duration-300 hover:scale-105 shadow-xl shadow-black/10 group">
-            <span>Talk with Synovainfo</span>
+            <span>Talk with Synova Infotech</span>
             <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

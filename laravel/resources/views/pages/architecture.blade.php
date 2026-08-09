@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="title">{{ $seo['title'] ?? 'Architecture — Mission-Critical Platform Design' }}</x-slot>
-    <x-slot name="description">{{ $seo['description'] ?? 'Explore how Synovainfo designs mission-critical, AI-native multi-cloud architectures — zero-downtime migration, event-driven patterns, and zero-trust security baked into every reference stack.' }}</x-slot>
+    <x-slot name="description">{{ $seo['description'] ?? 'Explore how Synova Infotech designs mission-critical, AI-native multi-cloud architectures — zero-downtime migration, event-driven patterns, and zero-trust security baked into every reference stack.' }}</x-slot>
     @if(!empty($seo['keywords']))
         <x-slot name="keywords">{{ $seo['keywords'] }}</x-slot>
     @endif
@@ -13,7 +13,7 @@
         "@id": "{{ url('/architecture') }}#webpage",
         "url": "{{ url('/architecture') }}",
         "name": "Architecture — Mission-Critical Platform Design",
-        "description": "Synovainfo designs mission-critical, AI-native multi-cloud architectures with zero-trust security and zero-downtime migration patterns.",
+        "description": "Synova Infotech designs mission-critical, AI-native multi-cloud architectures with zero-trust security and zero-downtime migration patterns.",
         "isPartOf": { "@id": "{{ url('/') }}#website" },
         "inLanguage": "en"
     }
@@ -21,7 +21,7 @@
     @endpush
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // ENTERPRISE ARCHITECTURE"
+        eyebrow="SYNOVAINFOTECH // ENTERPRISE ARCHITECTURE"
         title="Architecture That Survives Contact With Reality"
         subtitle="Reference-grade design for mission-critical platforms — patterns, practices, and stacks validated in production across payments, healthcare, energy, and logistics."
         accent="reference-architecture"

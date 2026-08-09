@@ -2,7 +2,7 @@
     <x-slot name="title">{{ $post->seo_title ?? $post->title }}</x-slot>
 
     @php
-        $words = collect(explode(' ', $post->author->name ?? 'Synovainfo'))->map(fn($w) => strtoupper(substr($w, 0, 1)))->take(2)->join('');
+        $words = collect(explode(' ', $post->author->name ?? 'Synova Infotech'))->map(fn($w) => strtoupper(substr($w, 0, 1)))->take(2)->join('');
     @endphp
 
     <article class="bg-canvas min-h-screen">
@@ -21,7 +21,7 @@
                         <li class="text-white/80 truncate max-w-[240px]" aria-current="page">{{ $post->title }}</li>
                     </ol>
                 </nav>
-                <p class="eyebrow text-ember-400 mb-5 reveal">SYNOVAINFO // ENTERPRISE INSIGHTS</p>
+                <p class="eyebrow text-ember-400 mb-5 reveal">SYNOVAINFOTECH // ENTERPRISE INSIGHTS</p>
                 <h1 class="font-display font-extrabold tracking-tight text-[clamp(1.7rem,4vw,3rem)] leading-[1.1] text-white max-w-4xl reveal">
                     {{ $post->title }}<span class="text-ember-500">.</span>
                 </h1>
@@ -74,7 +74,7 @@
                 <div class="absolute inset-0 bg-grid opacity-40" aria-hidden="true"></div>
                 <div class="relative">
                     <h3 class="font-display text-2xl font-extrabold text-white mb-3">Ready to Engineer Your Enterprise Advantage?</h3>
-                    <p class="text-white/50 mb-8 max-w-xl mx-auto">Talk to our architects about how Synovainfo's platform engineering can accelerate your digital transformation.</p>
+                    <p class="text-white/50 mb-8 max-w-xl mx-auto">Talk to our architects about how Synova Infotech's platform engineering can accelerate your digital transformation.</p>
                     <a href="{{ route('contact') }}" class="inline-flex items-center gap-2 rounded-full bg-ember-500 px-8 py-3.5 text-sm font-bold text-white hover:bg-ember-600 transition-all shadow-ember hover:-translate-y-0.5">
                         Start the Conversation
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

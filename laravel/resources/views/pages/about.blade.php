@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="title">{{ $seo['title'] ?? 'About Us' }}</x-slot>
-    <x-slot name="description">{{ $seo['description'] ?? 'Synovainfo Infotech is a premier enterprise technology consultancy specializing in large-scale digital transformation and AI-driven capability realization for global enterprises.' }}</x-slot>
+    <x-slot name="description">{{ $seo['description'] ?? 'Synova Infotech Infotech is a premier enterprise technology consultancy specializing in large-scale digital transformation and AI-driven capability realization for global enterprises.' }}</x-slot>
     @if(!empty($seo['keywords']))
         <x-slot name="keywords">{{ $seo['keywords'] }}</x-slot>
     @endif
@@ -15,7 +15,7 @@
         "@type": "AboutPage",
         "@id": "{{ url('/about') }}#webpage",
         "url": "{{ url('/about') }}",
-        "name": "About Synovainfo Infotech",
+        "name": "About Synova Infotech Infotech",
         "isPartOf": { "@id": "{{ url('/') }}#website" },
         "about": { "@id": "{{ url('/') }}#organization" },
         "inLanguage": "en"
@@ -25,10 +25,10 @@
 
     @php
         $content = [
-            'badge' => 'About Synovainfo Infotech',
+            'badge' => 'About Synova Infotech Infotech',
             'title' => 'Orchestrating Digital Paradigms',
             'subtitle' => 'We are a consortium of strategic visionaries and enterprise architects dedicated to orchestrating digital transformations that drive sustainable growth, mitigate systemic risk, and redefine industry paradigms.',
-            'whoWeAre' => 'Synovainfo Infotech is a premier enterprise technology consultancy specializing in massive-scale digital transformation, custom ecosystem development, and AI-driven capability realization. Founded by industry veterans with deep expertise in global architecture, our team brings together decades of collective experience delivering mission-critical outcomes across Fortune 500 environments.',
+            'whoWeAre' => 'Synova Infotech Infotech is a premier enterprise technology consultancy specializing in massive-scale digital transformation, custom ecosystem development, and AI-driven capability realization. Founded by industry veterans with deep expertise in global architecture, our team brings together decades of collective experience delivering mission-critical outcomes across Fortune 500 environments.',
             'vision' => 'To be the definitive strategic technology partner for global enterprises — orchestrating synergistic solutions that unlock shareholder value and create measurable, sustainable market dominance.',
             'mission' => 'Empower organizations with enterprise-grade software paradigms that combine cutting-edge agility with uncompromising architectural governance, enabling them to achieve operational excellence and hyper-scalability.',
             'incorporated' => '30 June 2026',

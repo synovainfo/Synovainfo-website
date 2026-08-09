@@ -6,7 +6,7 @@
     @endphp
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // INDUSTRY"
+        eyebrow="SYNOVAINFOTECH // INDUSTRY"
         :title="$industry->name"
         :subtitle="$industry->description"
         accent="industry-capability-map"

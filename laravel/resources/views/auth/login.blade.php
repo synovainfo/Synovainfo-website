@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Admin Login - {{ config('app.name', 'Synovainfo') }}</title>
+    <title>Admin Login - {{ config('app.name', 'Synova Infotech') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -25,7 +25,7 @@
             </div>
             <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-slate-900">Sign in to your account</h2>
             <p class="mt-2 text-center text-sm text-slate-500">
-                Synovainfo Content Management System
+                Synova Infotech Content Management System
             </p>
         </div>
 
@@ -84,7 +84,7 @@
             </div>
             
             <p class="mt-8 text-center text-sm text-slate-500">
-                &copy; {{ date('Y') }} Synovainfo Infotech Pvt Ltd. All rights reserved.
+                &copy; {{ date('Y') }} Synova Infotech Infotech Pvt Ltd. All rights reserved.
             </p>
         </div>
     </div>

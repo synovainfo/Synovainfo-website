@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="title">Insights</x-slot>
-    <x-slot name="description">Architectural whitepapers, industry benchmarks, and engineering insights from Synovainfo principal architects on cloud, AI, security, and transformation.</x-slot>
+    <x-slot name="description">Architectural whitepapers, industry benchmarks, and engineering insights from Synova Infotech principal architects on cloud, AI, security, and transformation.</x-slot>
 
     <x-sections.command-band
-        eyebrow="SYNOVAINFO // THOUGHT LEADERSHIP"
+        eyebrow="SYNOVAINFOTECH // THOUGHT LEADERSHIP"
         title="Engineering the Future of Enterprise Tech"
-        subtitle="Perspectives on cloud architecture, AI, security, and digital transformation from Synovainfo's principal architects."
+        subtitle="Perspectives on cloud architecture, AI, security, and digital transformation from Synova Infotech's principal architects."
         accent="insights-and-research"
     />
 

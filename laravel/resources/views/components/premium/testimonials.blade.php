@@ -14,7 +14,7 @@
         >
             @foreach ([
                 ['home/testimonial-avatar-1.png', 'Rahul Menon', 'Chief Information Officer', 'Meridian Bank Group',
-                 'Synovainfo rebuilt our payments core without a single minute of unplanned downtime. Two years on, it processes over a million transactions a minute — and it has never once let us down.'],
+                 'Synova Infotech rebuilt our payments core without a single minute of unplanned downtime. Two years on, it processes over a million transactions a minute — and it has never once let us down.'],
                 ['home/testimonial-avatar-2.png', 'Sarah Whitfield', 'Chief Technology Officer', 'Aurora Health Network',
                  'Fourteen hospitals, one clinical platform, and one partner we trust completely. Their teams operate ours with a level of rigor we have not found anywhere else.'],
                 ['home/testimonial-avatar-3.png', 'Daniel Okafor', 'VP, Digital Engineering', 'Vertex Energy',

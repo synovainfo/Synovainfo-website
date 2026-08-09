@@ -20,7 +20,7 @@
                 </h1>
 
                 <p data-hero-anim="copy" class="mt-8 max-w-xl text-lg md:text-xl leading-relaxed text-ink-muted" style="opacity: 0;">
-                    Synova engineers mission-critical platforms for the organizations
+                    Synova Infotech engineers mission-critical platforms for the organizations
                     defining the next decade of computing — cloud-native, AI-driven,
                     secure by design.
                 </p>
@@ -48,7 +48,7 @@
                 <div data-hero-anim="visual" class="relative" style="opacity: 0;">
                     <div class="case-visual rounded-2xl aspect-[4/5] max-w-sm ml-auto w-full" data-parallax="5">
                         <img src="{{ asset('images/home/hero-global-datacenter.webp') }}"
-                             alt="Synova global data center operations" loading="eager" fetchpriority="high" decoding="async" />
+                             alt="Synova Infotech global data center operations" loading="eager" fetchpriority="high" decoding="async" />
                         <div class="case-overlay"></div>
                     </div>
                     <div class="absolute -bottom-6 -left-6 card-surface rounded-2xl px-6 py-4 hidden sm:block"
