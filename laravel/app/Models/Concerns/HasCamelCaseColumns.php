@@ -52,6 +52,11 @@ trait HasCamelCaseColumns
 
     private function fk(?string $key): ?string
     {
-        return $key;
+        if ($key === null) {
+            return null;
+        }
+        // The models have hardcoded camelCase foreign keys (e.g. 'authorId').
+        // Since the DB is now fully snake_case, we auto-convert them here.
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $key));
     }
 }
