@@ -1,24 +1,5 @@
 <?php
 
-<<<<<<< HEAD
-return [
-
-    'default' => env('DB_CONNECTION', 'mysql'),
-
-    'connections' => [
-
-        'mysql' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '118.139.178.77'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'synova_db'),
-            'username' => env('DB_USERNAME', 'Sachin'),
-            'password' => env('DB_PASSWORD', 'Sachin@9923'),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-=======
 use Illuminate\Support\Str;
 
 return [
@@ -72,7 +53,6 @@ return [
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => env('DB_CHARSET', 'utf8mb4'),
             'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
->>>>>>> c05ecdb6ad438865977435b644e98e5f97a9d67f
             'prefix' => '',
             'prefix_indexes' => true,
             'strict' => true,
@@ -82,10 +62,6 @@ return [
             ]) : [],
         ],
 
-<<<<<<< HEAD
-    ],
-
-=======
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),
@@ -149,14 +125,11 @@ return [
     |
     */
 
->>>>>>> c05ecdb6ad438865977435b644e98e5f97a9d67f
     'migrations' => [
         'table' => 'migrations',
         'update_date_on_publish' => true,
     ],
 
-<<<<<<< HEAD
-=======
     /*
     |--------------------------------------------------------------------------
     | Redis Databases
@@ -198,5 +171,4 @@ return [
 
     ],
 
->>>>>>> c05ecdb6ad438865977435b644e98e5f97a9d67f
 ];

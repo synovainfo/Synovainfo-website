@@ -1,24 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
-use Illuminate\Support\Facades\DB;
-
-/*
-|--------------------------------------------------------------------------
-| Synova Infotech — Laravel Enterprise Web Routes
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/', function () {
-    return response()->json([
-        'name' => 'Synova Infotech API Server',
-        'status' => 'online',
-        'version' => '1.0.0',
-        'environment' => config('app.env'),
-        'docs' => '/api/health',
-    ]);
-=======
 
 // -----------------------------------------------------------------------------
 // PUBLIC ROUTES
@@ -129,5 +111,4 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('site-configs', \App\Http\Controllers\Admin\SiteConfigController::class);
     Route::get('audit-logs', [\App\Http\Controllers\Admin\AuditLogController::class, 'index'])->name('audit-logs.index');
->>>>>>> c05ecdb6ad438865977435b644e98e5f97a9d67f
 });
