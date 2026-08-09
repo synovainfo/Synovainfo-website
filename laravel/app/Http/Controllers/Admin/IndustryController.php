@@ -14,7 +14,7 @@ class IndustryController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Industry::query()->latest('createdAt');
+        $query = Industry::query()->latest('created_at');
         
         if ($request->has('search')) {
             $search = $request->get('search');

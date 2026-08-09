@@ -14,7 +14,7 @@ class PortfolioController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Portfolio::query()->latest('createdAt');
+        $query = Portfolio::query()->latest('created_at');
 
         if ($request->has('search')) {
             $search = $request->get('search');

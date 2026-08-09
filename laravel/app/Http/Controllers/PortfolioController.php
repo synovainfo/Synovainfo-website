@@ -11,7 +11,7 @@ class PortfolioController extends Controller
     public function index(): View
     {
         $portfolios = Portfolio::whereIn('status', ['PUBLISHED', '1', 1])
-            ->orderBy('publishedAt', 'desc')
+            ->orderBy('published_at', 'desc')
             ->paginate(12);
             
         return view('portfolio.index', compact('portfolios'));

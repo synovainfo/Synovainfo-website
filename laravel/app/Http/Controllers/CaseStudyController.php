@@ -11,7 +11,7 @@ class CaseStudyController extends Controller
     public function index(): View
     {
         $caseStudies = CaseStudy::whereIn('status', ['PUBLISHED', 1, '1', true])
-            ->orderBy('createdAt', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(12);
             
         return view('case-studies.index', compact('caseStudies'));

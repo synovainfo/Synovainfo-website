@@ -13,7 +13,7 @@ class LeadController extends Controller
      */
     public function index(Request $request)
     {
-        $query = LeadModel::query()->latest('createdAt');
+        $query = LeadModel::query()->latest('created_at');
         
         if ($request->has('search')) {
             $search = $request->get('search');

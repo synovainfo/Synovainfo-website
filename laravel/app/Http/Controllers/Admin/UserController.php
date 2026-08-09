@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $query = User::query()->latest('createdAt');
+        $query = User::query()->latest('created_at');
 
         if ($request->has('search')) {
             $search = $request->get('search');

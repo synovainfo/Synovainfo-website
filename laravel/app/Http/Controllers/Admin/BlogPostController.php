@@ -15,7 +15,7 @@ class BlogPostController extends Controller
      */
     public function index(Request $request)
     {
-        $query = BlogPost::with('category', 'author')->latest('createdAt');
+        $query = BlogPost::with('category', 'author')->latest('created_at');
 
         if ($request->has('search')) {
             $search = $request->get('search');

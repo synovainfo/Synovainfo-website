@@ -13,7 +13,7 @@ class CareerController extends Controller
     public function index(): View
     {
         $careers = Career::whereIn('status', [1, '1', true])
-            ->orderBy('createdAt', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('careers.index', compact('careers'));

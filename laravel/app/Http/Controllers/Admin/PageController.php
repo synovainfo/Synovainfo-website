@@ -15,7 +15,7 @@ class PageController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Page::query()->latest('createdAt');
+        $query = Page::query()->latest('created_at');
         
         if ($request->has('search')) {
             $search = $request->get('search');

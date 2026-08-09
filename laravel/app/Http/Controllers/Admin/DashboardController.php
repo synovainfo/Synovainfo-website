@@ -23,14 +23,14 @@ class DashboardController extends Controller
             'services_count' => \App\Models\Service::count(),
             'case_studies_count' => \App\Models\CaseStudy::count(),
             'careers_count' => \App\Models\Career::count(),
-            'new_leads_this_week' => Lead::where('createdAt', '>=', now()->subWeek())->count(),
+            'new_leads_this_week' => Lead::where('created_at', '>=', now()->subWeek())->count(),
         ];
 
         $recentLogs = [];
         if (class_exists(AuditLog::class)) {
-            $recentLogs = AuditLog::with('user')->latest('createdAt')->take(5)->get();
+            $recentLogs = AuditLog::with('user')->latest('created_at')->take(5)->get();
         }
-        $recentLeads = Lead::latest('createdAt')->take(5)->get();
+        $recentLeads = Lead::latest('created_at')->take(5)->get();
 
         return view('admin.dashboard', compact('stats', 'recentLogs', 'recentLeads'));
     }

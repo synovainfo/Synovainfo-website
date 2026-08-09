@@ -14,7 +14,7 @@ class CaseStudyController extends Controller
      */
     public function index(Request $request)
     {
-        $query = CaseStudy::query()->latest('createdAt');
+        $query = CaseStudy::query()->latest('created_at');
         
         if ($request->has('search')) {
             $search = $request->get('search');

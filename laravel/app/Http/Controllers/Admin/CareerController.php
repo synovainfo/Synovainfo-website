@@ -14,7 +14,7 @@ class CareerController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Career::query()->latest('createdAt');
+        $query = Career::query()->latest('created_at');
         
         if ($request->has('search')) {
             $search = $request->get('search');

@@ -20,7 +20,7 @@ class BlogController extends Controller
             });
         }
 
-        $posts = $query->orderBy('publishedAt', 'desc')->paginate(12);
+        $posts = $query->orderBy('published_at', 'desc')->paginate(12);
         $categories = BlogCategory::orderBy('name')->get();
 
         return view('blog.index', compact('posts', 'categories'));

@@ -89,13 +89,13 @@ class SitemapController extends Controller
                     $query->where('status', true);
                 }
 
-                $rows = $query->whereNotNull('slug')->select('slug', 'updatedAt')->get();
+                $rows = $query->whereNotNull('slug')->select('slug', 'updated_at')->get();
 
                 foreach ($rows as $row) {
                     // DB::table() returns raw PDO strings — parse defensively (no Carbon casts).
                     $lastmod = null;
-                    if (! empty($row->updatedAt)) {
-                        $lastmod = date('Y-m-d', strtotime((string) $row->updatedAt)) ?: null;
+                    if (! empty($row->updated_at)) {
+                        $lastmod = date('Y-m-d', strtotime((string) $row->updated_at)) ?: null;
                     }
 
                     $urls[] = [

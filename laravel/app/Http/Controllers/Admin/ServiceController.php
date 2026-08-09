@@ -14,7 +14,7 @@ class ServiceController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Service::query()->latest('createdAt');
+        $query = Service::query()->latest('created_at');
         
         if ($request->has('search')) {
             $search = $request->get('search');
