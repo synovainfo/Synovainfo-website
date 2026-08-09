@@ -15,7 +15,7 @@ class BlogPost extends Model
 {
     use HasUlids, HasCamelCaseColumns, SoftDeletes;
 
-    protected const DELETED_AT = 'deletedAt';
+    protected const DELETED_AT = 'deleted_at';
 
 
     public $incrementing = false;
