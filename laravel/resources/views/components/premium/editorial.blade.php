@@ -1,53 +1,27 @@
-<section class="relative py-24 md:py-32 bg-canvas" aria-label="How we work">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-12 gap-14 items-center">
-            <div class="lg:col-span-6">
-                <p class="eyebrow text-ember-500 mb-8">06 — The discipline</p>
-                <h2 data-split-headline class="premium-display text-[clamp(2rem,4.2vw,3.6rem)] text-ink leading-[1.08]">
-                    Ship with the rigor of a mission, not a milestone.
-                </h2>
+<section class="relative py-28 md:py-40 bg-abyss-950 text-white overflow-hidden" aria-label="Our Service Approach">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="mb-20 max-w-3xl">
+            <p class="eyebrow text-ember-500 mb-6 tracking-widest uppercase text-sm font-semibold">05 — Our service approach</p>
+            <h2 class="premium-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.2]">
+                A structured, client-focused methodology — from first conversation to long-term partnership.
+            </h2>
+        </div>
 
-                <div class="mt-10 space-y-8" data-batch>
-                    <div class="flex gap-6">
-                        <span class="mono-num text-sm text-ember-500 pt-1">A</span>
-                        <div>
-                            <h3 class="text-ink font-semibold mb-1.5">Architecture first</h3>
-                            <p class="text-sm text-ink-muted leading-relaxed">Every engagement begins with a defensible architecture — documented, reviewed, and owned by engineering leadership.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-6">
-                        <span class="mono-num text-sm text-ember-500 pt-1">B</span>
-                        <div>
-                            <h3 class="text-ink font-semibold mb-1.5">Governed delivery</h3>
-                            <p class="text-sm text-ink-muted leading-relaxed">Incremental releases, continuous verification, and a single source of truth for requirements, design, and risk.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-6">
-                        <span class="mono-num text-sm text-ember-500 pt-1">C</span>
-                        <div>
-                            <h3 class="text-ink font-semibold mb-1.5">Measured outcomes</h3>
-                            <p class="text-sm text-ink-muted leading-relaxed">We hold ourselves to the same SLAs we design — uptime, throughput, and business impact you can audit.</p>
-                        </div>
-                    </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            @foreach(config('content.service_approach', []) as $step)
+                <div class="relative bg-white/5 border border-white/10 rounded-2xl p-6 lg:p-8 hover:bg-white/10 transition-colors duration-300">
+                    <div class="text-3xl font-bold text-ember-500 mb-6 font-mono">{{ str_pad($step['number'], 2, '0', STR_PAD_LEFT) }}</div>
+                    <h3 class="text-xl font-semibold mb-4">{{ $step['title'] }}</h3>
+                    <p class="text-sm text-white/60 leading-relaxed">{{ $step['description'] }}</p>
+                    
+                    @if(!$loop->last)
+                        <div class="hidden lg:block absolute -right-3 top-1/2 w-6 h-px bg-white/20"></div>
+                    @endif
                 </div>
-            </div>
-
-            <div class="lg:col-span-5 lg:col-start-8">
-                <div class="relative">
-                    <div data-curtain class="case-visual rounded-2xl aspect-[4/5]">
-                        <div class="curtain-overlay"></div>
-                        <img src="{{ asset('images/about/about-headquarters.webp') }}" alt="Synovainfo enterprise headquarters" loading="lazy" />
-                        <div class="case-overlay"></div>
-                    </div>
-                    <figure class="absolute -bottom-8 -left-8 card-surface rounded-2xl p-8 max-w-[19rem] hidden md:block"
-                            style="box-shadow: 0 24px 60px -20px rgb(7 19 36 / 0.35);">
-                        <blockquote class="premium-serif text-xl text-ink leading-snug">
-                            "They operate our systems like their own. That level of ownership is rare."
-                        </blockquote>
-                        <figcaption class="mt-4 eyebrow text-ink-faint">CTO, Global Payments Client</figcaption>
-                    </figure>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
+    
+    <div class="absolute inset-0 bg-grid opacity-20" aria-hidden="true"></div>
+    <div class="absolute -bottom-40 right-0 w-[40rem] h-[40rem] rounded-full opacity-20 pointer-events-none" style="background: radial-gradient(circle, var(--color-ember-500) 0%, transparent 60%);"></div>
 </section>
