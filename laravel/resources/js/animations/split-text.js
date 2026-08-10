@@ -57,13 +57,22 @@ export function splitText(el) {
     el.appendChild(document.createTextNode(' '));
   }
 
+  // 1. Measure all offsets before modifying the DOM
+  const offsets = words.map(word => word.offsetTop);
+
+  // 2. Clear out the temp layout (removes floating text nodes)
+  el.textContent = '';
+
   const lines = [];
   const lineInners = [];
   let currentTop = null;
   let currentInner = null;
 
-  for (const word of words) {
-    const top = word.offsetTop;
+  // 3. Build lines using pre-measured offsets
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    const top = offsets[i];
+    
     if (top !== currentTop) {
       currentTop = top;
       const line = document.createElement('span');
@@ -76,7 +85,12 @@ export function splitText(el) {
       lineInners.push(inner);
       currentInner = inner;
     }
-    if (currentInner) currentInner.appendChild(word);
+    
+    if (currentInner) {
+      currentInner.appendChild(word);
+      // Append a space after the word to preserve natural spacing
+      currentInner.appendChild(document.createTextNode(' '));
+    }
   }
 
   const chars = words.flatMap((w) => Array.from(w.querySelectorAll('.split-char')));
@@ -115,13 +129,23 @@ export function splitLines(el) {
     w.textContent = part;
     wordSpans.push(w);
     el.appendChild(w);
-    el.appendChild(document.createTextNode(' '));
+    el.appendChild(document.createTextNode(' ')); // Adds a space AFTER every word in `el` temporarily.
   }
+
+  // 1. Measure all offsets before modifying the DOM
+  const offsets = wordSpans.map(word => word.offsetTop);
+
+  // 2. Clear out the temp layout (removes floating text nodes)
+  el.textContent = '';
 
   let currentTop = null;
   let currentInner = null;
-  for (const word of wordSpans) {
-    const top = word.offsetTop;
+  
+  // 3. Build lines using pre-measured offsets
+  for (let i = 0; i < wordSpans.length; i++) {
+    const word = wordSpans[i];
+    const top = offsets[i];
+    
     if (top !== currentTop) {
       currentTop = top;
       const line = document.createElement('span');
@@ -133,8 +157,14 @@ export function splitLines(el) {
       lineInners.push(inner);
       currentInner = inner;
     }
-    if (currentInner) currentInner.appendChild(word);
+    
+    if (currentInner) {
+      currentInner.appendChild(word);
+      // Append a space after the word to preserve natural spacing
+      currentInner.appendChild(document.createTextNode(' '));
+    }
   }
+  
   maskForAccessibility(el, text);
 
   return {
