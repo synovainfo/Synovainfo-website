@@ -1,35 +1,48 @@
 <x-admin-layout>
     <x-slot name="title">View Newsletter</x-slot>
 
-    <x-admin.page-header title="Newsletter Details">
-        <a href="{{ route('admin.newsletters.index') }}" class="text-sm font-semibold leading-6 text-slate-900 border border-slate-300 bg-white hover:bg-slate-50 px-3 py-2 rounded-md">
-            Back to Newsletters
-        </a>
-    </x-admin.page-header>
+    <div class="mb-8">
+        <a href="{{ route('admin.newsletters.index') }}" class="text-sm font-semibold text-slate-500 hover:text-slate-900">&larr; Back to Newsletters</a>
+    </div>
 
-    <div class="mt-6 bg-white shadow-sm ring-1 ring-slate-900/5 sm:rounded-xl">
-        <div class="px-4 py-6 sm:p-8 border-b border-slate-200">
-            <h3 class="text-base font-semibold leading-7 text-slate-900">Newsletter Information</h3>
+    <x-admin.page-header title="Newsletter: {{ $newsletter->subject }}" description="View newsletter details." />
+
+    <div class="bg-white shadow sm:rounded-lg border border-slate-200 p-6 max-w-4xl">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div>
+                <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Subject</dt>
+                <dd class="mt-1 text-sm font-medium text-slate-900">{{ $newsletter->subject }}</dd>
+            </div>
+
+            <div>
+                <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Status</dt>
+                <dd class="mt-1 text-sm text-slate-900">{{ ucfirst($newsletter->status) }}</dd>
+            </div>
+
+            <div>
+                <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Sent At</dt>
+                <dd class="mt-1 text-sm text-slate-900">{{ $newsletter->sent_at ? $newsletter->sent_at->format('F d, Y H:i A') : 'Not sent' }}</dd>
+            </div>
+
+            <div>
+                <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Recipients Count</dt>
+                <dd class="mt-1 text-sm text-slate-900">{{ $newsletter->recipient_count }}</dd>
+            </div>
+
+            <div class="col-span-full">
+                <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Content Body</dt>
+                <dd class="mt-2 text-sm text-slate-800 bg-slate-50 p-4 rounded-md border border-slate-200 prose max-w-none">
+                    {!! nl2br(e($newsletter->body)) !!}
+                </dd>
+            </div>
         </div>
-        <div class="border-t border-slate-100">
-            <dl class="divide-y divide-slate-100 px-4 sm:px-8">
-                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-slate-900">Subject</dt>
-                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0">{{ $newsletter->subject }}</dd>
-                        </div>                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-slate-900">Body</dt>
-                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0">{{ $newsletter->body }}</dd>
-                        </div>                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-slate-900">Sent At</dt>
-                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0">{{ $newsletter->sent_at }}</dd>
-                        </div>                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-slate-900">Status</dt>
-                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0">{{ $newsletter->status }}</dd>
-                        </div>                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-slate-900">Recipient Count</dt>
-                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0">{{ $newsletter->recipient_count }}</dd>
-                        </div>
-            </dl>
+
+        <div class="mt-8 border-t border-slate-200 pt-6 flex items-center justify-between">
+            <form action="{{ route('admin.newsletters.destroy', $newsletter) }}" method="POST" onsubmit="return confirm('Delete this newsletter?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-sm font-semibold text-red-600 hover:text-red-800">Delete Newsletter</button>
+            </form>
         </div>
     </div>
 </x-admin-layout>

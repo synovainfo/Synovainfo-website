@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <p class="mb-1 eyebrow text-abyss-900/40">Call Us</p>
-                                    <p class="text-sm leading-relaxed text-abyss-900/80">+91 (020) 2683-1122</p>
+                                    <p class="text-sm leading-relaxed text-abyss-900/80">+91 90118 96656</p>
                                 </div>
                             </div>
                         </a>

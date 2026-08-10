@@ -1,38 +1,51 @@
 <x-admin-layout>
     <x-slot name="title">View Subscriber</x-slot>
 
-    <x-admin.page-header title="Subscriber Details">
-        <a href="{{ route('admin.subscribers.index') }}" class="text-sm font-semibold leading-6 text-slate-900 border border-slate-300 bg-white hover:bg-slate-50 px-3 py-2 rounded-md">
-            Back to Subscribers
-        </a>
-    </x-admin.page-header>
+    <div class="mb-8">
+        <a href="{{ route('admin.subscribers.index') }}" class="text-sm font-semibold text-slate-500 hover:text-slate-900">&larr; Back to Subscribers</a>
+    </div>
 
-    <div class="mt-6 bg-white shadow-sm ring-1 ring-slate-900/5 sm:rounded-xl">
-        <div class="px-4 py-6 sm:p-8 border-b border-slate-200">
-            <h3 class="text-base font-semibold leading-7 text-slate-900">Subscriber Information</h3>
+    <x-admin.page-header title="Subscriber Details" description="View subscriber information." />
+
+    <div class="bg-white shadow sm:rounded-lg border border-slate-200 p-6 max-w-4xl">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div>
+                <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Email</dt>
+                <dd class="mt-1 text-sm font-medium text-slate-900">{{ $subscriber->email }}</dd>
+            </div>
+
+            <div>
+                <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Name</dt>
+                <dd class="mt-1 text-sm text-slate-900">{{ $subscriber->name ?? 'N/A' }}</dd>
+            </div>
+
+            <div>
+                <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Status</dt>
+                <dd class="mt-1 text-sm text-slate-900">{{ ucfirst($subscriber->status) }}</dd>
+            </div>
+
+            <div>
+                <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Source</dt>
+                <dd class="mt-1 text-sm text-slate-900">{{ $subscriber->source ?? 'N/A' }}</dd>
+            </div>
+
+            <div>
+                <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Subscribed At</dt>
+                <dd class="mt-1 text-sm text-slate-900">{{ $subscriber->subscribed_at ? $subscriber->subscribed_at->format('F d, Y H:i A') : 'N/A' }}</dd>
+            </div>
+
+            <div>
+                <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Unsubscribed At</dt>
+                <dd class="mt-1 text-sm text-slate-900">{{ $subscriber->unsubscribed_at ? $subscriber->unsubscribed_at->format('F d, Y H:i A') : 'N/A' }}</dd>
+            </div>
         </div>
-        <div class="border-t border-slate-100">
-            <dl class="divide-y divide-slate-100 px-4 sm:px-8">
-                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-slate-900">Email</dt>
-                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0">{{ $subscriber->email }}</dd>
-                        </div>                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-slate-900">Name</dt>
-                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0">{{ $subscriber->name }}</dd>
-                        </div>                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-slate-900">Status</dt>
-                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0">{{ $subscriber->status }}</dd>
-                        </div>                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-slate-900">Source</dt>
-                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0">{{ $subscriber->source }}</dd>
-                        </div>                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-slate-900">Subscribed At</dt>
-                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0">{{ $subscriber->subscribed_at }}</dd>
-                        </div>                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-slate-900">Unsubscribed At</dt>
-                            <dd class="mt-1 text-sm leading-6 text-slate-700 sm:col-span-2 sm:mt-0">{{ $subscriber->unsubscribed_at }}</dd>
-                        </div>
-            </dl>
+
+        <div class="mt-8 border-t border-slate-200 pt-6 flex items-center justify-between">
+            <form action="{{ route('admin.subscribers.destroy', $subscriber) }}" method="POST" onsubmit="return confirm('Delete this subscriber?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-sm font-semibold text-red-600 hover:text-red-800">Delete Subscriber</button>
+            </form>
         </div>
     </div>
 </x-admin-layout>

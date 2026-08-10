@@ -88,14 +88,14 @@
                                 {{ $content['headquarters'] }}
                             </p>
                         </div>
-                        <div class="col-span-2 pt-4 border-t border-slate-100">
+                        {{-- <div class="col-span-2 pt-4 border-t border-slate-100">
                             <span class="text-xs font-bold uppercase tracking-widest text-orange-600">
                                 Directors
                             </span>
                             <p class="mt-2 text-xl font-black text-slate-900">
                                 {{ $content['directors'] }}
                             </p>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <!-- Vision & Mission -->

@@ -26,7 +26,8 @@ class Lead extends Model
         'stage',
         'assigned_to_id',
         'source',
-        'notes'
+        'notes',
+        'ip_address'
     ];
     
     protected function casts(): array

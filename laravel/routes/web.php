@@ -101,6 +101,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('forms', \App\Http\Controllers\Admin\FormController::class);
     Route::resource('newsletters', \App\Http\Controllers\Admin\NewsletterController::class);
     Route::resource('subscribers', \App\Http\Controllers\Admin\SubscriberController::class);
+    Route::resource('resources', \App\Http\Controllers\Admin\ResourceController::class);
+    Route::resource('downloads', \App\Http\Controllers\Admin\DownloadController::class);
+
 
     // Media & UI
     Route::resource('media', \App\Http\Controllers\Admin\MediaController::class);

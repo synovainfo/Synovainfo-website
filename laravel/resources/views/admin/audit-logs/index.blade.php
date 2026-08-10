@@ -18,7 +18,7 @@
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-slate-900">IP Address</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-200 bg-white">
+                        <tbody class="divide-y divide-slate-200 bg-white" id="audit-logs-table-body">
                             @forelse($logs as $log)
                                 <tr>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-slate-900 sm:pl-6">
@@ -53,4 +53,6 @@
             </div>
         </div>
     </div>
+
+    <x-admin.auto-refresh targetId="audit-logs-table-body" interval="15" />
 </x-admin-layout>

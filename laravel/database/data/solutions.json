@@ -70,5 +70,69 @@
       "Real-time automated compliance drift tracking and auto-remediation triggers"
     ],
     "quantifiedImpact": "100% Audit Readiness & 0 Unsanctioned Data Transfers"
+  },
+  {
+    "id": "server-solution",
+    "title": "Server Solution",
+    "subtitle": "High-performance enterprise server infrastructure",
+    "badge": "Infrastructure",
+    "overview": "We provide robust, scalable, and secure server solutions tailored to your enterprise's processing and computational demands.",
+    "businessProblems": [
+      "Inadequate processing power for complex workloads",
+      "High maintenance overhead for legacy servers"
+    ],
+    "architectureHighlights": [
+      "High-availability server clusters",
+      "Automated load balancing and scaling"
+    ],
+    "quantifiedImpact": "99.999% Uptime & Sub-millisecond latency"
+  },
+  {
+    "id": "network-solutions",
+    "title": "Network Solutions",
+    "subtitle": "Resilient, high-bandwidth enterprise networking",
+    "badge": "Networking",
+    "overview": "Secure, software-defined networking architectures designed to connect hybrid workforces and distributed data centers.",
+    "businessProblems": [
+      "Network bottlenecks causing application latency",
+      "Complex management of distributed network resources"
+    ],
+    "architectureHighlights": [
+      "Software-Defined Wide Area Network (SD-WAN)",
+      "Zero-trust network access (ZTNA)"
+    ],
+    "quantifiedImpact": "50% Reduction in Network Latency"
+  },
+  {
+    "id": "storage-solution",
+    "title": "Storage Solution",
+    "subtitle": "Scalable, secure, and performant data storage",
+    "badge": "Data Management",
+    "overview": "Enterprise-grade SAN, NAS, and object storage solutions engineered for petabyte-scale data with automated tiering.",
+    "businessProblems": [
+      "Exploding data volumes outgrowing legacy storage",
+      "High cost of cold data storage"
+    ],
+    "architectureHighlights": [
+      "Automated hot/cold data tiering",
+      "Immutable backups for ransomware protection"
+    ],
+    "quantifiedImpact": "60% Storage Cost Optimization"
+  },
+  {
+    "id": "cloud-solutions",
+    "title": "Cloud Solutions",
+    "subtitle": "Seamless multi-cloud architecture and migration",
+    "badge": "Cloud Computing",
+    "overview": "Comprehensive cloud solutions encompassing IaaS, PaaS, and SaaS integration across major public cloud providers.",
+    "businessProblems": [
+      "Vendor lock-in and high public cloud costs",
+      "Difficulty in managing hybrid multi-cloud environments"
+    ],
+    "architectureHighlights": [
+      "Cloud-agnostic orchestration with Kubernetes",
+      "Unified hybrid-cloud management pane"
+    ],
+    "quantifiedImpact": "Seamless Workload Mobility Across Clouds"
   }
 ]

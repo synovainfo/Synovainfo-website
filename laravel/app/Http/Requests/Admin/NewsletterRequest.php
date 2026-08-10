@@ -14,11 +14,9 @@ class NewsletterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'subject' => ['required'],
-            'body' => ['required'],
-            'sent_at' => ['required'],
-            'status' => ['required'],
-            'recipient_count' => ['required'],
+            'subject' => ['required', 'string', 'max:255'],
+            'body' => ['required', 'string'],
+            'status' => ['required', 'string', 'in:draft,scheduled,sent'],
         ];
     }
 }

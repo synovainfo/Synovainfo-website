@@ -13,7 +13,7 @@ class NewsletterController extends Controller
         $query = \App\Models\Newsletter::query()->latest('created_at');
         if ($request->has('search')) {
             $search = $request->get('search');
-            $query->where('id', 'like', "%$search%");
+            $query->where('subject', 'like', "%$search%");
         }
         $newsletters = $query->paginate(15);
         return view('admin.newsletters.index', compact('newsletters'));
@@ -24,35 +24,45 @@ class NewsletterController extends Controller
         return view('admin.newsletters.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(\App\Http\Requests\Admin\NewsletterRequest $request)
     {
         $data = $request->validated();
-        if (\Illuminate\Support\Facades\Schema::hasColumn((new \App\Models\Newsletter)->getTable(), 'created_by_id')) {
-            $data['created_by_id'] = auth()->id();
-            $data['updated_by_id'] = auth()->id();
-        }
-        \App\Models\Newsletter::create($data);
-        return redirect()->route('admin.newsletters.index')->with('success', 'Newsletter created successfully.');
+        $data['recipient_count'] = 0; // Default when created
+        
+        Newsletter::create($data);
+
+        return redirect()->route('admin.newsletters.index')
+            ->with('success', 'Newsletter created successfully.');
     }
 
-    public function show(\App\Models\Newsletter $newsletter)
+    /**
+     * Display the specified resource.
+     */
+    public function show(Newsletter $newsletter)
     {
         return view('admin.newsletters.show', compact('newsletter'));
     }
 
-    public function edit(\App\Models\Newsletter $newsletter)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Newsletter $newsletter)
     {
         return view('admin.newsletters.edit', compact('newsletter'));
     }
 
-    public function update(\App\Http\Requests\Admin\NewsletterRequest $request, \App\Models\Newsletter $newsletter)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(\App\Http\Requests\Admin\NewsletterRequest $request, Newsletter $newsletter)
     {
-        $data = $request->validated();
-        if (\Illuminate\Support\Facades\Schema::hasColumn((new \App\Models\Newsletter)->getTable(), 'updated_by_id')) {
-            $data['updated_by_id'] = auth()->id();
-        }
-        $newsletter->update($data);
-        return redirect()->route('admin.newsletters.index')->with('success', 'Newsletter updated successfully.');
+        $newsletter->update($request->validated());
+
+        return redirect()->route('admin.newsletters.index')
+            ->with('success', 'Newsletter updated successfully.');
     }
 
     public function destroy(\App\Models\Newsletter $newsletter)

@@ -14,12 +14,10 @@ class SubscriberRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required'],
-            'name' => ['required'],
-            'status' => ['required'],
-            'source' => ['required'],
-            'subscribed_at' => ['required'],
-            'unsubscribed_at' => ['required'],
+            'email' => ['required', 'email', 'max:255'],
+            'name' => ['nullable', 'string', 'max:255'],
+            'status' => ['required', 'string', 'in:subscribed,unsubscribed'],
+            'source' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

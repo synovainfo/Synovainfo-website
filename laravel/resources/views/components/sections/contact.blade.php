@@ -1,6 +1,6 @@
 @props([
     'email' => 'contact@synovainfo.com',
-    'phone' => '+91 (020) 2683-1122',
+    'phone' => '+91 90118 96656',
     'badge' => 'Contact Us',
     'title' => 'Ready to Transform Your Enterprise?',
     'subtitle' => 'Get in touch with our architecture team to discuss your next strategic initiative.',

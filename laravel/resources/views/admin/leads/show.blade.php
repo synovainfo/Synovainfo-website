@@ -38,6 +38,11 @@
                 <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Submitted At</dt>
                 <dd class="mt-1 text-sm text-slate-900">{{ $lead->created_at->format('F d, Y H:i A') }}</dd>
             </div>
+            
+            <div>
+                <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">IP Address</dt>
+                <dd class="mt-1 text-sm text-slate-900">{{ $lead->ip_address ?? 'Not captured' }}</dd>
+            </div>
 
             <div class="col-span-full">
                 <dt class="text-xs font-semibold uppercase tracking-wider text-slate-500">Message / Inquiry</dt>

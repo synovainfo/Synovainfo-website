@@ -11,9 +11,18 @@ class FormController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Form::query()->latest('created_at');
+
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('slug', 'like', "%{$search}%");
+        }
+
+        $forms = $query->paginate(15);
+        return view('admin.forms.index', compact('forms'));
     }
 
     /**
@@ -21,15 +30,18 @@ class FormController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.forms.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\Admin\FormRequest $request)
     {
-        //
+        Form::create($request->validated());
+
+        return redirect()->route('admin.forms.index')
+            ->with('success', 'Form created successfully.');
     }
 
     /**
@@ -37,7 +49,7 @@ class FormController extends Controller
      */
     public function show(Form $form)
     {
-        //
+        return view('admin.forms.show', compact('form'));
     }
 
     /**
@@ -45,15 +57,18 @@ class FormController extends Controller
      */
     public function edit(Form $form)
     {
-        //
+        return view('admin.forms.edit', compact('form'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Form $form)
+    public function update(\App\Http\Requests\Admin\FormRequest $request, Form $form)
     {
-        //
+        $form->update($request->validated());
+
+        return redirect()->route('admin.forms.index')
+            ->with('success', 'Form updated successfully.');
     }
 
     /**
@@ -61,6 +76,9 @@ class FormController extends Controller
      */
     public function destroy(Form $form)
     {
-        //
+        $form->delete();
+
+        return redirect()->route('admin.forms.index')
+            ->with('success', 'Form deleted successfully.');
     }
 }

@@ -114,7 +114,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}" class="font-display font-extrabold text-2xl tracking-tight text-ink">
-                        SYNOVAINFOTECH<span class="text-ember-500">.</span>
+                        SYNOVA INFOTECH<span class="text-ember-500">.</span>
                     </a>
                 </div>
 
@@ -123,6 +123,18 @@
                     <a href="{{ route('about') }}" class="text-sm font-medium text-abyss-900/70 dark:text-white/70 hover:text-ember-500 dark:hover:text-ember-400 transition-colors">About</a>
                     <a href="{{ route('services.index') }}" class="text-sm font-medium text-abyss-900/70 dark:text-white/70 hover:text-ember-500 dark:hover:text-ember-400 transition-colors">Services</a>
                     <a href="{{ route('industries.index') }}" class="text-sm font-medium text-abyss-900/70 dark:text-white/70 hover:text-ember-500 dark:hover:text-ember-400 transition-colors">Industries</a>
+                    <div class="relative" x-data="{ open: false }" @mouseleave="open = false">
+                        <button @mouseover="open = true" class="text-sm font-medium text-abyss-900/70 dark:text-white/70 hover:text-ember-500 dark:hover:text-ember-400 transition-colors flex items-center gap-1">
+                            Solutions
+                            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </button>
+                        <div x-show="open" x-transition class="absolute left-0 mt-2 w-48 rounded-xl border border-surface-border bg-white dark:bg-abyss-950 p-2 shadow-lg z-50" style="display: none;">
+                            <a href="{{ route('solutions.show', 'server-solution') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-abyss-900/70 dark:text-white/70 hover:bg-ember-50 dark:hover:bg-ember-500/10 hover:text-ember-600 dark:hover:text-ember-400 transition-colors">Server Solution</a>
+                            <a href="{{ route('solutions.show', 'network-solutions') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-abyss-900/70 dark:text-white/70 hover:bg-ember-50 dark:hover:bg-ember-500/10 hover:text-ember-600 dark:hover:text-ember-400 transition-colors">Network Solutions</a>
+                            <a href="{{ route('solutions.show', 'storage-solution') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-abyss-900/70 dark:text-white/70 hover:bg-ember-50 dark:hover:bg-ember-500/10 hover:text-ember-600 dark:hover:text-ember-400 transition-colors">Storage Solution</a>
+                            <a href="{{ route('solutions.show', 'cloud-solutions') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-abyss-900/70 dark:text-white/70 hover:bg-ember-50 dark:hover:bg-ember-500/10 hover:text-ember-600 dark:hover:text-ember-400 transition-colors">Cloud Solutions</a>
+                        </div>
+                    </div>
                     <a href="{{ route('case_studies.index') }}" class="text-sm font-medium text-abyss-900/70 dark:text-white/70 hover:text-ember-500 dark:hover:text-ember-400 transition-colors">Case Studies</a>
                     <a href="{{ route('blog.index') }}" class="text-sm font-medium text-abyss-900/70 dark:text-white/70 hover:text-ember-500 dark:hover:text-ember-400 transition-colors">Insights</a>
                 </nav>
@@ -158,7 +170,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-14">
                 <div class="col-span-1 md:col-span-1">
                     <a href="{{ route('home') }}" class="font-display font-extrabold text-2xl tracking-tight text-white">
-                        SYNOVAINFOTECH<span class="text-ember-500">.</span>
+                        SYNOVA INFOTECH<span class="text-ember-500">.</span>
                     </a>
                     <p class="mt-4 text-sm text-white/50 leading-relaxed">
                         Enterprise software solutions engineered for scale, security, and performance.

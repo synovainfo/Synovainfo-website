@@ -13,7 +13,8 @@ class SubscriberController extends Controller
         $query = \App\Models\Subscriber::query()->latest('created_at');
         if ($request->has('search')) {
             $search = $request->get('search');
-            $query->where('id', 'like', "%$search%");
+            $query->where('email', 'like', "%$search%")
+                ->orWhere('name', 'like', "%$search%");
         }
         $subscribers = $query->paginate(15);
         return view('admin.subscribers.index', compact('subscribers'));
@@ -27,9 +28,8 @@ class SubscriberController extends Controller
     public function store(\App\Http\Requests\Admin\SubscriberRequest $request)
     {
         $data = $request->validated();
-        if (\Illuminate\Support\Facades\Schema::hasColumn((new \App\Models\Subscriber)->getTable(), 'created_by_id')) {
-            $data['created_by_id'] = auth()->id();
-            $data['updated_by_id'] = auth()->id();
+        if ($data['status'] === 'subscribed' && empty($data['subscribed_at'])) {
+            $data['subscribed_at'] = now();
         }
         \App\Models\Subscriber::create($data);
         return redirect()->route('admin.subscribers.index')->with('success', 'Subscriber created successfully.');
@@ -48,8 +48,11 @@ class SubscriberController extends Controller
     public function update(\App\Http\Requests\Admin\SubscriberRequest $request, \App\Models\Subscriber $subscriber)
     {
         $data = $request->validated();
-        if (\Illuminate\Support\Facades\Schema::hasColumn((new \App\Models\Subscriber)->getTable(), 'updated_by_id')) {
-            $data['updated_by_id'] = auth()->id();
+        if ($data['status'] === 'unsubscribed' && $subscriber->status !== 'unsubscribed') {
+            $data['unsubscribed_at'] = now();
+        } elseif ($data['status'] === 'subscribed' && $subscriber->status !== 'subscribed') {
+            $data['subscribed_at'] = now();
+            $data['unsubscribed_at'] = null;
         }
         $subscriber->update($data);
         return redirect()->route('admin.subscribers.index')->with('success', 'Subscriber updated successfully.');
