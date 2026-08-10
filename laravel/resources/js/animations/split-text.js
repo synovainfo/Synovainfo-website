@@ -11,7 +11,6 @@ function createWord(text) {
   word.className = 'split-word';
   word.style.display = 'inline-block';
   word.style.whiteSpace = 'nowrap';
-  word.textContent = text;
   return word;
 }
 
@@ -113,6 +112,7 @@ export function splitLines(el) {
       continue;
     }
     const w = createWord(part);
+    w.textContent = part;
     wordSpans.push(w);
     el.appendChild(w);
     el.appendChild(document.createTextNode(' '));

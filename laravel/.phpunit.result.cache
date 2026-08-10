@@ -1,1 +1,1 @@
-{"version":2,"defects":[],"times":{"Tests\\Feature\\AdminSidebarTest::test_all_admin_sidebar_routes_render_successfully":27.922}}
+{"version":2,"defects":[],"times":{"Tests\\Feature\\AdminSidebarTest::test_all_admin_sidebar_routes_render_successfully":35.796}}

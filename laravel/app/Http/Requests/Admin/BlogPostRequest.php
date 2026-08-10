@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Enums\BlogPostStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -21,7 +22,7 @@ class BlogPostRequest extends FormRequest
             'content' => ['nullable', 'string'],
             'featured_image' => ['nullable', 'string', 'max:255'],
             'category_id' => ['nullable', 'exists:blog_categories,id'],
-            'status' => ['required', 'string'],
+            'status' => ['required', Rule::enum(BlogPostStatus::class)],
             'published_at' => ['nullable', 'date'],
             'seo_title' => ['nullable', 'string', 'max:255'],
             'seo_description' => ['nullable', 'string', 'max:1000'],

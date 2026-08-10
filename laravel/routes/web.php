@@ -112,3 +112,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('site-configs', \App\Http\Controllers\Admin\SiteConfigController::class);
     Route::get('audit-logs', [\App\Http\Controllers\Admin\AuditLogController::class, 'index'])->name('audit-logs.index');
 });
+
+// Dynamic CMS pages. Keep this after concrete public/admin routes so reserved
+// application paths continue to resolve to their dedicated controllers.
+Route::get('/{slug}', [\App\Http\Controllers\PageController::class, 'show'])
+    ->where('slug', '^(?!admin$|login$|logout$|api$|storage$|build$).+')
+    ->name('pages.show');

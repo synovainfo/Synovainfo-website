@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Page;
 use App\Http\Requests\Admin\PageRequest;
+use App\Models\Page;
+use App\Support\RichTextSanitizer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
@@ -16,14 +16,15 @@ class PageController extends Controller
     public function index(Request $request)
     {
         $query = Page::query()->latest('created_at');
-        
+
         if ($request->has('search')) {
             $search = $request->get('search');
             $query->where('title', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%");
+                ->orWhere('slug', 'like', "%{$search}%");
         }
 
         $pages = $query->paginate(10);
+
         return view('admin.pages.index', compact('pages'));
     }
 
@@ -42,7 +43,8 @@ class PageController extends Controller
     {
         $data = $request->validated();
         $data['author_id'] = auth()->id();
-        
+        $data['content'] = $this->contentBlocks($data['content'] ?? null);
+
         Page::create($data);
 
         return redirect()->route('admin.pages.index')
@@ -62,7 +64,9 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        return view('admin.pages.edit', compact('page'));
+        $pageContent = $this->htmlFromContentBlocks($page->content);
+
+        return view('admin.pages.edit', compact('page', 'pageContent'));
     }
 
     /**
@@ -70,7 +74,10 @@ class PageController extends Controller
      */
     public function update(PageRequest $request, Page $page)
     {
-        $page->update($request->validated());
+        $data = $request->validated();
+        $data['content'] = $this->contentBlocks($data['content'] ?? null);
+
+        $page->update($data);
 
         return redirect()->route('admin.pages.index')
             ->with('success', 'Page updated successfully.');
@@ -85,5 +92,34 @@ class PageController extends Controller
 
         return redirect()->route('admin.pages.index')
             ->with('success', 'Page deleted successfully.');
+    }
+
+    private function contentBlocks(?string $content): ?array
+    {
+        $cleanContent = RichTextSanitizer::clean($content);
+
+        return $cleanContent === null ? null : [$cleanContent];
+    }
+
+    private function htmlFromContentBlocks(mixed $content): string
+    {
+        if (! is_array($content)) {
+            return is_string($content) ? $content : '';
+        }
+
+        return collect($content)
+            ->map(function (mixed $block): string {
+                if (is_string($block)) {
+                    return $block;
+                }
+
+                if (is_array($block)) {
+                    return (string) ($block['body'] ?? $block['content'] ?? $block['text'] ?? '');
+                }
+
+                return '';
+            })
+            ->filter()
+            ->implode("\n\n");
     }
 }

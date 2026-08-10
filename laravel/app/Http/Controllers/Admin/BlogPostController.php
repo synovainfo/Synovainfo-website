@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\BlogPost;
-use App\Models\BlogCategory;
 use App\Http\Requests\Admin\BlogPostRequest;
+use App\Models\BlogCategory;
+use App\Models\BlogPost;
+use App\Support\RichTextSanitizer;
 use Illuminate\Http\Request;
 
 class BlogPostController extends Controller
@@ -20,10 +21,11 @@ class BlogPostController extends Controller
         if ($request->has('search')) {
             $search = $request->get('search');
             $query->where('title', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%");
+                ->orWhere('slug', 'like', "%{$search}%");
         }
 
         $posts = $query->paginate(15);
+
         return view('admin.blog-posts.index', compact('posts'));
     }
 
@@ -33,6 +35,7 @@ class BlogPostController extends Controller
     public function create()
     {
         $categories = BlogCategory::pluck('name', 'id')->all();
+
         return view('admin.blog-posts.create', compact('categories'));
     }
 
@@ -43,6 +46,7 @@ class BlogPostController extends Controller
     {
         $data = $request->validated();
         $data['author_id'] = auth()->id();
+        $data['content'] = RichTextSanitizer::clean($data['content'] ?? null);
 
         BlogPost::create($data);
 
@@ -64,6 +68,7 @@ class BlogPostController extends Controller
     public function edit(BlogPost $blogPost)
     {
         $categories = BlogCategory::pluck('name', 'id')->all();
+
         return view('admin.blog-posts.edit', compact('blogPost', 'categories'));
     }
 
@@ -72,7 +77,10 @@ class BlogPostController extends Controller
      */
     public function update(BlogPostRequest $request, BlogPost $blogPost)
     {
-        $blogPost->update($request->validated());
+        $data = $request->validated();
+        $data['content'] = RichTextSanitizer::clean($data['content'] ?? null);
+
+        $blogPost->update($data);
 
         return redirect()->route('admin.blog-posts.index')
             ->with('success', 'Blog post updated successfully.');

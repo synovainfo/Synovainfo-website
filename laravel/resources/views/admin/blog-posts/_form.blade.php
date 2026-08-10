@@ -31,8 +31,9 @@
         <label for="status" class="block text-sm font-medium leading-6 text-slate-900">Status</label>
         <div class="mt-2">
             <select id="status" name="status" class="block w-full rounded-md border-0 py-1.5 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 sm:text-sm">
-                <option value="published" {{ old('status', $post->status ?? 'published') == 'published' ? 'selected' : '' }}>Published</option>
-                <option value="draft" {{ old('status', $post->status ?? 'published') == 'draft' ? 'selected' : '' }}>Draft</option>
+                @foreach(\App\Enums\BlogPostStatus::cases() as $status)
+                    <option value="{{ $status->value }}" {{ old('status', isset($post) ? $post->status->value : \App\Enums\BlogPostStatus::DRAFT->value) === $status->value ? 'selected' : '' }}>{{ ucfirst(strtolower($status->value)) }}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -44,12 +45,13 @@
         </div>
     </div>
 
-    <div class="col-span-full">
-        <label for="content" class="block text-sm font-medium leading-6 text-slate-900">Article Content</label>
-        <div class="mt-2">
-            <textarea id="content" name="content" rows="8" class="block w-full rounded-md border-0 py-1.5 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 sm:text-sm">{{ old('content', $post->content ?? '') }}</textarea>
-        </div>
-    </div>
+    <x-admin.rich-text-editor
+        name="content"
+        id="article-content"
+        label="Article Content"
+        :value="$post->content ?? ''"
+        help="Use the toolbar to compose structured articles with headings, lists, links, quotes, tables, and media."
+    />
 </div>
 
 <div class="mt-8 flex items-center justify-end gap-x-6 border-t border-slate-900/10 pt-8">

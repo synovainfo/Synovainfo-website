@@ -100,3 +100,57 @@ if (window.Alpine) {
     window.Alpine.data('testimonialCarousel', testimonialCarousel);
   });
 }
+
+const initRichTextEditors = () => {
+  document.querySelectorAll('[data-rich-editor]').forEach((editor) => {
+    const surface = editor.querySelector('[data-rich-editor-surface]');
+    const input = editor.querySelector('[data-rich-editor-input]');
+    const form = editor.closest('form');
+
+    if (!surface || !input || surface.dataset.richEditorReady === 'true') return;
+
+    surface.dataset.richEditorReady = 'true';
+
+    const sync = () => {
+      input.value = surface.innerHTML.trim();
+    };
+
+    editor.querySelectorAll('[data-command]').forEach((button) => {
+      button.addEventListener('click', () => {
+        surface.focus();
+        const command = button.dataset.command;
+        let value = button.dataset.value || null;
+
+        if (command === 'createLink') {
+          value = window.prompt('Enter the full URL');
+          if (!value) return;
+        }
+
+        if (command === 'insertImage') {
+          value = window.prompt('Enter the image URL');
+          if (!value) return;
+        }
+
+        if (command === 'insertTable') {
+          document.execCommand('insertHTML', false, '<table><tbody><tr><th>Heading</th><th>Heading</th></tr><tr><td>Content</td><td>Content</td></tr></tbody></table><p><br></p>');
+          sync();
+          return;
+        }
+
+        document.execCommand(command, false, value);
+        sync();
+      });
+    });
+
+    surface.addEventListener('input', sync);
+    surface.addEventListener('blur', sync);
+    form?.addEventListener('submit', sync);
+    sync();
+  });
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initRichTextEditors);
+} else {
+  initRichTextEditors();
+}
