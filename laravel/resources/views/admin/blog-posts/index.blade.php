@@ -3,7 +3,7 @@
 
     <x-admin.page-header title="Blog Posts" description="Manage blog posts, articles, and updates.">
         <a href="{{ route('admin.blog-posts.create') }}" class="inline-flex items-center rounded-md bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500">
-            Add Article
+            Create Blog Post
         </a>
     </x-admin.page-header>
 

@@ -3,7 +3,7 @@
 
     <x-admin.page-header title="Blog Categories" description="Manage article categories and taxonomies.">
         <a href="{{ route('admin.blog-categories.create') }}" class="inline-flex items-center rounded-md bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500">
-            Add Category
+            Create Category
         </a>
     </x-admin.page-header>
 

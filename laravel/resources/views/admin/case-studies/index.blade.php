@@ -3,7 +3,7 @@
 
     <x-admin.page-header title="Case Studies" description="Manage case studies and success stories.">
         <a href="{{ route('admin.case-studies.create') }}" class="inline-flex items-center rounded-md bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">
-            Add Case Study
+            Create Case Study
         </a>
     </x-admin.page-header>
 

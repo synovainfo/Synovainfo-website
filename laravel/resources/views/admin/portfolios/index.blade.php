@@ -3,7 +3,7 @@
 
     <x-admin.page-header title="Portfolio Projects" description="Manage client projects and software showcase items.">
         <a href="{{ route('admin.portfolios.create') }}" class="inline-flex items-center rounded-md bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500">
-            Add Portfolio Project
+            Create Portfolio
         </a>
     </x-admin.page-header>
 
