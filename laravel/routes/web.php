@@ -116,6 +116,22 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('audit-logs', [\App\Http\Controllers\Admin\AuditLogController::class, 'index'])->name('audit-logs.index');
 });
 
+// -----------------------------------------------------------------------------
+// ADMIN API ROUTES (For Testing Script)
+// -----------------------------------------------------------------------------
+Route::post('/admin/api/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
+
+Route::middleware(['auth'])->prefix('admin/api')->name('admin.api.')->group(function () {
+    Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index']);
+    Route::apiResource('pages', \App\Http\Controllers\Admin\PageController::class);
+    Route::apiResource('blog-posts', \App\Http\Controllers\Admin\BlogPostController::class);
+    Route::apiResource('blog-categories', \App\Http\Controllers\Admin\BlogCategoryController::class);
+    Route::apiResource('tags', \App\Http\Controllers\Admin\TagController::class);
+    Route::apiResource('case-studies', \App\Http\Controllers\Admin\CaseStudyController::class);
+    Route::apiResource('portfolios', \App\Http\Controllers\Admin\PortfolioController::class);
+    Route::apiResource('team-members', \App\Http\Controllers\Admin\TeamMemberController::class);
+});
+
 // Dynamic CMS pages. Keep this after concrete public/admin routes so reserved
 // application paths continue to resolve to their dedicated controllers.
 Route::get('/{slug}', [\App\Http\Controllers\PageController::class, 'show'])

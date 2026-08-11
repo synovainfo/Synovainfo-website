@@ -24,6 +24,18 @@ class CaseStudyController extends Controller
         }
 
         $caseStudies = $query->paginate(15);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $caseStudies->items(),
+                'meta' => [
+                    'current_page' => $caseStudies->currentPage(),
+                    'last_page' => $caseStudies->lastPage(),
+                    'total' => $caseStudies->total()
+                ]
+            ]);
+        }
+
         return view('admin.case-studies.index', compact('caseStudies'));
     }
 
@@ -46,6 +58,13 @@ class CaseStudyController extends Controller
         
         CaseStudy::create($data);
 
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => CaseStudy::latest()->first()
+            ], 201);
+        }
+
         return redirect()->route('admin.case-studies.index')
             ->with('success', 'Case study created successfully.');
     }
@@ -55,6 +74,13 @@ class CaseStudyController extends Controller
      */
     public function show(CaseStudy $caseStudy)
     {
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $caseStudy
+            ]);
+        }
+
         return view('admin.case-studies.show', compact('caseStudy'));
     }
 
@@ -76,6 +102,13 @@ class CaseStudyController extends Controller
 
         $caseStudy->update($data);
 
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $caseStudy
+            ]);
+        }
+
         return redirect()->route('admin.case-studies.index')
             ->with('success', 'Case study updated successfully.');
     }
@@ -86,6 +119,13 @@ class CaseStudyController extends Controller
     public function destroy(CaseStudy $caseStudy)
     {
         $caseStudy->delete();
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Record deleted successfully.'
+            ]);
+        }
 
         return redirect()->route('admin.case-studies.index')
             ->with('success', 'Case study deleted successfully.');

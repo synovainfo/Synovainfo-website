@@ -16,6 +16,18 @@ class TagController extends Controller
             $query->where('id', 'like', "%$search%");
         }
         $tags = $query->paginate(15);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $tags->items(),
+                'meta' => [
+                    'current_page' => $tags->currentPage(),
+                    'last_page' => $tags->lastPage(),
+                    'total' => $tags->total()
+                ]
+            ]);
+        }
+
         return view('admin.tags.index', compact('tags'));
     }
 
@@ -32,6 +44,13 @@ class TagController extends Controller
             $data['updated_by_id'] = auth()->id();
         }
         \App\Models\Tag::create($data);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => Tag::latest()->first()
+            ], 201);
+        }
+
         return redirect()->route('admin.tags.index')->with('success', 'Tag created successfully.');
     }
 
@@ -52,12 +71,26 @@ class TagController extends Controller
             $data['updated_by_id'] = auth()->id();
         }
         $tag->update($data);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $tag
+            ]);
+        }
+
         return redirect()->route('admin.tags.index')->with('success', 'Tag updated successfully.');
     }
 
     public function destroy(\App\Models\Tag $tag)
     {
         $tag->delete();
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Record deleted successfully.'
+            ]);
+        }
+
         return redirect()->route('admin.tags.index')->with('success', 'Tag deleted successfully.');
     }
 }

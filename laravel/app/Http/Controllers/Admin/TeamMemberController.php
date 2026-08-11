@@ -16,6 +16,18 @@ class TeamMemberController extends Controller
             $query->where('id', 'like', "%$search%");
         }
         $teamMembers = $query->paginate(15);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $teamMembers->items(),
+                'meta' => [
+                    'current_page' => $teamMembers->currentPage(),
+                    'last_page' => $teamMembers->lastPage(),
+                    'total' => $teamMembers->total()
+                ]
+            ]);
+        }
+
         return view('admin.team-members.index', compact('teamMembers'));
     }
 
@@ -32,6 +44,13 @@ class TeamMemberController extends Controller
             $data['updated_by_id'] = auth()->id();
         }
         \App\Models\TeamMember::create($data);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => TeamMember::latest()->first()
+            ], 201);
+        }
+
         return redirect()->route('admin.team-members.index')->with('success', 'TeamMember created successfully.');
     }
 
@@ -52,12 +71,26 @@ class TeamMemberController extends Controller
             $data['updated_by_id'] = auth()->id();
         }
         $teamMember->update($data);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $teamMember
+            ]);
+        }
+
         return redirect()->route('admin.team-members.index')->with('success', 'TeamMember updated successfully.');
     }
 
     public function destroy(\App\Models\TeamMember $teamMember)
     {
         $teamMember->delete();
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Record deleted successfully.'
+            ]);
+        }
+
         return redirect()->route('admin.team-members.index')->with('success', 'TeamMember deleted successfully.');
     }
 }

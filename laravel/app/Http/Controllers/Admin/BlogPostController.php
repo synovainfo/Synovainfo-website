@@ -26,6 +26,18 @@ class BlogPostController extends Controller
 
         $posts = $query->paginate(15);
 
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $posts->items(),
+                'meta' => [
+                    'current_page' => $posts->currentPage(),
+                    'last_page' => $posts->lastPage(),
+                    'total' => $posts->total()
+                ]
+            ]);
+        }
+
         return view('admin.blog-posts.index', compact('posts'));
     }
 
@@ -50,6 +62,13 @@ class BlogPostController extends Controller
 
         BlogPost::create($data);
 
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => BlogPost::latest()->first()
+            ], 201);
+        }
+
         return redirect()->route('admin.blog-posts.index')
             ->with('success', 'Blog post created successfully.');
     }
@@ -59,6 +78,13 @@ class BlogPostController extends Controller
      */
     public function show(BlogPost $blogPost)
     {
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $blogPost
+            ]);
+        }
+
         return view('admin.blog-posts.show', compact('blogPost'));
     }
 
@@ -82,6 +108,13 @@ class BlogPostController extends Controller
 
         $blogPost->update($data);
 
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $blogPost
+            ]);
+        }
+
         return redirect()->route('admin.blog-posts.index')
             ->with('success', 'Blog post updated successfully.');
     }
@@ -92,6 +125,13 @@ class BlogPostController extends Controller
     public function destroy(BlogPost $blogPost)
     {
         $blogPost->delete();
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Record deleted successfully.'
+            ]);
+        }
 
         return redirect()->route('admin.blog-posts.index')
             ->with('success', 'Blog post deleted successfully.');

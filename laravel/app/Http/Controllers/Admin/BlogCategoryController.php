@@ -23,6 +23,18 @@ class BlogCategoryController extends Controller
         }
 
         $categories = $query->paginate(15);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $categories->items(),
+                'meta' => [
+                    'current_page' => $categories->currentPage(),
+                    'last_page' => $categories->lastPage(),
+                    'total' => $categories->total()
+                ]
+            ]);
+        }
+
         return view('admin.blog-categories.index', compact('categories'));
     }
 
@@ -50,6 +62,13 @@ class BlogCategoryController extends Controller
      */
     public function show(BlogCategory $blogCategory)
     {
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $blogCategory
+            ]);
+        }
+
         return view('admin.blog-categories.show', compact('blogCategory'));
     }
 
@@ -78,6 +97,13 @@ class BlogCategoryController extends Controller
     public function destroy(BlogCategory $blogCategory)
     {
         $blogCategory->delete();
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Record deleted successfully.'
+            ]);
+        }
 
         return redirect()->route('admin.blog-categories.index')
             ->with('success', 'Category deleted successfully.');

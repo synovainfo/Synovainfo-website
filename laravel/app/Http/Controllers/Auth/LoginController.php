@@ -31,7 +31,22 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'token' => csrf_token(),
+                    'user' => Auth::user()
+                ]);
+            }
+
             return redirect()->intended('/admin');
+        }
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'The provided credentials do not match our records.'
+            ], 401);
         }
 
         return back()->withErrors([

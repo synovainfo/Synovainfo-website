@@ -32,6 +32,14 @@ class DashboardController extends Controller
         }
         $recentLeads = Lead::latest('created_at')->take(5)->get();
 
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => compact('stats', 'recentLogs', 'recentLeads'),
+                'total' => collect($stats)->sum()
+            ]);
+        }
+
         return view('admin.dashboard', compact('stats', 'recentLogs', 'recentLeads'));
     }
 }

@@ -25,6 +25,18 @@ class PageController extends Controller
 
         $pages = $query->paginate(10);
 
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $pages->items(),
+                'meta' => [
+                    'current_page' => $pages->currentPage(),
+                    'last_page' => $pages->lastPage(),
+                    'total' => $pages->total()
+                ]
+            ]);
+        }
+
         return view('admin.pages.index', compact('pages'));
     }
 
@@ -45,7 +57,14 @@ class PageController extends Controller
         $data['author_id'] = auth()->id();
         $data['content'] = $this->contentBlocks($data['content'] ?? null);
 
-        Page::create($data);
+        $page = Page::create($data);
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => Page::latest()->first(), // We need the newly created page. Actually, Page::create returns the model, but we didn't assign it.
+            ], 201);
+        }
 
         return redirect()->route('admin.pages.index')
             ->with('success', 'Page created successfully.');
@@ -56,6 +75,13 @@ class PageController extends Controller
      */
     public function show(Page $page)
     {
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $page
+            ]);
+        }
+
         return view('admin.pages.show', compact('page'));
     }
 
@@ -79,6 +105,13 @@ class PageController extends Controller
 
         $page->update($data);
 
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $page
+            ]);
+        }
+
         return redirect()->route('admin.pages.index')
             ->with('success', 'Page updated successfully.');
     }
@@ -89,6 +122,13 @@ class PageController extends Controller
     public function destroy(Page $page)
     {
         $page->delete();
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Page deleted successfully.'
+            ]);
+        }
 
         return redirect()->route('admin.pages.index')
             ->with('success', 'Page deleted successfully.');
