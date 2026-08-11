@@ -1,11 +1,11 @@
+{{-- 
 <section class="relative py-28 md:py-40 overflow-hidden bg-ember-500" aria-label="Contact call to action">
     <div class="absolute inset-0 bg-grid opacity-20" aria-hidden="true"></div>
     <div class="absolute -top-24 right-1/4 h-96 w-96 rounded-full opacity-30 pointer-events-none"
          style="background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, transparent 62%); filter: blur(30px);" aria-hidden="true"></div>
 
     <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {{-- <p class="eyebrow text-white/80 mb-8">08 — Start something significant</p> --}}
-
+        
         <h2 class="premium-display text-[clamp(2.75rem,8vw,7rem)] text-white leading-[0.98]">
             Let's build <span class="premium-serif">what's next.</span>
         </h2>
@@ -26,3 +26,4 @@
         </div>
     </div>
 </section>
+--}}
